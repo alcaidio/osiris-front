@@ -60,6 +60,8 @@
         "@angular/cli": "10.0.0",
         "@angular/compiler-cli": "10.0.1",
         "@angular/language-service": "10.0.1",
+        "@commitlint/cli": "^9.0.1",
+        "@commitlint/config-conventional": "^9.0.1",
         "@types/crypto-js": "3.1.47",
         "@types/highlight.js": "9.12.4",
         "@types/jasmine": "3.5.11",
@@ -86,9 +88,10 @@
         "typescript": "3.9.5"
     },
     "husky": {
-      "hooks": {
-        "pre-commit": "pretty-quick --staged && ng lint", 
-        "pre-push": "ng build --aot true"
-      }
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "pre-commit": "pretty-quick --staged && ng lint",
+            "pre-push": "ng build --aot true"
+        }
     }
 }
