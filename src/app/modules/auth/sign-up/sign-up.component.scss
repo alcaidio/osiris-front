@@ -1,32 +1,26 @@
 @import 'treo';
 
 auth-sign-up {
+  .content-layout {
+    align-items: center;
+    justify-content: center;
 
-    .content-layout {
-        align-items: center;
-        justify-content: center;
-
-        treo-card {
-
-            .form-container {
-
-                .form {
-
-                    .field-footer {
-
-                        .link {
-                            margin: 0 4px;
-                        }
-                    }
-                }
+    treo-card {
+      .form-container {
+        .form {
+          .field-footer {
+            .link {
+              margin: 0 4px;
             }
+          }
         }
+      }
     }
+  }
 }
 
 // -----------------------------------------------------------------------------------------------------
 // @ Theming
 // -----------------------------------------------------------------------------------------------------
 @include treo-theme {
-
 }

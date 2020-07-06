@@ -1,191 +1,149 @@
-import { Injectable } from '@angular/core';
-import { assign, cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { TreoMockApiUtils } from '@treo/lib/mock-api/mock-api.utils';
-import { notifications as notificationsData } from 'app/data/mock/common/notifications/data';
+import { Injectable } from '@angular/core'
+import { assign, cloneDeep } from 'lodash-es'
+import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces'
+import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service'
+import { TreoMockApiUtils } from '@treo/lib/mock-api/mock-api.utils'
+import { notifications as notificationsData } from 'app/data/mock/common/notifications/data'
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
-export class NotificationsMockApi implements TreoMockApi
-{
-    // Private
-    private _notifications: any;
+export class NotificationsMockApi implements TreoMockApi {
+  // Private
+  private _notifications: any
 
-    /**
-     * Constructor
-     *
-     * @param {TreoMockApiService} _treoMockApiService
-     */
-    constructor(
-        private _treoMockApiService: TreoMockApiService
-    )
-    {
-        // Set the data
-        this._notifications = notificationsData;
+  /**
+   * Constructor
+   *
+   * @param {TreoMockApiService} _treoMockApiService
+   */
+  constructor(private _treoMockApiService: TreoMockApiService) {
+    // Set the data
+    this._notifications = notificationsData
 
-        // Register the API endpoints
-        this.register();
-    }
+    // Register the API endpoints
+    this.register()
+  }
+
+  // -----------------------------------------------------------------------------------------------------
+  // @ Public methods
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Register
+   */
+  register(): void {
+    // -----------------------------------------------------------------------------------------------------
+    // @ Notifications - GET
+    // -----------------------------------------------------------------------------------------------------
+    this._treoMockApiService.onGet('api/common/notifications').reply(() => {
+      return [
+        200,
+        {
+          notifications: cloneDeep(this._notifications),
+        },
+      ]
+    })
 
     // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
+    // @ Notifications - PUT
     // -----------------------------------------------------------------------------------------------------
+    this._treoMockApiService.onPut('api/common/notifications').reply((request) => {
+      // Get the notification
+      const newNotification = cloneDeep(request.body.notification)
 
-    /**
-     * Register
-     */
-    register(): void
-    {
-        // -----------------------------------------------------------------------------------------------------
-        // @ Notifications - GET
-        // -----------------------------------------------------------------------------------------------------
-        this._treoMockApiService
-            .onGet('api/common/notifications')
-            .reply(() => {
-                return [
-                    200,
-                    {
-                        notifications: cloneDeep(this._notifications)
-                    }
-                ];
-            });
+      // Generate a new GUID
+      newNotification.id = TreoMockApiUtils.guid()
 
-        // -----------------------------------------------------------------------------------------------------
-        // @ Notifications - PUT
-        // -----------------------------------------------------------------------------------------------------
-        this._treoMockApiService
-            .onPut('api/common/notifications')
-            .reply((request) => {
+      // Unshift the new notification
+      this._notifications.unshift(newNotification)
 
-                // Get the notification
-                const newNotification = cloneDeep(request.body.notification);
+      return [200, newNotification]
+    })
 
-                // Generate a new GUID
-                newNotification.id = TreoMockApiUtils.guid();
+    // -----------------------------------------------------------------------------------------------------
+    // @ Notifications - PATCH
+    // -----------------------------------------------------------------------------------------------------
+    this._treoMockApiService.onPatch('api/common/notifications').reply((request) => {
+      // Get the id and notification
+      const id = request.body.id
+      const notification = cloneDeep(request.body.notification)
 
-                // Unshift the new notification
-                this._notifications.unshift(newNotification);
+      // Prepare the updated notification
+      let updatedNotification = null
 
-                return [
-                    200,
-                    newNotification
-                ];
-            });
+      // Find the notification and update it
+      this._notifications.forEach((item, index, notifications) => {
+        if (item.id === id) {
+          // Update the notification
+          notifications[index] = assign({}, notifications[index], notification)
 
-        // -----------------------------------------------------------------------------------------------------
-        // @ Notifications - PATCH
-        // -----------------------------------------------------------------------------------------------------
-        this._treoMockApiService
-            .onPatch('api/common/notifications')
-            .reply((request) => {
+          // Store the updated notification
+          updatedNotification = notifications[index]
+        }
+      })
 
-                // Get the id and notification
-                const id = request.body.id;
-                const notification = cloneDeep(request.body.notification);
+      return [200, updatedNotification]
+    })
 
-                // Prepare the updated notification
-                let updatedNotification = null;
+    // -----------------------------------------------------------------------------------------------------
+    // @ Notifications - DELETE
+    // -----------------------------------------------------------------------------------------------------
+    this._treoMockApiService.onDelete('api/common/notifications').reply((request) => {
+      // Get the id
+      const id = request.params.get('id')
 
-                // Find the notification and update it
-                this._notifications.forEach((item, index, notifications) => {
+      // Prepare the deleted notification
+      let deletedNotification = null
 
-                    if ( item.id === id )
-                    {
-                        // Update the notification
-                        notifications[index] = assign({}, notifications[index], notification);
+      // Find the notification
+      const index = this._notifications.findIndex((item) => item.id === id)
 
-                        // Store the updated notification
-                        updatedNotification = notifications[index];
-                    }
-                });
+      // Store the deleted notification
+      deletedNotification = cloneDeep(this._notifications[index])
 
-                return [
-                    200,
-                    updatedNotification
-                ];
-            });
+      // Delete the notification
+      this._notifications.splice(index, 1)
 
-        // -----------------------------------------------------------------------------------------------------
-        // @ Notifications - DELETE
-        // -----------------------------------------------------------------------------------------------------
-        this._treoMockApiService
-            .onDelete('api/common/notifications')
-            .reply((request) => {
+      return [200, deletedNotification]
+    })
 
-                // Get the id
-                const id = request.params.get('id');
+    // -----------------------------------------------------------------------------------------------------
+    // @ Mark all as read - GET
+    // -----------------------------------------------------------------------------------------------------
+    this._treoMockApiService.onGet('api/common/notifications/mark-all-as-read').reply(() => {
+      // Go through all notifications
+      this._notifications.forEach((item, index, notifications) => {
+        // Mark it as read
+        notifications[index].read = true
+        notifications[index].seen = true
+      })
 
-                // Prepare the deleted notification
-                let deletedNotification = null;
+      return [200, true]
+    })
 
-                // Find the notification
-                const index = this._notifications.findIndex((item) => item.id === id);
+    // -----------------------------------------------------------------------------------------------------
+    // @ Toggle read status - POST
+    // -----------------------------------------------------------------------------------------------------
+    this._treoMockApiService.onPost('api/common/notifications/toggle-read-status').reply((request) => {
+      // Get the notification
+      const notification = cloneDeep(request.body.notification)
 
-                // Store the deleted notification
-                deletedNotification = cloneDeep(this._notifications[index]);
+      // Prepare the updated notification
+      let updatedNotification = null
 
-                // Delete the notification
-                this._notifications.splice(index, 1);
+      // Find the notification and update it
+      this._notifications.forEach((item, index, notifications) => {
+        if (item.id === notification.id) {
+          // Update the notification
+          notifications[index].read = notification.read
 
-                return [
-                    200,
-                    deletedNotification
-                ];
-            });
+          // Store the updated notification
+          updatedNotification = notifications[index]
+        }
+      })
 
-        // -----------------------------------------------------------------------------------------------------
-        // @ Mark all as read - GET
-        // -----------------------------------------------------------------------------------------------------
-        this._treoMockApiService
-            .onGet('api/common/notifications/mark-all-as-read')
-            .reply(() => {
-
-                // Go through all notifications
-                this._notifications.forEach((item, index, notifications) => {
-
-                    // Mark it as read
-                    notifications[index].read = true;
-                    notifications[index].seen = true;
-                });
-
-                return [
-                    200,
-                    true
-                ];
-            });
-
-        // -----------------------------------------------------------------------------------------------------
-        // @ Toggle read status - POST
-        // -----------------------------------------------------------------------------------------------------
-        this._treoMockApiService
-            .onPost('api/common/notifications/toggle-read-status')
-            .reply((request) => {
-
-                // Get the notification
-                const notification = cloneDeep(request.body.notification);
-
-                // Prepare the updated notification
-                let updatedNotification = null;
-
-                // Find the notification and update it
-                this._notifications.forEach((item, index, notifications) => {
-
-                    if ( item.id === notification.id )
-                    {
-                        // Update the notification
-                        notifications[index].read = notification.read;
-
-                        // Store the updated notification
-                        updatedNotification = notifications[index];
-                    }
-                });
-
-                return [
-                    200,
-                    updatedNotification
-                ];
-            });
-    }
+      return [200, updatedNotification]
+    })
+  }
 }

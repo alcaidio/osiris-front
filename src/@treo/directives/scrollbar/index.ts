@@ -1,1 +1,1 @@
-export * from '@treo/directives/scrollbar/public-api';
+export * from '@treo/directives/scrollbar/public-api'

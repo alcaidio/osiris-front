@@ -1,1 +1,1 @@
-export * from '@treo/services/splash-screen/public-api';
+export * from '@treo/services/splash-screen/public-api'

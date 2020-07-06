@@ -11,18 +11,15 @@
 /// @param {String} $breakpoint - Name of the breakpoint or a media rule
 ///
 @mixin treo-breakpoint($breakpoint) {
+  $mediaQuery: map-get($treo-breakpoints, $breakpoint);
 
-    $mediaQuery: map-get($treo-breakpoints, $breakpoint);
-
-    @if ($mediaQuery != null) {
-
-        @media #{$mediaQuery} {
-            @content
-        }
-    } @else {
-
-        @media #{$breakpoint} {
-            @content
-        }
+  @if ($mediaQuery != null) {
+    @media #{$mediaQuery} {
+      @content;
     }
+  } @else {
+    @media #{$breakpoint} {
+      @content;
+    }
+  }
 }

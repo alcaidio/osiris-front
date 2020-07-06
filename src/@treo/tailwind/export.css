@@ -9,4 +9,5 @@
  * Do NOT modify or use this file to generate your own variants.
  */
 
-@variants export-boxShadow, export-colors, export-fontFamily, export-screens {}
+@variants export-boxShadow, export-colors, export-fontFamily, export-screens {
+}

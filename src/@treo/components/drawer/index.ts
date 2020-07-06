@@ -1,1 +1,1 @@
-export * from '@treo/components/drawer/public-api';
+export * from '@treo/components/drawer/public-api'

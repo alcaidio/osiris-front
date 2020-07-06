@@ -1,1 +1,1 @@
-export * from '@treo/components/card/public-api';
+export * from '@treo/components/card/public-api'

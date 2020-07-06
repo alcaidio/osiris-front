@@ -1,1 +1,1 @@
-export * from '@treo/components/highlight/public-api';
+export * from '@treo/components/highlight/public-api'

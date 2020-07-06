@@ -1,1 +1,1 @@
-export * from '@treo/directives/autogrow/public-api';
+export * from '@treo/directives/autogrow/public-api'

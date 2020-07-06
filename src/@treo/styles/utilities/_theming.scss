@@ -9,26 +9,21 @@
 /// @param {Boolean} $encapsulated - Should the generated rules compatible with encapsulated components?
 ///
 @mixin treo-theme($encapsulated: false) {
+  @each $class-name, $theme in $treo-themes {
+    // Set the theme as global so it can be accessible from outside
+    $theme: $theme !global;
 
-    @each $class-name, $theme in $treo-themes {
-
-        // Set the theme as global so it can be accessible from outside
-        $theme: $theme !global;
-
-        // If encapsulated...
-        @if ($encapsulated) {
-
-            // Do everything inside a host context
-            :host-context(.#{$class-name}) {
-                @content;
-            }
-
-        } @else {
-
-            // Do everything openly
-            .#{$class-name} {
-                @content;
-            }
-        }
+    // If encapsulated...
+    @if ($encapsulated) {
+      // Do everything inside a host context
+      :host-context(.#{$class-name}) {
+        @content;
+      }
+    } @else {
+      // Do everything openly
+      .#{$class-name} {
+        @content;
+      }
     }
+  }
 }

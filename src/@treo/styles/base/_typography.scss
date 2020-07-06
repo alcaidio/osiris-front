@@ -2,111 +2,115 @@
 // @ Angular Material typography config
 // -----------------------------------------------------------------------------------------------------
 @include angular-material-typography(
-        mat-typography-config(
-            $font-family: $treo-font-sans,
-            $title: mat-typography-level(1.25rem, 2rem, 600),
-            $body-2: mat-typography-level(0.875rem, 1.5rem, 600),
-            $button: mat-typography-level(0.875rem, 0.875rem, 500),
-            $input: mat-typography-level(0.875rem, 1.2857142857, 400) // line-height: 20px
-        )
+  mat-typography-config(
+    $font-family: $treo-font-sans,
+    $title: mat-typography-level(1.25rem, 2rem, 600),
+    $body-2: mat-typography-level(0.875rem, 1.5rem, 600),
+    $button: mat-typography-level(0.875rem, 0.875rem, 500),
+    $input: mat-typography-level(0.875rem, 1.2857142857, 400) // line-height: 20px
+  )
 );
 
 // -----------------------------------------------------------------------------------------------------
 // @ General
 // -----------------------------------------------------------------------------------------------------
 html {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 body {
-    font-size: 0.875rem;
-    font-family: $treo-font-sans;
+  font-size: 0.875rem;
+  font-family: $treo-font-sans;
 }
 
 // Headings
-h1, h2, h3, h4, h5, h6 {
-    margin: 1.25em 0 0.5em 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1.25em 0 0.5em 0;
 }
 
 h1 {
-    font-size: 32px;
-    font-weight: 800;
-    letter-spacing: -0.022em;
-    line-height: 1.25;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.022em;
+  line-height: 1.25;
 }
 
 h2 {
-    font-size: 32px;
-    font-weight: 600;
-    letter-spacing: -0.022em;
-    line-height: 1.25;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.25;
 }
 
 h3 {
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: -0.019em;
-    line-height: 1.25;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.019em;
+  line-height: 1.25;
 }
 
 h4 {
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: -0.017em;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.017em;
 }
 
 h5 {
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: -0.014em;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.014em;
 }
 
 h6 {
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: -0.011em;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.011em;
 }
 
 // Override links for web apps
 a {
-    color: currentColor;
-    text-decoration: none;
+  color: currentColor;
+  text-decoration: none;
 }
 
 // Link helper for applying default 'a' style
 .link {
-    cursor: pointer;
+  cursor: pointer;
 
-    &:focus,
-    &:hover {
-        text-decoration: underline;
-    }
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 // Breadcrumb
 .breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
 
-    .path {
-        white-space: nowrap;
+  .path {
+    white-space: nowrap;
 
-        &a {
-            color: inherit;
-        }
-
-        &.current {
-
-        }
+    &a {
+      color: inherit;
     }
 
-    .separator {
-        margin: 0 6px;
+    &.current {
     }
+  }
+
+  .separator {
+    margin: 0 6px;
+  }
 }
 
 // -----------------------------------------------------------------------------------------------------
@@ -114,370 +118,369 @@ a {
 // -----------------------------------------------------------------------------------------------------
 code,
 pre {
-    font-family: $treo-font-mono;
-    font-size: 14px;
-    line-height: 1.6;
-    border-radius: 4px;
+  font-family: $treo-font-mono;
+  font-size: 14px;
+  line-height: 1.6;
+  border-radius: 4px;
 
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
 
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 
-    white-space: pre-wrap;
-    word-break: break-word;
-    word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 
 pre {
-    padding: 24px;
-    margin: 0;
-    @include treo-elevation();
+  padding: 24px;
+  margin: 0;
+  @include treo-elevation();
 }
 
 :not(pre) > code {
-    padding: 2px 5px;
+  padding: 2px 5px;
 }
 
 // -----------------------------------------------------------------------------------------------------
 // @ Rich text
 // -----------------------------------------------------------------------------------------------------
 .rich-text {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+  }
 
-    h1, h2, h3, h4, h5, h6 {
-        margin: 0;
+  h1 {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  h1 + * {
+    margin-top: 32px;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  * + h2 {
+    margin-top: 32px;
+  }
+
+  h2 + * {
+    margin-top: 16px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  * + h3 {
+    margin-top: 32px;
+  }
+
+  h2 + h3 {
+    margin-top: 16px;
+  }
+
+  h3 + * {
+    margin-top: 8px;
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  * + h4 {
+    margin-top: 24px;
+  }
+
+  h3 + h4 {
+    margin-top: 8px;
+  }
+
+  h4 + * {
+    margin-top: 8px;
+  }
+
+  h5 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  h6 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  p {
+    line-height: 1.75;
+  }
+
+  p + p {
+    margin-top: 16px;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+  }
+
+  * + ol {
+    margin-top: 16px;
+  }
+
+  ol + * {
+    margin-top: 16px;
+  }
+
+  li ol {
+    margin-top: 8px;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  * + ul {
+    margin-top: 16px;
+  }
+
+  ul + *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+    margin-top: 16px;
+  }
+
+  li ul {
+    margin-top: 8px;
+  }
+
+  li + li {
+    margin-top: 8px;
+  }
+
+  li p {
+    margin-top: 16px;
+  }
+
+  li p + p {
+    margin-top: 8px;
+  }
+
+  li:first-child p:first-child {
+    margin-top: 8px;
+  }
+
+  a {
+    font-weight: 500;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  abbr {
+    cursor: help;
+    border-bottom-width: 1px;
+    border-bottom-style: dotted;
+  }
+
+  blockquote {
+    border-left-width: 3px;
+    font-style: italic;
+    margin: 16px 0;
+    padding-left: 16px;
+
+    footer {
+      font-style: normal;
+
+      &:before {
+        content: '\2014 \00A0';
+      }
     }
 
-    h1 {
-        font-size: 36px;
-        font-weight: 600;
-        line-height: 1;
-    }
+    &.reverse {
+      border-left-width: 0;
+      border-right-width: 3px;
+      text-align: right;
+      padding-left: 0;
+      padding-right: 16px;
 
-    h1 + * {
-        margin-top: 32px;
-    }
-
-    h2 {
-        font-size: 24px;
-        font-weight: 600;
-        line-height: 1.25;
-    }
-
-    * + h2 {
-        margin-top: 32px;
-    }
-
-    h2 + * {
-        margin-top: 16px;
-    }
-
-    h3 {
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 1.25;
-    }
-
-    * + h3 {
-        margin-top: 32px;
-    }
-
-    h2 + h3 {
-        margin-top: 16px;
-    }
-
-    h3 + * {
-        margin-top: 8px;
-    }
-
-    h4 {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 1.5;
-    }
-
-    * + h4 {
-        margin-top: 24px;
-    }
-
-    h3 + h4 {
-        margin-top: 8px;
-    }
-
-    h4 + * {
-        margin-top: 8px;
-    }
-
-    h5 {
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 1.5;
-    }
-
-    h6 {
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 1.5;
-    }
-
-    p {
-        line-height: 1.75;
-    }
-
-    p + p {
-        margin-top: 16px;
-    }
-
-    ol {
-        list-style-type: decimal;
-        padding-left: 20px;
-    }
-
-    * + ol {
-        margin-top: 16px;
-    }
-
-    ol + * {
-        margin-top: 16px;
-    }
-
-    li ol {
-        margin-top: 8px;
-    }
-
-    ul {
-        list-style-type: disc;
-        padding-left: 20px;
-    }
-
-    * + ul {
-        margin-top: 16px;
-    }
-
-    ul + *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
-        margin-top: 16px;
-    }
-
-    li ul {
-        margin-top: 8px;
-    }
-
-    li + li {
-        margin-top: 8px;
-    }
-
-    li p {
-        margin-top: 16px;
-    }
-
-    li p + p {
-        margin-top: 8px;
-    }
-
-    li:first-child p:first-child {
-        margin-top: 8px;
-    }
-
-    a {
-        font-weight: 500;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    abbr {
-        cursor: help;
-        border-bottom-width: 1px;
-        border-bottom-style: dotted;
-    }
-
-    blockquote {
-        border-left-width: 3px;
-        font-style: italic;
-        margin: 16px 0;
-        padding-left: 16px;
-
-        footer {
-            font-style: normal;
-
-            &:before {
-                content: '\2014 \00A0';
-            }
+      footer {
+        &:before {
+          content: '';
         }
 
-        &.reverse {
-            border-left-width: 0;
-            border-right-width: 3px;
-            text-align: right;
-            padding-left: 0;
-            padding-right: 16px;
-
-            footer {
-
-                &:before {
-                    content: '';
-                }
-
-                &:after {
-                    content: '\2014 \00A0';
-                }
-            }
+        &:after {
+          content: '\2014 \00A0';
         }
+      }
+    }
+  }
+
+  * + blockquote {
+    margin-top: 16px;
+  }
+
+  blockquote + * {
+    margin-top: 16px;
+  }
+
+  dl {
+    dt {
+      font-weight: 700;
     }
 
-    * + blockquote {
-        margin-top: 16px;
+    dd {
+      margin: 4px 0 16px 0;
     }
+  }
 
-    blockquote + * {
-        margin-top: 16px;
+  fieldset {
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+    padding-block-start: 0;
+    padding-block-end: 0;
+    width: 100%;
+    border-width: 1px;
+    border-radius: 4px;
+    padding: 24px;
+
+    legend {
+      padding: 0 6px;
+      margin-left: -6px;
     }
+  }
 
-    dl {
+  img {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
 
-        dt {
-            font-weight: 700;
-        }
+  * + pre {
+    margin-top: 16px;
+  }
 
-        dd {
-            margin: 4px 0 16px 0;
-        }
-    }
+  pre + * {
+    margin-top: 16px;
+  }
 
-    fieldset {
-        margin-inline-start: 0;
-        margin-inline-end: 0;
-        padding-inline-start: 0;
-        padding-inline-end: 0;
-        padding-block-start: 0;
-        padding-block-end: 0;
-        width: 100%;
-        border-width: 1px;
-        border-radius: 4px;
-        padding: 24px;
+  pre code {
+    padding: 0;
+  }
 
-        legend {
-            padding: 0 6px;
-            margin-left: -6px;
-        }
-    }
+  strong {
+    font-weight: 700;
+  }
 
-    img {
-        margin-top: 32px;
-        margin-bottom: 32px;
-    }
+  // treo-highlight
+  * + .treo-highlight {
+    margin-top: 16px;
+  }
 
-    * + pre {
-        margin-top: 16px;
-    }
+  .treo-highlight + p {
+    margin-top: 24px;
+  }
 
-    pre + * {
-        margin-top: 16px;
-    }
+  // treo-message
+  * + treo-message {
+    margin-top: 24px;
+  }
 
-    pre code {
-        padding: 0;
-    }
-
-    strong {
-        font-weight: 700;
-    }
-
-    // treo-highlight
-    * + .treo-highlight {
-        margin-top: 16px;
-    }
-
-    .treo-highlight + p {
-        margin-top: 24px;
-    }
-
-    // treo-message
-    * + treo-message {
-        margin-top: 24px;
-    }
-
-    treo-message + p {
-        margin-top: 24px;
-    }
+  treo-message + p {
+    margin-top: 24px;
+  }
 }
 
 // -----------------------------------------------------------------------------------------------------
 // @ Theming
 // -----------------------------------------------------------------------------------------------------
 @include treo-theme {
+  $foreground: map-get($theme, foreground);
+  $primary: map-get($theme, primary);
+  $is-dark: map-get($theme, is-dark);
 
-    $foreground: map-get($theme, foreground);
-    $primary: map-get($theme, primary);
-    $is-dark: map-get($theme, is-dark);
+  // -----------------------------------------------------------------------------------------------------
+  // @ General
+  // -----------------------------------------------------------------------------------------------------
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ General
-    // -----------------------------------------------------------------------------------------------------
+  // Link helper for applying default 'a' style
+  .link {
+    color: map-get($primary, default);
+    border-bottom-color: map-get($primary, default);
+  }
 
-    // Link helper for applying default 'a' style
-    .link {
-        color: map-get($primary, default);
-        border-bottom-color: map-get($primary, default);
+  // Breadcrumb
+  .breadcrumb {
+    .path {
+      color: map-get($primary, default);
+
+      &.current {
+        color: map-get($foreground, secondary-text);
+      }
     }
 
-    // Breadcrumb
-    .breadcrumb {
+    .separator {
+      color: map-get($foreground, secondary-text);
+    }
+  }
 
-        .path {
-            color: map-get($primary, default);
+  // -----------------------------------------------------------------------------------------------------
+  // @ Code and Pre
+  // -----------------------------------------------------------------------------------------------------
+  code,
+  pre {
+    @if ($is-dark) {
+      color: treo-color('cool-gray', 400);
+      background: treo-color('cool-gray', 800);
+    } @else {
+      background: #ffffff;
+      color: #728fcb;
+    }
+  }
 
-            &.current {
-                color: map-get($foreground, secondary-text);
-            }
-        }
+  :not(pre) > code {
+    @if ($is-dark) {
+      color: treo-color('cool-gray', 400);
+      background: treo-color('cool-gray', 700);
+    } @else {
+      color: treo-color('cool-gray', 500);
+      background: treo-color('cool-gray', 200);
+    }
+  }
 
-        .separator {
-            color: map-get($foreground, secondary-text);
-        }
+  // -----------------------------------------------------------------------------------------------------
+  // @ Rich text
+  // -----------------------------------------------------------------------------------------------------
+  .rich-text {
+    a {
+      color: map-get($primary, default);
+      border-bottom-color: map-get($primary, default);
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Code and Pre
-    // -----------------------------------------------------------------------------------------------------
-    code,
-    pre {
-        @if ($is-dark) {
-            color: treo-color('cool-gray', 400);
-            background: treo-color('cool-gray', 800);
-        } @else {
-            background: #FFFFFF;
-            color: #728FCB;
-        }
+    mark {
+      background: #f7f49a;
     }
-
-    :not(pre) > code {
-        @if ($is-dark) {
-            color: treo-color('cool-gray', 400);
-            background: treo-color('cool-gray', 700);
-        } @else {
-            color: treo-color('cool-gray', 500);
-            background: treo-color('cool-gray', 200);
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Rich text
-    // -----------------------------------------------------------------------------------------------------
-    .rich-text {
-
-        a {
-            color: map-get($primary, default);
-            border-bottom-color: map-get($primary, default);
-        }
-
-        mark {
-            background: #F7F49A;
-        }
-    }
+  }
 }

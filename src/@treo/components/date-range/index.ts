@@ -1,1 +1,1 @@
-export * from '@treo/components/date-range/public-api';
+export * from '@treo/components/date-range/public-api'

@@ -1,1 +1,1 @@
-export * from './treo.module';
+export * from './treo.module'

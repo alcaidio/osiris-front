@@ -1,120 +1,117 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { TreoAnimations } from '@treo/animations';
-import { TreoNavigationItem } from '@treo/components/navigation/navigation.types';
-import { TreoNavigationService } from '@treo/components/navigation/navigation.service';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core'
+import { BehaviorSubject, Subject } from 'rxjs'
+import { TreoAnimations } from '@treo/animations'
+import { TreoNavigationItem } from '@treo/components/navigation/navigation.types'
+import { TreoNavigationService } from '@treo/components/navigation/navigation.service'
 
 @Component({
-    selector       : 'treo-horizontal-navigation',
-    templateUrl    : './horizontal.component.html',
-    styleUrls      : ['./horizontal.component.scss'],
-    animations     : TreoAnimations,
-    encapsulation  : ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'treoHorizontalNavigation'
+  selector: 'treo-horizontal-navigation',
+  templateUrl: './horizontal.component.html',
+  styleUrls: ['./horizontal.component.scss'],
+  animations: TreoAnimations,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  exportAs: 'treoHorizontalNavigation',
 })
-export class TreoHorizontalNavigationComponent implements OnInit, OnDestroy
-{
-    onRefreshed: BehaviorSubject<boolean | null>;
+export class TreoHorizontalNavigationComponent implements OnInit, OnDestroy {
+  onRefreshed: BehaviorSubject<boolean | null>
 
-    // Name
-    @Input()
-    name: string;
+  // Name
+  @Input()
+  name: string
 
-    // Private
-    private _navigation: TreoNavigationItem[];
-    private _unsubscribeAll: Subject<any>;
+  // Private
+  private _navigation: TreoNavigationItem[]
+  private _unsubscribeAll: Subject<any>
 
-    /**
-     * Constructor
-     *
-     * @param {ChangeDetectorRef} _changeDetectorRef
-     * @param {TreoNavigationService} _treoNavigationService
-     */
-    constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _treoNavigationService: TreoNavigationService
-    )
-    {
-        // Set the private defaults
-        this._unsubscribeAll = new Subject();
+  /**
+   * Constructor
+   *
+   * @param {ChangeDetectorRef} _changeDetectorRef
+   * @param {TreoNavigationService} _treoNavigationService
+   */
+  constructor(private _changeDetectorRef: ChangeDetectorRef, private _treoNavigationService: TreoNavigationService) {
+    // Set the private defaults
+    this._unsubscribeAll = new Subject()
 
-        // Set the defaults
-        this.onRefreshed = new BehaviorSubject(null);
-    }
+    // Set the defaults
+    this.onRefreshed = new BehaviorSubject(null)
+  }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Accessors
-    // -----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------------
+  // @ Accessors
+  // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * Setter & getter for data
-     */
-    @Input()
-    set navigation(value: TreoNavigationItem[])
-    {
-        // Store the value
-        this._navigation = value;
+  /**
+   * Setter & getter for data
+   */
+  @Input()
+  set navigation(value: TreoNavigationItem[]) {
+    // Store the value
+    this._navigation = value
 
-        // Mark for check
-        this._changeDetectorRef.markForCheck();
-    }
+    // Mark for check
+    this._changeDetectorRef.markForCheck()
+  }
 
-    get navigation(): TreoNavigationItem[]
-    {
-        return this._navigation;
-    }
+  get navigation(): TreoNavigationItem[] {
+    return this._navigation
+  }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------------
+  // @ Lifecycle hooks
+  // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Register the navigation component
-        this._treoNavigationService.registerComponent(this.name, this);
-    }
+  /**
+   * On init
+   */
+  ngOnInit(): void {
+    // Register the navigation component
+    this._treoNavigationService.registerComponent(this.name, this)
+  }
 
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
-        // Deregister the navigation component from the registry
-        this._treoNavigationService.deregisterComponent(this.name);
+  /**
+   * On destroy
+   */
+  ngOnDestroy(): void {
+    // Deregister the navigation component from the registry
+    this._treoNavigationService.deregisterComponent(this.name)
 
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
-        this._unsubscribeAll.complete();
-    }
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next()
+    this._unsubscribeAll.complete()
+  }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------------
+  // @ Public methods
+  // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * Refresh the component to apply the changes
-     */
-    refresh(): void
-    {
-        // Mark for check
-        this._changeDetectorRef.markForCheck();
+  /**
+   * Refresh the component to apply the changes
+   */
+  refresh(): void {
+    // Mark for check
+    this._changeDetectorRef.markForCheck()
 
-        // Execute the observable
-        this.onRefreshed.next(true);
-    }
+    // Execute the observable
+    this.onRefreshed.next(true)
+  }
 
-    /**
-     * Track by function for ngFor loops
-     *
-     * @param index
-     * @param item
-     */
-    trackByFn(index: number, item: any): any
-    {
-        return item.id || index;
-    }
+  /**
+   * Track by function for ngFor loops
+   *
+   * @param index
+   * @param item
+   */
+  trackByFn(index: number, item: any): any {
+    return item.id || index
+  }
 }

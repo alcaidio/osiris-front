@@ -1,2 +1,2 @@
-export * from '@treo/directives/autogrow/autogrow.directive';
-export * from '@treo/directives/autogrow/autogrow.module';
+export * from '@treo/directives/autogrow/autogrow.directive'
+export * from '@treo/directives/autogrow/autogrow.module'

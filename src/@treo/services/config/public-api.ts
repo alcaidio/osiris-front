@@ -1,2 +1,2 @@
-export * from '@treo/services/config/config.module';
-export * from '@treo/services/config/config.service';
+export * from '@treo/services/config/config.module'
+export * from '@treo/services/config/config.service'

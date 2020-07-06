@@ -1,1 +1,1 @@
-export * from '@treo/services/media-watcher/public-api';
+export * from '@treo/services/media-watcher/public-api'

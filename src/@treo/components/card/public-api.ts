@@ -1,2 +1,2 @@
-export * from '@treo/components/card/card.component';
-export * from '@treo/components/card/card.module';
+export * from '@treo/components/card/card.component'
+export * from '@treo/components/card/card.module'
