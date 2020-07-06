@@ -75,10 +75,13 @@
         "karma-jasmine": "3.3.1",
         "karma-jasmine-html-reporter": "1.5.4",
         "lodash": "4.17.15",
+        "prettier": "^2.0.5",
+        "pretty-quick": "^2.0.1",
         "protractor": "7.0.0",
         "tailwindcss": "1.4.6",
         "ts-node": "8.3.0",
         "tslint": "6.1.2",
+        "tslint-config-prettier": "^1.18.0",
         "typescript": "3.9.5"
     }
 }

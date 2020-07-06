@@ -1,6 +1,6 @@
 // @formatter:off
 {
-    "extends": "tslint:recommended",
+    "extends": ["tslint:recommended", "tslint-config-prettier"],
     "rules": {
     "align": {
       "options": [
@@ -90,11 +90,7 @@
             true,
             "single"
         ],
-    "semicolon": {
-      "options": [
-        "always"
-      ]
-    },
+        "semicolon": [true, "never"],
     "space-before-function-paren": {
       "options": {
         "anonymous": "never",
