@@ -67,6 +67,7 @@
         "@types/lodash-es": "4.17.3",
         "@types/node": "12.12.47",
         "codelyzer": "6.0.0-next.1",
+        "husky": "^4.2.5",
         "jasmine-core": "3.5.0",
         "jasmine-spec-reporter": "5.0.2",
         "karma": "5.0.9",
@@ -83,5 +84,11 @@
         "tslint": "6.1.2",
         "tslint-config-prettier": "^1.18.0",
         "typescript": "3.9.5"
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "pretty-quick --staged && ng lint", 
+        "pre-push": "ng build --aot true"
+      }
     }
 }
