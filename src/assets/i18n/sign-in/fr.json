@@ -1,0 +1,18 @@
+{
+  "form": {
+    "title": "Connexion",
+    "sub-title": "Pas de compte ?",
+    "link": "S'inscrire",
+    "label-email": "Adresse email",
+    "label-password": "Mot de passe",
+    "remember-me": "Se souvenir de moi",
+    "forgot-password": "Mot de passe oublié ?",
+    "button": "Se connecter",
+    "continue-with": "Ou continuer avec"
+  },
+  "content": {
+    "title": "Mettez de la réalité dans vos données",
+    "description": "Immergis vous aide à optimiser la gestion de votre patrimoine urbain en vous offrant un outil de visualisation puissant et efficace.",
+    "button": "En savoir plus"
+  }
+}

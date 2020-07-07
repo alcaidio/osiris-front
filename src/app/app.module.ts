@@ -2,16 +2,19 @@ import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router'
-import { MarkdownModule } from 'ngx-markdown'
+import { TranslocoConfig, TRANSLOCO_CONFIG } from '@ngneat/transloco'
 import { TreoModule } from '@treo'
-import { TreoConfigModule } from '@treo/services/config'
 import { TreoMockApiModule } from '@treo/lib/mock-api'
-import { CoreModule } from 'app/core/core.module'
-import { appConfig } from 'app/core/config/app.config'
-import { mockDataServices } from 'app/data/mock'
-import { LayoutModule } from 'app/layout/layout.module'
+import { TreoConfigModule } from '@treo/services/config'
 import { AppComponent } from 'app/app.component'
 import { appRoutes } from 'app/app.routing'
+import { appConfig } from 'app/core/config/app.config'
+import { CoreModule } from 'app/core/core.module'
+import { mockDataServices } from 'app/data/mock'
+import { LayoutModule } from 'app/layout/layout.module'
+import { environment } from 'environments/environment'
+import { MarkdownModule } from 'ngx-markdown'
+import { httpLoader } from './core/i18n/transloco.loader'
 
 const routerConfig: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -38,6 +41,21 @@ const routerConfig: ExtraOptions = {
 
     // 3rd party modules
     MarkdownModule.forRoot({}),
+  ],
+  providers: [
+    httpLoader,
+    {
+      provide: TRANSLOCO_CONFIG,
+      useValue: {
+        prodMode: environment.production,
+        availableLangs: [
+          { id: 'en', label: 'English' },
+          { id: 'fr', label: 'French' },
+        ],
+        reRenderOnLangChange: true,
+        defaultLang: 'fr',
+      } as TranslocoConfig,
+    },
   ],
   bootstrap: [AppComponent],
 })

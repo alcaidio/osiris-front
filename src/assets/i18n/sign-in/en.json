@@ -1,0 +1,18 @@
+{
+  "form": {
+    "title": "Sign in",
+    "sub-title": "Don't have an account?",
+    "link": "Sign up",
+    "label-email": "Email address",
+    "label-password": "Password",
+    "remember-me": "Remember me",
+    "forgot-password": "Forgot password?",
+    "button": "Sign in",
+    "continue-with": "Or continue with"
+  },
+  "content": {
+    "title": "When your data becomes reality",
+    "description": "Immergis helps you optimize the management of your urban heritage by providing you with a powerful and effective visualization tool.",
+    "button": "Learn more"
+  }
+}
