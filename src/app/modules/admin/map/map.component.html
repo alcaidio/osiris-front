@@ -1,3 +1,47 @@
 <div class="content-layout fullwidth-basic-normal-scroll">
-  <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[9]" [center]="[-74.5, 40]"> </mgl-map>
+  <mgl-map
+    [style]="'mapbox://styles/mapbox/outdoors-v9'"
+    [zoom]="13"
+    [center]="[2.189, 48.926]"
+    [pitch]="0"
+    [bearing]="0"
+    [maxZoom]="20"
+    [minZoom]="12"
+  >
+    <mgl-control mglGeocoder position="top-right"></mgl-control>
+    <mgl-control mglFullscreen position="bottom-right"></mgl-control>
+    <mgl-control mglNavigation position="bottom-right"></mgl-control>
+    <mgl-control
+      mglGeolocate
+      [positionOptions]="{
+        enableHighAccuracy: true
+      }"
+      [trackUserLocation]="true"
+      position="bottom-right"
+    ></mgl-control>
+    <mgl-control mglScale position="bottom-left"></mgl-control>
+
+    <mgl-geojson-source id="section">
+      <mgl-feature
+        *ngFor="let section of sections"
+        [geometry]="section.geometry"
+        [properties]="section.properties"
+      ></mgl-feature>
+    </mgl-geojson-source>
+
+    <mgl-layer
+      id="section"
+      type="line"
+      source="section"
+      [layout]="{
+        'line-join': 'round',
+        'line-cap': 'round'
+      }"
+      [paint]="{
+        'line-color': '#008000',
+        'line-width': 5
+      }"
+    >
+    </mgl-layer>
+  </mgl-map>
 </div>

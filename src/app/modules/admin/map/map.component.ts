@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { SECTIONS } from './sections'
 
 @Component({
   selector: 'app-map',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
+  sections: any
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sections = SECTIONS.features
+  }
 }
