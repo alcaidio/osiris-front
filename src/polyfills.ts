@@ -1,3 +1,9 @@
+/* eslint no-use-before-define: 0 */ // --> OFF
+
+// mapbox issues https://github.com/Wykks/ngx-mapbox-gl/issues/136#issuecomment-496224634
+/* eslint-disable no-use-before-define */
+;(window as any).global = window
+
 /**
  * This file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.
@@ -27,7 +33,6 @@
  * Standard animation support in Angular DOES NOT require any polyfills (as of Angular 6.0).
  */
 import 'web-animations-js' // Run `npm install --save web-animations-js`.
-
 /**
  * By default, zone.js will patch all possible macroTask and DomEvents
  * user can disable parts of macroTask/DomEvents patch by setting following flags
@@ -51,7 +56,6 @@ import 'web-animations-js' // Run `npm install --save web-animations-js`.
  *  (window as any).__Zone_enable_cross_context_check = true;
  *
  */
-
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */

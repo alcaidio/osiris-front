@@ -4,6 +4,11 @@
 
 export const environment = {
   production: false,
+  mapbox: {
+    api: {
+      token: 'pk.eyJ1IjoidGltb3RoeTM0IiwiYSI6ImNrYjZreXRmNzB6NXAyeW16ZDFyYzFhdmcifQ.PP2qxB_gEEAh9XzZMEQm0g',
+    },
+  },
 }
 
 /*

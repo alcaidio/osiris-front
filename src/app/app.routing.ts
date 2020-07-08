@@ -101,7 +101,7 @@ export const appRoutes: Route[] = [
       // Example
       {
         path: 'map',
-        loadChildren: () => import('app/modules/admin/example/example.module').then((m) => m.ExampleModule),
+        loadChildren: () => import('app/modules/admin/map/map.module').then((m) => m.MapModule),
       },
       {
         path: 'dashboard',
