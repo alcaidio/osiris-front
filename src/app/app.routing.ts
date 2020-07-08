@@ -1,17 +1,17 @@
 import { Route } from '@angular/router'
+import { InitialDataResolver } from 'app/app.resolvers'
 import { AuthGuard } from 'app/core/auth/guards/auth.guard'
 import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard'
 import { LayoutComponent } from 'app/layout/layout.component'
-import { InitialDataResolver } from 'app/app.resolvers'
 
 // @formatter:off
 // tslint:disable:max-line-length
 export const appRoutes: Route[] = [
   // Redirect empty path to '/example'
-  { path: '', pathMatch: 'full', redirectTo: 'example' },
+  { path: '', pathMatch: 'full', redirectTo: 'map' },
 
   // Redirect signed in user to the '/example'
-  { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'example' },
+  { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'map' },
 
   // Auth routes (guest)
   {
@@ -100,7 +100,7 @@ export const appRoutes: Route[] = [
     children: [
       // Example
       {
-        path: 'example',
+        path: 'map',
         loadChildren: () => import('app/modules/admin/example/example.module').then((m) => m.ExampleModule),
       },
 
