@@ -1,0 +1,12 @@
+{
+  "404": {
+    "title": "Ooops... 404 !",
+    "description": "La page que vous avez demandée est introuvable.",
+    "link": "Retourner sur {{location}}"
+  },
+  "500": {
+    "title": "Quelque chose a mal tourné !",
+    "description": "Erreur de serveur 500. Notre personnel a été informé, merci de votre compréhension.",
+    "link": "Retourner sur {{location}}"
+  }
+}
