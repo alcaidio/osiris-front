@@ -21,27 +21,19 @@
     ></mgl-control>
     <mgl-control mglScale position="bottom-left"></mgl-control>
 
-    <mgl-geojson-source id="section">
-      <mgl-feature
-        *ngFor="let section of sections"
-        [geometry]="section.geometry"
-        [properties]="section.properties"
-      ></mgl-feature>
-    </mgl-geojson-source>
+    <!-- Good section layer -->
+    <app-layer [id]="'good'" [data]="goodSections" [color]="'#48bb78'"></app-layer>
 
-    <mgl-layer
-      id="section"
-      type="line"
-      source="section"
-      [layout]="{
-        'line-join': 'round',
-        'line-cap': 'round'
-      }"
-      [paint]="{
-        'line-color': '#008000',
-        'line-width': 5
-      }"
-    >
-    </mgl-layer>
+    <!-- Medium section layer -->
+    <app-layer [id]="'medium'" [data]="mediumSections" [color]="'#ecc94b'"></app-layer>
+
+    <!-- Poor section layer -->
+    <app-layer [id]="'poor'" [data]="poorSections" [color]="'#ed8936'"></app-layer>
+
+    <!-- Very poor section layer -->
+    <app-layer [id]="'very_poor'" [data]="veryPoorSections" [color]="'#e53e3e'"></app-layer>
+
+    <!-- Out section layer -->
+    <app-layer [id]="'out'" [data]="outSections" [color]="'#cbd5e0'"></app-layer>
   </mgl-map>
 </div>

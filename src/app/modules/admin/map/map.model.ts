@@ -20,4 +20,6 @@ export interface Point {
   coordinates: [number, number, number?]
 }
 
-export interface Properties {}
+// export interface Properties {
+// TODO
+// }

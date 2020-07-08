@@ -7,11 +7,32 @@ import { SECTIONS } from './sections'
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-  sections: any
+  outSections = []
+  goodSections = []
+  mediumSections = []
+  poorSections = []
+  veryPoorSections = []
 
   constructor() {}
 
   ngOnInit(): void {
-    this.sections = SECTIONS.features
+    this.generateLayers()
+  }
+
+  private generateLayers(): void {
+    SECTIONS.features.map((t) => {
+      const state = t.properties.etat_ch
+      if (state === 'Bon') {
+        return this.goodSections.push(t)
+      } else if (state === 'Moyen') {
+        return this.mediumSections.push(t)
+      } else if (state === 'Mauvais') {
+        return this.poorSections.push(t)
+      } else if (state === 'Très mauvais') {
+        return this.veryPoorSections.push(t)
+      } else {
+        return this.outSections.push(t)
+      }
+    })
   }
 }
