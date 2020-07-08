@@ -103,6 +103,26 @@ export const appRoutes: Route[] = [
         path: 'map',
         loadChildren: () => import('app/modules/admin/example/example.module').then((m) => m.ExampleModule),
       },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('app/modules/admin/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+      },
+      {
+        path: 'works',
+        loadChildren: () =>
+          import('app/modules/admin/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+      },
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('app/modules/admin/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('app/modules/admin/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+      },
 
       // 404 & Catch all
       // {path: '404-not-found', pathMatch: 'full', loadChildren: () => import('app/modules/admin/pages/errors/error-404/error-404.module').then(m => m.Error404Module)},
