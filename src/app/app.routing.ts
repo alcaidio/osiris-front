@@ -123,10 +123,13 @@ export const appRoutes: Route[] = [
         loadChildren: () =>
           import('app/modules/admin/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
       },
-
-      // 404 & Catch all
-      // {path: '404-not-found', pathMatch: 'full', loadChildren: () => import('app/modules/admin/pages/errors/error-404/error-404.module').then(m => m.Error404Module)},
-      // {path: '**', redirectTo: '404-not-found'}
+      {
+        path: '404-not-found',
+        pathMatch: 'full',
+        loadChildren: () =>
+          import('app/modules/admin/pages/errors/error-404/error-404.module').then((m) => m.Error404Module),
+      },
+      { path: '**', redirectTo: '404-not-found' },
     ],
   },
 ]
