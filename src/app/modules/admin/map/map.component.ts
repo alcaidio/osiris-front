@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { MapMouseEvent } from 'mapbox-gl'
 import { SECTIONS } from './sections'
 
 @Component({
@@ -12,6 +13,7 @@ export class MapComponent implements OnInit {
   mediumSections = []
   poorSections = []
   veryPoorSections = []
+  cursorStyle = ''
 
   constructor() {}
 
@@ -34,5 +36,14 @@ export class MapComponent implements OnInit {
         return this.outSections.push(t)
       }
     })
+  }
+
+  toggleCursorStyle(evt: string) {
+    evt === '' ? (this.cursorStyle = '') : (this.cursorStyle = 'pointer')
+  }
+
+  onClick(evt: MapMouseEvent) {
+    // TODO
+    console.log('Event: ', evt)
   }
 }

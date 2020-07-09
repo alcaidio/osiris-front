@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { MapMouseEvent } from 'mapbox-gl'
 import { Feature } from './../map.model'
 
 @Component({
@@ -24,6 +25,9 @@ import { Feature } from './../map.model'
           'line-color': color,
           'line-width': width
         }"
+        (click)="selected.emit($event)"
+        (mouseEnter)="emitEnter()"
+        (mouseLeave)="emitLeave()"
       >
       </mgl-layer>
     </ng-container>
@@ -34,4 +38,17 @@ export class LayerComponent {
   @Input() data: Feature
   @Input() color: string
   @Input() width = 5
+
+  @Output() cursor = new EventEmitter<string>()
+  @Output() selected = new EventEmitter<MapMouseEvent>()
+
+  emitEnter() {
+    // this.width += 5
+    this.cursor.emit('pointer')
+  }
+
+  emitLeave() {
+    // this.width -= 5
+    this.cursor.emit('')
+  }
 }

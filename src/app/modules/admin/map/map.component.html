@@ -7,6 +7,7 @@
     [bearing]="0"
     [maxZoom]="20"
     [minZoom]="12"
+    [cursorStyle]="cursorStyle"
   >
     <mgl-control mglGeocoder position="top-right"></mgl-control>
     <mgl-control mglFullscreen position="bottom-right"></mgl-control>
@@ -22,18 +23,48 @@
     <mgl-control mglScale position="bottom-left"></mgl-control>
 
     <!-- Good section layer -->
-    <app-layer [id]="'good'" [data]="goodSections" [color]="'#48bb78'"></app-layer>
+    <app-layer
+      [id]="'good'"
+      [data]="goodSections"
+      [color]="'#48bb78'"
+      (cursor)="toggleCursorStyle($event)"
+      (selected)="onClick($event)"
+    ></app-layer>
 
     <!-- Medium section layer -->
-    <app-layer [id]="'medium'" [data]="mediumSections" [color]="'#ecc94b'"></app-layer>
+    <app-layer
+      [id]="'medium'"
+      [data]="mediumSections"
+      [color]="'#ecc94b'"
+      (cursor)="toggleCursorStyle($event)"
+      (selected)="onClick($event)"
+    ></app-layer>
 
     <!-- Poor section layer -->
-    <app-layer [id]="'poor'" [data]="poorSections" [color]="'#ed8936'"></app-layer>
+    <app-layer
+      [id]="'poor'"
+      [data]="poorSections"
+      [color]="'#ed8936'"
+      (cursor)="toggleCursorStyle($event)"
+      (selected)="onClick($event)"
+    ></app-layer>
 
     <!-- Very poor section layer -->
-    <app-layer [id]="'very_poor'" [data]="veryPoorSections" [color]="'#e53e3e'"></app-layer>
+    <app-layer
+      [id]="'very_poor'"
+      [data]="veryPoorSections"
+      [color]="'#e53e3e'"
+      (cursor)="toggleCursorStyle($event)"
+      (selected)="onClick($event)"
+    ></app-layer>
 
     <!-- Out section layer -->
-    <app-layer [id]="'out'" [data]="outSections" [color]="'#cbd5e0'"></app-layer>
+    <app-layer
+      [id]="'out'"
+      [data]="outSections"
+      [color]="'#cbd5e0'"
+      (cursor)="toggleCursorStyle($event)"
+      (selected)="onClick($event)"
+    ></app-layer>
   </mgl-map>
 </div>
