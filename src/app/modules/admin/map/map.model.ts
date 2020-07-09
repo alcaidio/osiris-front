@@ -1,25 +1,28 @@
-export interface FeatureCollection {
-  type: 'FeatureCollection'
-  features: Array<Feature>
-  name?: string
-}
-
-export interface Feature {
-  type: 'Feature'
-  geometry: Point | LineString
+export interface FeatureCollection extends GeoJSON.FeatureCollection {
   properties?: any
 }
 
-export interface LineString {
-  type: 'LineString'
-  coordinates: Array<[number, number, number]>
+export interface Feature {
+  id?: string | number
+  type: 'Feature'
+  geometry: GeoJSON.Geometry
+  properties?: Properties
 }
 
-export interface Point {
-  type: 'Point'
-  coordinates: [number, number, number?]
+export interface Properties {
+  pk: number
+  id_bdtopo: string
+  nom_rue: string
+  longueur: number
+  etat_ch: 'Bon' | 'Moyen' | 'Mauvais' | 'Très mauvais'
+  commune: string
+  quartier?: string
+  domaniali?: string
+  hierarchie?: string
+  ch_revet?: string
+  ch_larg?: number
+  surface?: number
+  n_surf?: number
+  n_stru?: number
+  note_chau?: number
 }
-
-// export interface Properties {
-// TODO
-// }

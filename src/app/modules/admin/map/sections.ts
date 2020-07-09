@@ -1,6 +1,6 @@
 /* tslint:disable */
-// divide by 2 the file size thanks to cleaning properties and reducing accuracy (with geojson-pick and geojson-precision)
-export const SECTIONS = {
+import { FeatureCollection } from './map.model'
+export const SECTIONS: FeatureCollection = {
   type: 'FeatureCollection',
   properties: { name: 'Diagnostique Houille', date_survey: '17/03/2020' },
   features: [
