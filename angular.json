@@ -125,5 +125,12 @@
       }
     }
   },
-  "defaultProject": "treo"
+  "defaultProject": "treo",
+  "schematics": {
+    "@schematics/angular": {
+      "component": {
+        "inlineTemplate": true
+      }
+    }
+  }
 }
