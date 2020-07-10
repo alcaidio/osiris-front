@@ -10,17 +10,9 @@
     [cursorStyle]="cursorStyle"
   >
     <mgl-control mglGeocoder position="top-right"></mgl-control>
-    <mgl-control mglFullscreen position="bottom-right"></mgl-control>
-    <mgl-control mglNavigation position="bottom-right"></mgl-control>
-    <mgl-control
-      mglGeolocate
-      [positionOptions]="{
-        enableHighAccuracy: true
-      }"
-      [trackUserLocation]="true"
-      position="bottom-right"
-    ></mgl-control>
-    <mgl-control mglScale position="bottom-left"></mgl-control>
+    <mgl-control mglFullscreen position="top-left"></mgl-control>
+    <mgl-control mglNavigation position="top-left"></mgl-control>
+    <mgl-control mglScale position="bottom-right"></mgl-control>
 
     <!-- Good section layer -->
     <app-layer
