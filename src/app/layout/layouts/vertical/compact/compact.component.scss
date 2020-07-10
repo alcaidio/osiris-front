@@ -144,7 +144,11 @@ compact-layout {
       }
 
       .navigation-toggle-button {
+        visibility: hidden;
         margin-right: 8px;
+        @include treo-breakpoint('lt-md') {
+          visibility: visible;
+        }
       }
 
       .spacer {
