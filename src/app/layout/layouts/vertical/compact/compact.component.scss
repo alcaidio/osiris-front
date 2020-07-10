@@ -1,6 +1,6 @@
 @import 'treo';
 
-$treo-vertical-navigation-compact-width: 144;
+$treo-vertical-navigation-compact-width: 100;
 
 compact-layout {
   position: relative;
@@ -80,7 +80,7 @@ compact-layout {
               .treo-vertical-navigation-item-icon {
                 margin-right: 0;
                 margin-bottom: 8px;
-                @include treo-icon-size(30);
+                @include treo-icon-size(28);
               }
 
               .treo-vertical-navigation-item-title-wrapper {
