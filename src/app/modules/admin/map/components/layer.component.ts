@@ -42,12 +42,12 @@ export class LayerComponent {
   @Output() cursor = new EventEmitter<string>()
   @Output() selected = new EventEmitter<MapMouseEvent>()
 
-  emitEnter() {
+  emitEnter(): void {
     // this.width += 5
     this.cursor.emit('pointer')
   }
 
-  emitLeave() {
+  emitLeave(): void {
     // this.width -= 5
     this.cursor.emit('')
   }

@@ -38,11 +38,11 @@ export class MapComponent implements OnInit {
     })
   }
 
-  toggleCursorStyle(evt: string) {
+  toggleCursorStyle(evt: string): void {
     evt === '' ? (this.cursorStyle = '') : (this.cursorStyle = 'pointer')
   }
 
-  onClick(evt: MapMouseEvent) {
+  onClick(evt: MapMouseEvent): void {
     // TODO
     console.log('Event: ', evt)
   }
