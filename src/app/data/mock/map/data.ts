@@ -1,11 +1,12 @@
+import { TreoMockApiUtils } from './../../../../@treo/lib/mock-api/mock-api.utils'
 /* tslint:disable */
-import { FeatureCollection } from './map.model'
-export const SECTIONS: FeatureCollection = {
+export const sections = {
   type: 'FeatureCollection',
   properties: { name: 'Diagnostique Houille', date_survey: '17/03/2020' },
   features: [
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -35,6 +36,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -68,6 +70,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -100,6 +103,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -136,6 +140,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -172,6 +177,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -201,6 +207,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -228,6 +235,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -256,6 +264,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -291,6 +300,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -320,6 +330,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -350,6 +361,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -378,6 +390,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -409,6 +422,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -436,6 +450,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -463,6 +478,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -490,6 +506,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -523,6 +540,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -552,6 +570,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -581,6 +600,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -610,6 +630,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -638,6 +659,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -667,6 +689,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -697,6 +720,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -726,6 +750,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -756,6 +781,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -783,6 +809,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -810,6 +837,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -838,6 +866,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -865,6 +894,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -897,6 +927,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -925,6 +956,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -953,6 +985,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -983,6 +1016,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1010,6 +1044,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1038,6 +1073,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1066,6 +1102,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1094,6 +1131,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1127,6 +1165,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1158,6 +1197,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1186,6 +1226,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1215,6 +1256,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1243,6 +1285,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1271,6 +1314,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1306,6 +1350,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1334,6 +1379,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1362,6 +1408,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1391,6 +1438,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1426,6 +1474,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1462,6 +1511,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1489,6 +1539,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1518,6 +1569,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1545,6 +1597,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1574,6 +1627,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1610,6 +1664,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1639,6 +1694,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1669,6 +1725,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1697,6 +1754,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1740,6 +1798,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1773,6 +1832,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1814,6 +1874,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1847,6 +1908,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1884,6 +1946,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1916,6 +1979,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1949,6 +2013,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -1976,6 +2041,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2003,6 +2069,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2033,6 +2100,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2073,6 +2141,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2101,6 +2170,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2135,6 +2205,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2162,6 +2233,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2191,6 +2263,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2219,6 +2292,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2246,6 +2320,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2274,6 +2349,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2302,6 +2378,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2329,6 +2406,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2358,6 +2436,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2385,6 +2464,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2415,6 +2495,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2457,6 +2538,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2486,6 +2568,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2513,6 +2596,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2543,6 +2627,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2572,6 +2657,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2599,6 +2685,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2632,6 +2719,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2661,6 +2749,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2690,6 +2779,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2721,6 +2811,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2748,6 +2839,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2785,6 +2877,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2817,6 +2910,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2847,6 +2941,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2877,6 +2972,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2906,6 +3002,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2934,6 +3031,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2964,6 +3062,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -2996,6 +3095,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3025,6 +3125,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3059,6 +3160,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3090,6 +3192,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3118,6 +3221,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3147,6 +3251,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3174,6 +3279,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3202,6 +3308,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3229,6 +3336,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3257,6 +3365,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3284,6 +3393,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3314,6 +3424,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3347,6 +3458,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3377,6 +3489,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3406,6 +3519,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3435,6 +3549,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3463,6 +3578,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3494,6 +3610,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3523,6 +3640,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3552,6 +3670,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3579,6 +3698,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3609,6 +3729,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3637,6 +3758,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3666,6 +3788,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3696,6 +3819,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3733,6 +3857,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3764,6 +3889,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3792,6 +3918,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3819,6 +3946,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3848,6 +3976,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3878,6 +4007,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3910,6 +4040,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3941,6 +4072,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3969,6 +4101,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -3998,6 +4131,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4026,6 +4160,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4064,6 +4199,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4095,6 +4231,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4124,6 +4261,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4152,6 +4290,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4179,6 +4318,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4213,6 +4353,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4240,6 +4381,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4267,6 +4409,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4294,6 +4437,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4321,6 +4465,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4348,6 +4493,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4382,6 +4528,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4410,6 +4557,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4449,6 +4597,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4476,6 +4625,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4503,6 +4653,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4537,6 +4688,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4573,6 +4725,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4609,6 +4762,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4639,6 +4793,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4666,6 +4821,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4696,6 +4852,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4724,6 +4881,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4754,6 +4912,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4786,6 +4945,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4813,6 +4973,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4843,6 +5004,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4870,6 +5032,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4902,6 +5065,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4937,6 +5101,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -4969,6 +5134,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5003,6 +5169,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5030,6 +5197,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5059,6 +5227,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5093,6 +5262,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5120,6 +5290,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5150,6 +5321,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5180,6 +5352,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5207,6 +5380,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5240,6 +5414,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5268,6 +5443,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5297,6 +5473,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5324,6 +5501,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5351,6 +5529,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5378,6 +5557,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5408,6 +5588,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5444,6 +5625,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5475,6 +5657,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5502,6 +5685,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5529,6 +5713,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5558,6 +5743,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5590,6 +5776,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5626,6 +5813,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5654,6 +5842,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5683,6 +5872,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5710,6 +5900,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5744,6 +5935,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5772,6 +5964,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5799,6 +5992,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5828,6 +6022,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5857,6 +6052,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5885,6 +6081,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5912,6 +6109,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5942,6 +6140,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5970,6 +6169,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -5998,6 +6198,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6025,6 +6226,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6055,6 +6257,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6083,6 +6286,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6110,6 +6314,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6137,6 +6342,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6164,6 +6370,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6197,6 +6404,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6232,6 +6440,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6262,6 +6471,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6297,6 +6507,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6334,6 +6545,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6361,6 +6573,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6393,6 +6606,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6420,6 +6634,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6448,6 +6663,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6480,6 +6696,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6510,6 +6727,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6539,6 +6757,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6566,6 +6785,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6594,6 +6814,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6623,6 +6844,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6651,6 +6873,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6678,6 +6901,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6710,6 +6934,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6739,6 +6964,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6766,6 +6992,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6797,6 +7024,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6825,6 +7053,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6871,6 +7100,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6898,6 +7128,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6935,6 +7166,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6969,6 +7201,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -6998,6 +7231,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7029,6 +7263,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7065,6 +7300,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7094,6 +7330,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7122,6 +7359,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7152,6 +7390,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7182,6 +7421,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7209,6 +7449,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7240,6 +7481,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7267,6 +7509,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7295,6 +7538,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7326,6 +7570,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7356,6 +7601,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7383,6 +7629,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7414,6 +7661,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7441,6 +7689,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7469,6 +7718,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7497,6 +7747,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7524,6 +7775,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7552,6 +7804,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7579,6 +7832,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7609,6 +7863,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7637,6 +7892,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7665,6 +7921,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7697,6 +7954,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7726,6 +7984,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7768,6 +8027,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7796,6 +8056,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7827,6 +8088,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7854,6 +8116,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7881,6 +8144,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7909,6 +8173,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7938,6 +8203,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7965,6 +8231,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -7992,6 +8259,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8019,6 +8287,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8047,6 +8316,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8074,6 +8344,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8106,6 +8377,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8134,6 +8406,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8164,6 +8437,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8191,6 +8465,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8220,6 +8495,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8249,6 +8525,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8276,6 +8553,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8309,6 +8587,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8339,6 +8618,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8370,6 +8650,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8402,6 +8683,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8432,6 +8714,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8468,6 +8751,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8499,6 +8783,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8526,6 +8811,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8560,6 +8846,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8588,6 +8875,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8615,6 +8903,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8642,6 +8931,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8669,6 +8959,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8699,6 +8990,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8730,6 +9022,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8757,6 +9050,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8785,6 +9079,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8817,6 +9112,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8847,6 +9143,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8874,6 +9171,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8901,6 +9199,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8928,6 +9227,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8955,6 +9255,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -8984,6 +9285,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9013,6 +9315,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9041,6 +9344,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9073,6 +9377,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9105,6 +9410,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9142,6 +9448,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9169,6 +9476,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9197,6 +9505,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9231,6 +9540,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9264,6 +9574,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9298,6 +9609,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9328,6 +9640,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9355,6 +9668,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9382,6 +9696,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9409,6 +9724,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9437,6 +9753,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9464,6 +9781,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9495,6 +9813,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9522,6 +9841,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9549,6 +9869,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9578,6 +9899,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9605,6 +9927,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9634,6 +9957,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9663,6 +9987,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9690,6 +10015,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9717,6 +10043,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9744,6 +10071,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9773,6 +10101,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9804,6 +10133,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9832,6 +10162,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9859,6 +10190,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9892,6 +10224,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9920,6 +10253,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9947,6 +10281,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -9979,6 +10314,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10006,6 +10342,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10033,6 +10370,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10062,6 +10400,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10091,6 +10430,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10118,6 +10458,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10145,6 +10486,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10172,6 +10514,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10202,6 +10545,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10231,6 +10575,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10259,6 +10604,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10286,6 +10632,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10313,6 +10660,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10345,6 +10693,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10372,6 +10721,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10403,6 +10753,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10432,6 +10783,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10459,6 +10811,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10486,6 +10839,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10513,6 +10867,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10540,6 +10895,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10568,6 +10924,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10597,6 +10954,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10624,6 +10982,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10651,6 +11010,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10679,6 +11039,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10706,6 +11067,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10733,6 +11095,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10760,6 +11123,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10787,6 +11151,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10817,6 +11182,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10844,6 +11210,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10872,6 +11239,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10899,6 +11267,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10926,6 +11295,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10961,6 +11331,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -10989,6 +11360,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11016,6 +11388,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11043,6 +11416,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11071,6 +11445,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11100,6 +11475,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11127,6 +11503,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11160,6 +11537,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11187,6 +11565,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11214,6 +11593,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11242,6 +11622,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11270,6 +11651,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11298,6 +11680,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11327,6 +11710,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11362,6 +11746,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11390,6 +11775,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11427,6 +11813,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11454,6 +11841,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11481,6 +11869,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11508,6 +11897,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11538,6 +11928,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11566,6 +11957,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11597,6 +11989,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11625,6 +12018,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11656,6 +12050,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11687,6 +12082,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11714,6 +12110,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11745,6 +12142,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11774,6 +12172,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11806,6 +12205,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11838,6 +12238,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11867,6 +12268,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11900,6 +12302,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11927,6 +12330,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11960,6 +12364,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -11987,6 +12392,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12020,6 +12426,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12047,6 +12454,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12075,6 +12483,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12106,6 +12515,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12136,6 +12546,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12170,6 +12581,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12197,6 +12609,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12225,6 +12638,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12252,6 +12666,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12285,6 +12700,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12312,6 +12728,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12341,6 +12758,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12372,6 +12790,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12400,6 +12819,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12428,6 +12848,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12455,6 +12876,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12484,6 +12906,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12521,6 +12944,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12557,6 +12981,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12586,6 +13011,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12613,6 +13039,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12642,6 +13069,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12670,6 +13098,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12697,6 +13126,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12724,6 +13154,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12752,6 +13183,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12780,6 +13212,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12807,6 +13240,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12834,6 +13268,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12863,6 +13298,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12903,6 +13339,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12930,6 +13367,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -12958,6 +13396,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13010,6 +13449,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13039,6 +13479,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13071,6 +13512,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13100,6 +13542,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13127,6 +13570,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13155,6 +13599,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13186,6 +13631,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13216,6 +13662,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13243,6 +13690,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13271,6 +13719,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13298,6 +13747,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13328,6 +13778,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13357,6 +13808,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13386,6 +13838,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13417,6 +13870,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13445,6 +13899,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13474,6 +13929,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13510,6 +13966,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13537,6 +13994,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13565,6 +14023,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13596,6 +14055,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13629,6 +14089,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13659,6 +14120,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13687,6 +14149,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13714,6 +14177,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13744,6 +14208,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13772,6 +14237,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13800,6 +14266,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13831,6 +14298,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13863,6 +14331,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13896,6 +14365,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13925,6 +14395,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13953,6 +14424,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -13980,6 +14452,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14010,6 +14483,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14042,6 +14516,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14086,6 +14561,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14118,6 +14594,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14148,6 +14625,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14177,6 +14655,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14204,6 +14683,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14231,6 +14711,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14259,6 +14740,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14286,6 +14768,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14314,6 +14797,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14342,6 +14826,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14370,6 +14855,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14399,6 +14885,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14426,6 +14913,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14455,6 +14943,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14482,6 +14971,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14509,6 +14999,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14550,6 +15041,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14578,6 +15070,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14606,6 +15099,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14635,6 +15129,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14662,6 +15157,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14690,6 +15186,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14717,6 +15214,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14744,6 +15242,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14773,6 +15272,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14805,6 +15305,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14840,6 +15341,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14874,6 +15376,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14901,6 +15404,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14940,6 +15444,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14967,6 +15472,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -14996,6 +15502,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15025,6 +15532,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15053,6 +15561,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15081,6 +15590,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15113,6 +15623,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15140,6 +15651,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15167,6 +15679,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15197,6 +15710,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15234,6 +15748,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15261,6 +15776,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15301,6 +15817,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15339,6 +15856,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15369,6 +15887,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15396,6 +15915,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15425,6 +15945,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15452,6 +15973,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15479,6 +16001,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15507,6 +16030,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15535,6 +16059,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15562,6 +16087,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15590,6 +16116,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15627,6 +16154,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15662,6 +16190,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15704,6 +16233,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15733,6 +16263,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15770,6 +16301,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15800,6 +16332,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15830,6 +16363,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15857,6 +16391,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15885,6 +16420,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15912,6 +16448,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15941,6 +16478,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15968,6 +16506,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -15995,6 +16534,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16027,6 +16567,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16054,6 +16595,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16081,6 +16623,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16111,6 +16654,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16138,6 +16682,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16166,6 +16711,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16193,6 +16739,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16220,6 +16767,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16247,6 +16795,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16274,6 +16823,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16301,6 +16851,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16330,6 +16881,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16363,6 +16915,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16391,6 +16944,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16418,6 +16972,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16451,6 +17006,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16484,6 +17040,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16521,6 +17078,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16554,6 +17112,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16582,6 +17141,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16612,6 +17172,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16644,6 +17205,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16673,6 +17235,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16700,6 +17263,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16735,6 +17299,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16763,6 +17328,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16790,6 +17356,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16820,6 +17387,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16847,6 +17415,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16881,6 +17450,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16909,6 +17479,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16937,6 +17508,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16968,6 +17540,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -16999,6 +17572,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17029,6 +17603,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17056,6 +17631,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17085,6 +17661,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17113,6 +17690,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17140,6 +17718,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17170,6 +17749,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17202,6 +17782,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17229,6 +17810,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17260,6 +17842,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17293,6 +17876,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17325,6 +17909,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17352,6 +17937,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17384,6 +17970,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17411,6 +17998,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17440,6 +18028,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17475,6 +18064,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17510,6 +18100,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17540,6 +18131,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17568,6 +18160,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17601,6 +18194,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17632,6 +18226,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17659,6 +18254,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17689,6 +18285,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17721,6 +18318,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17750,6 +18348,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17781,6 +18380,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17820,6 +18420,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17848,6 +18449,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17879,6 +18481,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17906,6 +18509,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17933,6 +18537,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17963,6 +18568,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -17990,6 +18596,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18018,6 +18625,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18045,6 +18653,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18100,6 +18709,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18128,6 +18738,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18155,6 +18766,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18182,6 +18794,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18210,6 +18823,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18239,6 +18853,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18266,6 +18881,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18295,6 +18911,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18323,6 +18940,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18351,6 +18969,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18387,6 +19006,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18417,6 +19037,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18444,6 +19065,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18472,6 +19094,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18500,6 +19123,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18528,6 +19152,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18556,6 +19181,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18584,6 +19210,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18612,6 +19239,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18639,6 +19267,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18671,6 +19300,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18702,6 +19332,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18731,6 +19362,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18759,6 +19391,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18788,6 +19421,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18825,6 +19459,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18858,6 +19493,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18899,6 +19535,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18930,6 +19567,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18959,6 +19597,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -18988,6 +19627,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -19020,6 +19660,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -19050,6 +19691,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -19077,6 +19719,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -19104,6 +19747,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -19138,6 +19782,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -19166,6 +19811,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -19199,6 +19845,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -19226,6 +19873,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [
@@ -19254,6 +19902,7 @@ export const SECTIONS: FeatureCollection = {
     },
     {
       type: 'Feature',
+      id: TreoMockApiUtils.guid(),
       geometry: {
         type: 'LineString',
         coordinates: [

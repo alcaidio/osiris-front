@@ -1,8 +1,0 @@
-Nettoyage du fichier geojson à l'aide de 
-
-geojson-pick 
-
-geojson-pick pk id_bdtopo commune nom_rue domaniali hierarchie ch_revet ch_larg longueur surface n_surf n_stru note_chau etat_ch quartier < [input] > [output]
-
-geojson-precision
-geojson-precision -p 5 -e 2 [input] [output]

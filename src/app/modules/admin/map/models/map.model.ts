@@ -6,7 +6,11 @@ export interface Feature {
   id?: string | number
   type: 'Feature'
   geometry: GeoJSON.Geometry
-  properties?: Properties
+  properties?: any
+}
+
+export interface Section extends Feature {
+  properties: Properties
 }
 
 export interface Properties {

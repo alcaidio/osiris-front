@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { MapMouseEvent } from 'mapbox-gl'
-import { Feature } from './../map.model'
+import { Feature } from '../models/map.model'
 
 @Component({
   selector: 'app-layer',
