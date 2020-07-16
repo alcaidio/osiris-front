@@ -4,15 +4,28 @@ import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Section } from '../models/map.model'
 import { MapService } from '../services/map.service'
+import { TreoDrawerService } from './../../../../../@treo/components/drawer/drawer.service'
 
 @Component({
   selector: 'app-map',
   styleUrls: ['./map.component.scss'],
   template: `
-    <div class="content-layout fullwidth-basic-normal-scroll">
+    <div class="content-layout right-sidebar-fullheight-basic-inner-scroll">
+      <treo-drawer
+        [name]="'sectionDetails'"
+        [mode]="'over'"
+        [fixed]="false"
+        [position]="'right'"
+        [transparentOverlay]="true"
+        #sectionDetails
+      >
+        <div class="flex flex-col w-full light:bg-cool-gray-100 overflow-auto p-3">
+          test
+        </div>
+      </treo-drawer>
       <mgl-map
         [style]="'mapbox://styles/mapbox/outdoors-v9'"
-        [zoom]="13"
+        [zoom]="13.5"
         [center]="[2.189, 48.926]"
         [pitch]="0"
         [bearing]="0"
@@ -49,7 +62,7 @@ export class MapComponent implements OnInit {
   layers: any
   fit: any
 
-  constructor(private _mapService: MapService) {}
+  constructor(private _mapService: MapService, private _treoDrawerService: TreoDrawerService) {}
 
   ngOnInit(): void {
     this.sections$ = this._mapService.getSections()
@@ -98,5 +111,11 @@ export class MapComponent implements OnInit {
       [evt.lngLat.lng - 0.001, evt.lngLat.lat - 0.001],
       [evt.lngLat.lng + 0.001, evt.lngLat.lat + 0.001],
     ]
+    this.toggleDrawer('sectionDetails')
+  }
+
+  private toggleDrawer(drawerName: string): void {
+    const drawer = this._treoDrawerService.getComponent(drawerName)
+    drawer.toggle()
   }
 }

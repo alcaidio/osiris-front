@@ -5,6 +5,18 @@ mgl-map {
   width: 100%;
 }
 
+treo-drawer {
+  min-width: 386px !important;
+  max-width: 386px !important;
+  width: 386px !important;
+
+  @include treo-breakpoint('sm') {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
 // -----------------------------------------------------------------------------------------------------
 // @ Theming
 // -----------------------------------------------------------------------------------------------------
