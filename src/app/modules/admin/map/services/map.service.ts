@@ -7,16 +7,16 @@ import { Section } from '../models/map.model'
 @Injectable({
   providedIn: 'root',
 })
-export class DiagnosticService {
+export class MapService {
   constructor(private _http: HttpClient) {}
 
   getSections(): Observable<Section[]> {
-    return this._http.get<Section[]>('api/diagnostic/sections/all')
+    return this._http.get<Section[]>('api/map/sections/all')
   }
 
   getSectionById(id: string): Observable<Section> {
     return this._http
-      .get<Section>('api/diagnostic/sections/id', { params: { id } })
+      .get<Section>('api/map/sections/id', { params: { id } })
       .pipe(
         map((section: any) => {
           if (!section) {

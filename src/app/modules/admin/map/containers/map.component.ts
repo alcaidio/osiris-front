@@ -3,7 +3,7 @@ import { MapMouseEvent } from 'mapbox-gl'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Section } from '../models/map.model'
-import { DiagnosticService } from '../services/map.service'
+import { MapService } from '../services/map.service'
 
 @Component({
   selector: 'app-map',
@@ -47,7 +47,7 @@ export class MapComponent implements OnInit {
   cursorStyle = ''
   layers: any
 
-  constructor(private _mapService: DiagnosticService) {}
+  constructor(private _mapService: MapService) {}
 
   ngOnInit(): void {
     this.sections$ = this._mapService.getSections()

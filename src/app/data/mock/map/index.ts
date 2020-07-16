@@ -31,7 +31,7 @@ export class DiagnosticMockApi implements TreoMockApi {
     // -----------------------------------------------------------------------------------------------------
     // @ Sections - GET
     // -----------------------------------------------------------------------------------------------------
-    this._treoMockApiService.onGet('api/diagnostic/sections/all').reply(() => {
+    this._treoMockApiService.onGet('api/map/sections/all').reply(() => {
       const featureCollection = cloneDeep(this._sections)
       return [200, featureCollection.features]
     })
@@ -39,7 +39,7 @@ export class DiagnosticMockApi implements TreoMockApi {
     // -----------------------------------------------------------------------------------------------------
     // @ Section - GET
     // -----------------------------------------------------------------------------------------------------
-    this._treoMockApiService.onGet('api/diagnostic/sections/id').reply((request: any) => {
+    this._treoMockApiService.onGet('api/map/sections/id').reply((request: any) => {
       // Get the id from the params
       const id = request.params.get('id')
 
