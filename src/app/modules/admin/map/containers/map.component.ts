@@ -19,6 +19,7 @@ import { MapService } from '../services/map.service'
         [maxZoom]="20"
         [minZoom]="12"
         [cursorStyle]="cursorStyle"
+        [fitBounds]="fit"
       >
         <mgl-control mglGeocoder position="top-right"></mgl-control>
         <mgl-control mglFullscreen position="top-left"></mgl-control>
@@ -46,6 +47,7 @@ export class MapComponent implements OnInit {
   outSections$: Observable<Section[]>
   cursorStyle = ''
   layers: any
+  fit: any
 
   constructor(private _mapService: MapService) {}
 
@@ -57,7 +59,7 @@ export class MapComponent implements OnInit {
       { id: 'medium', data: this.mediumSections$, color: '#ecc94b' },
       { id: 'poor', data: this.poorSections$, color: '#ed8936' },
       { id: 'vary_poor', data: this.veryPoorSections$, color: '#e53e3e' },
-      { id: 'out', data: this.outSections$, color: '#e53e3e' },
+      { id: 'out', data: this.outSections$, color: '#cbd5e0' },
     ]
   }
 
@@ -75,7 +77,15 @@ export class MapComponent implements OnInit {
       map((sections) => sections.filter((section) => section.properties.etat_ch === 'Très mauvais'))
     )
     this.outSections$ = this.sections$.pipe(
-      map((sections) => sections.filter((section) => section.properties.etat_ch === null))
+      map((sections) =>
+        sections.filter(
+          (section) =>
+            section.properties.etat_ch !== 'Bon' &&
+            section.properties.etat_ch !== 'Moyen' &&
+            section.properties.etat_ch !== 'Mauvais' &&
+            section.properties.etat_ch !== 'Très mauvais'
+        )
+      )
     )
   }
 
@@ -84,7 +94,9 @@ export class MapComponent implements OnInit {
   }
 
   onClick(evt: MapMouseEvent): void {
-    // TODO
-    console.log('Event: ', evt)
+    this.fit = [
+      [evt.lngLat.lng - 0.001, evt.lngLat.lat - 0.001],
+      [evt.lngLat.lng + 0.001, evt.lngLat.lat + 0.001],
+    ]
   }
 }
