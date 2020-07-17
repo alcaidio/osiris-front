@@ -343,9 +343,9 @@ treo-card {
         @if ($is-dark) {
           background: treo-color('cool-gray', 700);
         } @else {
-          background: map-get($background, background);
+          background: map-get($background, hover);
         }
-        color: white;
+        color: treo-color('gray', 700);
 
         .background {
           path {
