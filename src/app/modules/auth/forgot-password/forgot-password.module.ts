@@ -10,6 +10,7 @@ import { TreoMessageModule } from '@treo/components/message'
 import { SharedModule } from 'app/shared/shared.module'
 import { AuthForgotPasswordComponent } from 'app/modules/auth/forgot-password/forgot-password.component'
 import { authForgotPasswordRoutes } from 'app/modules/auth/forgot-password/forgot-password.routing'
+import { TRANSLOCO_SCOPE } from '@ngneat/transloco'
 
 @NgModule({
   declarations: [AuthForgotPasswordComponent],
@@ -24,5 +25,6 @@ import { authForgotPasswordRoutes } from 'app/modules/auth/forgot-password/forgo
     TreoMessageModule,
     SharedModule,
   ],
+  providers: [{ provide: TRANSLOCO_SCOPE, useValue: 'forgot-password' }],
 })
 export class AuthForgotPasswordModule {}

@@ -1,0 +1,17 @@
+{
+  "form": {
+    "title": "Forgot password?",
+    "subtitle": "Fill the form to reset your password.",
+    "label-email": "Email address",
+    "error-required": "Email address is required.",
+    "error-email": "Please enter a valid email address.",
+    "button": "Send reset link",
+    "message": "Return to",
+    "link": "sign in"
+  },
+  "content": {
+    "title": "When your data becomes reality",
+    "description": "Immergis helps you optimize the management of your urban heritage by providing you with a powerful and effective visualization tool.",
+    "button": "Learn more"
+  }
+}
