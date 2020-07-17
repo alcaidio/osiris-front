@@ -1,0 +1,11 @@
+{
+  "title": "Vous vous êtes déconnecté !",
+  "subtitle": {
+    "countdown": "Redirection dans {{count}} seconde",
+    "message": "Vous êtes maintenant redirigé !"
+  },
+  "form": {
+    "message": "Aller à",
+    "link": "connexion"
+  }
+}

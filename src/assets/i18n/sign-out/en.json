@@ -1,0 +1,11 @@
+{
+  "title": "You have signed out!",
+  "subtitle": {
+    "countdown": "Redirecting in {{count}} second",
+    "message": "You are now being redirected!"
+  },
+  "form": {
+    "message": "Go to",
+    "link": "sign in"
+  }
+}
