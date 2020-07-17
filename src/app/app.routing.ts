@@ -105,29 +105,24 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'dashboard',
-        loadChildren: () =>
-          import('app/modules/admin/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+        loadChildren: () => import('app/modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
       },
       {
         path: 'works',
-        loadChildren: () =>
-          import('app/modules/admin/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+        loadChildren: () => import('app/modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
       },
       {
         path: 'settings',
-        loadChildren: () =>
-          import('app/modules/admin/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+        loadChildren: () => import('app/modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
       },
       {
         path: 'profile',
-        loadChildren: () =>
-          import('app/modules/admin/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+        loadChildren: () => import('app/modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
       },
       {
         path: '404-not-found',
         pathMatch: 'full',
-        loadChildren: () =>
-          import('app/modules/admin/pages/errors/error-404/error-404.module').then((m) => m.Error404Module),
+        loadChildren: () => import('app/modules/pages/errors/error-404/error-404.module').then((m) => m.Error404Module),
       },
       { path: '**', redirectTo: '404-not-found' },
     ],

@@ -7,8 +7,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { RouterModule } from '@angular/router'
 import { TreoCardModule } from '@treo/components/card'
 import { TreoMessageModule } from '@treo/components/message'
-import { ComingSoonComponent } from 'app/modules/admin/pages/coming-soon/coming-soon.component'
-import { comingSoonRoutes } from 'app/modules/admin/pages/coming-soon/coming-soon.routing'
+import { ComingSoonComponent } from 'app/modules/pages/coming-soon/coming-soon.component'
+import { comingSoonRoutes } from 'app/modules/pages/coming-soon/coming-soon.routing'
 import { SharedModule } from 'app/shared/shared.module'
 
 @NgModule({

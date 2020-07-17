@@ -1,5 +1,5 @@
 import { Route } from '@angular/router'
-import { Error404Component } from 'app/modules/admin/pages/errors/error-404/error-404.component'
+import { Error404Component } from 'app/modules/pages/errors/error-404/error-404.component'
 
 export const error404Routes: Route[] = [
   {
