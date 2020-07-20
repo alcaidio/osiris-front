@@ -113,7 +113,7 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'settings',
-        loadChildren: () => import('app/modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+        loadChildren: () => import('app/modules/admin/settings/settings.module').then((m) => m.SettingsModule),
       },
       {
         path: 'profile',
