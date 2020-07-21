@@ -1,53 +1,51 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { MapMouseEvent } from 'mapbox-gl'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Section } from '../models/map.model'
 import { MapService } from '../services/map.service'
-import { TreoDrawerService } from './../../../../../@treo/components/drawer/drawer.service'
 
 @Component({
   selector: 'app-map',
   styleUrls: ['./map.component.scss'],
   template: `
     <div class="content-layout right-sidebar-fullheight-basic-inner-scroll">
-      <treo-drawer
-        [name]="'sectionDetails'"
-        [mode]="'over'"
-        [fixed]="false"
-        [position]="'right'"
-        [transparentOverlay]="true"
-        #sectionDetails
-      >
-        <div class="flex flex-col w-full light:bg-cool-gray-100 overflow-auto p-3">
-          test
-        </div>
-      </treo-drawer>
-      <mgl-map
-        [style]="'mapbox://styles/mapbox/outdoors-v9'"
-        [zoom]="13.5"
-        [center]="[2.189, 48.926]"
-        [pitch]="0"
-        [bearing]="0"
-        [maxZoom]="20"
-        [minZoom]="12"
-        [cursorStyle]="cursorStyle"
-        [fitBounds]="fit"
-      >
-        <mgl-control mglGeocoder position="top-right"></mgl-control>
-        <mgl-control mglFullscreen position="top-left"></mgl-control>
-        <mgl-control mglNavigation position="top-left"></mgl-control>
-        <mgl-control mglScale position="bottom-right"></mgl-control>
+      <mat-drawer-container>
+        <!-- Drawer -->
+        <mat-drawer [autoFocus]="false" [mode]="'side'" [opened]="false" [position]="'end'" #matDrawer>
+          router outlet
+        </mat-drawer>
 
-        <app-layer
-          *ngFor="let layer of layers"
-          [id]="layer.id"
-          [data]="layer.data | async"
-          [color]="layer.color"
-          (cursor)="toggleCursorStyle($event)"
-          (selected)="onClick($event)"
-        ></app-layer>
-      </mgl-map>
+        <mat-drawer-content>
+          <mgl-map
+            [style]="'mapbox://styles/mapbox/outdoors-v9'"
+            [zoom]="13.5"
+            [center]="[2.189, 48.926]"
+            [pitch]="0"
+            [bearing]="0"
+            [maxZoom]="20"
+            [minZoom]="12"
+            [cursorStyle]="cursorStyle"
+            [fitBounds]="fit"
+            [refreshExpiredTiles]="true"
+            [trackResize]="true"
+          >
+            <mgl-control mglGeocoder position="top-right"></mgl-control>
+            <mgl-control mglFullscreen position="top-left"></mgl-control>
+            <mgl-control mglNavigation position="top-left"></mgl-control>
+            <mgl-control mglScale position="bottom-right"></mgl-control>
+
+            <app-layer
+              *ngFor="let layer of layers"
+              [id]="layer.id"
+              [data]="layer.data | async"
+              [color]="layer.color"
+              (cursor)="toggleCursorStyle($event)"
+              (selected)="onClick($event)"
+            ></app-layer>
+          </mgl-map>
+        </mat-drawer-content>
+      </mat-drawer-container>
     </div>
   `,
 })
@@ -62,7 +60,10 @@ export class MapComponent implements OnInit {
   layers: any
   fit: any
 
-  constructor(private _mapService: MapService, private _treoDrawerService: TreoDrawerService) {}
+  @ViewChild('matDrawer')
+  matDrawer: any
+
+  constructor(private _mapService: MapService) {}
 
   ngOnInit(): void {
     this.sections$ = this._mapService.getSections()
@@ -111,11 +112,6 @@ export class MapComponent implements OnInit {
       [evt.lngLat.lng - 0.001, evt.lngLat.lat - 0.001],
       [evt.lngLat.lng + 0.001, evt.lngLat.lat + 0.001],
     ]
-    this.toggleDrawer('sectionDetails')
-  }
-
-  private toggleDrawer(drawerName: string): void {
-    const drawer = this._treoDrawerService.getComponent(drawerName)
-    drawer.toggle()
+    this.matDrawer.open()
   }
 }

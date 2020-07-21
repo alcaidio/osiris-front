@@ -5,10 +5,10 @@ mgl-map {
   width: 100%;
 }
 
-treo-drawer {
-  min-width: 386px !important;
-  max-width: 386px !important;
-  width: 386px !important;
+mat-drawer {
+  min-width: 384px !important;
+  max-width: 384px !important;
+  width: 384px !important;
 
   @include treo-breakpoint('sm') {
     min-width: 100% !important;
