@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { MapMouseEvent } from 'mapbox-gl'
+import { MatDrawer } from '@angular/material/sidenav'
+import { MapboxGeoJSONFeature, MapMouseEvent } from 'mapbox-gl'
+import { MapComponent } from 'ngx-mapbox-gl'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Section } from '../models/map.model'
@@ -13,11 +15,12 @@ import { MapService } from '../services/map.service'
       <mat-drawer-container>
         <!-- Drawer -->
         <mat-drawer [autoFocus]="false" [mode]="'side'" [opened]="false" [position]="'end'" #matDrawer>
-          router outlet
+          <app-section-details [section]="feature"></app-section-details>
         </mat-drawer>
 
         <mat-drawer-content>
           <mgl-map
+            #mapbox
             [style]="'mapbox://styles/mapbox/outdoors-v9'"
             [zoom]="13.5"
             [center]="[2.189, 48.926]"
@@ -26,8 +29,6 @@ import { MapService } from '../services/map.service'
             [maxZoom]="20"
             [minZoom]="12"
             [cursorStyle]="cursorStyle"
-            [fitBounds]="fit"
-            [refreshExpiredTiles]="true"
             [trackResize]="true"
           >
             <mgl-control mglGeocoder position="top-right"></mgl-control>
@@ -49,7 +50,7 @@ import { MapService } from '../services/map.service'
     </div>
   `,
 })
-export class MapComponent implements OnInit {
+export class CustomMapComponent implements OnInit {
   sections$: Observable<Section[]>
   goodSections$: Observable<Section[]>
   mediumSections$: Observable<Section[]>
@@ -60,8 +61,13 @@ export class MapComponent implements OnInit {
   layers: any
   fit: any
 
+  feature: MapboxGeoJSONFeature
+
+  @ViewChild('mapbox')
+  map: MapComponent
+
   @ViewChild('matDrawer')
-  matDrawer: any
+  matDrawer: MatDrawer
 
   constructor(private _mapService: MapService) {}
 
@@ -72,7 +78,7 @@ export class MapComponent implements OnInit {
       { id: 'good', data: this.goodSections$, color: '#48bb78' },
       { id: 'medium', data: this.mediumSections$, color: '#ecc94b' },
       { id: 'poor', data: this.poorSections$, color: '#ed8936' },
-      { id: 'vary_poor', data: this.veryPoorSections$, color: '#e53e3e' },
+      { id: 'very_poor', data: this.veryPoorSections$, color: '#e53e3e' },
       { id: 'out', data: this.outSections$, color: '#cbd5e0' },
     ]
   }
@@ -108,10 +114,23 @@ export class MapComponent implements OnInit {
   }
 
   onClick(evt: MapMouseEvent): void {
+    const feature = this.map.mapInstance.queryRenderedFeatures(evt.point, {
+      layers: ['good', 'medium', 'poor', 'very_poor', 'out'],
+    })[0]
+
+    this.feature = feature
+
+    // FIX when bbox is send by back i can remove this
+    const geometry = feature.geometry['coordinates']
+    const length = geometry.length
+    const first = geometry[0]
+    const last = geometry[length - 1]
     this.fit = [
-      [evt.lngLat.lng - 0.001, evt.lngLat.lat - 0.001],
-      [evt.lngLat.lng + 0.001, evt.lngLat.lat + 0.001],
+      [first[0], first[1]],
+      [last[0], last[1]],
     ]
+
+    this.map.mapInstance.fitBounds(this.fit, { padding: 275 })
     this.matDrawer.open()
   }
 }

@@ -124,7 +124,7 @@ export const appRoutes: Route[] = [
         pathMatch: 'full',
         loadChildren: () => import('app/modules/pages/errors/error-404/error-404.module').then((m) => m.Error404Module),
       },
-      { path: '**', redirectTo: '404-not-found' },
+      // { path: '**', redirectTo: '404-not-found' },
     ],
   },
 ]
