@@ -47,21 +47,6 @@ const routerConfig: ExtraOptions = {
 
     // 3rd party modules
     MarkdownModule.forRoot({}),
-
-    // Ngxs store
-    NgxsModule.forRoot(AppStates, {
-      developmentMode: !environment.production,
-    }),
-    NgxsStoragePluginModule.forRoot({
-      key: [], // TODO
-    }),
-    NgxsRouterPluginModule.forRoot(),
-    NgxsReduxDevtoolsPluginModule.forRoot({
-      name: 'Osiris Store DevTools',
-    }),
-    NgxsLoggerPluginModule.forRoot({
-      disabled: environment.production,
-    }),
   ],
   providers: [
     httpLoader,

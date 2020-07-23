@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-
-const COMPONENTS = []
+import { NgxsModule } from '@ngxs/store'
+import { AuthStates } from './store'
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: COMPONENTS,
-  exports: COMPONENTS,
+  imports: [CommonModule, NgxsModule.forFeature(AuthStates)],
 })
 export class AuthModule {}

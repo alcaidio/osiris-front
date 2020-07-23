@@ -2,11 +2,34 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { NgModule, Optional, SkipSelf } from '@angular/core'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin'
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin'
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
+import { NgxsModule } from '@ngxs/store'
 import { AuthInterceptor } from 'app/auth/interceptors/auth.interceptor'
+import { environment } from 'environments/environment'
 import { AuthModule } from '../auth'
+import { AppStates } from './store'
 
 @NgModule({
-  imports: [HttpClientModule, AuthModule],
+  imports: [
+    HttpClientModule,
+    AuthModule,
+    NgxsModule.forRoot(AppStates, {
+      developmentMode: !environment.production,
+    }),
+    NgxsStoragePluginModule.forRoot({
+      key: ['auth.status'],
+    }),
+    NgxsRouterPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot({
+      name: 'Osiris Store DevTools',
+    }),
+    NgxsLoggerPluginModule.forRoot({
+      disabled: environment.production,
+    }),
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

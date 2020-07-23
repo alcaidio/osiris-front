@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core'
 import { State } from '@ngxs/store'
 import { Layout } from './../../../layout/layout.types'
 
@@ -15,4 +16,5 @@ export interface ConfigStateModel {
     theme: 'light',
   },
 })
+@Injectable()
 export class ConfigState {}

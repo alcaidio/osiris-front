@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core'
 import { Observable, of, throwError } from 'rxjs'
 import { catchError, switchMap } from 'rxjs/operators'
 import { AuthUtils } from '../auth.utils'
+import { Credentials } from './../models/user.model'
 
 @Injectable({
   providedIn: 'root',
@@ -45,7 +46,7 @@ export class AuthService {
    *
    * @param credentials
    */
-  signIn(credentials: { email: string; password: string }): Observable<any> {
+  signIn(credentials: Credentials): Observable<any> {
     // Throw error, if the user is already logged in
     if (this._authenticated) {
       return throwError('User is already logged in.')
