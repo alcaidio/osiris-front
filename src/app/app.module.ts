@@ -3,6 +3,11 @@ import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router'
 import { TranslocoConfig, TRANSLOCO_CONFIG } from '@ngneat/transloco'
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin'
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin'
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
+import { NgxsModule } from '@ngxs/store'
 import { TreoModule } from '@treo'
 import { TreoMockApiModule } from '@treo/lib/mock-api'
 import { TreoConfigModule } from '@treo/services/config'
@@ -41,6 +46,19 @@ const routerConfig: ExtraOptions = {
 
     // 3rd party modules
     MarkdownModule.forRoot({}),
+
+    // Ngxs store
+    NgxsModule.forRoot(), // TODO
+    NgxsStoragePluginModule.forRoot({
+      key: [], // TODO
+    }),
+    NgxsRouterPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot({
+      name: 'Osiris Store DevTools',
+    }),
+    NgxsLoggerPluginModule.forRoot({
+      disabled: environment.production,
+    }),
   ],
   providers: [
     httpLoader,
