@@ -3,7 +3,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
 import { AuthInterceptor } from 'app/auth/interceptors/auth.interceptor'
-import { AuthModule } from './../auth/auth.module'
+import { AuthModule } from '../auth'
 
 @NgModule({
   imports: [HttpClientModule, AuthModule],

@@ -21,6 +21,7 @@ import { environment } from 'environments/environment'
 import { MarkdownModule } from 'ngx-markdown'
 import { CustomRouterStateSerializer } from './app.routing'
 import { httpLoader } from './core/i18n/transloco.loader'
+import { AppStates } from './core/store'
 
 const routerConfig: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -33,7 +34,6 @@ const routerConfig: ExtraOptions = {
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, routerConfig),
-
     // Treo & Treo Mock API
     TreoModule,
     TreoConfigModule.forRoot(appConfig),
@@ -49,7 +49,9 @@ const routerConfig: ExtraOptions = {
     MarkdownModule.forRoot({}),
 
     // Ngxs store
-    NgxsModule.forRoot(), // TODO
+    NgxsModule.forRoot(AppStates, {
+      developmentMode: !environment.production,
+    }),
     NgxsStoragePluginModule.forRoot({
       key: [], // TODO
     }),
