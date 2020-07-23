@@ -5,7 +5,7 @@ import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router'
 import { TranslocoConfig, TRANSLOCO_CONFIG } from '@ngneat/transloco'
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin'
-import { NgxsRouterPluginModule } from '@ngxs/router-plugin'
+import { NgxsRouterPluginModule, RouterStateSerializer } from '@ngxs/router-plugin'
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
 import { NgxsModule } from '@ngxs/store'
 import { TreoModule } from '@treo'
@@ -19,6 +19,7 @@ import { mockDataServices } from 'app/data/mock'
 import { LayoutModule } from 'app/layout/layout.module'
 import { environment } from 'environments/environment'
 import { MarkdownModule } from 'ngx-markdown'
+import { CustomRouterStateSerializer } from './app.routing'
 import { httpLoader } from './core/i18n/transloco.loader'
 
 const routerConfig: ExtraOptions = {
@@ -74,6 +75,7 @@ const routerConfig: ExtraOptions = {
         defaultLang: 'fr',
       } as TranslocoConfig,
     },
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
   bootstrap: [AppComponent],
 })
