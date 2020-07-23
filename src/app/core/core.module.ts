@@ -1,14 +1,13 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { NgModule, Optional, SkipSelf } from '@angular/core'
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
-import { DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material/icon'
-import { AuthService } from 'app/core/auth/auth.service'
-import { AuthInterceptor } from 'app/core/auth/auth.interceptor'
+import { DomSanitizer } from '@angular/platform-browser'
+import { AuthInterceptor } from 'app/auth/interceptors/auth.interceptor'
+import { AuthModule } from './../auth/auth.module'
 
 @NgModule({
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, AuthModule],
   providers: [
-    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
