@@ -7,11 +7,15 @@ import { MapSectionsResolver } from './map.resolvers'
 const routes: Routes = [
   {
     path: '',
-    component: CustomMapComponent,
     resolve: {
       map: MapSectionsResolver,
     },
     children: [
+      { path: '', redirectTo: 'sections' },
+      {
+        path: 'sections',
+        component: CustomMapComponent,
+      },
       {
         path: 'section/:id',
         component: SectionDetailsComponent,

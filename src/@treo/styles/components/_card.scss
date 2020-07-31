@@ -255,6 +255,8 @@ treo-card {
 
         img {
           object-fit: cover;
+          object-position: center;
+          height: 100%;
         }
 
         path {

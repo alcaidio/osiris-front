@@ -1,39 +1,27 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router'
 import { TranslocoConfig, TRANSLOCO_CONFIG } from '@ngneat/transloco'
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin'
-import { NgxsRouterPluginModule, RouterStateSerializer } from '@ngxs/router-plugin'
-import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
-import { NgxsModule } from '@ngxs/store'
+import { RouterStateSerializer } from '@ngxs/router-plugin'
 import { TreoModule } from '@treo'
 import { TreoMockApiModule } from '@treo/lib/mock-api'
 import { TreoConfigModule } from '@treo/services/config'
 import { AppComponent } from 'app/app.component'
-import { appRoutes } from 'app/app.routing'
 import { appConfig } from 'app/core/config/app.config'
 import { CoreModule } from 'app/core/core.module'
 import { mockDataServices } from 'app/data/mock'
 import { LayoutModule } from 'app/layout/layout.module'
 import { environment } from 'environments/environment'
 import { MarkdownModule } from 'ngx-markdown'
-import { CustomRouterStateSerializer } from './app.routing'
+import { AppRoutingModule, CustomRouterStateSerializer } from './app.routing'
 import { httpLoader } from './core/i18n/transloco.loader'
-import { AppStates } from './core/store'
-
-const routerConfig: ExtraOptions = {
-  scrollPositionRestoration: 'enabled',
-  preloadingStrategy: PreloadAllModules,
-}
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes, routerConfig),
+    AppRoutingModule,
     // Treo & Treo Mock API
     TreoModule,
     TreoConfigModule.forRoot(appConfig),

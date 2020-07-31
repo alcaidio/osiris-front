@@ -1,32 +1,20 @@
-import { Params, Route, RouterStateSnapshot } from '@angular/router'
+import { NgModule } from '@angular/core'
+import { ExtraOptions, Params, PreloadAllModules, Route, RouterModule, RouterStateSnapshot } from '@angular/router'
 import { RouterStateSerializer } from '@ngxs/router-plugin'
 import { InitialDataResolver } from 'app/app.resolvers'
 import { LayoutComponent } from 'app/layout/layout.component'
 import { AuthGuard } from './auth/guards/auth.guard'
 
+const routerConfig: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  preloadingStrategy: PreloadAllModules,
+}
+
 // @formatter:off
 // tslint:disable:max-line-length
-export const appRoutes: Route[] = [
+export const routes: Route[] = [
   // Redirect empty path to '/example'
   { path: '', pathMatch: 'full', redirectTo: 'map' },
-
-  // Redirect signed in user to the '/example'
-  { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'map' },
-
-  // Landing routes
-  {
-    path: '',
-    component: LayoutComponent,
-    data: {
-      layout: 'empty',
-    },
-    children: [
-      {
-        path: 'home',
-        loadChildren: () => import('app/modules/landing/home/home.module').then((m) => m.LandingHomeModule),
-      },
-    ],
-  },
 
   // Admin routes
   {
@@ -38,10 +26,9 @@ export const appRoutes: Route[] = [
       initialData: InitialDataResolver,
     },
     children: [
-      // Example
       {
         path: 'map',
-        loadChildren: () => import('app/modules/admin/map/map.module').then((m) => m.MapModule),
+        loadChildren: () => import('./modules/admin/map/map.module').then((m) => m.MapModule),
       },
       {
         path: 'dashboard',
@@ -68,6 +55,12 @@ export const appRoutes: Route[] = [
     ],
   },
 ]
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, routerConfig)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
 
 export interface RouterStateParams {
   url: string

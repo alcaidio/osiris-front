@@ -16,6 +16,14 @@ const routes: Routes = [
     },
     children: [
       {
+        path: 'sign-in',
+        loadChildren: () => import('./modules/sign-in/sign-in.module').then((m) => m.AuthSignInModule),
+      },
+      {
+        path: 'sign-up',
+        loadChildren: () => import('./modules/sign-up/sign-up.module').then((m) => m.AuthSignUpModule),
+      },
+      {
         path: 'confirmation-required',
         loadChildren: () =>
           import('./modules/confirmation-required/confirmation-required.module').then(
@@ -31,14 +39,6 @@ const routes: Routes = [
         path: 'reset-password',
         loadChildren: () =>
           import('./modules/reset-password/reset-password.module').then((m) => m.AuthResetPasswordModule),
-      },
-      {
-        path: 'sign-in',
-        loadChildren: () => import('./modules/sign-in/sign-in.module').then((m) => m.AuthSignInModule),
-      },
-      {
-        path: 'sign-up',
-        loadChildren: () => import('./modules/sign-up/sign-up.module').then((m) => m.AuthSignUpModule),
       },
     ],
   },
