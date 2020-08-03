@@ -9,7 +9,7 @@ import { Section } from '../models/map.model'
 @Injectable({
   providedIn: 'root',
 })
-export class MapService {
+export class DiagService {
   apiCarto = environment.osiris.api.carto
   apiDiag = environment.osiris.api.diag
 
@@ -21,11 +21,18 @@ export class MapService {
     return this.http.get<Layer[]>(`${this.apiCarto}/carto/layers/sections`)
   }
 
-  // TODO : create Section Model
-  getSection(point: { lng: number; lat: number }): Observable<any | null> {
+  getSection(point: { lng: number; lat: number }): Observable<Section | null> {
     return this.http.get<number>(`${this.apiCarto}/carto/layers/section?lng=${point.lng}&lat=${point.lat}`).pipe(
       mergeMap((sectionId) => this.http.get<Section>(`${this.apiDiag}/diag/section/${sectionId}`)),
       catchError((err: HttpErrorResponse) => of(null))
     )
+  }
+
+  getSectionIdByLngLat(point: { lng: number; lat: number }): Observable<number> {
+    return this.http.get<number>(`${this.apiCarto}/carto/layers/section?lng=${point.lng}&lat=${point.lat}`)
+  }
+
+  getSectionById(id: string): Observable<Section> {
+    return this.http.get<Section>(`${this.apiDiag}/diag/section/${id}`)
   }
 }

@@ -1,3 +1,5 @@
+import { LngLatBounds } from 'mapbox-gl'
+
 export interface FeatureCollection extends GeoJSON.FeatureCollection {
   properties?: any
 }
@@ -7,10 +9,6 @@ export interface Feature {
   type: 'Feature'
   geometry: GeoJSON.Geometry
   properties?: any
-}
-
-export interface Section extends Feature {
-  properties: Properties
 }
 
 export interface Properties {
@@ -29,4 +27,21 @@ export interface Properties {
   n_surf?: number
   n_stru?: number
   note_chau?: number
+}
+
+export interface Section {
+  id: number
+  geometry: GeoJSON.LineString
+  edgeId: number
+  bounds: LngLatBounds
+  state: 'GOOD' | 'MEDIUM' | 'BAD' | 'VERY_BAD'
+  streetName: string
+  neighborhood: string
+  city: string
+  length: number
+  width: number
+  roadwayScore: number
+  structureScore: number
+  surfaceScore: number
+  optionalProperties?: { key: string; value: any }[]
 }

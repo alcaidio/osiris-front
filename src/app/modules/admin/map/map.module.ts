@@ -7,7 +7,7 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { environment } from 'environments/environment'
-import { NgxMapboxGLModule } from 'ngx-mapbox-gl'
+import { NgxMapboxGLModule, MapService } from 'ngx-mapbox-gl'
 import { LayerComponent } from './components/layer.component'
 import { CustomMapComponent } from './containers/map.component'
 import { SectionDetailsComponent } from './containers/section-details.component'
@@ -25,5 +25,6 @@ const MATERIAL = [MatIconModule, MatButtonModule, MatMenuModule, MatSidenavModul
     }),
     ...MATERIAL,
   ],
+  providers: [MapService],
 })
 export class MapModule {}
