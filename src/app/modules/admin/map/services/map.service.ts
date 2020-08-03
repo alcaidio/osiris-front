@@ -1,29 +1,31 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, throwError } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { environment } from 'environments/environment'
+import { Layer } from 'mapbox-gl'
+import { Observable, of } from 'rxjs'
+import { catchError, mergeMap } from 'rxjs/operators'
 import { Section } from '../models/map.model'
 
 @Injectable({
   providedIn: 'root',
 })
 export class MapService {
-  constructor(private _http: HttpClient) {}
+  apiCarto = environment.osiris.api.carto
+  apiDiag = environment.osiris.api.diag
 
-  getSections(): Observable<Section[]> {
-    return this._http.get<Section[]>('api/map/sections/all')
+  canClick = true
+
+  constructor(private http: HttpClient) {}
+
+  getLayers(): Observable<Layer[]> {
+    return this.http.get<Layer[]>(`${this.apiCarto}/carto/layers/sections`)
   }
 
-  getSectionById(id: string): Observable<Section> {
-    return this._http
-      .get<Section>('api/map/sections/id', { params: { id } })
-      .pipe(
-        map((section: any) => {
-          if (!section) {
-            return throwError('Could not found section with id of ' + id + '!')
-          }
-          return section
-        })
-      )
+  // TODO : create Section Model
+  getSection(point: { lng: number; lat: number }): Observable<any | null> {
+    return this.http.get<number>(`${this.apiCarto}/carto/layers/section?lng=${point.lng}&lat=${point.lat}`).pipe(
+      mergeMap((sectionId) => this.http.get<Section>(`${this.apiDiag}/diag/section/${sectionId}`)),
+      catchError((err: HttpErrorResponse) => of(null))
+    )
   }
 }
