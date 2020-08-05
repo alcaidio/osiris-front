@@ -1,6 +1,7 @@
 import { LngLatBounds } from 'mapbox-gl'
+import { ID } from './../../../../shared/shared.model'
 
-export enum SectionState {
+const enum State {
   Good = 'GOOD',
   Medium = 'MEDIUM',
   Bad = 'BAD',
@@ -8,11 +9,11 @@ export enum SectionState {
 }
 
 export interface Section {
-  id: number
+  id: ID
   geometry: GeoJSON.LineString
   edgeId: number
   bounds: LngLatBounds
-  state: SectionState
+  state: State
   streetName: string
   neighborhood: string
   city: string

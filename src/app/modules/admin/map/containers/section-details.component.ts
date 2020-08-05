@@ -1,9 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDrawerToggleResult } from '@angular/material/sidenav'
-import { ActivatedRoute } from '@angular/router'
-import { Subscription } from 'rxjs'
-import { DiagService } from '../services/diag.service'
+import { Select, Store } from '@ngxs/store'
+import { ID } from 'app/shared/shared.model'
+import { Observable, Subscription } from 'rxjs'
+import { take } from 'rxjs/operators'
+import { GetSectionById } from '../store'
 import { Section } from './../models/section.model'
+import { SectionsState } from './../store/states/section.state'
 import { CustomMapComponent } from './map.component'
 
 @Component({
@@ -12,7 +15,7 @@ import { CustomMapComponent } from './map.component'
     <div class="content-layout fullwidth-basic-inner-scroll">
       <!-- Main -->
       <div class="main p-4">
-        <div *ngIf="section">
+        <div *ngIf="selectedSection$ | async as section">
           {{ section | json }}
         </div>
       </div>
@@ -20,25 +23,26 @@ import { CustomMapComponent } from './map.component'
   `,
 })
 export class SectionDetailsComponent implements OnInit, OnDestroy {
-  section: Section
+  @Select(SectionsState.getSelectedSection) selectedSection$: Observable<Section>
+  @Select((state) => state.router.state.params.id) id$: Observable<ID>
   private subs = new Subscription()
 
-  constructor(
-    private route: ActivatedRoute,
-    private mapComponent: CustomMapComponent,
-    private diagService: DiagService
-  ) {}
+  constructor(private mapComponent: CustomMapComponent, private store: Store) {}
 
   ngOnInit(): void {
     this.openDrawer()
     this.subs.add(
-      this.route.params.subscribe((params) => {
+      this.id$.subscribe((id) => {
         this.subs.add(
-          this.diagService.getSectionById(params.id).subscribe((s: Section) => {
-            this.section = s
-            this.flyToSection(s)
-            setTimeout(() => this.displaySelectedSection(s), 150)
-          })
+          this.store
+            .dispatch(new GetSectionById(id))
+            .pipe(take(1))
+            .subscribe((state) => {
+              const sections = state.map.sections
+              const selectedSection = sections.entities[sections.selectedSectionId]
+              this.flyToSection(selectedSection)
+              setTimeout(() => this.displaySelectedSection(selectedSection), 200)
+            })
         )
       })
     )

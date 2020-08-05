@@ -1,10 +1,13 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { Component, Injectable, OnInit, ViewChild } from '@angular/core'
 import { MatDrawer } from '@angular/material/sidenav'
-import { Router } from '@angular/router'
-import { Layer, MapMouseEvent } from 'mapbox-gl'
+import { Select, Store } from '@ngxs/store'
+import { MapMouseEvent } from 'mapbox-gl'
 import { MapComponent } from 'ngx-mapbox-gl'
-import { Observable, Subscription } from 'rxjs'
-import { DiagService } from '../services/diag.service'
+import { Observable } from 'rxjs'
+import { Layer } from '../models/layer.model'
+import { LoadLayers } from './../store/actions/layer.action'
+import { GetSectionId } from './../store/actions/section.action'
+import { LayersState } from './../store/states/layer.state'
 
 @Component({
   selector: 'app-map',
@@ -47,30 +50,24 @@ import { DiagService } from '../services/diag.service'
     </div>
   `,
 })
-export class CustomMapComponent implements OnInit, OnDestroy {
+@Injectable({
+  providedIn: 'root',
+})
+export class CustomMapComponent implements OnInit {
+  @Select(LayersState.getLayers) layers$: Observable<Layer[]>
   @ViewChild('mapbox', { static: true }) map: MapComponent
   @ViewChild('matDrawer', { static: true }) matDrawer: MatDrawer
-  layers$: Observable<Layer[]>
-  private subs = new Subscription()
 
-  constructor(private diagService: DiagService, private router: Router) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.layers$ = this.diagService.getLayers()
+    this.store.dispatch(new LoadLayers())
   }
 
   onClick(evt: MapMouseEvent): void {
     if (evt.lngLat) {
       const { lng, lat } = evt.lngLat
-      this.subs.add(
-        this.diagService.getSectionIdByLngLat({ lng, lat }).subscribe((id) => {
-          this.router.navigate(['map/sections', id])
-        })
-      )
+      this.store.dispatch(new GetSectionId({ lng, lat }))
     }
-  }
-
-  ngOnDestroy(): void {
-    this.subs.unsubscribe()
   }
 }
