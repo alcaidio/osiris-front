@@ -28,20 +28,3 @@ export interface Properties {
   n_stru?: number
   note_chau?: number
 }
-
-export interface Section {
-  id: number
-  geometry: GeoJSON.LineString
-  edgeId: number
-  bounds: LngLatBounds
-  state: 'GOOD' | 'MEDIUM' | 'BAD' | 'VERY_BAD'
-  streetName: string
-  neighborhood: string
-  city: string
-  length: number
-  width: number
-  roadwayScore: number
-  structureScore: number
-  surfaceScore: number
-  optionalProperties?: { key: string; value: any }[]
-}

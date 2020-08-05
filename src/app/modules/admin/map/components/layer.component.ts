@@ -1,54 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { MapMouseEvent } from 'mapbox-gl'
-import { Feature } from '../models/map.model'
+import { Component, Input } from '@angular/core'
+import { Layer } from 'mapbox-gl'
 
 @Component({
   selector: 'app-layer',
   template: `
-    <ng-container *ngIf="data && id">
-      <mgl-geojson-source [id]="id">
-        <mgl-feature
-          *ngFor="let section of data"
-          [geometry]="section.geometry"
-          [properties]="section.properties"
-        ></mgl-feature>
-      </mgl-geojson-source>
+    <ng-container *ngIf="visible">
       <mgl-layer
-        [id]="id"
-        type="line"
-        [source]="id"
-        [layout]="{
-          'line-join': 'round',
-          'line-cap': 'round'
-        }"
-        [paint]="{
-          'line-color': color,
-          'line-width': width
-        }"
-        (click)="selected.emit($event)"
-        (mouseEnter)="emitEnter()"
-        (mouseLeave)="emitLeave()"
-      >
-      </mgl-layer>
+        *ngFor="let layer of layers; trackBy: trackByFn"
+        [id]="layer.id"
+        [type]="layer.type"
+        [source]="layer.source"
+      ></mgl-layer>
     </ng-container>
   `,
 })
 export class LayerComponent {
-  @Input() id: string
-  @Input() data: Feature
-  @Input() color: string
-  @Input() width = 5
+  @Input() layers: Layer[]
+  @Input() visible: boolean
 
-  @Output() cursor = new EventEmitter<string>()
-  @Output() selected = new EventEmitter<MapMouseEvent>()
-
-  emitEnter(): void {
-    // this.width += 5
-    this.cursor.emit('pointer')
-  }
-
-  emitLeave(): void {
-    // this.width -= 5
-    this.cursor.emit('')
+  trackByFn(index: number, item: any): string {
+    return item.id || index
   }
 }

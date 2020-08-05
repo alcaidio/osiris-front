@@ -28,6 +28,10 @@ import { DiagService } from '../services/diag.service'
             [bearing]="0"
             (click)="onClick($event)"
           >
+            <!-- Controls -->
+            <mgl-control mglFullscreen position="top-left"></mgl-control>
+            <mgl-control mglNavigation position="top-left"></mgl-control>
+            <mgl-control mglScale position="bottom-right"></mgl-control>
             <mgl-control
               mglGeocoder
               [proximity]="[4.28596, 46.28486]"
@@ -35,13 +39,8 @@ import { DiagService } from '../services/diag.service'
               placeholder="Search"
               position="top-right"
             ></mgl-control>
-            <mgl-control mglFullscreen position="top-left"></mgl-control>
-            <mgl-control mglNavigation position="top-left"></mgl-control>
-            <mgl-control mglScale position="bottom-right"></mgl-control>
-
-            <ng-container *ngFor="let layer of layers$ | async; trackBy: trackByFn">
-              <mgl-layer [id]="layer.id" [type]="layer.type" [source]="layer.source"></mgl-layer>
-            </ng-container>
+            <!-- Layers  -->
+            <app-layer [layers]="layers$ | async" [visible]="true"></app-layer>
           </mgl-map>
         </mat-drawer-content>
       </mat-drawer-container>
@@ -69,10 +68,6 @@ export class CustomMapComponent implements OnInit, OnDestroy {
         })
       )
     }
-  }
-
-  trackByFn(index: number, item: any): any {
-    return item.id || index
   }
 
   ngOnDestroy(): void {

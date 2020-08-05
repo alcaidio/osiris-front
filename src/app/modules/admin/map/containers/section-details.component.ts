@@ -3,7 +3,7 @@ import { MatDrawerToggleResult } from '@angular/material/sidenav'
 import { ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { DiagService } from '../services/diag.service'
-import { Section } from './../models/map.model'
+import { Section } from './../models/section.model'
 import { CustomMapComponent } from './map.component'
 
 @Component({

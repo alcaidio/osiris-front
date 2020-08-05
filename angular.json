@@ -134,7 +134,9 @@
   "schematics": {
     "@schematics/angular": {
       "component": {
-        "inlineTemplate": true
+        "inlineTemplate": true,
+        "inlineStyle": true,
+        "skipTests": true
       }
     }
   }
