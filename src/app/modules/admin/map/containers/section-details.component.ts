@@ -16,7 +16,7 @@ import { CustomMapComponent } from './map.component'
       <!-- Main -->
       <div class="main p-4">
         <div *ngIf="selectedSection$ | async as section">
-          {{ section | json }}
+          {{ section.properties | json }}
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@ export class SectionDetailsComponent implements OnInit, OnDestroy {
 
   private flyToSection(section: Section): void {
     const map = this.mapComponent.map.mapInstance
-    const { sw, ne } = section.bounds
+    const { sw, ne } = section.bbox
     map.fitBounds([sw, ne], { padding: 200 })
   }
 

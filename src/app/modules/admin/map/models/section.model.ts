@@ -10,17 +10,19 @@ const enum State {
 
 export interface Section {
   id: ID
+  bbox: LngLatBounds
   geometry: GeoJSON.LineString
-  edgeId: number
-  bounds: LngLatBounds
-  state: State
-  streetName: string
-  neighborhood: string
-  city: string
-  length: number
-  width: number
-  roadwayScore: number
-  structureScore: number
-  surfaceScore: number
-  optionalProperties?: { key: string; value: any }[]
+  properties: {
+    edgeId: number
+    state: State
+    streetName: string
+    neighborhood: string
+    city: string
+    length: number
+    width: number
+    roadwayScore: number
+    structureScore: number
+    surfaceScore: number
+    optionalProperties?: { key: string; value: any }[]
+  }
 }
