@@ -39,6 +39,15 @@ export class LayersState {
     return Object.values(state.entities)
   }
 
+  @Selector()
+  static getFilter(state: LayersStateModel) {
+    const res = []
+    Object.values(state.entities).map((l) => {
+      res.push({ id: l.id, name: l.name, visible: l.visible })
+    })
+    return res
+  }
+
   @Action(LoadLayers)
   load({ dispatch, patchState }: StateContext<LayersStateModel>) {
     patchState({
@@ -55,8 +64,9 @@ export class LayersState {
 
   @Action(LoadLayersSuccess)
   loadSuccess({ getState, patchState }: StateContext<LayersStateModel>, action: LoadLayersSuccess) {
-    action.payload.map((layer: Layer) => {
+    action.payload.map((l: Layer) => {
       const state = getState()
+      const layer = { ...l, visible: true }
       patchState({
         ids: [...state.ids, layer.id],
         entities: { ...state.entities, [layer.id]: layer },
@@ -76,11 +86,10 @@ export class LayersState {
   @Action(ToggleLayer)
   toggle({ getState, patchState }: StateContext<LayersStateModel>, action: ToggleLayer) {
     const state = getState()
-    const id = action.payload
-    const layer = state.entities[id]
+    const layer = state.entities[action.payload]
     const layerToggled = { ...layer, visible: !layer.visible }
     patchState({
-      entities: { ...state.entities, [id]: layerToggled },
+      entities: { ...state.entities, [layerToggled.id]: layerToggled },
     })
   }
 }

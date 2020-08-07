@@ -16,5 +16,5 @@ export class LoadLayersFailure {
 
 export class ToggleLayer {
   static readonly type = '[Layer] Toggle layer'
-  constructor(public payload: number) {}
+  constructor(public payload: string) {}
 }

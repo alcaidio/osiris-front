@@ -19,10 +19,10 @@ export class CanDeactivateSectionDetails implements CanDeactivate<SectionDetails
       nextRoute = nextRoute.firstChild
     }
 
-    // If the next state doesn't contain '/sections'
+    // If the next state doesn't contain '/section'
     // it means we are navigating away from the
     // sections route
-    if (!nextState.url.includes('/sections')) {
+    if (!nextState.url.includes('/section')) {
       // Let it navigate
       return true
     }

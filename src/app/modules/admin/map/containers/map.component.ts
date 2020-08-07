@@ -16,14 +16,19 @@ import { LayersState } from './../store/states/layer.state'
     <div class="content-layout right-sidebar-fullheight-basic-inner-scroll">
       <mat-drawer-container>
         <!-- Drawer -->
-        <mat-drawer [mode]="'side'" [position]="'end'" [disableClose]="true" [opened]="false" #matDrawer>
-          <router-outlet></router-outlet>
+        <mat-drawer [mode]="'side'" [position]="'end'" [disableClose]="true" #matDrawer>
+          <div class="content-layout fullwidth-basic-inner-scroll">
+            <div class="main p-4">
+              <router-outlet></router-outlet>
+            </div>
+          </div>
         </mat-drawer>
 
         <mat-drawer-content>
+          <app-buttons-menu></app-buttons-menu>
           <mgl-map
             #mapbox
-            [style]="'mapbox://styles/mapbox/outdoors-v9'"
+            [style]="'mapbox://styles/mapbox/light-v10'"
             [zoom]="11"
             [maxBounds]="[4, 45.7, 4.5, 46.7]"
             [center]="[4.28596, 46.28486]"
@@ -43,7 +48,7 @@ import { LayersState } from './../store/states/layer.state'
               position="top-right"
             ></mgl-control>
             <!-- Layers  -->
-            <app-layer [layers]="layers$ | async" [visible]="true"></app-layer>
+            <app-layer [layers]="layers$ | async"></app-layer>
           </mgl-map>
         </mat-drawer-content>
       </mat-drawer-container>

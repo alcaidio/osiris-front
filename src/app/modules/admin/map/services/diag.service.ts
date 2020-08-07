@@ -21,7 +21,7 @@ export class DiagService {
   }
 
   getSection(point: { lng: number; lat: number }): Observable<Section | HttpErrorResponse> {
-    return this.http.get<number>(`${this.apiCarto}/carto/layers/section?lng=${point.lng}&lat=${point.lat}`).pipe(
+    return this.http.get<any>(`${this.apiCarto}/carto/layers/section?lng=${point.lng}&lat=${point.lat}`).pipe(
       mergeMap((sectionId) => this.http.get<Section>(`${this.apiDiag}/diag/section/${sectionId}`)),
       catchError((err: HttpErrorResponse) => of(err))
     )

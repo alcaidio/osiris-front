@@ -2,13 +2,14 @@
 
 mgl-map {
   height: 100%;
-  width: 100%;
+  // $treo-vertical-navigation-compact-width = 100
+  width: calc(100vw - 100px);
 }
 
 mat-drawer {
-  min-width: 384px !important;
-  max-width: 384px !important;
-  width: 384px !important;
+  min-width: 375px !important;
+  max-width: 375px !important;
+  width: 375px !important;
 
   @include treo-breakpoint('sm') {
     min-width: 100% !important;

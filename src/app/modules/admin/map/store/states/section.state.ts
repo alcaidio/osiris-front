@@ -74,7 +74,7 @@ export class SectionsState {
       loading: false,
       selectedSectionId: id,
     })
-    dispatch(new Navigate(['/map/sections', id]))
+    dispatch(new Navigate(['/map/section/', id]))
   }
 
   @Action(GetSectionIdFailure)

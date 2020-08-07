@@ -27,14 +27,7 @@ export class SectionResolver implements Resolve<any> {
     return this.diagService.getSectionById(id).pipe(
       catchError((error) => {
         console.error(error)
-        const parentUrl = state.root.parent.toString()
-        const parentUrl2 = state.url.split('/').slice(0, -1).join('/')
-        if (parentUrl === parentUrl2) {
-          console.log('ok')
-        } else {
-          console.log('no')
-        }
-
+        const parentUrl = state.url.split('/').slice(0, -1).join('/')
         this.router.navigateByUrl(parentUrl)
         return throwError(error)
       })

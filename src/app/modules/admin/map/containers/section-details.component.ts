@@ -12,14 +12,9 @@ import { CustomMapComponent } from './map.component'
 @Component({
   selector: 'app-section-details',
   template: `
-    <div class="content-layout fullwidth-basic-inner-scroll">
-      <!-- Main -->
-      <div class="main p-4">
-        <div *ngIf="selectedSection$ | async as section">
-          {{ section.properties | json }}
-        </div>
-      </div>
-    </div>
+    <mat-list role="list" *ngIf="(selectedSection$ | async)?.properties as section">
+      {{ section | json }}
+    </mat-list>
   `,
 })
 export class SectionDetailsComponent implements OnInit, OnDestroy {
@@ -51,17 +46,15 @@ export class SectionDetailsComponent implements OnInit, OnDestroy {
   private flyToSection(section: Section): void {
     const map = this.mapComponent.map.mapInstance
     const { sw, ne } = section.bbox
-    map.fitBounds([sw, ne], { padding: 200 })
+    // padding right depend of the drawer size (375px)
+    map.fitBounds([sw, ne], { padding: { top: 200, bottom: 200, left: 200, right: 550 } })
   }
 
   private displaySelectedSection(section: Section): void {
     const map = this.mapComponent.map.mapInstance
     const id = 'selectedSection'
 
-    if (map.getLayer(id) && map.getSource(id)) {
-      map.removeLayer(id)
-      map.removeSource(id)
-    }
+    this.removeSourceAndLayer('selectedSection')
 
     map.addSource(id, {
       type: 'geojson',
@@ -89,12 +82,21 @@ export class SectionDetailsComponent implements OnInit, OnDestroy {
         'line-cap': 'round',
       },
       paint: {
-        'line-color': '#888',
-        'line-width': 12,
-        'line-blur': 3,
-        'line-opacity': 0.75,
+        // TODO put color of the selected layer
+        'line-color': '#1aae61',
+        'line-width': 20,
+        'line-blur': 2,
+        'line-opacity': 0.6,
       },
     })
+  }
+
+  private removeSourceAndLayer(id: string): void {
+    const map = this.mapComponent.map.mapInstance
+    if (map.getLayer(id) && map.getSource(id)) {
+      map.removeLayer(id)
+      map.removeSource(id)
+    }
   }
 
   // Use in section resolver
@@ -108,5 +110,7 @@ export class SectionDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe()
+    this.removeSourceAndLayer('selectedSection')
+    this.closeDrawer()
   }
 }
