@@ -4,7 +4,6 @@ import { FilterDetailsComponent } from './components/filter-details.component'
 import { CustomMapComponent } from './containers/map.component'
 import { SectionDetailsComponent } from './containers/section-details.component'
 import { CanDeactivateSectionDetails } from './guards/section.guards'
-import { SectionResolver } from './resolvers/section.resolvers'
 
 const routes: Routes = [
   {
@@ -18,7 +17,6 @@ const routes: Routes = [
       {
         path: 'section/:id',
         component: SectionDetailsComponent,
-        resolve: { section: SectionResolver },
         canDeactivate: [CanDeactivateSectionDetails],
       },
     ],
