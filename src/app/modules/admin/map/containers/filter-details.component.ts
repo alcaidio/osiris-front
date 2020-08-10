@@ -7,21 +7,23 @@ import { LayersState, ToggleLayer } from '../store'
 @Component({
   selector: 'app-filter-details',
   template: `
-    <div>
-      <div class="flex items-center justify-between">
-        <div class="text-2xl font-semibold leading-tight">Filtres</div>
+    <ng-container *ngIf="filters$ | async as filters">
+      <div class="bg-gray-50 p-5 border-b border-gray-200">
+        <div class="text-lg leading-6 font-medium text-gray-900">
+          Filtres
+        </div>
       </div>
-      <div class="flex items-center justify-between mt-6">
-        <span class="font-medium text-secondary">Etat de la voirie</span>
-      </div>
-      <div class="flex flex-col mt-2 ml-6">
-        <ng-container *ngFor="let filter of filters$ | async">
-          <mat-checkbox class="my-1" color="primary" [checked]="filter.visible" (change)="onToggle(filter.id)">
+      <div class="px-4 py-3 mt-2">
+        <dt class="text-sm leading-5 font-medium text-gray-500 mb-3">
+          Etat de la voirie
+        </dt>
+        <dd class="ml-2 mt-1 text-sm leading-5 text-gray-900" *ngFor="let filter of filters">
+          <mat-checkbox color="primary" [checked]="filter.visible" (change)="onToggle(filter.id)">
             {{ filter.name }}
           </mat-checkbox>
-        </ng-container>
+        </dd>
       </div>
-    </div>
+    </ng-container>
   `,
   styles: [],
 })

@@ -2,8 +2,12 @@
 
 mgl-map {
   height: 100%;
-  // $treo-vertical-navigation-compact-width = 100
-  width: calc(100vw - 100px);
+  width: calc(100vw - 100px); // $treo-vertical-navigation-compact-width = 100
+  @include treo-breakpoint('xs') {
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
 }
 
 mat-drawer {
@@ -11,7 +15,7 @@ mat-drawer {
   max-width: 375px !important;
   width: 375px !important;
 
-  @include treo-breakpoint('sm') {
+  @include treo-breakpoint('xs') {
     min-width: 100% !important;
     max-width: 100% !important;
     width: 100% !important;

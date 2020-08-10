@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Navigate } from '@ngxs/router-plugin'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { NotificationService } from 'app/shared/services/notification.service'
 import { catchError, map } from 'rxjs/operators'
-import { CustomMapComponent } from '../../containers/map.component'
 import { DiagService } from '../../services/diag.service'
 import {
   GetSectionById,
@@ -39,7 +39,7 @@ export const SectionsStateDefaults: SectionsStateModel = {
 })
 @Injectable()
 export class SectionsState {
-  constructor(private diagService: DiagService, private mapComponent: CustomMapComponent) {}
+  constructor(private diagService: DiagService, private notification: NotificationService) {}
 
   @Selector()
   static getEntities(state: SectionsStateModel) {
@@ -63,7 +63,7 @@ export class SectionsState {
     })
     return this.diagService.getSectionIdByLngLat(action.payload).pipe(
       map((id: ID) => dispatch(new GetSectionIdSuccess(id))),
-      catchError((err) => dispatch(new GetSectionIdFailure(err.error.error.message)))
+      catchError((err) => dispatch(new GetSectionIdFailure(err)))
     )
   }
 
@@ -79,10 +79,13 @@ export class SectionsState {
 
   @Action(GetSectionIdFailure)
   getSectionIdFailure({ patchState }: StateContext<SectionsStateModel>, action: GetSectionIdFailure) {
+    console.log(action.payload)
+
     patchState({
       error: action.payload,
       loading: false,
     })
+    this.notification.openSnackBar('Aucune section dans un rayon de 50m.')
   }
 
   @Action(GetSectionById)

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree } from '@angular/router'
 import { Observable } from 'rxjs'
-import { SectionDetailsComponent } from './../containers/section-details.component'
+import { SectionInfosComponent } from '../containers/section-infos.component'
 
 @Injectable({
   providedIn: 'root',
 })
-export class CanDeactivateSectionDetails implements CanDeactivate<SectionDetailsComponent> {
+export class CanDeactivateSectionDetails implements CanDeactivate<SectionInfosComponent> {
   canDeactivate(
-    component: SectionDetailsComponent,
+    component: SectionInfosComponent,
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState: RouterStateSnapshot

@@ -11,26 +11,25 @@ import { LayersState } from './../store/states/layer.state'
 
 @Component({
   selector: 'app-map',
-  styleUrls: ['./map.component.scss'],
+  styleUrls: ['./styles/map.component.scss'],
   template: `
     <div class="content-layout right-sidebar-fullheight-basic-inner-scroll">
       <mat-drawer-container>
         <!-- Drawer -->
         <mat-drawer [mode]="'side'" [position]="'end'" [disableClose]="true" #matDrawer>
           <div class="content-layout fullwidth-basic-inner-scroll">
-            <div class="main p-4">
-              <router-outlet></router-outlet>
-            </div>
+            <router-outlet></router-outlet>
           </div>
         </mat-drawer>
 
         <mat-drawer-content>
+          <app-drawer-switch [drawer]="matDrawer"></app-drawer-switch>
           <app-buttons-menu></app-buttons-menu>
           <mgl-map
             #mapbox
-            [style]="'mapbox://styles/mapbox/light-v10'"
+            [style]="'mapbox://styles/mapbox/outdoors-v11'"
             [zoom]="11"
-            [maxBounds]="[4, 45.7, 4.5, 46.7]"
+            [maxBounds]="[3.5, 44, 6, 48]"
             [center]="[4.28596, 46.28486]"
             [pitch]="0"
             [bearing]="0"
@@ -39,13 +38,13 @@ import { LayersState } from './../store/states/layer.state'
             <!-- Controls -->
             <mgl-control mglFullscreen position="top-left"></mgl-control>
             <mgl-control mglNavigation position="top-left"></mgl-control>
-            <mgl-control mglScale position="bottom-right"></mgl-control>
+            <mgl-control mglScale position="bottom-left"></mgl-control>
             <mgl-control
               mglGeocoder
               [proximity]="[4.28596, 46.28486]"
               [bbox]="[4, 46, 4.5, 46.5]"
               placeholder="Search"
-              position="top-right"
+              position="bottom-right"
             ></mgl-control>
             <!-- Layers  -->
             <app-layer [layers]="layers$ | async"></app-layer>

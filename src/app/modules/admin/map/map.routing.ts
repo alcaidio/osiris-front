@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { FilterDetailsComponent } from './components/filter-details.component'
+import { MapDetailsComponent } from './components/map-details.component'
+import { FilterDetailsComponent } from './containers/filter-details.component'
 import { CustomMapComponent } from './containers/map.component'
-import { SectionDetailsComponent } from './containers/section-details.component'
+import { SectionInfosComponent } from './containers/section-infos.component'
 import { CanDeactivateSectionDetails } from './guards/section.guards'
 
 const routes: Routes = [
@@ -11,13 +12,24 @@ const routes: Routes = [
     component: CustomMapComponent,
     children: [
       {
+        path: '',
+        component: MapDetailsComponent,
+      },
+      {
         path: 'filter',
         component: FilterDetailsComponent,
       },
       {
         path: 'section/:id',
-        component: SectionDetailsComponent,
         canDeactivate: [CanDeactivateSectionDetails],
+        children: [
+          { path: '', redirectTo: 'infos', pathMatch: 'full' },
+          {
+            path: 'infos',
+            component: SectionInfosComponent,
+          },
+          // TODO add other path for the drawer section
+        ],
       },
     ],
   },
