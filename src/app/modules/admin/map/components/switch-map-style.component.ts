@@ -47,7 +47,7 @@ export class SwitchMapStyleComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.isOpen = true
+    this.isOpen = false
     this.styles = [
       { id: 'outdoors-v11', image: 'assets/images/topografic-map.png', tooltip: 'Topografic map' },
       { id: 'streets-v11', image: 'assets/images/light-map.png', tooltip: 'Light map' },

@@ -12,7 +12,8 @@ import { FilterDetailsComponent } from './containers/filter-details.component'
 import { CustomMapComponent } from './containers/map.component'
 import { SectionInfosComponent } from './containers/section-infos.component'
 import { MapRoutingModule } from './map.routing'
-import { MapStates } from './store'
+import { MapStates } from './store';
+import { MapToolsComponent } from './components/map-tools.component'
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MapStates } from './store'
     DrawerSwitchComponent,
     MapDetailsComponent,
     SwitchMapStyleComponent,
+    MapToolsComponent,
   ],
   imports: [
     SharedModule,
