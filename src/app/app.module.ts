@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -15,12 +16,15 @@ import { environment } from 'environments/environment'
 import { MarkdownModule } from 'ngx-markdown'
 import { AppRoutingModule, CustomRouterStateSerializer } from './app.routing'
 import { httpLoader } from './core/i18n/transloco.loader'
+import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
+    SharedModule,
     AppRoutingModule,
     // Treo & Treo Mock API
     TreoModule,

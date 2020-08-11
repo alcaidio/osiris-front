@@ -25,9 +25,10 @@ import { LayersState } from './../store/states/layer.state'
         <mat-drawer-content>
           <app-drawer-switch [drawer]="matDrawer"></app-drawer-switch>
           <app-buttons-menu></app-buttons-menu>
+          <app-switch-map-style (style)="switchMapStyle($event)"></app-switch-map-style>
           <mgl-map
             #mapbox
-            [style]="'mapbox://styles/mapbox/outdoors-v11'"
+            [style]="'mapbox://styles/mapbox/' + layerId"
             [zoom]="11"
             [maxBounds]="[3.5, 44, 6, 48]"
             [center]="[4.28596, 46.28486]"
@@ -61,11 +62,13 @@ export class CustomMapComponent implements OnInit {
   @Select(LayersState.getLayers) layers$: Observable<Layer[]>
   @ViewChild('mapbox', { static: true }) map: MapComponent
   @ViewChild('matDrawer', { static: true }) matDrawer: MatDrawer
+  layerId: string
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(new LoadLayers())
+    this.layerId = 'streets-v11'
   }
 
   onClick(evt: MapMouseEvent): void {
@@ -73,5 +76,9 @@ export class CustomMapComponent implements OnInit {
       const { lng, lat } = evt.lngLat
       this.store.dispatch(new GetSectionId({ lng, lat }))
     }
+  }
+
+  switchMapStyle(evt: string): void {
+    this.layerId = evt
   }
 }
