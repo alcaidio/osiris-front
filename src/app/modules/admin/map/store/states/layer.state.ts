@@ -56,19 +56,18 @@ export class LayersState {
     return this.diagService.getLayers().pipe(
       map((ls: Layer[]) => dispatch(new LoadLayersSuccess(ls))),
       catchError((err) => {
-        dispatch(new LoadLayersFailure(err.error.error.message))
-        return of(new LoadLayersFailure(err))
+        dispatch(new LoadLayersFailure(err))
+        return of(err)
       })
     )
   }
 
   @Action(LoadLayersSuccess)
   loadSuccess({ getState, patchState }: StateContext<LayersStateModel>, action: LoadLayersSuccess) {
-    action.payload.map((l: Layer) => {
+    action.payload.map((layer: Layer) => {
       const state = getState()
-      const layer = { ...l, visible: true }
       patchState({
-        ids: [...state.ids, layer.id],
+        ids: [...state.ids.filter((e) => e !== layer.id), layer.id],
         entities: { ...state.entities, [layer.id]: layer },
         loading: false,
       })
