@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core'
-import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { ChangeMapStyle, LoadBaseMap, LoadBaseMapFailure, LoadBaseMapSuccess } from '../actions/base-map.action'
 import { BaseMap } from './../../models/base-map.model'
 import { DiagService } from './../../services/diag.service'
+import { SaveBaseMapConfig } from './../actions/base-map.action'
 
 export interface BaseMapStateModel {
   map: BaseMap
   loading: boolean
+  loaded: boolean
   error: any | null
 }
 
@@ -18,35 +20,43 @@ export interface BaseMapStateModel {
     map: {
       style: '',
       center: [0, 0],
-      zoom: [0],
-      pitch: [0],
-      bearing: [0],
+      zoom: 0,
+      pitch: 0,
+      bearing: 0,
     },
     loading: false,
+    loaded: false,
     error: null,
   },
 })
 @Injectable()
 export class BaseMapState {
-  constructor(private diagService: DiagService) {}
+  constructor(private diagService: DiagService, private store: Store) {}
 
   @Selector()
   static getBaseMap(state: BaseMapStateModel) {
     return state.map
   }
 
+  @Selector()
+  static getLoaded(state: BaseMapStateModel) {
+    return state.loaded
+  }
+
   @Action(LoadBaseMap)
-  load({ dispatch, patchState }: StateContext<BaseMapStateModel>) {
-    patchState({
-      loading: true,
-    })
-    return this.diagService.getBaseMap().pipe(
-      map((baseMap: BaseMap) => dispatch(new LoadBaseMapSuccess(baseMap))),
-      catchError((err) => {
-        dispatch(new LoadBaseMapFailure(err))
-        return of(err)
+  load({ getState, dispatch, patchState }: StateContext<BaseMapStateModel>) {
+    if (!getState().loaded) {
+      patchState({
+        loading: true,
       })
-    )
+      return this.diagService.getBaseMap().pipe(
+        map((baseMap: BaseMap) => dispatch(new LoadBaseMapSuccess(baseMap))),
+        catchError((err) => {
+          dispatch(new LoadBaseMapFailure(err))
+          return of(err)
+        })
+      )
+    }
   }
 
   @Action(LoadBaseMapSuccess)
@@ -63,6 +73,7 @@ export class BaseMapState {
         maxBounds: baseMap.maxBounds,
       },
       loading: false,
+      loaded: true,
     })
   }
 
@@ -71,6 +82,7 @@ export class BaseMapState {
     patchState({
       error: action.payload,
       loading: false,
+      loaded: false,
     })
   }
 
@@ -82,6 +94,16 @@ export class BaseMapState {
         ...state.map,
         style: action.payload,
       },
+    })
+  }
+
+  @Action(SaveBaseMapConfig)
+  saveBaseMapConfig({ getState, patchState }: StateContext<BaseMapStateModel>, action: SaveBaseMapConfig) {
+    const state = getState()
+    const e = action.payload
+    const newMap = { ...state.map, ...e }
+    patchState({
+      map: newMap,
     })
   }
 }

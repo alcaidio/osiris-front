@@ -3,8 +3,8 @@ import { TreoMockApiUtils } from './../../../../@treo/lib/mock-api/mock-api.util
 export const baseMap = {
   style: 'mapbox://styles/mapbox/streets-v11',
   center: [4.28596, 46.28486],
-  zoom: [11],
-  pitch: [0],
+  zoom: 11,
+  pitch: 0,
   maxBounds: [3.5, 44, 6, 48],
 }
 

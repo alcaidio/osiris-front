@@ -1,11 +1,11 @@
-import { Component, Injectable, OnInit, ViewChild } from '@angular/core'
+import { Component, Injectable, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDrawer } from '@angular/material/sidenav'
 import { Select, Store } from '@ngxs/store'
-import { MapMouseEvent } from 'mapbox-gl'
+import { Map, MapMouseEvent } from 'mapbox-gl'
 import { MapComponent } from 'ngx-mapbox-gl'
 import { Observable } from 'rxjs'
 import { Layer } from '../models/layer.model'
-import { BaseMapState, LoadBaseMap, UIState } from '../store'
+import { BaseMapState, LoadBaseMap, SaveBaseMapConfig, UIState } from '../store'
 import { BaseMap } from './../models/base-map.model'
 import { LoadLayers } from './../store/actions/layer.action'
 import { GetSectionId } from './../store/actions/section.action'
@@ -35,11 +35,11 @@ import { LayersState } from './../store/states/layer.state'
           <mgl-map
             #mapbox
             [style]="(baseMap$ | async)?.style"
-            [zoom]="(baseMap$ | async)?.zoom"
-            [maxBounds]="(baseMap$ | async)?.maxBounds"
             [center]="(baseMap$ | async)?.center"
-            [pitch]="(baseMap$ | async)?.pitch"
-            [bearing]="(baseMap$ | async)?.bearing"
+            [zoom]="[(baseMap$ | async)?.zoom]"
+            [pitch]="[(baseMap$ | async)?.pitch]"
+            [bearing]="[(baseMap$ | async)?.bearing]"
+            [maxBounds]="(baseMap$ | async)?.maxBounds"
             (click)="onClick($event)"
           >
             <!-- Controls -->
@@ -64,7 +64,7 @@ import { LayersState } from './../store/states/layer.state'
 @Injectable({
   providedIn: 'root',
 })
-export class CustomMapComponent implements OnInit {
+export class CustomMapComponent implements OnInit, OnDestroy {
   @Select(BaseMapState.getBaseMap) baseMap$: Observable<BaseMap>
   @Select(LayersState.getLayers) layers$: Observable<Layer[]>
   @Select(UIState.getDrawer) drawer$: Observable<MatDrawer>
@@ -85,6 +85,21 @@ export class CustomMapComponent implements OnInit {
     if (evt.lngLat) {
       const { lng, lat } = evt.lngLat
       this.store.dispatch(new GetSectionId({ lng, lat }))
+    }
+  }
+
+  ngOnDestroy(): void {
+    const map = this.getBaseMapConfig(this.map.mapInstance)
+    this.store.dispatch(new SaveBaseMapConfig(map))
+  }
+
+  private getBaseMapConfig(map: Map): Partial<BaseMap> {
+    const { lng, lat } = map.getCenter()
+    return {
+      center: [lng, lat],
+      zoom: map.getZoom(),
+      pitch: map.getPitch(),
+      bearing: map.getBearing(),
     }
   }
 }

@@ -18,3 +18,8 @@ export class ChangeMapStyle {
   static readonly type = '[Base Map] Change Map Style'
   constructor(public payload: string) {}
 }
+
+export class SaveBaseMapConfig {
+  static readonly type = '[Base Map] save map config'
+  constructor(public payload: Partial<BaseMap>) {}
+}
