@@ -1,5 +1,13 @@
 import { TreoMockApiUtils } from './../../../../@treo/lib/mock-api/mock-api.utils'
 /* tslint:disable */
+export const baseMap = {
+  style: 'mapbox://styles/mapbox/streets-v11',
+  center: [4.28596, 46.28486],
+  zoom: [11],
+  pitch: [0],
+  maxBounds: [3.5, 44, 6, 48],
+}
+
 export const sections = {
   type: 'FeatureCollection',
   properties: { name: 'Diagnostique Houille', date_survey: '17/03/2020' },

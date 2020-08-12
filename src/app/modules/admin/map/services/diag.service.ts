@@ -5,6 +5,7 @@ import { Layer } from 'mapbox-gl'
 import { Observable, of } from 'rxjs'
 import { catchError, mergeMap } from 'rxjs/operators'
 import { ID } from './../../../../shared/shared.model'
+import { BaseMap } from './../models/base-map.model'
 import { Section } from './../models/section.model'
 
 @Injectable({
@@ -15,6 +16,12 @@ export class DiagService {
   apiDiag = environment.osiris.api.diag
 
   constructor(private http: HttpClient) {}
+
+  getBaseMap(): Observable<BaseMap> {
+    const test = this.http.get<BaseMap>(`api/map/base`)
+    console.log(test)
+    return test
+  }
 
   getLayers(): Observable<Layer[]> {
     return this.http.get<Layer[]>(`${this.apiCarto}/carto/layers/sections`)

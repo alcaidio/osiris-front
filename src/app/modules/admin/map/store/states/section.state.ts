@@ -83,6 +83,7 @@ export class SectionsState {
       error: action.payload,
       loading: false,
     })
+    // TODO mettre message retourné par le back
     this.notification.openSnackBar('Aucune section dans un rayon de 50m.')
   }
 

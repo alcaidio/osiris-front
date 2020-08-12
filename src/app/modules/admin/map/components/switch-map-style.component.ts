@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { TreoAnimations } from '@treo/animations'
 import { Observable } from 'rxjs'
-import { ToggleButtonStyle, UIState } from '../store'
+import { ChangeMapStyle, ToggleButtonStyle, UIState } from '../store'
 
 @Component({
   selector: 'app-switch-map-style',
@@ -44,17 +44,20 @@ import { ToggleButtonStyle, UIState } from '../store'
 })
 export class SwitchMapStyleComponent implements OnInit {
   @Select(UIState.getButtonStyle) isOpen$: Observable<boolean>
-  @Output() style = new EventEmitter<string>()
   styles: { id: string; image: string; tooltip: string }[]
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.styles = [
-      { id: 'outdoors-v11', image: 'assets/images/topografic-map.png', tooltip: 'Topografic map' },
-      { id: 'streets-v11', image: 'assets/images/light-map.png', tooltip: 'Light map' },
-      { id: 'satellite-v9', image: 'assets/images/satellite-map.png', tooltip: 'Satellite map' },
-      { id: 'dark-v10', image: 'assets/images/dark-map.png', tooltip: 'Dark map' },
+      {
+        id: 'mapbox://styles/mapbox/outdoors-v11',
+        image: 'assets/images/topografic-map.png',
+        tooltip: 'Topografic map',
+      },
+      { id: 'mapbox://styles/mapbox/streets-v11', image: 'assets/images/light-map.png', tooltip: 'Light map' },
+      { id: 'mapbox://styles/mapbox/satellite-v9', image: 'assets/images/satellite-map.png', tooltip: 'Satellite map' },
+      { id: 'mapbox://styles/mapbox/dark-v10', image: 'assets/images/dark-map.png', tooltip: 'Dark map' },
     ]
   }
 
@@ -62,7 +65,7 @@ export class SwitchMapStyleComponent implements OnInit {
     this.store.dispatch(new ToggleButtonStyle())
   }
 
-  switchStyle(styleId: string): void {
-    this.style.emit(styleId)
+  switchStyle(style: string): void {
+    this.store.dispatch(new ChangeMapStyle(style))
   }
 }

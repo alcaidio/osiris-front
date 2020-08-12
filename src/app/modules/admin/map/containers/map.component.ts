@@ -5,7 +5,8 @@ import { MapMouseEvent } from 'mapbox-gl'
 import { MapComponent } from 'ngx-mapbox-gl'
 import { Observable } from 'rxjs'
 import { Layer } from '../models/layer.model'
-import { UIState } from '../store'
+import { BaseMapState, LoadBaseMap, UIState } from '../store'
+import { BaseMap } from './../models/base-map.model'
 import { LoadLayers } from './../store/actions/layer.action'
 import { GetSectionId } from './../store/actions/section.action'
 import { LayersState } from './../store/states/layer.state'
@@ -30,15 +31,15 @@ import { LayersState } from './../store/states/layer.state'
         <mat-drawer-content>
           <app-drawer-switch></app-drawer-switch>
           <app-buttons-menu></app-buttons-menu>
-          <app-switch-map-style (style)="switchMapStyle($event)"></app-switch-map-style>
+          <app-switch-map-style></app-switch-map-style>
           <mgl-map
             #mapbox
-            [style]="'mapbox://styles/mapbox/' + styleName"
-            [zoom]="11"
-            [maxBounds]="[3.5, 44, 6, 48]"
-            [center]="[4.28596, 46.28486]"
-            [pitch]="0"
-            [bearing]="0"
+            [style]="(baseMap$ | async)?.style"
+            [zoom]="(baseMap$ | async)?.zoom"
+            [maxBounds]="(baseMap$ | async)?.maxBounds"
+            [center]="(baseMap$ | async)?.center"
+            [pitch]="(baseMap$ | async)?.pitch"
+            [bearing]="(baseMap$ | async)?.bearing"
             (click)="onClick($event)"
           >
             <!-- Controls -->
@@ -47,8 +48,8 @@ import { LayersState } from './../store/states/layer.state'
             <mgl-control mglScale position="bottom-left"></mgl-control>
             <mgl-control
               mglGeocoder
-              [proximity]="[4.28596, 46.28486]"
-              [bbox]="[4, 46, 4.5, 46.5]"
+              [proximity]="(baseMap$ | async)?.center"
+              [bbox]="(baseMap$ | async)?.maxBounds"
               placeholder="Search"
               position="bottom-right"
             ></mgl-control>
@@ -64,16 +65,20 @@ import { LayersState } from './../store/states/layer.state'
   providedIn: 'root',
 })
 export class CustomMapComponent implements OnInit {
+  @Select(BaseMapState.getBaseMap) baseMap$: Observable<BaseMap>
   @Select(LayersState.getLayers) layers$: Observable<Layer[]>
   @Select(UIState.getDrawer) drawer$: Observable<MatDrawer>
   @ViewChild('mapbox', { static: true }) map: MapComponent
-  styleName: string
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadLayers())
-    this.styleName = 'streets-v11'
+    this.store
+      .dispatch(new LoadBaseMap())
+      .toPromise()
+      .then(() => {
+        this.store.dispatch(new LoadLayers())
+      })
   }
 
   onClick(evt: MapMouseEvent): void {
@@ -81,9 +86,5 @@ export class CustomMapComponent implements OnInit {
       const { lng, lat } = evt.lngLat
       this.store.dispatch(new GetSectionId({ lng, lat }))
     }
-  }
-
-  switchMapStyle(evt: string): void {
-    this.styleName = evt
   }
 }
