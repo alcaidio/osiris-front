@@ -13,6 +13,7 @@ export interface LayersStateModel {
     [id: string]: Layer
   }
   loading: boolean
+  loaded: boolean
   error: string | null
 }
 
@@ -22,6 +23,7 @@ export interface LayersStateModel {
     ids: [],
     entities: {},
     loading: false,
+    loaded: false,
     error: null,
   },
 })
@@ -49,17 +51,19 @@ export class LayersState {
   }
 
   @Action(LoadLayers)
-  load({ dispatch, patchState }: StateContext<LayersStateModel>) {
-    patchState({
-      loading: true,
-    })
-    return this.diagService.getLayers().pipe(
-      map((ls: Layer[]) => dispatch(new LoadLayersSuccess(ls))),
-      catchError((err) => {
-        dispatch(new LoadLayersFailure(err))
-        return of(err)
+  load({ getState, dispatch, patchState }: StateContext<LayersStateModel>) {
+    if (!getState().loaded) {
+      patchState({
+        loading: true,
       })
-    )
+      return this.diagService.getLayers().pipe(
+        map((ls: Layer[]) => dispatch(new LoadLayersSuccess(ls))),
+        catchError((err) => {
+          dispatch(new LoadLayersFailure(err))
+          return of(err)
+        })
+      )
+    }
   }
 
   @Action(LoadLayersSuccess)
@@ -70,6 +74,7 @@ export class LayersState {
         ids: [...state.ids.filter((e) => e !== layer.id), layer.id],
         entities: { ...state.entities, [layer.id]: layer },
         loading: false,
+        loaded: true,
       })
     })
   }
@@ -79,6 +84,7 @@ export class LayersState {
     patchState({
       error: action.payload,
       loading: false,
+      loaded: false,
     })
   }
 
