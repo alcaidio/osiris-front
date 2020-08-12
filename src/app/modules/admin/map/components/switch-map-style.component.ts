@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Select, Store } from '@ngxs/store'
 import { TreoAnimations } from '@treo/animations'
+import { Observable } from 'rxjs'
+import { ToggleButtonStyle, UIState } from '../store'
 
 @Component({
   selector: 'app-switch-map-style',
@@ -14,7 +17,7 @@ import { TreoAnimations } from '@treo/animations'
           >
             <mat-icon class="icon-size-20 text-white z-50" [svgIcon]="'feather:map'"></mat-icon>
           </div>
-          <ng-container *ngIf="isOpen">
+          <ng-container *ngIf="isOpen$ | async">
             <div
               *ngFor="let style of styles"
               class="mr-3 bg-cool-gray-100 cursor-pointer rounded-full shadow-lg z-10"
@@ -40,14 +43,13 @@ import { TreoAnimations } from '@treo/animations'
   ],
 })
 export class SwitchMapStyleComponent implements OnInit {
-  isOpen: boolean
-  styles: { id: string; image: string; tooltip: string }[]
+  @Select(UIState.getButtonStyle) isOpen$: Observable<boolean>
   @Output() style = new EventEmitter<string>()
+  styles: { id: string; image: string; tooltip: string }[]
 
-  constructor() {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.isOpen = true
     this.styles = [
       { id: 'outdoors-v11', image: 'assets/images/topografic-map.png', tooltip: 'Topografic map' },
       { id: 'streets-v11', image: 'assets/images/light-map.png', tooltip: 'Light map' },
@@ -57,7 +59,7 @@ export class SwitchMapStyleComponent implements OnInit {
   }
 
   onClick() {
-    this.isOpen = !this.isOpen
+    this.store.dispatch(new ToggleButtonStyle())
   }
 
   switchStyle(styleId: string): void {

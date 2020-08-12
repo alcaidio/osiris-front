@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MatDrawerToggleResult } from '@angular/material/sidenav'
 import { Select, Store } from '@ngxs/store'
 import { ID } from 'app/shared/shared.model'
 import { Observable, Subscription } from 'rxjs'
 import { take } from 'rxjs/operators'
 import { Section } from '../models/section.model'
-import { GetSectionById } from '../store'
+import { CloseDrawer, GetSectionById, OpenDrawer } from '../store'
 import { SectionsState } from '../store/states/section.state'
 import { CustomMapComponent } from './map.component'
 
@@ -101,7 +100,6 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
   constructor(private mapComponent: CustomMapComponent, private store: Store) {}
 
   ngOnInit(): void {
-    this.openDrawer()
     this.subs.add(
       this.id$.subscribe((id) => {
         this.subs.add(
@@ -109,6 +107,7 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
             .dispatch(new GetSectionById(id))
             .pipe(take(1))
             .subscribe((state) => {
+              this.openDrawer()
               const sections = state.map.sections
               const selectedSection = sections.entities[sections.selectedSectionId]
               this.flyToSection(selectedSection)
@@ -175,13 +174,13 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Use in section resolver
-  public closeDrawer(): Promise<MatDrawerToggleResult> {
-    return this.mapComponent.matDrawer.close()
+  private openDrawer(): void {
+    this.store.dispatch(new OpenDrawer())
   }
 
-  private openDrawer(): Promise<MatDrawerToggleResult> {
-    return this.mapComponent.matDrawer.open()
+  // Use in section guards
+  public closeDrawer(): Promise<boolean> {
+    return this.store.dispatch(new CloseDrawer()).toPromise()
   }
 
   ngOnDestroy(): void {

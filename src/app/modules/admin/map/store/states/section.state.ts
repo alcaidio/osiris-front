@@ -79,8 +79,6 @@ export class SectionsState {
 
   @Action(GetSectionIdFailure)
   getSectionIdFailure({ patchState }: StateContext<SectionsStateModel>, action: GetSectionIdFailure) {
-    console.log(action.payload)
-
     patchState({
       error: action.payload,
       loading: false,

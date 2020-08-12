@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { Observable } from 'rxjs'
-import { CustomMapComponent } from '../containers/map.component'
-import { LayersState, ToggleLayer } from '../store'
+import { LayersState, OpenDrawer, ToggleLayer } from '../store'
+import { CloseDrawer } from './../store/actions/ui.action'
 
 @Component({
   selector: 'app-filter-details',
@@ -30,10 +30,10 @@ import { LayersState, ToggleLayer } from '../store'
 export class FilterDetailsComponent implements OnInit, OnDestroy {
   @Select(LayersState.getFilter) filters$: Observable<any>
 
-  constructor(private mapComponent: CustomMapComponent, private store: Store) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.mapComponent.matDrawer.open()
+    this.store.dispatch(new OpenDrawer())
   }
 
   onToggle(id: string) {
@@ -41,6 +41,6 @@ export class FilterDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mapComponent.matDrawer.close()
+    this.store.dispatch(new CloseDrawer())
   }
 }

@@ -5,6 +5,7 @@ import { MapMouseEvent } from 'mapbox-gl'
 import { MapComponent } from 'ngx-mapbox-gl'
 import { Observable } from 'rxjs'
 import { Layer } from '../models/layer.model'
+import { UIState } from '../store'
 import { LoadLayers } from './../store/actions/layer.action'
 import { GetSectionId } from './../store/actions/section.action'
 import { LayersState } from './../store/states/layer.state'
@@ -16,19 +17,23 @@ import { LayersState } from './../store/states/layer.state'
     <div class="content-layout right-sidebar-fullheight-basic-inner-scroll">
       <mat-drawer-container>
         <!-- Drawer -->
-        <mat-drawer [mode]="'side'" [position]="'end'" [disableClose]="true" #matDrawer>
+        <mat-drawer
+          [mode]="(drawer$ | async)?.mode"
+          [position]="(drawer$ | async)?.position"
+          [opened]="(drawer$ | async)?.opened"
+        >
           <div class="content-layout fullwidth-basic-inner-scroll">
             <router-outlet></router-outlet>
           </div>
         </mat-drawer>
 
         <mat-drawer-content>
-          <app-drawer-switch [drawer]="matDrawer"></app-drawer-switch>
+          <app-drawer-switch></app-drawer-switch>
           <app-buttons-menu></app-buttons-menu>
           <app-switch-map-style (style)="switchMapStyle($event)"></app-switch-map-style>
           <mgl-map
             #mapbox
-            [style]="'mapbox://styles/mapbox/' + layerId"
+            [style]="'mapbox://styles/mapbox/' + styleName"
             [zoom]="11"
             [maxBounds]="[3.5, 44, 6, 48]"
             [center]="[4.28596, 46.28486]"
@@ -60,15 +65,15 @@ import { LayersState } from './../store/states/layer.state'
 })
 export class CustomMapComponent implements OnInit {
   @Select(LayersState.getLayers) layers$: Observable<Layer[]>
+  @Select(UIState.getDrawer) drawer$: Observable<MatDrawer>
   @ViewChild('mapbox', { static: true }) map: MapComponent
-  @ViewChild('matDrawer', { static: true }) matDrawer: MatDrawer
-  layerId: string
+  styleName: string
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(new LoadLayers())
-    this.layerId = 'streets-v11'
+    this.styleName = 'streets-v11'
   }
 
   onClick(evt: MapMouseEvent): void {
@@ -79,6 +84,6 @@ export class CustomMapComponent implements OnInit {
   }
 
   switchMapStyle(evt: string): void {
-    this.layerId = evt
+    this.styleName = evt
   }
 }

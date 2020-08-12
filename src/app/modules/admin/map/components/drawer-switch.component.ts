@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core'
-import { MatDrawer } from '@angular/material/sidenav'
+import { Component } from '@angular/core'
+import { Select, Store } from '@ngxs/store'
+import { Observable } from 'rxjs'
+import { ToggleDrawer, UIState } from '../store'
 
 @Component({
   selector: 'app-drawer-switch',
@@ -12,7 +14,7 @@ import { MatDrawer } from '@angular/material/sidenav'
         >
           <mat-icon
             class="icon-size-16 text-white"
-            [svgIcon]="this.drawer.opened ? 'feather:chevron-right' : 'feather:chevron-left'"
+            [svgIcon]="(drawerOpened$ | async) ? 'feather:chevron-right' : 'feather:chevron-left'"
           ></mat-icon>
         </div>
       </div>
@@ -20,9 +22,11 @@ import { MatDrawer } from '@angular/material/sidenav'
   `,
 })
 export class DrawerSwitchComponent {
-  @Input() drawer: MatDrawer
+  @Select(UIState.getDrawerOpened) drawerOpened$: Observable<boolean>
+
+  constructor(private store: Store) {}
 
   onClick() {
-    this.drawer.toggle()
+    this.store.dispatch(new ToggleDrawer())
   }
 }
