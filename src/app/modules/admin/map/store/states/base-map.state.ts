@@ -1,15 +1,24 @@
 import { Injectable } from '@angular/core'
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
+import { Action, Selector, State, StateContext } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
-import { ChangeMapStyle, LoadBaseMap, LoadBaseMapFailure, LoadBaseMapSuccess } from '../actions/base-map.action'
+import {
+  ChangeMapStyle,
+  LoadBaseMap,
+  LoadBaseMapFailure,
+  LoadBaseMapSuccess,
+  LoadSavedMap,
+  SaveActiveMap,
+  ToggleBuildindsLayer,
+} from '../actions/base-map.action'
 import { BaseMap } from './../../models/base-map.model'
 import { DiagService } from './../../services/diag.service'
-import { CloneActiveMapInPreviousMap } from './../actions/base-map.action'
+import { GetActiveMap } from './../actions/base-map.action'
 
 export interface BaseMapStateModel {
   active: BaseMap
-  previous: BaseMap
+  saved: BaseMap
+  buildings: boolean
   loading: boolean
   loaded: boolean
   error: any | null
@@ -27,7 +36,8 @@ export const defaultMap: BaseMap = {
   name: 'baseMap',
   defaults: {
     active: defaultMap,
-    previous: defaultMap,
+    saved: defaultMap,
+    buildings: false,
     loading: false,
     loaded: false,
     error: null,
@@ -35,25 +45,26 @@ export const defaultMap: BaseMap = {
 })
 @Injectable()
 export class BaseMapState {
-  constructor(private diagService: DiagService, private store: Store) {}
+  constructor(private diagService: DiagService) {}
 
   @Selector()
   static getActiveMap(state: BaseMapStateModel) {
-    if (state.previous !== defaultMap) {
-      return state.previous
-    } else {
-      return state.active
-    }
+    return state.active
   }
 
   @Selector()
-  static getPreviousMap(state: BaseMapStateModel) {
-    return state.previous
+  static getSavedMap(state: BaseMapStateModel) {
+    return state.saved
   }
 
   @Selector()
   static getLoaded(state: BaseMapStateModel) {
     return state.loaded
+  }
+
+  @Selector()
+  static isBuildings(state: BaseMapStateModel) {
+    return state.buildings
   }
 
   @Action(LoadBaseMap)
@@ -110,16 +121,55 @@ export class BaseMapState {
     })
   }
 
-  @Action(CloneActiveMapInPreviousMap)
-  cloneActiveMapInPrivious(
-    { getState, patchState }: StateContext<BaseMapStateModel>,
-    action: CloneActiveMapInPreviousMap
-  ) {
+  @Action(GetActiveMap)
+  getActiveMap({ getState, patchState }: StateContext<BaseMapStateModel>, action: GetActiveMap) {
     const state = getState()
-    const activeMap = action.payload
-    const previousMap = { ...state.active, ...activeMap }
+    const activeMap = { ...state.active, ...action.payload }
     patchState({
-      previous: previousMap,
+      active: activeMap,
     })
+  }
+
+  @Action(SaveActiveMap)
+  saveActiveMap({ getState, patchState }: StateContext<BaseMapStateModel>) {
+    const state = getState()
+    patchState({
+      saved: state.active,
+    })
+  }
+
+  @Action(LoadSavedMap)
+  loadSavedMap({ getState, patchState }: StateContext<BaseMapStateModel>) {
+    const state = getState()
+    patchState({
+      active: state.saved,
+    })
+  }
+
+  @Action(ToggleBuildindsLayer)
+  toggleBuildindsLayer({ getState, patchState }: StateContext<BaseMapStateModel>) {
+    const state = getState()
+    const minZoom = (zoom: number) => {
+      return zoom < 16.2 ? 16.2 : zoom
+    }
+    if (state.buildings) {
+      patchState({
+        buildings: false,
+        active: {
+          ...state.active,
+          // pitch to 0 don't work
+          pitch: Math.pow(10, -10),
+        },
+      })
+    } else {
+      patchState({
+        buildings: true,
+        active: {
+          ...state.active,
+          zoom: minZoom(state.active.zoom),
+          pitch: 60,
+        },
+      })
+    }
   }
 }

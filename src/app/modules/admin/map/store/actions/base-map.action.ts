@@ -19,7 +19,24 @@ export class ChangeMapStyle {
   constructor(public payload: string) {}
 }
 
-export class CloneActiveMapInPreviousMap {
-  static readonly type = '[Base Map] clone active map in previous map'
+export class GetActiveMap {
+  static readonly type = '[Base Map] Get active map'
   constructor(public payload: Partial<BaseMap>) {}
+}
+
+export class SaveActiveMap {
+  static readonly type = '[Base Map] Save map'
+  constructor(public payload?: Partial<BaseMap>) {}
+}
+
+export class LoadSavedMap {
+  static readonly type = '[Base Map] Load saved map'
+}
+
+export class ToggleBuildindsLayer {
+  static readonly type = '[Base Map] Toggle buildings layer'
+}
+
+export class LoadAnimation {
+  static readonly type = '[Base Map] Load animation'
 }

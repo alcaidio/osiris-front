@@ -21,3 +21,15 @@ export class OpenDrawer {
 export class CloseDrawer {
   static readonly type = '[Map UI] Close drawer'
 }
+
+export class ToggleButtonTools {
+  static readonly type = '[Map UI] Toggle button tools'
+}
+
+export class OpenButtonTools {
+  static readonly type = '[Map UI] Open button tools'
+}
+
+export class CloseButtonTools {
+  static readonly type = '[Map UI] Close button tools'
+}
