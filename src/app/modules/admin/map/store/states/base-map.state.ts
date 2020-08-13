@@ -5,25 +5,29 @@ import { catchError, map } from 'rxjs/operators'
 import { ChangeMapStyle, LoadBaseMap, LoadBaseMapFailure, LoadBaseMapSuccess } from '../actions/base-map.action'
 import { BaseMap } from './../../models/base-map.model'
 import { DiagService } from './../../services/diag.service'
-import { SaveBaseMapConfig } from './../actions/base-map.action'
+import { CloneActiveMapInPreviousMap } from './../actions/base-map.action'
 
 export interface BaseMapStateModel {
-  map: BaseMap
+  active: BaseMap
+  previous: BaseMap
   loading: boolean
   loaded: boolean
   error: any | null
 }
 
+export const defaultMap: BaseMap = {
+  style: '',
+  center: [0, 0],
+  zoom: 0,
+  pitch: 0,
+  bearing: 0,
+}
+
 @State<BaseMapStateModel>({
   name: 'baseMap',
   defaults: {
-    map: {
-      style: '',
-      center: [0, 0],
-      zoom: 0,
-      pitch: 0,
-      bearing: 0,
-    },
+    active: defaultMap,
+    previous: defaultMap,
     loading: false,
     loaded: false,
     error: null,
@@ -34,8 +38,17 @@ export class BaseMapState {
   constructor(private diagService: DiagService, private store: Store) {}
 
   @Selector()
-  static getBaseMap(state: BaseMapStateModel) {
-    return state.map
+  static getActiveMap(state: BaseMapStateModel) {
+    if (state.previous !== defaultMap) {
+      return state.previous
+    } else {
+      return state.active
+    }
+  }
+
+  @Selector()
+  static getPreviousMap(state: BaseMapStateModel) {
+    return state.previous
   }
 
   @Selector()
@@ -64,8 +77,8 @@ export class BaseMapState {
     const baseMap = action.payload
     const state = getState()
     patchState({
-      map: {
-        ...state.map,
+      active: {
+        ...state.active,
         style: baseMap.style,
         center: baseMap.center,
         zoom: baseMap.zoom,
@@ -90,20 +103,23 @@ export class BaseMapState {
   changeMapStyle({ getState, patchState }: StateContext<BaseMapStateModel>, action: ChangeMapStyle) {
     const state = getState()
     patchState({
-      map: {
-        ...state.map,
+      active: {
+        ...state.active,
         style: action.payload,
       },
     })
   }
 
-  @Action(SaveBaseMapConfig)
-  saveBaseMapConfig({ getState, patchState }: StateContext<BaseMapStateModel>, action: SaveBaseMapConfig) {
+  @Action(CloneActiveMapInPreviousMap)
+  cloneActiveMapInPrivious(
+    { getState, patchState }: StateContext<BaseMapStateModel>,
+    action: CloneActiveMapInPreviousMap
+  ) {
     const state = getState()
-    const e = action.payload
-    const newMap = { ...state.map, ...e }
+    const activeMap = action.payload
+    const previousMap = { ...state.active, ...activeMap }
     patchState({
-      map: newMap,
+      previous: previousMap,
     })
   }
 }

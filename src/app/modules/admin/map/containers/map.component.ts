@@ -5,8 +5,9 @@ import { Map, MapMouseEvent } from 'mapbox-gl'
 import { MapComponent } from 'ngx-mapbox-gl'
 import { Observable } from 'rxjs'
 import { Layer } from '../models/layer.model'
-import { BaseMapState, LoadBaseMap, SaveBaseMapConfig, UIState } from '../store'
+import { BaseMapState, LoadBaseMap, UIState } from '../store'
 import { BaseMap } from './../models/base-map.model'
+import { CloneActiveMapInPreviousMap } from './../store/actions/base-map.action'
 import { LoadLayers } from './../store/actions/layer.action'
 import { GetSectionId } from './../store/actions/section.action'
 import { LayersState } from './../store/states/layer.state'
@@ -34,12 +35,12 @@ import { LayersState } from './../store/states/layer.state'
           <app-switch-map-style></app-switch-map-style>
           <mgl-map
             #mapbox
-            [style]="(baseMap$ | async)?.style"
-            [center]="(baseMap$ | async)?.center"
-            [zoom]="[(baseMap$ | async)?.zoom]"
-            [pitch]="[(baseMap$ | async)?.pitch]"
-            [bearing]="[(baseMap$ | async)?.bearing]"
-            [maxBounds]="(baseMap$ | async)?.maxBounds"
+            [style]="(activeMap$ | async)?.style"
+            [center]="(activeMap$ | async)?.center"
+            [zoom]="[(activeMap$ | async)?.zoom]"
+            [pitch]="[(activeMap$ | async)?.pitch]"
+            [bearing]="[(activeMap$ | async)?.bearing]"
+            [maxBounds]="(activeMap$ | async)?.maxBounds"
             (click)="onClick($event)"
           >
             <!-- Controls -->
@@ -48,8 +49,8 @@ import { LayersState } from './../store/states/layer.state'
             <mgl-control mglScale position="bottom-left"></mgl-control>
             <mgl-control
               mglGeocoder
-              [proximity]="(baseMap$ | async)?.center"
-              [bbox]="(baseMap$ | async)?.maxBounds"
+              [proximity]="(activeMap$ | async)?.center"
+              [bbox]="(activeMap$ | async)?.maxBounds"
               placeholder="Search"
               position="bottom-right"
             ></mgl-control>
@@ -65,7 +66,7 @@ import { LayersState } from './../store/states/layer.state'
   providedIn: 'root',
 })
 export class CustomMapComponent implements OnInit, OnDestroy {
-  @Select(BaseMapState.getBaseMap) baseMap$: Observable<BaseMap>
+  @Select(BaseMapState.getActiveMap) activeMap$: Observable<BaseMap>
   @Select(LayersState.getLayers) layers$: Observable<Layer[]>
   @Select(UIState.getDrawer) drawer$: Observable<MatDrawer>
   @ViewChild('mapbox', { static: true }) map: MapComponent
@@ -90,7 +91,7 @@ export class CustomMapComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     const map = this.getBaseMapConfig(this.map.mapInstance)
-    this.store.dispatch(new SaveBaseMapConfig(map))
+    this.store.dispatch(new CloneActiveMapInPreviousMap(map))
   }
 
   private getBaseMapConfig(map: Map): Partial<BaseMap> {
