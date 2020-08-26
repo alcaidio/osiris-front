@@ -12,10 +12,18 @@ import { CustomMapComponent } from './map.component'
   selector: 'app-section-infos',
   template: `
     <div>
-      <div class="bg-gray-50 p-5 border-b border-gray-200">
-        <div class="text-lg leading-6 font-medium text-gray-900">
+      <div class="flex items-center justibg-gray-50 p-5 border-b border-gray-200">
+        <div class="text-lg leading-6 font-medium text-gray-900 mr-2">
           Informations du tronçon
         </div>
+        <mat-icon
+          *ngIf="selectedSection$ | async as section"
+          class="icon-size-16 text-gray cursor-pointer"
+          [svgIcon]="'dripicons:crosshair'"
+          [matTooltipPosition]="'below'"
+          matTooltip="Go to the section"
+          (click)="goToSection(section)"
+        ></mat-icon>
       </div>
       <ng-container *ngIf="(selectedSection$ | async)?.id; else noSection">
         <dl *ngIf="(selectedSection$ | async)?.properties as sectionProp">
@@ -122,6 +130,10 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
         )
       })
     )
+  }
+
+  goToSection(section: Section): void {
+    this.flyToSection(section)
   }
 
   private flyToSection(section: Section): void {
