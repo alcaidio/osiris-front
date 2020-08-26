@@ -5,12 +5,12 @@ import { NotificationService } from 'app/shared/services/notification.service'
 import { catchError, map } from 'rxjs/operators'
 import { DiagService } from '../../services/diag.service'
 import {
+  GetSection,
   GetSectionById,
   GetSectionByIdFailure,
   GetSectionByIdSuccess,
-  GetSectionId,
-  GetSectionIdFailure,
-  GetSectionIdSuccess,
+  GetSectionFailure,
+  GetSectionSuccess,
 } from '../actions/section.action'
 import { ID } from './../../../../../shared/shared.model'
 import { Section } from './../../models/section.model'
@@ -22,7 +22,7 @@ export interface SectionsStateModel {
   }
   loading: boolean
   error: string | null
-  selectedSectionId: ID | null
+  selectedSection: Section | null
 }
 
 export const SectionsStateDefaults: SectionsStateModel = {
@@ -30,7 +30,7 @@ export const SectionsStateDefaults: SectionsStateModel = {
   entities: {},
   loading: false,
   error: null,
-  selectedSectionId: null,
+  selectedSection: null,
 }
 
 @State<SectionsStateModel>({
@@ -48,37 +48,36 @@ export class SectionsState {
 
   @Selector()
   static getSelectedId(state: SectionsStateModel) {
-    return state.selectedSectionId
+    return state.selectedSection.id
   }
 
   @Selector()
   static getSelectedSection(state: SectionsStateModel) {
-    return state.selectedSectionId && state.entities[state.selectedSectionId]
+    return state.selectedSection.id && state.entities[state.selectedSection.id]
   }
 
-  @Action(GetSectionId)
-  getSectionId({ dispatch, patchState }: StateContext<SectionsStateModel>, action: GetSectionId) {
+  @Action(GetSection)
+  getSection({ dispatch, patchState }: StateContext<SectionsStateModel>, action: GetSection) {
     patchState({
       loading: true,
     })
     return this.diagService.getSectionIdByLngLat(action.payload).pipe(
-      map((id: ID) => dispatch(new GetSectionIdSuccess(id))),
-      catchError((err) => dispatch(new GetSectionIdFailure(err)))
+      map((id: ID) => dispatch(new GetSectionSuccess(id))),
+      catchError((err) => dispatch(new GetSectionFailure(err)))
     )
   }
 
-  @Action(GetSectionIdSuccess)
-  getSectionIdSuccess({ dispatch, patchState }: StateContext<SectionsStateModel>, action: GetSectionIdSuccess) {
+  @Action(GetSectionSuccess)
+  getSectionSuccess({ dispatch, patchState }: StateContext<SectionsStateModel>, action: GetSectionSuccess) {
     const id = action.payload
     patchState({
       loading: false,
-      selectedSectionId: id,
     })
     dispatch(new Navigate(['/map/section/', id]))
   }
 
-  @Action(GetSectionIdFailure)
-  getSectionIdFailure({ patchState }: StateContext<SectionsStateModel>, action: GetSectionIdFailure) {
+  @Action(GetSectionFailure)
+  getSectionFailure({ patchState }: StateContext<SectionsStateModel>, action: GetSectionFailure) {
     patchState({
       error: action.payload,
       loading: false,
@@ -106,7 +105,7 @@ export class SectionsState {
       ids: [...state.ids, section.id],
       entities: { ...state.entities, [section.id]: section },
       loading: false,
-      selectedSectionId: section.id,
+      selectedSection: section,
     })
   }
 
