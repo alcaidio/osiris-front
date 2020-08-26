@@ -11,14 +11,14 @@ import { CustomMapComponent } from './map.component'
 @Component({
   selector: 'app-section-infos',
   template: `
-    <ng-container *ngIf="(selectedSection$ | async)?.properties as section">
+    <div>
       <div class="bg-gray-50 p-5 border-b border-gray-200">
         <div class="text-lg leading-6 font-medium text-gray-900">
           Informations du tronçon
         </div>
       </div>
-      <div>
-        <dl>
+      <ng-container *ngIf="(selectedSection$ | async)?.id; else noSection">
+        <dl *ngIf="(selectedSection$ | async)?.properties as sectionProp">
           <div class="px-4 py-3 mt-2">
             <dt class="text-sm leading-5 font-medium text-gray-500">
               Cractéristiques
@@ -27,7 +27,7 @@ import { CustomMapComponent } from './map.component'
               <ul class="border border-gray-200 rounded-md">
                 <li class="pl-3 pr-4 py-3 text-sm leading-5">
                   <span class="font-medium mr-1">Etat: </span>
-                  {{ section.state ? (section.state | titlecase) : 'Inconnu' }}
+                  {{ sectionProp.state ? (sectionProp.state | titlecase) : 'Inconnu' }}
                   <mat-icon
                     class="icon-size-12 text-gray cursor-pointer"
                     [svgIcon]="'dripicons:question'"
@@ -39,11 +39,11 @@ import { CustomMapComponent } from './map.component'
                   <div class="flex">
                     <div class="flex-1">
                       <span class="font-medium mr-1">Longeur: </span>
-                      {{ section.length ? section.length + ' m' : 'null' }}
+                      {{ sectionProp.length ? sectionProp.length + ' m' : 'null' }}
                     </div>
                     <div class="flex-1">
                       <span class="font-medium mr-1">Largeur: </span>
-                      {{ section.width ? section.width + ' m' : 'null' }}
+                      {{ sectionProp.width ? sectionProp.width + ' m' : 'null' }}
                     </div>
                   </div>
                 </li>
@@ -58,20 +58,20 @@ import { CustomMapComponent } from './map.component'
               <ul class="border border-gray-200 rounded-md">
                 <li class="pl-3 pr-4 py-3 text-sm leading-5">
                   <span class="font-medium mr-1">Rue: </span>
-                  {{ section.streetName ? (section.streetName | titlecase) : '-' }}
+                  {{ sectionProp.streetName ? (sectionProp.streetName | titlecase) : '-' }}
                 </li>
                 <li class="border-t border-gray-200 pl-3 pr-4 py-3 text-sm leading-5">
                   <span class="font-medium mr-1">Quartier: </span>
-                  {{ section.neighborhood ? (section.neighborhood | titlecase) : '-' }}
+                  {{ sectionProp.neighborhood ? (sectionProp.neighborhood | titlecase) : '-' }}
                 </li>
                 <li class="border-t border-gray-200 pl-3 pr-4 py-3 text-sm leading-5">
                   <span class="font-medium mr-1">Ville: </span>
-                  {{ section.city ? (section.city | titlecase) : '-' }}
+                  {{ sectionProp.city ? (sectionProp.city | titlecase) : '-' }}
                 </li>
               </ul>
             </dd>
           </div>
-          <div class="px-4 py-3" *ngIf="section.optionalProperties.length > 0">
+          <div class="px-4 py-3" *ngIf="sectionProp.optionalProperties.length > 0">
             <dt class="text-sm leading-5 font-medium mr-1 text-gray-500">
               Informations complémentaires
             </dt>
@@ -79,7 +79,7 @@ import { CustomMapComponent } from './map.component'
               <ul class="border border-gray-200 rounded-md py-3">
                 <li
                   class=" border-gray-200 pl-3 pr-4 py-1 text-sm leading-5"
-                  *ngFor="let item of section.optionalProperties"
+                  *ngFor="let item of sectionProp.optionalProperties"
                 >
                   <span class="font-medium mr-1">{{ item.key | titlecase }}: </span>
                   {{ item.value | titlecase }}
@@ -88,8 +88,13 @@ import { CustomMapComponent } from './map.component'
             </dd>
           </div>
         </dl>
-      </div>
-    </ng-container>
+      </ng-container>
+      <ng-template #noSection>
+        <div class="px-4 py-3 mt-2" *ngIf="id$ | async as id">
+          Aucune informations disponibles pour le tronçon n°{{ id }}.
+        </div>
+      </ng-template>
+    </div>
   `,
 })
 export class SectionInfosComponent implements OnInit, OnDestroy {
@@ -119,51 +124,54 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
   }
 
   private flyToSection(section: Section): void {
-    const map = this.mapComponent.map.mapInstance
-    const { sw, ne } = section.bbox
-    // padding right depend of the drawer size (375px)
-    map.fitBounds([sw, ne], { padding: { top: 200, bottom: 200, left: 200, right: 550 } })
+    if (section.bbox) {
+      const map = this.mapComponent.map.mapInstance
+      const { sw, ne } = section.bbox
+      // padding right depend of the drawer size (375px)
+      map.fitBounds([sw, ne], { padding: { top: 200, bottom: 200, left: 200, right: 550 } })
+    }
   }
 
   private displaySelectedSection(section: Section): void {
-    const map = this.mapComponent.map.mapInstance
-    const id = 'selectedSection'
+    if (section.geometry) {
+      const map = this.mapComponent.map.mapInstance
+      const id = 'selectedSection'
 
-    this.removeSourceAndLayer('selectedSection')
-
-    map.addSource(id, {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: [
-          {
-            type: 'Feature',
-            properties: {},
-            geometry: {
-              type: 'LineString',
-              coordinates: section.geometry.coordinates,
+      this.removeSourceAndLayer('selectedSection')
+      map.addSource(id, {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: section.geometry.coordinates,
+              },
             },
-          },
-        ],
-      },
-    })
+          ],
+        },
+      })
 
-    map.addLayer({
-      id: id,
-      source: id,
-      type: 'line',
-      layout: {
-        'line-join': 'round',
-        'line-cap': 'round',
-      },
-      paint: {
-        // TODO put color of the selected layer
-        'line-color': '#1aae61',
-        'line-width': 20,
-        'line-blur': 2,
-        'line-opacity': 0.6,
-      },
-    })
+      map.addLayer({
+        id: id,
+        source: id,
+        type: 'line',
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round',
+        },
+        paint: {
+          // TODO put color of the selected layer
+          'line-color': '#1aae61',
+          'line-width': 20,
+          'line-blur': 2,
+          'line-opacity': 0.6,
+        },
+      })
+    }
   }
 
   private removeSourceAndLayer(id: string): void {
