@@ -14,6 +14,7 @@ import {
 } from '../actions/section.action'
 import { ID } from './../../../../../shared/shared.model'
 import { Section } from './../../models/section.model'
+import { LayersState, LayersStateModel } from './layer.state'
 
 export interface SectionsStateModel {
   ids: ID[]
@@ -44,6 +45,11 @@ export class SectionsState {
   @Selector()
   static getEntities(state: SectionsStateModel) {
     return state.entities
+  }
+
+  @Selector([LayersState])
+  static getSectionColor(state: SectionsStateModel, layersState: LayersStateModel) {
+    return layersState.entities[state.selectedSection.properties.layerIds.state].paint['line-color']
   }
 
   @Selector()

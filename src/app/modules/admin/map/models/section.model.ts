@@ -23,6 +23,9 @@ export interface Section {
     roadwayScore: number
     structureScore: number
     surfaceScore: number
+    layerIds?: {
+      state: string
+    }
     optionalProperties?: { key: string; value: any }[]
   }
 }

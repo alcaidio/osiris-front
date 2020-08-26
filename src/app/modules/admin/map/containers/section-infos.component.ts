@@ -99,6 +99,8 @@ import { CustomMapComponent } from './map.component'
 })
 export class SectionInfosComponent implements OnInit, OnDestroy {
   @Select(SectionsState.getSelectedSection) selectedSection$: Observable<Section>
+  @Select(SectionsState.getSectionColor) sectionColor$: Observable<string>
+
   @Select((state) => state.router.state.params.id) id$: Observable<ID>
   private subs = new Subscription()
 
@@ -113,8 +115,7 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
             .pipe(take(1))
             .subscribe((state) => {
               this.openDrawer()
-              const sections = state.map.sections
-              const selectedSection = sections.entities[sections.selectedSectionId]
+              const selectedSection = state.map.sections.selectedSection
               this.flyToSection(selectedSection)
               setTimeout(() => this.displaySelectedSection(selectedSection), 200)
             })
@@ -137,40 +138,44 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
       const map = this.mapComponent.map.mapInstance
       const id = 'selectedSection'
 
-      this.removeSourceAndLayer('selectedSection')
-      map.addSource(id, {
-        type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: [
-            {
-              type: 'Feature',
-              properties: {},
-              geometry: {
-                type: 'LineString',
-                coordinates: section.geometry.coordinates,
-              },
-            },
-          ],
-        },
-      })
+      this.subs.add(
+        this.sectionColor$.subscribe((color) => {
+          this.removeSourceAndLayer('selectedSection')
 
-      map.addLayer({
-        id: id,
-        source: id,
-        type: 'line',
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round',
-        },
-        paint: {
-          // TODO put color of the selected layer
-          'line-color': '#1aae61',
-          'line-width': 20,
-          'line-blur': 2,
-          'line-opacity': 0.6,
-        },
-      })
+          map.addSource(id, {
+            type: 'geojson',
+            data: {
+              type: 'FeatureCollection',
+              features: [
+                {
+                  type: 'Feature',
+                  properties: {},
+                  geometry: {
+                    type: 'LineString',
+                    coordinates: section.geometry.coordinates,
+                  },
+                },
+              ],
+            },
+          })
+
+          map.addLayer({
+            id: id,
+            source: id,
+            type: 'line',
+            layout: {
+              'line-join': 'round',
+              'line-cap': 'round',
+            },
+            paint: {
+              'line-color': color,
+              'line-width': 18,
+              'line-blur': 1.5,
+              'line-opacity': 0.6,
+            },
+          })
+        })
+      )
     }
   }
 
