@@ -22,23 +22,21 @@ export class DiagService {
   }
 
   getLayers(): Observable<Layer[]> {
-    return this.http.get<Layer[]>(`${this.apiCarto}/carto/layers?theme=sections`)
+    return this.http.get<Layer[]>(`${this.apiCarto}/layers?theme=sections`)
   }
 
   getSection(point: { lng: number; lat: number }): Observable<Section | HttpErrorResponse> {
-    return this.http
-      .get<any>(`${this.apiCarto}/carto/feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`)
-      .pipe(
-        mergeMap((sectionId) => this.http.get<Section>(`${this.apiDiag}/diag/section/${sectionId}`)),
-        catchError((err: HttpErrorResponse) => of(err))
-      )
+    return this.http.get<any>(`${this.apiCarto}/feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`).pipe(
+      mergeMap((sectionId) => this.http.get<Section>(`${this.apiDiag}/section/${sectionId}`)),
+      catchError((err: HttpErrorResponse) => of(err))
+    )
   }
 
   getSectionIdByLngLat(point: { lng: number; lat: number }): Observable<number> {
-    return this.http.get<number>(`${this.apiCarto}/carto/feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`)
+    return this.http.get<number>(`${this.apiCarto}/feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`)
   }
 
   getSectionById(id: ID): Observable<Section> {
-    return this.http.get<Section>(`${this.apiDiag}/diag/section/${id}`)
+    return this.http.get<Section>(`${this.apiDiag}/section/${id}`)
   }
 }

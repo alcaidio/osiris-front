@@ -11,8 +11,8 @@ export const environment = {
   },
   osiris: {
     api: {
-      diag: 'http://192.168.0.187:10001',
-      carto: 'http://192.168.0.187:10002',
+      carto: 'http://192.168.0.187:10010',
+      diag: 'http://192.168.0.187:10020',
     },
   },
 }
