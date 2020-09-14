@@ -17,15 +17,17 @@ export interface LayersStateModel {
   error: string | null
 }
 
+export const layersStateDefaults: LayersStateModel = {
+  ids: [],
+  entities: {},
+  loading: false,
+  loaded: false,
+  error: null,
+}
+
 @State<LayersStateModel>({
   name: 'layers',
-  defaults: {
-    ids: [],
-    entities: {},
-    loading: false,
-    loaded: false,
-    error: null,
-  },
+  defaults: layersStateDefaults,
 })
 @Injectable()
 export class LayersState {
