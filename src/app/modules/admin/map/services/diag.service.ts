@@ -18,7 +18,9 @@ export class DiagService {
   constructor(private http: HttpClient) {}
 
   getBaseMap(): Observable<BaseMap> {
-    return this.http.get<BaseMap>(`api/map/base`)
+    const res = this.http.get<BaseMap>(`api/map/base`)
+    console.log('BaseMap', res)
+    return res
   }
 
   getLayers(): Observable<Layer[]> {
