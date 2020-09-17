@@ -5,105 +5,47 @@ import {
   CanActivateChild,
   CanLoad,
   Route,
-  Router,
   RouterStateSnapshot,
   UrlSegment,
   UrlTree,
 } from '@angular/router'
+import { Navigate } from '@ngxs/router-plugin'
+import { Select, Store } from '@ngxs/store'
 import { Observable, of } from 'rxjs'
-import { switchMap } from 'rxjs/operators'
-import { AuthService } from '../services/auth.service'
+import { AuthStatusState } from '../store'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  /**
-   * Constructor
-   *
-   * @param {AuthService} _authService
-   * @param {Router} _router
-   */
-  constructor(private _authService: AuthService, private _router: Router) {}
+  @Select(AuthStatusState.getLoggedIn) isLoggedIn$: Observable<boolean>
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Private methods
-  // -----------------------------------------------------------------------------------------------------
+  constructor(private store: Store) {}
 
-  /**
-   * Check the authenticated status
-   *
-   * @param redirectURL
-   * @private
-   */
-  private _check(redirectURL): Observable<boolean> {
-    // Check the authentication status
-    return this._authService.check().pipe(
-      switchMap((authenticated) => {
-        // If the user is not authenticated...
-        if (!authenticated) {
-          // Redirect to the sign-in page
-          this._router.navigate(['sign-in'], { queryParams: { redirectURL } })
-
-          // Prevent the access
-          return of(false)
-        }
-
-        // Allow the access
-        return of(true)
-      })
-    )
+  private _check(): Observable<boolean> {
+    const authenticated = this.store.selectSnapshot(AuthStatusState.getLoggedIn)
+    if (!authenticated) {
+      this.store.dispatch(new Navigate(['sign-in']))
+      return of(false)
+    }
+    return of(true)
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Can activate
-   *
-   * @param route
-   * @param state
-   */
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    let redirectUrl = state.url
-
-    if (redirectUrl === '/sign-out') {
-      redirectUrl = '/'
-    }
-
-    return this._check(redirectUrl)
+    return this._check()
   }
 
-  /**
-   * Can activate child
-   *
-   * @param childRoute
-   * @param state
-   */
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    let redirectUrl = state.url
-
-    if (redirectUrl === '/sign-out') {
-      redirectUrl = '/'
-    }
-
-    return this._check(redirectUrl)
+    return this._check()
   }
 
-  /**
-   * Can load
-   *
-   * @param route
-   * @param segments
-   */
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-    return this._check('/')
+    return this._check()
   }
 }

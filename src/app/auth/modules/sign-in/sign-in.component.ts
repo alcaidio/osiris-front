@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { ActivatedRoute, Router } from '@angular/router'
-import { AuthService } from '../../services/auth.service'
+import { Select, Store } from '@ngxs/store'
+import { Login, LoginPageState } from 'app/auth/store'
+import { Observable } from 'rxjs'
 import { TreoAnimations } from '../../../../@treo/animations/public-api'
 
 @Component({
@@ -12,85 +13,24 @@ import { TreoAnimations } from '../../../../@treo/animations/public-api'
   animations: TreoAnimations,
 })
 export class AuthSignInComponent implements OnInit {
+  @Select(LoginPageState.getErrorMessage) message$: Observable<string>
   signInForm: FormGroup
-  message: any
 
-  /**
-   * Constructor
-   *
-   * @param {ActivatedRoute} _activatedRoute
-   * @param {AuthService} _authService
-   * @param {FormBuilder} _formBuilder
-   * @param {Router} _router
-   */
-  constructor(
-    private _activatedRoute: ActivatedRoute,
-    private _authService: AuthService,
-    private _formBuilder: FormBuilder,
-    private _router: Router
-  ) {
-    // Set the defaults
-    this.message = null
-  }
+  constructor(private _formBuilder: FormBuilder, private store: Store) {}
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On init
-   */
   ngOnInit(): void {
-    // Create the form
     this.signInForm = this._formBuilder.group({
-      email: ['watkins.andrew@company.com'],
+      email: ['admin@immergis.fr'],
       password: ['admin'],
       rememberMe: [''],
     })
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Sign in
-   */
-  signIn(): void {
-    // Disable the form
+  onSignIn(): void {
+    // TODO : add form in the store
+    // FIX : disable is present during an error
     this.signInForm.disable()
-
-    // Hide the message
-    this.message = null
-
-    // Get the credentials
     const credentials = this.signInForm.value
-
-    // Sign in
-    this._authService.signIn(credentials).subscribe(
-      () => {
-        // Set the redirect url.
-        // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
-        // to the correct page after a successful sign in. This way, that url can be set via
-        // routing file and we don't have to touch here.
-        const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/signed-in-redirect'
-
-        // Navigate to the redirect url
-        this._router.navigateByUrl(redirectURL)
-      },
-      (response) => {
-        // Re-enable the form
-        this.signInForm.enable()
-
-        // Show the error message
-        this.message = {
-          appearance: 'outline',
-          content: response.error,
-          shake: true,
-          showIcon: false,
-          type: 'error',
-        }
-      }
-    )
+    this.store.dispatch(new Login(credentials))
   }
 }

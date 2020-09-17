@@ -18,13 +18,13 @@
 
           <!-- Message -->
           <treo-message
-            *ngIf="message"
-            [appearance]="message.appearance"
-            [showIcon]="message.showIcon"
-            [type]="message.type"
-            [@shake]="message.shake"
+            *ngIf="message$ | async as message"
+            [appearance]="'outline'"
+            [showIcon]="false"
+            [type]="'error'"
+            [@shake]="true"
           >
-            {{ message.content }}
+            {{ message }}
           </treo-message>
 
           <!-- Sign in form -->
@@ -69,7 +69,7 @@
               type="button"
               [color]="'primary'"
               [disabled]="signInForm.disabled"
-              (click)="signIn()"
+              (click)="onSignIn()"
             >
               <span *ngIf="!signInForm.disabled">
                 {{ t('signIn.form.button') }}

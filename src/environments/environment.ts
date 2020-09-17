@@ -13,6 +13,7 @@ export const environment = {
     api: {
       carto: 'http://192.168.0.187:10010',
       diag: 'http://192.168.0.187:10020',
+      auth: 'http://192.168.0.187:10003',
     },
   },
 }

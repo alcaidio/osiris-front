@@ -3,7 +3,7 @@ import { Navigate } from '@ngxs/router-plugin'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
 import { catchError, map } from 'rxjs/operators'
 import { AuthService } from '../../services/auth.service'
-import { Login, LoginFailure, LoginSuccess } from '../actions/auth.actions'
+import { IsAuth, Login, LoginFailure, LoginSuccess } from '../actions/auth.actions'
 
 export interface LoginPageStateModel {
   error: string | null
@@ -22,8 +22,8 @@ export class LoginPageState {
   constructor(private authService: AuthService) {}
 
   @Selector()
-  static getError(state: LoginPageStateModel) {
-    return state.error
+  static getErrorMessage(state: LoginPageStateModel) {
+    return state.error['error'].message
   }
 
   @Selector()
@@ -38,7 +38,10 @@ export class LoginPageState {
       pending: true,
     })
     return this.authService.signIn(action.payload).pipe(
-      map((user) => dispatch(new LoginSuccess({ user }))),
+      map((res) => {
+        dispatch(new IsAuth(res['jwt']))
+        dispatch(new LoginSuccess())
+      }),
       catchError((error) => {
         return dispatch(new LoginFailure(error))
       })

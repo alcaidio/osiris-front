@@ -5,65 +5,32 @@ import {
   CanActivateChild,
   CanLoad,
   Route,
-  Router,
   RouterStateSnapshot,
   UrlSegment,
   UrlTree,
 } from '@angular/router'
+import { Navigate } from '@ngxs/router-plugin'
+import { Select, Store } from '@ngxs/store'
 import { Observable, of } from 'rxjs'
-import { switchMap } from 'rxjs/operators'
-import { AuthService } from '../services/auth.service'
+import { AuthStatusState } from '../store'
 
 @Injectable({
   providedIn: 'root',
 })
 export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  /**
-   * Constructor
-   *
-   * @param {AuthService} _authService
-   * @param {Router} _router
-   */
-  constructor(private _authService: AuthService, private _router: Router) {}
+  @Select(AuthStatusState.getLoggedIn) isLoggedIn$: Observable<boolean>
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Private methods
-  // -----------------------------------------------------------------------------------------------------
+  constructor(private store: Store) {}
 
-  /**
-   * Check the authenticated status
-   *
-   * @private
-   */
   private _check(): Observable<boolean> {
-    // Check the authentication status
-    return this._authService.check().pipe(
-      switchMap((authenticated) => {
-        // If the user is authenticated...
-        if (authenticated) {
-          // Redirect to the root
-          this._router.navigate([''])
-
-          // Prevent the access
-          return of(false)
-        }
-
-        // Allow the access
-        return of(true)
-      })
-    )
+    const authenticated = this.store.selectSnapshot(AuthStatusState.getLoggedIn)
+    if (authenticated) {
+      this.store.dispatch(new Navigate(['']))
+      return of(false)
+    }
+    return of(true)
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Can activate
-   *
-   * @param route
-   * @param state
-   */
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -71,12 +38,6 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
     return this._check()
   }
 
-  /**
-   * Can activate child
-   *
-   * @param childRoute
-   * @param state
-   */
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -84,12 +45,6 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
     return this._check()
   }
 
-  /**
-   * Can load
-   *
-   * @param route
-   * @param segments
-   */
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
     return this._check()
   }
