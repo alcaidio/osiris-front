@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Select, Store } from '@ngxs/store'
 import { Login, LoginPageState } from 'app/auth/store'
-import { Observable } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { TreoAnimations } from '../../../../@treo/animations/public-api'
 
 @Component({
@@ -12,25 +12,71 @@ import { TreoAnimations } from '../../../../@treo/animations/public-api'
   encapsulation: ViewEncapsulation.None,
   animations: TreoAnimations,
 })
-export class AuthSignInComponent implements OnInit {
+export class AuthSignInComponent implements OnInit, OnDestroy {
   @Select(LoginPageState.getErrorMessage) message$: Observable<string>
-  signInForm: FormGroup
+  @Select(LoginPageState.getPending) pending$: Observable<boolean>
+  @ViewChild('passwordField') passwordField: ElementRef
 
-  constructor(private _formBuilder: FormBuilder, private store: Store) {}
+  loginForm: FormGroup
+  private sub = new Subscription()
+  passwordPlaceholder = '**********'
+
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit(): void {
-    this.signInForm = this._formBuilder.group({
-      email: ['admin@immergis.fr'],
-      password: ['admin'],
+    this.setupForm()
+  }
+
+  onSignIn(): void {
+    const credentials = this.loginForm.value
+    if (credentials['rememberMe']) {
+      this.remember(credentials['email'])
+    }
+    this.store.dispatch(new Login(credentials))
+  }
+
+  onPressEmail(): void {
+    this.passwordField.nativeElement.focus()
+  }
+
+  onSwitchPasswordIcon(passwordField: HTMLInputElement): void {
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text'
+      this.passwordPlaceholder = 'password'
+    } else {
+      passwordField.type = 'password'
+      this.passwordPlaceholder = '**********'
+    }
+  }
+
+  get email() {
+    return this.loginForm.get('email')
+  }
+
+  get password() {
+    return this.loginForm.get('password')
+  }
+
+  private setupForm() {
+    this.loginForm = this.fb.group({
+      email: [this.emailInStorage(), [Validators.email, Validators.required]],
+      password: ['', [Validators.required]],
       rememberMe: [''],
     })
   }
 
-  onSignIn(): void {
-    // TODO : add form in the store
-    // FIX : disable is present during an error
-    this.signInForm.disable()
-    const credentials = this.signInForm.value
-    this.store.dispatch(new Login(credentials))
+  private remember(email: string): void {
+    localStorage.setItem('email.remember', email)
+  }
+
+  private emailInStorage() {
+    const email = localStorage.getItem('email.remember')
+    if (email) {
+      return email
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
   }
 }

@@ -12,7 +12,7 @@ import { take, takeUntil } from 'rxjs/operators'
   encapsulation: ViewEncapsulation.None,
 })
 export class AuthSignOutComponent implements OnInit, OnDestroy {
-  countdown = 5
+  countdown = 4
   private sub = new Subject()
 
   constructor(private router: Router, private store: Store) {}

@@ -24,32 +24,40 @@
             [type]="'error'"
             [@shake]="true"
           >
-            {{ message }}
+            <div *ngIf="message.length > 5; else unknown">{{ t('signIn.' + message) }}</div>
+            <ng-template #unknown>Une erreur inconnu est survenue.</ng-template>
           </treo-message>
 
           <!-- Sign in form -->
-          <form [formGroup]="signInForm">
+          <form [formGroup]="loginForm">
             <!-- Email field -->
             <mat-form-field>
               <mat-label>{{ t('signIn.form.label-email') }}</mat-label>
-              <input id="email" matInput [formControlName]="'email'" />
+              <input
+                id="email"
+                matInput
+                [formControlName]="'email'"
+                placeholder="email@company.com"
+                (keyup.enter)="onPressEmail()"
+              />
             </mat-form-field>
 
             <!-- Password field -->
             <mat-form-field>
               <mat-label>{{ t('signIn.form.label-password') }}</mat-label>
-              <input id="password" matInput type="password" [formControlName]="'password'" #passwordField />
-              <button
-                mat-icon-button
-                (click)="
-                  passwordField.type === 'password' ? (passwordField.type = 'text') : (passwordField.type = 'password')
-                "
-                tabindex="-1"
-                matSuffix
-              >
+              <input
+                id="password"
+                matInput
+                type="password"
+                [formControlName]="'password'"
+                [placeholder]="passwordPlaceholder"
+                (keyup.enter)="onSignIn()"
+                #passwordField
+              />
+              <a mat-icon-button tabindex="-1" (click)="onSwitchPasswordIcon(passwordField)">
                 <mat-icon *ngIf="passwordField.type === 'password'" [svgIcon]="'visibility'"></mat-icon>
                 <mat-icon *ngIf="passwordField.type === 'text'" [svgIcon]="'visibility_off'"></mat-icon>
-              </button>
+              </a>
             </mat-form-field>
 
             <!-- Field footer -->
@@ -64,18 +72,19 @@
 
             <!-- Submit button -->
             <button
+              id="submit"
               class="submit-button treo-mat-button-large"
               mat-flat-button
               type="button"
               [color]="'primary'"
-              [disabled]="signInForm.disabled"
+              [disabled]="(pending$ | async) || loginForm.invalid"
               (click)="onSignIn()"
             >
-              <span *ngIf="!signInForm.disabled">
+              <span *ngIf="!(pending$ | async)">
                 {{ t('signIn.form.button') }}
               </span>
               <mat-progress-spinner
-                *ngIf="signInForm.disabled"
+                *ngIf="pending$ | async"
                 [diameter]="24"
                 [mode]="'indeterminate'"
               ></mat-progress-spinner>

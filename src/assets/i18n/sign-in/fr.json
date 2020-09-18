@@ -14,5 +14,13 @@
     "title": "Mettez de la réalité dans vos données",
     "description": "Immergis vous aide à optimiser la gestion de votre patrimoine urbain en vous offrant un outil de visualisation puissant et efficace.",
     "button": "En savoir plus"
-  }
+  },
+  "server.auth.error.bad_credentials": "Votre e-mail et votre mot de passe ne correspondent pas.",
+  "server.auth.error.disabled_account": "Votre compte n'est plus actif.",
+  "server.auth.error.locked_account": "Votre compte est verrouillé.",
+  "server.auth.error.authentication_failure": "L'authentification a échoué.",
+  "server.auth.error.internal_server": "Erreur interne du serveur.",
+  "email.errors.email": "Cet email n'ai pas valide.",
+  "email.errors.required": "L'email est requis.",
+  "password.errors.required": "Le mot de passe est requis."
 }

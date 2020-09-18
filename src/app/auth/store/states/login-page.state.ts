@@ -10,12 +10,14 @@ export interface LoginPageStateModel {
   pending: boolean
 }
 
+const loginPageStateDefault: LoginPageStateModel = {
+  error: null,
+  pending: false,
+}
+
 @State<LoginPageStateModel>({
   name: 'loginPage',
-  defaults: {
-    error: null,
-    pending: false,
-  },
+  defaults: loginPageStateDefault,
 })
 @Injectable()
 export class LoginPageState {

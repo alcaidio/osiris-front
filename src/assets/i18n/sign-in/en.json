@@ -14,5 +14,13 @@
     "title": "When your data becomes reality",
     "description": "Immergis helps you optimize the management of your urban heritage by providing you with a powerful and effective visualization tool.",
     "button": "Learn more"
-  }
+  },
+  "server.auth.error.bad_credentials": "Your email and password do not match.",
+  "server.auth.error.disabled_account": "Your account is no longer active.",
+  "server.auth.error.locked_account": "Your account is locked.",
+  "server.auth.error.authentication_failure": "Authentication failed.",
+  "server.auth.error.internal_server": "Internal Server Error.",
+  "email.error.email": "This is not a valid email.",
+  "email.error.required": "Email is required.",
+  "password.error.required": "Password is required."
 }
