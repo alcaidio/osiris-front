@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DiagService Snapshot testing should get the diag layers 1`] = `
+exports[`DiagService should get the diag layers 1`] = `
 Array [
   Object {
     "id": "wms-sections-state-bad-layer",
@@ -49,29 +49,6 @@ Array [
     "visible": true,
   },
   Object {
-    "id": "wms-sections-state-very_bad-layer",
-    "layout": Object {
-      "line-cap": "square",
-      "line-join": "bevel",
-    },
-    "name": "Tronçons en très mauvais état",
-    "paint": Object {
-      "line-color": "#d7191c",
-      "line-opacity": 1,
-      "line-width": 3,
-    },
-    "source": Object {
-      "name": "wms-sections-state-very_bad-source",
-      "tileSize": 256,
-      "tiles": Array [
-        "http://192.168.0.187:8080/geoserver/osiris/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX={bbox-epsg-3857}&SRS=EPSG:3857&LAYERS=sections&STYLES=STATE&CQL_FILTER=state%3D%27VERY_BAD%27&WIDTH=256&HEIGHT=256&TRANSPARENT=TRUE&FORMAT=image/png",
-      ],
-      "type": "raster",
-    },
-    "type": "raster",
-    "visible": true,
-  },
-  Object {
     "id": "wms-sections-state-medium-layer",
     "layout": Object {
       "line-cap": "square",
@@ -94,12 +71,35 @@ Array [
     "type": "raster",
     "visible": true,
   },
+  Object {
+    "id": "wms-sections-state-very_bad-layer",
+    "layout": Object {
+      "line-cap": "square",
+      "line-join": "bevel",
+    },
+    "name": "Tronçons en très mauvais état",
+    "paint": Object {
+      "line-color": "#d7191c",
+      "line-opacity": 1,
+      "line-width": 3,
+    },
+    "source": Object {
+      "name": "wms-sections-state-very_bad-source",
+      "tileSize": 256,
+      "tiles": Array [
+        "http://192.168.0.187:8080/geoserver/osiris/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX={bbox-epsg-3857}&SRS=EPSG:3857&LAYERS=sections&STYLES=STATE&CQL_FILTER=state%3D%27VERY_BAD%27&WIDTH=256&HEIGHT=256&TRANSPARENT=TRUE&FORMAT=image/png",
+      ],
+      "type": "raster",
+    },
+    "type": "raster",
+    "visible": true,
+  },
 ]
 `;
 
-exports[`DiagService Snapshot testing should get the section Id by lngLat 1`] = `382`;
+exports[`DiagService should get the section Id by lngLat 1`] = `382`;
 
-exports[`DiagService Snapshot testing should get the section by Id 1`] = `
+exports[`DiagService should get the section by Id 1`] = `
 Object {
   "bbox": Object {
     "ne": Object {
@@ -234,12 +234,12 @@ Object {
     "neighborhood": "Quartier du Réveil Matin",
     "optionalProperties": Array [
       Object {
-        "key": "nature",
-        "value": "Enduit superficiel",
-      },
-      Object {
         "key": "hierarchy",
         "value": "4 - Distribution",
+      },
+      Object {
+        "key": "nature",
+        "value": "Enduit superficiel",
       },
     ],
     "roadwayScore": 1.64,
@@ -252,83 +252,21 @@ Object {
 }
 `;
 
-exports[`DiagService Snapshot testing should get the section by lngLat 1`] = `
-Object {
-  "bbox": Object {
-    "ne": Object {
-      "lat": 46.28772656791604,
-      "lng": 4.293357493082949,
-    },
-    "sw": Object {
-      "lat": 46.28697749520378,
-      "lng": 4.2907575613322315,
-    },
+exports[`DiagService should get the section by lngLat 1`] = `
+HttpErrorResponse {
+  "error": ProgressEvent {
+    "isTrusted": true,
   },
-  "geometry": Object {
-    "coordinates": Array [
-      Array [
-        4.2907575613322395,
-        46.28772656791604,
-      ],
-      Array [
-        4.2908639930961625,
-        46.28772265984481,
-      ],
-      Array [
-        4.290895141263981,
-        46.2877214062008,
-      ],
-      Array [
-        4.291101726744701,
-        46.287667730448234,
-      ],
-      Array [
-        4.291500440610262,
-        46.287553336974916,
-      ],
-      Array [
-        4.291919358535949,
-        46.28741439678826,
-      ],
-      Array [
-        4.29251526270701,
-        46.28723382030937,
-      ],
-      Array [
-        4.29300279453935,
-        46.28708509139007,
-      ],
-      Array [
-        4.293357493082964,
-        46.28697749520378,
-      ],
-    ],
-    "type": "LineString",
+  "headers": HttpHeaders {
+    "headers": Map {},
+    "lazyUpdate": null,
+    "normalizedNames": Map {},
   },
-  "id": 382,
-  "properties": Object {
-    "city": "Houilles",
-    "layerIds": Object {
-      "state": "wms-sections-state-good-layer",
-    },
-    "length": 217.45,
-    "neighborhood": "Quartier du Réveil Matin",
-    "optionalProperties": Array [
-      Object {
-        "key": "hierarchy",
-        "value": "4 - Distribution",
-      },
-      Object {
-        "key": "nature",
-        "value": "Enduit superficiel",
-      },
-    ],
-    "roadwayScore": 1.01,
-    "state": "GOOD",
-    "streetName": null,
-    "structureScore": 0.32,
-    "surfaceScore": 0.37,
-    "width": 5,
-  },
+  "message": "Http failure response for http://192.168.0.187:10002/apicarto//feature?typeName=sections&lng=4.291694550962802&lat=46.287235361177835: 0 Unknown Error",
+  "name": "HttpErrorResponse",
+  "ok": false,
+  "status": 0,
+  "statusText": "Unknown Error",
+  "url": "http://192.168.0.187:10002/apicarto//feature?typeName=sections&lng=4.291694550962802&lat=46.287235361177835",
 }
 `;

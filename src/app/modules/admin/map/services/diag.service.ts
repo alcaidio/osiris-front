@@ -12,8 +12,7 @@ import { Section } from './../models/section.model'
   providedIn: 'root',
 })
 export class DiagService {
-  apiCarto = environment.osiris.api.carto
-  apiDiag = environment.osiris.api.diag
+  api = environment.osiris.api
 
   constructor(private http: HttpClient) {}
 
@@ -22,21 +21,21 @@ export class DiagService {
   }
 
   getLayers(): Observable<Layer[]> {
-    return this.http.get<Layer[]>(`${this.apiCarto}/layers?theme=sections`)
+    return this.http.get<Layer[]>(`${this.api}/carto/layers?theme=sections`)
   }
 
   getSection(point: { lng: number; lat: number }): Observable<Section | HttpErrorResponse> {
-    return this.http.get<any>(`${this.apiCarto}/feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`).pipe(
-      mergeMap((sectionId) => this.http.get<Section>(`${this.apiDiag}/section/${sectionId}`)),
+    return this.http.get<any>(`${this.api}carto//feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`).pipe(
+      mergeMap((sectionId) => this.http.get<Section>(`${this.api}/diag/section/${sectionId}`)),
       catchError((err: HttpErrorResponse) => of(err))
     )
   }
 
   getSectionIdByLngLat(point: { lng: number; lat: number }): Observable<number> {
-    return this.http.get<number>(`${this.apiCarto}/feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`)
+    return this.http.get<number>(`${this.api}/carto/feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`)
   }
 
   getSectionById(id: ID): Observable<Section> {
-    return this.http.get<Section>(`${this.apiDiag}/section/${id}`)
+    return this.http.get<Section>(`${this.api}/diag/section/${id}`)
   }
 }

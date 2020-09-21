@@ -8,12 +8,12 @@ import { Credentials } from './../models/user.model'
   providedIn: 'root',
 })
 export class AuthService {
-  api = environment.osiris.api.auth
+  api = environment.osiris.api
 
   constructor(private http: HttpClient) {}
 
   signIn(credentials: Credentials): Observable<string> {
-    return this.http.post<string>(`${this.api}/login`, credentials)
+    return this.http.post<string>(`${this.api}/auth/login`, credentials)
   }
 
   // TODO : do a refresh token
