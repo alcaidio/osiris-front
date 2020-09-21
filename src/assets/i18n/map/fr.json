@@ -1,0 +1,17 @@
+{
+  "info.title": "Information du tronçon",
+  "info.tooltip": "Aller au tronçon",
+  "info.characteristics": "Caractéristique",
+  "info.state": "Etat",
+  "info.length": "Longueur",
+  "info.width": "Largeur",
+  "info.localisation": "Localisation",
+  "info.street": "Ville",
+  "info.neighborhood": "Quartier",
+  "info.city": "Ville",
+  "info.further": "Information complémentaire",
+  "info.no": "Aucune informations disponibles pour le tronçon n°{{ id }}.",
+  "filter.title": "Filtres",
+  "filter.state.title": "Etat de la voirie",
+  "filter.no": "Pas de filtres disponibles"
+}

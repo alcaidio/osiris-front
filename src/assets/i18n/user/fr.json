@@ -1,0 +1,10 @@
+{
+  "title": "Connecté avec",
+  "profile": "Profil",
+  "settings": "Paramètres",
+  "status": "Status",
+  "status.online": "En ligne",
+  "status.busy": "Occupé",
+  "status.invisible": "Invisible",
+  "signOut": "Se déconnecter"
+}

@@ -12,96 +12,96 @@ import { CustomMapComponent } from './map.component'
   selector: 'app-section-infos',
   template: `
     <div>
-      <div class="flex items-center justibg-gray-50 p-5 border-b border-gray-200">
-        <div class="text-lg leading-6 font-medium text-gray-900 mr-2">
-          Informations du tronçon
+      <ng-container *transloco="let t">
+        <div class="flex items-center justibg-gray-50 p-5 border-b border-gray-200">
+          <div class="text-lg leading-6 font-medium text-gray-900 mr-2">
+            {{ t('map.info.title') }}
+          </div>
+          <mat-icon
+            *ngIf="selectedSection$ | async as section"
+            class="icon-size-16 text-gray cursor-pointer"
+            [svgIcon]="'dripicons:crosshair'"
+            [matTooltipPosition]="'below'"
+            [matTooltip]="t('map.info.tooltip')"
+            (click)="goToSection(section)"
+          ></mat-icon>
         </div>
-        <mat-icon
-          *ngIf="selectedSection$ | async as section"
-          class="icon-size-16 text-gray cursor-pointer"
-          [svgIcon]="'dripicons:crosshair'"
-          [matTooltipPosition]="'below'"
-          matTooltip="Go to the section"
-          (click)="goToSection(section)"
-        ></mat-icon>
-      </div>
-      <ng-container *ngIf="(selectedSection$ | async)?.id; else noSection">
-        <dl *ngIf="(selectedSection$ | async)?.properties as sectionProp">
-          <div class="px-4 py-3 mt-2">
-            <dt class="text-sm leading-5 font-medium text-gray-500">
-              Cractéristiques
-            </dt>
-            <dd class="mt-3 text-sm leading-5 text-gray-900">
-              <ul class="border border-gray-200 rounded-md">
-                <li class="pl-3 pr-4 py-3 text-sm leading-5">
-                  <span class="font-medium mr-1">Etat: </span>
-                  {{ sectionProp.state ? (sectionProp.state | titlecase) : 'Inconnu' }}
-                  <mat-icon
-                    class="icon-size-12 text-gray cursor-pointer"
-                    [svgIcon]="'dripicons:question'"
-                    [matTooltipPosition]="'right'"
-                    matTooltip="Good / Medium / Bad / Very bad"
-                  ></mat-icon>
-                </li>
-                <li class="border-t border-gray-200 pl-3 pr-4 py-3 text-sm leading-5">
-                  <div class="flex">
-                    <div class="flex-1">
-                      <span class="font-medium mr-1">Longeur: </span>
-                      {{ sectionProp.length ? sectionProp.length + ' m' : 'null' }}
+        <ng-container *ngIf="(selectedSection$ | async)?.id; else noSection">
+          <dl *ngIf="(selectedSection$ | async)?.properties as sectionProp">
+            <div class="px-4 py-3 mt-2">
+              <dt class="text-sm leading-5 font-medium text-gray-500">
+                {{ t('map.info.characteristics') }}
+              </dt>
+              <dd class="mt-3 text-sm leading-5 text-gray-900">
+                <ul class="border border-gray-200 rounded-md">
+                  <li class="pl-3 pr-4 py-3 text-sm leading-5">
+                    <span class="font-medium mr-1">{{ t('map.info.state') }}: </span>
+                    {{ sectionProp.state ? (sectionProp.state | titlecase) : 'Inconnu' }}
+                    <mat-icon
+                      class="icon-size-12 text-gray cursor-pointer"
+                      [svgIcon]="'dripicons:question'"
+                      [matTooltipPosition]="'right'"
+                      matTooltip="Good / Medium / Bad / Very bad"
+                    ></mat-icon>
+                  </li>
+                  <li class="border-t border-gray-200 pl-3 pr-4 py-3 text-sm leading-5">
+                    <div class="flex">
+                      <div class="flex-1">
+                        <span class="font-medium mr-1">{{ t('map.info.length') }}: </span>
+                        {{ sectionProp.length ? sectionProp.length + ' m' : 'null' }}
+                      </div>
+                      <div class="flex-1">
+                        <span class="font-medium mr-1">{{ t('map.info.width') }}: </span>
+                        {{ sectionProp.width ? sectionProp.width + ' m' : 'null' }}
+                      </div>
                     </div>
-                    <div class="flex-1">
-                      <span class="font-medium mr-1">Largeur: </span>
-                      {{ sectionProp.width ? sectionProp.width + ' m' : 'null' }}
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </dd>
-          </div>
-          <div class="px-4 py-3">
-            <dt class="text-sm leading-5 font-medium mr-1 text-gray-500">
-              Localisation
-            </dt>
-            <dd class="mt-3 text-sm leading-5 text-gray-900">
-              <ul class="border border-gray-200 rounded-md">
-                <li class="pl-3 pr-4 py-3 text-sm leading-5">
-                  <span class="font-medium mr-1">Rue: </span>
-                  {{ sectionProp.streetName ? (sectionProp.streetName | titlecase) : '-' }}
-                </li>
-                <li class="border-t border-gray-200 pl-3 pr-4 py-3 text-sm leading-5">
-                  <span class="font-medium mr-1">Quartier: </span>
-                  {{ sectionProp.neighborhood ? (sectionProp.neighborhood | titlecase) : '-' }}
-                </li>
-                <li class="border-t border-gray-200 pl-3 pr-4 py-3 text-sm leading-5">
-                  <span class="font-medium mr-1">Ville: </span>
-                  {{ sectionProp.city ? (sectionProp.city | titlecase) : '-' }}
-                </li>
-              </ul>
-            </dd>
-          </div>
-          <div class="px-4 py-3" *ngIf="sectionProp.optionalProperties.length > 0">
-            <dt class="text-sm leading-5 font-medium mr-1 text-gray-500">
-              Informations complémentaires
-            </dt>
-            <dd class="mt-3 text-sm leading-5 text-gray-900">
-              <ul class="border border-gray-200 rounded-md py-3">
-                <li
-                  class=" border-gray-200 pl-3 pr-4 py-1 text-sm leading-5"
-                  *ngFor="let item of sectionProp.optionalProperties"
-                >
-                  <span class="font-medium mr-1">{{ item.key | titlecase }}: </span>
-                  {{ item.value | titlecase }}
-                </li>
-              </ul>
-            </dd>
-          </div>
-        </dl>
+                  </li>
+                </ul>
+              </dd>
+            </div>
+            <div class="px-4 py-3">
+              <dt class="text-sm leading-5 font-medium mr-1 text-gray-500">
+                {{ t('map.info.localisation') }}
+              </dt>
+              <dd class="mt-3 text-sm leading-5 text-gray-900">
+                <ul class="border border-gray-200 rounded-md">
+                  <li class="pl-3 pr-4 py-3 text-sm leading-5">
+                    <span class="font-medium mr-1">{{ t('map.info.street') }}: </span>
+                    {{ sectionProp.streetName ? (sectionProp.streetName | titlecase) : '-' }}
+                  </li>
+                  <li class="border-t border-gray-200 pl-3 pr-4 py-3 text-sm leading-5">
+                    <span class="font-medium mr-1">{{ t('map.info.neighborhood') }}: </span>
+                    {{ sectionProp.neighborhood ? (sectionProp.neighborhood | titlecase) : '-' }}
+                  </li>
+                  <li class="border-t border-gray-200 pl-3 pr-4 py-3 text-sm leading-5">
+                    <span class="font-medium mr-1">{{ t('map.info.city') }}: </span>
+                    {{ sectionProp.city ? (sectionProp.city | titlecase) : '-' }}
+                  </li>
+                </ul>
+              </dd>
+            </div>
+            <div class="px-4 py-3" *ngIf="sectionProp.optionalProperties.length > 0">
+              <dt class="text-sm leading-5 font-medium mr-1 text-gray-500">
+                {{ t('map.info.further') }}
+              </dt>
+              <dd class="mt-3 text-sm leading-5 text-gray-900">
+                <ul class="border border-gray-200 rounded-md py-3">
+                  <li
+                    class=" border-gray-200 pl-3 pr-4 py-1 text-sm leading-5"
+                    *ngFor="let item of sectionProp.optionalProperties"
+                  >
+                    <span class="font-medium mr-1">{{ item.key | titlecase }}: </span>
+                    {{ item.value | titlecase }}
+                  </li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </ng-container>
+        <ng-template #noSection>
+          <div class="px-4 py-3 mt-2" *ngIf="id$ | async as id">{{ t('map.info.no', { id: id }) }}</div>
+        </ng-template>
       </ng-container>
-      <ng-template #noSection>
-        <div class="px-4 py-3 mt-2" *ngIf="id$ | async as id">
-          Aucune informations disponibles pour le tronçon n°{{ id }}.
-        </div>
-      </ng-template>
     </div>
   `,
 })

@@ -7,11 +7,13 @@ import { IsAuth } from './../actions/auth.actions'
 export interface AuthStatusStateModel {
   loggedIn: boolean
   jwt: string | null
+  email: string | null
 }
 
 const authStatusStateDefaults: AuthStatusStateModel = {
   loggedIn: false,
   jwt: null,
+  email: null,
 }
 
 @State<AuthStatusStateModel>({
@@ -30,11 +32,17 @@ export class AuthStatusState {
     return state.jwt
   }
 
+  @Selector()
+  static getEmail(state: AuthStatusStateModel): string {
+    return state.email
+  }
+
   @Action(IsAuth)
   isAuth({ patchState }: StateContext<AuthStatusStateModel>, action: IsAuth) {
     patchState({
       loggedIn: true,
-      jwt: action.payload,
+      jwt: action.payload.jwt,
+      email: action.payload.email,
     })
   }
 

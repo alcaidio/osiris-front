@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core'
+import { TRANSLOCO_SCOPE } from '@ngneat/transloco'
 import { NgxsModule } from '@ngxs/store'
 import { SharedModule } from 'app/shared/shared.module'
 import { environment } from 'environments/environment'
@@ -37,6 +38,6 @@ import { MapStates } from './store'
       accessToken: environment.mapbox.api.token,
     }),
   ],
-  providers: [MapService],
+  providers: [MapService, { provide: TRANSLOCO_SCOPE, useValue: 'map' }],
 })
 export class MapModule {}

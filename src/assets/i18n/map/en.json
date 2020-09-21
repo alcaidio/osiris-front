@@ -1,0 +1,17 @@
+{
+  "info.title": "Section information",
+  "info.tooltip": "Go to section",
+  "info.characteristics": "Characteristics",
+  "info.state": "State",
+  "info.length": "Length",
+  "info.width": "Width",
+  "info.localisation": "Localisation",
+  "info.street": "Street",
+  "info.neighborhood": "Neighborhood",
+  "info.city": "City",
+  "info.further": "Further information",
+  "info.no": "No information available for the section n°{{id}}.",
+  "filter.title": "Filters",
+  "filter.state.title": "State of the roads",
+  "filter.no": "Pas de filtres disponibles"
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Sign in as",
+  "profile": "Profile",
+  "settings": "Settings",
+  "status": "Status",
+  "status.online": "Online",
+  "status.busy": "Busy",
+  "status.invisible": "Invisible",
+  "signOut": "Sign out"
+}
