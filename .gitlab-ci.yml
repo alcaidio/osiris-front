@@ -1,0 +1,51 @@
+stages:
+  - build-prod
+  - package-develop
+  - package-master
+
+build-prod:
+  stage: build-prod
+  image: node:latest
+  only:
+    - develop
+    - master
+  script:
+    - npm install -g @angular/cli@10
+    - npm install
+    - ng build --prod
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 2 hours
+  cache:
+    paths:
+      - node_modules/
+
+package-develop:
+  stage: package-develop
+  only:
+    - develop
+  image: docker:stable
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE/develop:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE/develop:latest --tag $CI_REGISTRY_IMAGE/develop:latest .
+    - docker push $CI_REGISTRY_IMAGE/develop:latest
+
+package-master:
+  stage: package-master
+  only:
+    - master
+  services:
+    - docker:dind
+  image: docker:stable
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
