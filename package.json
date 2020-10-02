@@ -17,8 +17,12 @@
         "tw:build": "./node_modules/.bin/tailwind build src/tailwind/main.css -c src/tailwind/config.js -o src/styles/tailwind.scss",
         "tw:export": "npm run tw:export:js && npm run tw:export:scss",
         "tw:export:js": "node src/@treo/tailwind/export.js -c src/tailwind/config.js -o src/@treo/tailwind/exported/variables.ts",
-        "tw:export:scss": "./node_modules/.bin/tailwind build src/@treo/tailwind/export.css -c src/tailwind/config.js -o src/@treo/tailwind/exported/_variables.scss", 
-        "snapshot": "jest --updateSnapshot"
+        "tw:export:scss": "./node_modules/.bin/tailwind build src/@treo/tailwind/export.css -c src/tailwind/config.js -o src/@treo/tailwind/exported/_variables.scss",
+        "snapshot": "jest --updateSnapshot", 
+        "release": "standard-version",
+        "release:minor": "standard-version --release-as minor",
+        "release:patch": "standard-version --release-as patch",
+        "release:major": "standard-version --release-as major"    
     },
     "private": true,
     "dependencies": {
@@ -91,17 +95,11 @@
         "prettier": "^2.0.5",
         "pretty-quick": "^2.0.1",
         "protractor": "7.0.0",
+        "standard-version": "^9.0.0",
         "tailwindcss": "1.4.6",
         "ts-node": "8.3.0",
         "tslint": "6.1.2",
         "tslint-config-prettier": "^1.18.0",
         "typescript": "3.9.5"
-    },
-    "husky": {
-        "hooks": {
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-            "pre-commit": "pretty-quick --staged && ng lint",
-            "pre-push": "ng build --aot true"
-        }
     }
 }
