@@ -1,5 +1,4 @@
-import { LngLatBounds } from 'mapbox-gl'
-
+import { ID } from './../../../../shared/shared.model'
 export interface FeatureCollection extends GeoJSON.FeatureCollection {
   properties?: any
 }
@@ -27,4 +26,10 @@ export interface Properties {
   n_surf?: number
   n_stru?: number
   note_chau?: number
+}
+
+export interface SectionIdDTO {
+  message: string
+  distance: number
+  featureId: ID
 }
