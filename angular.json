@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "treo": {
+    "osiris": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/treo",
+            "outputPath": "dist/osiris",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -82,18 +82,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "treo:build"
+            "browserTarget": "osiris:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "treo:build:production"
+              "browserTarget": "osiris:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "treo:build"
+            "browserTarget": "osiris:build"
           }
         },
         "lint": {
@@ -107,18 +107,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "treo:serve"
+            "devServerTarget": "osiris:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "treo:serve:production"
+              "devServerTarget": "osiris:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "treo",
+  "defaultProject": "osiris",
   "schematics": {
     "@schematics/angular": {
       "component": {
