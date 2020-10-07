@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { Observable } from 'rxjs'
 import { LayersState, ToggleLayer } from '../store'
+import { Filter } from './../models/layer.model'
 import { CloseDrawer, OpenDrawer } from './../store/actions/ui.action'
 
 @Component({
@@ -32,7 +33,7 @@ import { CloseDrawer, OpenDrawer } from './../store/actions/ui.action'
   `,
 })
 export class FilterDetailsComponent implements OnInit, OnDestroy {
-  @Select(LayersState.getFilter) filters$: Observable<any>
+  @Select(LayersState.getFilter) filters$: Observable<Filter[]>
 
   constructor(private store: Store) {}
 

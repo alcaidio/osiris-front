@@ -5,15 +5,16 @@ import { NotificationService } from 'app/shared/services/notification.service'
 import { catchError, map } from 'rxjs/operators'
 import { DiagService } from '../../services/diag.service'
 import {
-  GetSection,
+  DeselectSection,
   GetSectionById,
   GetSectionByIdFailure,
   GetSectionByIdSuccess,
-  GetSectionFailure,
-  GetSectionSuccess,
+  GetSectionId,
+  GetSectionIdFailure,
+  GetSectionIdSuccess,
 } from '../actions/section.action'
 import { ID } from './../../../../../shared/shared.model'
-import { Section } from './../../models/section.model'
+import { Section, SectionIdDTO } from './../../models/section.model'
 import { LayersState, LayersStateModel } from './layer.state'
 
 export interface SectionsStateModel {
@@ -62,34 +63,36 @@ export class SectionsState {
     return state.selectedSection.id && state.entities[state.selectedSection.id]
   }
 
-  @Action(GetSection)
-  getSection({ dispatch, patchState }: StateContext<SectionsStateModel>, action: GetSection) {
+  @Action(GetSectionId)
+  getSectionId({ dispatch, patchState }: StateContext<SectionsStateModel>, action: GetSectionId) {
     patchState({
       loading: true,
     })
     return this.diagService.getSectionIdByLngLat(action.payload).pipe(
-      map((id: ID) => dispatch(new GetSectionSuccess(id))),
-      catchError((err) => dispatch(new GetSectionFailure(err)))
+      map((res: SectionIdDTO) => dispatch(new GetSectionIdSuccess(res))),
+      catchError((err) => dispatch(new GetSectionIdFailure(err)))
     )
   }
 
-  @Action(GetSectionSuccess)
-  getSectionSuccess({ dispatch, patchState }: StateContext<SectionsStateModel>, action: GetSectionSuccess) {
-    const id = action.payload
+  @Action(GetSectionIdSuccess)
+  getSectionSuccess({ dispatch, patchState }: StateContext<SectionsStateModel>, action: GetSectionIdSuccess) {
+    const { distance, featureId, message } = action.payload
     patchState({
       loading: false,
     })
-    dispatch(new Navigate(['/map/section/', id]))
+    if (featureId !== null) {
+      dispatch(new Navigate(['/map/section/', featureId]))
+    } else {
+      this.notification.openSnackBar(`Aucune section trouvée dans un rayon de ${distance}m.`)
+    }
   }
 
-  @Action(GetSectionFailure)
-  getSectionFailure({ patchState }: StateContext<SectionsStateModel>, action: GetSectionFailure) {
+  @Action(GetSectionIdFailure)
+  getSectionFailure({ patchState }: StateContext<SectionsStateModel>, action: GetSectionIdFailure) {
     patchState({
       error: action.payload,
       loading: false,
     })
-    // TODO mettre message retourné par le back
-    this.notification.openSnackBar('Aucune section dans un rayon de 50m.')
   }
 
   @Action(GetSectionById)
@@ -120,6 +123,13 @@ export class SectionsState {
     patchState({
       error: action.payload,
       loading: false,
+    })
+  }
+
+  @Action(DeselectSection)
+  deselectSection({ patchState }: StateContext<SectionsStateModel>) {
+    patchState({
+      selectedSection: null,
     })
   }
 }

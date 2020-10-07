@@ -18,11 +18,11 @@
         "tw:export": "npm run tw:export:js && npm run tw:export:scss",
         "tw:export:js": "node src/@treo/tailwind/export.js -c src/tailwind/config.js -o src/@treo/tailwind/exported/variables.ts",
         "tw:export:scss": "./node_modules/.bin/tailwind build src/@treo/tailwind/export.css -c src/tailwind/config.js -o src/@treo/tailwind/exported/_variables.scss",
-        "snapshot": "jest --updateSnapshot", 
+        "snapshot": "jest --updateSnapshot",
         "release": "standard-version",
         "release:minor": "standard-version --release-as minor",
         "release:patch": "standard-version --release-as patch",
-        "release:major": "standard-version --release-as major"    
+        "release:major": "standard-version --release-as major"
     },
     "private": true,
     "dependencies": {
@@ -58,6 +58,7 @@
         "mapbox-gl": "^1.11.1",
         "moment": "2.27.0",
         "ng-apexcharts": "1.3.0",
+        "ngx-auto-unsubscribe": "^3.0.1",
         "ngx-mapbox-gl": "^4.6.0",
         "ngx-markdown": "9.1.1",
         "ngx-quill": "11.1.0",

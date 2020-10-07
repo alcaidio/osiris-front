@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { ID } from 'app/shared/shared.model'
-import { Observable, Subscription } from 'rxjs'
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
+import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
 import { Section } from '../models/section.model'
 import { CloseDrawer, GetSectionById, OpenDrawer } from '../store'
 import { SectionsState } from '../store/states/section.state'
 import { CustomMapComponent } from './map.component'
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-section-infos',
   template: `
@@ -108,32 +110,28 @@ import { CustomMapComponent } from './map.component'
 export class SectionInfosComponent implements OnInit, OnDestroy {
   @Select(SectionsState.getSelectedSection) selectedSection$: Observable<Section>
   @Select(SectionsState.getSectionColor) sectionColor$: Observable<string>
-
   @Select((state) => state.router.state.params.id) id$: Observable<ID>
-  private subs = new Subscription()
 
   constructor(private mapComponent: CustomMapComponent, private store: Store) {}
 
   ngOnInit(): void {
-    this.subs.add(
-      this.id$.subscribe((id) => {
-        this.subs.add(
-          this.store
-            .dispatch(new GetSectionById(id))
-            .pipe(take(1))
-            .subscribe((state) => {
-              this.openDrawer()
-              const selectedSection = state.map.sections.selectedSection
-              this.flyToSection(selectedSection)
-              setTimeout(() => this.displaySelectedSection(selectedSection), 200)
-            })
-        )
-      })
-    )
+    this.id$.subscribe((id) => {
+      if (id !== undefined) {
+        this.store
+          .dispatch(new GetSectionById(id))
+          .pipe(take(1))
+          .subscribe((state) => {
+            this.openDrawer()
+            const selectedSection = state.map.sections.selectedSection
+            this.goToSection(selectedSection)
+          })
+      }
+    })
   }
 
   goToSection(section: Section): void {
     this.flyToSection(section)
+    setTimeout(() => this.displaySelectedSection(section), 200)
   }
 
   private flyToSection(section: Section): void {
@@ -141,6 +139,7 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
       const map = this.mapComponent.map.mapInstance
       const { sw, ne } = section.bbox
       // padding right depend of the drawer size (375px)
+      // don't tuch padding because bug !
       map.fitBounds([sw, ne], { padding: { top: 200, bottom: 200, left: 200, right: 550 } })
     }
   }
@@ -150,44 +149,42 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
       const map = this.mapComponent.map.mapInstance
       const id = 'selectedSection'
 
-      this.subs.add(
-        this.sectionColor$.subscribe((color) => {
-          this.removeSourceAndLayer('selectedSection')
+      this.sectionColor$.subscribe((color) => {
+        this.removeSourceAndLayer('selectedSection')
 
-          map.addSource(id, {
-            type: 'geojson',
-            data: {
-              type: 'FeatureCollection',
-              features: [
-                {
-                  type: 'Feature',
-                  properties: {},
-                  geometry: {
-                    type: 'LineString',
-                    coordinates: section.geometry.coordinates,
-                  },
+        map.addSource(id, {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'LineString',
+                  coordinates: section.geometry.coordinates,
                 },
-              ],
-            },
-          })
-
-          map.addLayer({
-            id: id,
-            source: id,
-            type: 'line',
-            layout: {
-              'line-join': 'round',
-              'line-cap': 'round',
-            },
-            paint: {
-              'line-color': color,
-              'line-width': 18,
-              'line-blur': 1.5,
-              'line-opacity': 0.6,
-            },
-          })
+              },
+            ],
+          },
         })
-      )
+
+        map.addLayer({
+          id: id,
+          source: id,
+          type: 'line',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': color,
+            'line-width': 18,
+            'line-blur': 1.5,
+            'line-opacity': 0.6,
+          },
+        })
+      })
     }
   }
 
@@ -209,7 +206,6 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subs.unsubscribe()
     this.removeSourceAndLayer('selectedSection')
     this.closeDrawer()
   }

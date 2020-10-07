@@ -47,7 +47,7 @@ export class LayersState {
   static getFilter(state: LayersStateModel) {
     const res = []
     Object.values(state.entities).map((l) => {
-      res.push({ id: l.id, name: l.name, visible: l.visible })
+      res.push({ id: l.id, name: l.name, visible: l.visible, paint: l.paint['line-color'] })
     })
     return res
   }

@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs'
 import { catchError, mergeMap } from 'rxjs/operators'
 import { ID } from './../../../../shared/shared.model'
 import { BaseMap } from './../models/base-map.model'
-import { Section } from './../models/section.model'
+import { Section, SectionIdDTO } from './../models/section.model'
 
 @Injectable({
   providedIn: 'root',
@@ -24,18 +24,18 @@ export class DiagService {
     return this.http.get<Layer[]>(`${this.api}/carto/layers?theme=sections`)
   }
 
-  getSection(point: { lng: number; lat: number }): Observable<Section | HttpErrorResponse> {
-    return this.http.get<any>(`${this.api}carto//feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`).pipe(
-      mergeMap((sectionId) => this.http.get<Section>(`${this.api}/diag/section/${sectionId}`)),
-      catchError((err: HttpErrorResponse) => of(err))
-    )
-  }
-
-  getSectionIdByLngLat(point: { lng: number; lat: number }): Observable<number> {
-    return this.http.get<number>(`${this.api}/carto/feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`)
+  getSectionIdByLngLat(point: { lng: number; lat: number }): Observable<SectionIdDTO> {
+    return this.http.get<SectionIdDTO>(`${this.api}/diag/feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`)
   }
 
   getSectionById(id: ID): Observable<Section> {
     return this.http.get<Section>(`${this.api}/diag/section/${id}`)
+  }
+
+  getSection(point: { lng: number; lat: number }): Observable<Section | HttpErrorResponse> {
+    return this.getSectionIdByLngLat(point).pipe(
+      mergeMap((res) => this.getSectionById(res.featureId)),
+      catchError((err: HttpErrorResponse) => of(err))
+    )
   }
 }

@@ -1,4 +1,5 @@
 import { Layer as l } from 'mapbox-gl'
+import { ID } from './../../../../shared/shared.model'
 
 export interface Layer extends l {
   name?: string
@@ -22,4 +23,11 @@ export function generateMockLayer(id: string): Layer {
       // some tile url example : http://192.168.0.187:8080/geoserver/osiris/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX={bbox-epsg-3857}&SRS=EPSG:3857&LAYERS=sections&STYLES=STATE&CQL_FILTER=state%3D%27MEDIUM%27&WIDTH=256&HEIGHT=256&TRANSPARENT=TRUE&FORMAT=image/png
     } as mapboxgl.RasterSource,
   }
+}
+
+export interface Filter {
+  id: ID
+  name: string
+  visible: boolean
+  paint: string
 }

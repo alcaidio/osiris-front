@@ -5,12 +5,10 @@ import { Map, MapMouseEvent } from 'mapbox-gl'
 import { MapComponent } from 'ngx-mapbox-gl'
 import { Observable } from 'rxjs'
 import { Layer } from '../models/layer.model'
-import { BaseMapState, LoadBaseMap, UIState } from '../store'
+import { BaseMapState, GetSectionId, LayersState, LoadBaseMap, UIState } from '../store'
 import { BaseMap } from './../models/base-map.model'
 import { GetActiveMap } from './../store/actions/base-map.action'
 import { LoadLayers } from './../store/actions/layer.action'
-import { GetSection } from './../store/actions/section.action'
-import { LayersState } from './../store/states/layer.state'
 
 @Component({
   selector: 'app-map',
@@ -87,7 +85,7 @@ export class CustomMapComponent implements OnInit {
   onClick(evt: MapMouseEvent): void {
     if (evt.lngLat) {
       const { lng, lat } = evt.lngLat
-      this.store.dispatch(new GetSection({ lng, lat }))
+      this.store.dispatch(new GetSectionId({ lng, lat }))
     }
   }
 

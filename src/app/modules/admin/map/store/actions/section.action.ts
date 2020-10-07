@@ -1,18 +1,18 @@
 import { ID } from './../../../../../shared/shared.model'
-import { Section } from './../../models/section.model'
+import { Section, SectionIdDTO } from './../../models/section.model'
 
-export class GetSection {
-  static readonly type = '[Section] Get section'
+export class GetSectionId {
+  static readonly type = '[Section] Get section id'
   constructor(public payload: { lng: number; lat: number }) {}
 }
 
-export class GetSectionSuccess {
-  static readonly type = '[Section] Get section Success'
-  constructor(public payload: ID) {}
+export class GetSectionIdSuccess {
+  static readonly type = '[Section] Get section id Success'
+  constructor(public payload: SectionIdDTO) {}
 }
 
-export class GetSectionFailure {
-  static readonly type = '[Section] Get section Failure'
+export class GetSectionIdFailure {
+  static readonly type = '[Section] Get section id Failure'
   constructor(public payload: any) {}
 }
 
@@ -29,4 +29,8 @@ export class GetSectionByIdSuccess {
 export class GetSectionByIdFailure {
   static readonly type = '[Section] Get Section by Id Failure'
   constructor(public payload: any) {}
+}
+
+export class DeselectSection {
+  static readonly type = '[Section] Deselect section'
 }

@@ -29,3 +29,9 @@ export interface Section {
     optionalProperties?: { key: string; value: any }[]
   }
 }
+
+export interface SectionIdDTO {
+  message: string
+  distance: number
+  featureId: ID
+}
