@@ -61,7 +61,7 @@ import { LoadLayers } from './../store/actions/layer.action'
             <!-- Layers  -->
             <app-layer [layers]="layers$ | async"></app-layer>
             <app-buildings [visible]="isBuildings$ | async"></app-buildings>
-            <app-layer-geojson [layer]="layer" [data]="geojson" (cursor)="cursorChange($event)"></app-layer-geojson>
+            <!-- <app-layer-geojson [layer]="layer" [data]="geojson" (cursor)="cursorChange($event)"></app-layer-geojson> -->
           </mgl-map>
         </mat-drawer-content>
       </mat-drawer-container>
@@ -81,10 +81,6 @@ export class CustomMapComponent implements OnInit {
   layer = {
     id: 'mapillary',
     type: 'line',
-    paint: {
-      'line-color': '#ffff00',
-      'line-width': 6,
-    },
   }
 
   cursorStyle = ''

@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core'
 import { ExtraOptions, Params, PreloadAllModules, Route, RouterModule, RouterStateSnapshot } from '@angular/router'
 import { RouterStateSerializer } from '@ngxs/router-plugin'
-import { InitialDataResolver } from 'app/app.resolvers'
 import { LayoutComponent } from 'app/layout/layout.component'
-import { AuthGuard } from './auth/guards/auth.guard'
 
 const routerConfig: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -14,7 +12,7 @@ const routerConfig: ExtraOptions = {
 // tslint:disable:max-line-length
 export const routes: Route[] = [
   // Redirect empty path to '/map'
-  { path: '', pathMatch: 'full', redirectTo: 'map' },
+  { path: '', pathMatch: 'full', redirectTo: 'image' },
 
   // Redirect signed in user to the '/map'
   { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'map' },
@@ -22,16 +20,17 @@ export const routes: Route[] = [
   // Admin routes
   {
     path: '',
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
+    // canActivate: [AuthGuard],
+    // canActivateChild: [AuthGuard],
     component: LayoutComponent,
-    resolve: {
-      initialData: InitialDataResolver,
-    },
     children: [
       {
         path: 'map',
         loadChildren: () => import('./modules/admin/map/map.module').then((m) => m.MapModule),
+      },
+      {
+        path: 'image',
+        loadChildren: () => import('./modules/admin/image/image.module').then((m) => m.ImageModule),
       },
       {
         path: 'dashboard',
