@@ -137,10 +137,11 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
   private flyToSection(section: Section): void {
     if (section.bbox) {
       const map = this.mapComponent.map.mapInstance
-      const { sw, ne } = section.bbox
       // padding right depend of the drawer size (375px)
       // don't tuch padding because bug !
-      map.fitBounds([sw, ne], { padding: { top: 200, bottom: 200, left: 200, right: 550 } })
+      map.fitBounds([section.bbox[0], section.bbox[1], section.bbox[2], section.bbox[3]], {
+        padding: { top: 200, bottom: 200, left: 200, right: 550 },
+      })
     }
   }
 
