@@ -55,6 +55,7 @@
         "highlight.js": "10.1.1",
         "lodash-es": "4.17.15",
         "mapbox-gl": "^1.11.1",
+        "mapillary-js": "^2.21.0",
         "moment": "2.27.0",
         "ng-apexcharts": "1.3.0",
         "ngx-auto-unsubscribe": "^3.0.1",

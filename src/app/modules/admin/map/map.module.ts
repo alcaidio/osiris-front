@@ -15,7 +15,8 @@ import { FilterDetailsComponent } from './containers/filter-details.component'
 import { CustomMapComponent } from './containers/map.component'
 import { SectionInfosComponent } from './containers/section-infos.component'
 import { MapRoutingModule } from './map.routing'
-import { MapStates } from './store'
+import { MapStates } from './store';
+import { LayerGeojsonComponent } from './components/layer-geojson.component'
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MapStates } from './store'
     SwitchMapStyleComponent,
     MapToolsComponent,
     BuildingsComponent,
+    LayerGeojsonComponent,
   ],
   imports: [
     SharedModule,

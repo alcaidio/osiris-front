@@ -12,6 +12,11 @@ export const environment = {
   osiris: {
     api: 'http://192.168.0.187:10002/api',
   },
+  mapillary: {
+    clientId: 'NkozRU9wNWZXUlU5SVVUQ0d3RlIzbzo0MTk5ODgyOWYwMmFiOTRl',
+    images: 'https://images.mapillary.com',
+    api: 'https://a.mapillary.com/v3',
+  },
 }
 
 /*

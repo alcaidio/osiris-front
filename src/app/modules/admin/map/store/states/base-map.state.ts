@@ -30,6 +30,7 @@ export const defaultMap: BaseMap = {
   zoom: 0,
   pitch: 0,
   bearing: 0,
+  bounds: [0, 0, 0, 0],
 }
 
 @State<BaseMapStateModel>({

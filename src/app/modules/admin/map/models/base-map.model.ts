@@ -9,7 +9,7 @@ export interface BaseMap {
   maxBounds?: LngLatBoundsLike
   cursorStyle?: CursorStyle
   bearing?: number
-  //   bounds: LngLatBoundsLike
+  bounds: LngLatBoundsLike
   //   minZoom: number
   //   maxZoom: number
 }

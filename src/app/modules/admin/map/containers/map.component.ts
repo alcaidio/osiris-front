@@ -7,6 +7,7 @@ import { Observable } from 'rxjs'
 import { Layer } from '../models/layer.model'
 import { BaseMapState, GetSectionId, LayersState, LoadBaseMap, UIState } from '../store'
 import { BaseMap } from './../models/base-map.model'
+import { MapillaryService } from './../services/mapilary.service'
 import { GetActiveMap } from './../store/actions/base-map.action'
 import { LoadLayers } from './../store/actions/layer.action'
 
@@ -44,6 +45,7 @@ import { LoadLayers } from './../store/actions/layer.action'
             (click)="onClick($event)"
             (dragEnd)="getActiveMap()"
             (zoomEnd)="getActiveMap()"
+            [cursorStyle]="cursorStyle"
           >
             <!-- Controls -->
             <mgl-control mglFullscreen position="top-left"></mgl-control>
@@ -59,6 +61,7 @@ import { LoadLayers } from './../store/actions/layer.action'
             <!-- Layers  -->
             <app-layer [layers]="layers$ | async"></app-layer>
             <app-buildings [visible]="isBuildings$ | async"></app-buildings>
+            <app-layer-geojson [layer]="layer" [data]="geojson" (cursor)="cursorChange($event)"></app-layer-geojson>
           </mgl-map>
         </mat-drawer-content>
       </mat-drawer-container>
@@ -75,11 +78,27 @@ export class CustomMapComponent implements OnInit {
   @Select(UIState.getDrawer) drawer$: Observable<MatDrawer>
   @ViewChild('mapbox', { static: true }) map: MapComponent
 
-  constructor(private store: Store) {}
+  layer = {
+    id: 'mapillary',
+    type: 'line',
+    paint: {
+      'line-color': '#ffff00',
+      'line-width': 6,
+    },
+  }
+
+  cursorStyle = ''
+  geojson: any
+
+  constructor(private store: Store, private service: MapillaryService) {}
 
   ngOnInit(): void {
     this.store.dispatch(new LoadBaseMap())
     this.store.dispatch(new LoadLayers())
+    const test = this.service.getSequences([4, 44, 4.5, 45])
+    test.subscribe((section) => {
+      this.geojson = section
+    })
   }
 
   onClick(evt: MapMouseEvent): void {
@@ -100,6 +119,11 @@ export class CustomMapComponent implements OnInit {
       zoom: baseMap.getZoom(),
       pitch: baseMap.getPitch(),
       bearing: baseMap.getBearing(),
+      bounds: baseMap.getBounds(),
     }
+  }
+
+  cursorChange(evt: string): void {
+    this.cursorStyle = evt
   }
 }
