@@ -22,9 +22,7 @@ import { LoadLayers } from './../store/actions/layer.action'
           [position]="(drawer$ | async)?.position"
           [opened]="(drawer$ | async)?.opened"
         >
-          <div class="content-layout fullwidth-basic-inner-scroll">
-            <router-outlet></router-outlet>
-          </div>
+          <router-outlet></router-outlet>
         </mat-drawer>
 
         <mat-drawer-content>

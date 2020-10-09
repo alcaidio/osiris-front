@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core'
+import { AfterContentInit, ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { Observable } from 'rxjs'
 import { LayersState, ToggleLayer } from '../store'
@@ -9,22 +9,23 @@ import { CloseDrawer, OpenDrawer } from './../store/actions/ui.action'
   selector: 'app-filter-details',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ng-container *transloco="let t">
-      <div class="bg-gray-50 p-5 border-b border-gray-200">
-        <div class="text-lg leading-6 font-medium text-gray-900">
-          {{ t('map.filter.title') }}
+    <aside *transloco="let t">
+      <div class="flex items-center justify-between bg-gray-50 px-5 py-3 border-b border-gray-200">
+        <div class="text-2xl font-medium leading-tight">{{ t('map.filter.title') }}</div>
+        <div class="-mr-3">
+          <button mat-icon-button (click)="onClose()">
+            <mat-icon>close</mat-icon>
+          </button>
         </div>
       </div>
-      <div class="px-4 py-3 mt-2">
-        <ng-container *ngIf="isLoading$ | async">
-          Loading
-        </ng-container>
+
+      <div class="px-6 py-4 mt-1">
         <ng-container *ngIf="isLoaded$ | async">
           <ng-container *ngIf="(filters$ | async)?.length > 0; else noFilters">
-            <dt class="text-sm leading-5 font-medium text-gray-500 mb-3">
+            <dt class="text-lg font-medium text-gray-500 mb-4">
               {{ t('map.filter.state.title') }}
             </dt>
-            <dd class="ml-2 mt-1 text-sm leading-5 text-gray-900" *ngFor="let filter of filters$ | async">
+            <dd class="ml-3 mt-2 leading-5 text-gray-900" *ngFor="let filter of filters$ | async">
               <mat-checkbox color="primary" [checked]="filter.visible" (change)="onToggle(filter.id)">
                 {{ filter.name }}
               </mat-checkbox>
@@ -35,15 +36,14 @@ import { CloseDrawer, OpenDrawer } from './../store/actions/ui.action'
           </ng-template>
         </ng-container>
       </div>
-    </ng-container>
+    </aside>
   `,
 })
 export class FilterDetailsComponent implements AfterContentInit, OnDestroy {
-  @Select(LayersState.getLoading) isLoading$: Observable<boolean>
   @Select(LayersState.getLoaded) isLoaded$: Observable<boolean>
   @Select(LayersState.getFilter) filters$: Observable<Filter[]>
 
-  constructor(private store: Store, private cd: ChangeDetectorRef) {}
+  constructor(private store: Store) {}
 
   ngAfterContentInit(): void {
     setTimeout(() => {
@@ -53,6 +53,10 @@ export class FilterDetailsComponent implements AfterContentInit, OnDestroy {
 
   onToggle(id: string) {
     this.store.dispatch(new ToggleLayer(id))
+  }
+
+  onClose() {
+    this.store.dispatch(new CloseDrawer())
   }
 
   ngOnDestroy(): void {
