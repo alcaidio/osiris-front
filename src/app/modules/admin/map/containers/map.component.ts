@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit, ViewChild } from '@angular/core'
+import { Component, Injectable, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDrawer } from '@angular/material/sidenav'
 import { Select, Store } from '@ngxs/store'
 import { Map, MapMouseEvent } from 'mapbox-gl'
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs'
 import { Layer } from '../models/layer.model'
 import { BaseMapState, GetSectionId, LayersState, LoadBaseMap, UIState } from '../store'
 import { BaseMap } from './../models/base-map.model'
-import { GetActiveMap } from './../store/actions/base-map.action'
+import { GetActiveMap, SaveActiveMap } from './../store/actions/base-map.action'
 import { LoadLayers } from './../store/actions/layer.action'
 
 @Component({
@@ -28,38 +28,41 @@ import { LoadLayers } from './../store/actions/layer.action'
         </mat-drawer>
 
         <mat-drawer-content>
-          <app-drawer-switch></app-drawer-switch>
-          <app-buttons-menu></app-buttons-menu>
-          <app-map-tools></app-map-tools>
-          <app-switch-map-style></app-switch-map-style>
-          <mgl-map
-            #mapbox
-            [movingMethod]="'jumpTo'"
-            [style]="(activeMap$ | async)?.style"
-            [center]="(activeMap$ | async)?.center"
-            [zoom]="[(activeMap$ | async)?.zoom]"
-            [pitch]="[(activeMap$ | async)?.pitch]"
-            [bearing]="[(activeMap$ | async)?.bearing]"
-            [maxBounds]="(activeMap$ | async)?.maxBounds"
-            (click)="onClick($event)"
-            (dragEnd)="getActiveMap()"
-            (zoomEnd)="getActiveMap()"
-          >
-            <!-- Controls -->
-            <mgl-control mglFullscreen position="top-left"></mgl-control>
-            <mgl-control mglNavigation position="top-left"></mgl-control>
-            <mgl-control mglScale position="bottom-left"></mgl-control>
-            <mgl-control
-              mglGeocoder
-              [proximity]="(activeMap$ | async)?.center"
-              [bbox]="(activeMap$ | async)?.maxBounds"
-              placeholder="Search"
-              position="bottom-right"
-            ></mgl-control>
-            <!-- Layers  -->
-            <app-layer [layers]="layers$ | async"></app-layer>
-            <app-buildings [visible]="isBuildings$ | async"></app-buildings>
-          </mgl-map>
+          <ng-container *ngIf="isLoaded$ | async">
+            <app-drawer-switch></app-drawer-switch>
+            <app-buttons-menu></app-buttons-menu>
+            <app-map-tools></app-map-tools>
+            <app-switch-map-style></app-switch-map-style>
+            <mgl-map
+              #mapbox
+              class="map"
+              (load)="onLoad($event)"
+              [style]="(activeMap$ | async)?.style"
+              [pitch]="(defaultOrSavedMap$ | async)?.pitch"
+              [bounds]="(defaultOrSavedMap$ | async)?.bounds"
+              [maxBounds]="(defaultOrSavedMap$ | async)?.maxBounds"
+              (click)="onClick($event)"
+              (dragEnd)="getActiveMap()"
+              (zoomEnd)="getActiveMap()"
+              (pitchEnd)="getActiveMap()"
+              [movingMethod]="'easeTo'"
+            >
+              <!-- Controls -->
+              <mgl-control mglFullscreen position="top-left"></mgl-control>
+              <mgl-control mglNavigation position="top-left"></mgl-control>
+              <mgl-control mglScale position="bottom-left"></mgl-control>
+              <mgl-control
+                mglGeocoder
+                [proximity]="(activeMap$ | async)?.center"
+                [bbox]="(defaultOrSavedMap$ | async)?.bounds"
+                placeholder="Recherche"
+                position="bottom-right"
+              ></mgl-control>
+              <!-- Layers  -->
+              <app-layer [layers]="layers$ | async"></app-layer>
+              <app-buildings [visible]="isBuildings$ | async"></app-buildings>
+            </mgl-map>
+          </ng-container>
         </mat-drawer-content>
       </mat-drawer-container>
     </div>
@@ -68,18 +71,26 @@ import { LoadLayers } from './../store/actions/layer.action'
 @Injectable({
   providedIn: 'root',
 })
-export class CustomMapComponent implements OnInit {
+export class CustomMapComponent implements OnInit, OnDestroy {
+  @Select(BaseMapState.getSavedMapOrDefault) defaultOrSavedMap$: Observable<BaseMap>
   @Select(BaseMapState.getActiveMap) activeMap$: Observable<BaseMap>
+  @Select(BaseMapState.getLoaded) isLoaded$: Observable<boolean>
+
   @Select(BaseMapState.isBuildings) isBuildings$: Observable<boolean>
   @Select(LayersState.getLayers) layers$: Observable<Layer[]>
   @Select(UIState.getDrawer) drawer$: Observable<MatDrawer>
   @ViewChild('mapbox', { static: true }) map: MapComponent
+  mapInstance: Map
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(new LoadBaseMap())
     this.store.dispatch(new LoadLayers())
+  }
+
+  onLoad(evt: Map) {
+    this.mapInstance = evt
   }
 
   onClick(evt: MapMouseEvent): void {
@@ -90,16 +101,23 @@ export class CustomMapComponent implements OnInit {
   }
 
   getActiveMap() {
-    this.store.dispatch(new GetActiveMap(this.getBaseMapConfig(this.map.mapInstance)))
+    if (this.mapInstance !== undefined) {
+      this.store.dispatch(new GetActiveMap(this.getBaseMapConfig()))
+    }
   }
 
-  private getBaseMapConfig(baseMap: Map): Partial<BaseMap> {
-    const { lng, lat } = baseMap.getCenter()
+  private getBaseMapConfig(): Partial<BaseMap> {
+    const { lng, lat } = this.mapInstance.getCenter()
     return {
       center: [lng, lat],
-      zoom: baseMap.getZoom(),
-      pitch: baseMap.getPitch(),
-      bearing: baseMap.getBearing(),
+      zoom: this.mapInstance.getZoom(),
+      pitch: this.mapInstance.getPitch(),
+      bearing: this.mapInstance.getBearing(),
+      bounds: this.mapInstance.getBounds(),
     }
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(new SaveActiveMap())
   }
 }

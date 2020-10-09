@@ -13,11 +13,12 @@ import { Section, SectionIdDTO } from './../models/section.model'
 })
 export class DiagService {
   api = environment.osiris.api
+  diagNum = 1
 
   constructor(private http: HttpClient) {}
 
   getBaseMap(): Observable<BaseMap> {
-    return this.http.get<BaseMap>(`api/map/base`)
+    return this.http.get<BaseMap>(`${this.api}/diag/${this.diagNum}/config/carto`)
   }
 
   getLayers(): Observable<Layer[]> {

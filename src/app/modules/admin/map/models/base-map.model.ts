@@ -3,13 +3,13 @@ import { CursorStyle } from './../../../../shared/models/ui.models'
 
 export interface BaseMap {
   style: string | Style
-  center: LngLatLike
-  zoom: number
+  maxBounds: LngLatBoundsLike
+  bounds: LngLatBoundsLike
+  minZoom: number
   pitch: number
-  maxBounds?: LngLatBoundsLike
-  cursorStyle?: CursorStyle
   bearing?: number
-  //   bounds: LngLatBoundsLike
-  //   minZoom: number
-  //   maxZoom: number
+  cursorStyle?: CursorStyle
+  center?: LngLatLike
+  zoom?: number
+  maxZoom?: number
 }

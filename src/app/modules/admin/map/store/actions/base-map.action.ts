@@ -26,7 +26,6 @@ export class GetActiveMap {
 
 export class SaveActiveMap {
   static readonly type = '[Base Map] Save map'
-  constructor(public payload?: Partial<BaseMap>) {}
 }
 
 export class LoadSavedMap {

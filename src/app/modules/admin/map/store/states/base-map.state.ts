@@ -11,32 +11,27 @@ import {
   SaveActiveMap,
   ToggleBuildindsLayer,
 } from '../actions/base-map.action'
+import { NotificationService } from './../../../../../shared/services/notification.service'
 import { BaseMap } from './../../models/base-map.model'
 import { DiagService } from './../../services/diag.service'
 import { GetActiveMap } from './../actions/base-map.action'
 
 export interface BaseMapStateModel {
-  active: BaseMap
-  saved: BaseMap
+  default: BaseMap | null
+  active: BaseMap | null
+  saved: BaseMap | null
   buildings: boolean
   loading: boolean
   loaded: boolean
   error: any | null
 }
 
-export const defaultMap: BaseMap = {
-  style: '',
-  center: [0, 0],
-  zoom: 0,
-  pitch: 0,
-  bearing: 0,
-}
-
 @State<BaseMapStateModel>({
   name: 'baseMap',
   defaults: {
-    active: defaultMap,
-    saved: defaultMap,
+    default: null,
+    active: null,
+    saved: null,
     buildings: false,
     loading: false,
     loaded: false,
@@ -45,7 +40,16 @@ export const defaultMap: BaseMap = {
 })
 @Injectable()
 export class BaseMapState {
-  constructor(private diagService: DiagService) {}
+  constructor(private diagService: DiagService, private notification: NotificationService) {}
+
+  @Selector()
+  static getSavedMapOrDefault(state: BaseMapStateModel) {
+    if (state.saved === null) {
+      return state.default
+    } else {
+      return state.saved
+    }
+  }
 
   @Selector()
   static getActiveMap(state: BaseMapStateModel) {
@@ -53,13 +57,13 @@ export class BaseMapState {
   }
 
   @Selector()
-  static getSavedMap(state: BaseMapStateModel) {
-    return state.saved
+  static getLoaded(state: BaseMapStateModel) {
+    return state.loaded
   }
 
   @Selector()
-  static getLoaded(state: BaseMapStateModel) {
-    return state.loaded
+  static getLoading(state: BaseMapStateModel) {
+    return state.loading
   }
 
   @Selector()
@@ -84,18 +88,17 @@ export class BaseMapState {
   }
 
   @Action(LoadBaseMapSuccess)
-  loadSuccess({ getState, patchState }: StateContext<BaseMapStateModel>, action: LoadBaseMapSuccess) {
-    const baseMap = action.payload
-    const state = getState()
+  loadSuccess({ patchState }: StateContext<BaseMapStateModel>, action: LoadBaseMapSuccess) {
+    const baseMap = {
+      style: action.payload.style,
+      pitch: action.payload.pitch,
+      bounds: action.payload.bounds,
+      maxBounds: action.payload.maxBounds,
+      minZoom: action.payload.minZoom,
+    }
     patchState({
-      active: {
-        ...state.active,
-        style: baseMap.style,
-        center: baseMap.center,
-        zoom: baseMap.zoom,
-        pitch: baseMap.pitch,
-        maxBounds: baseMap.maxBounds,
-      },
+      default: baseMap,
+      active: baseMap,
       loading: false,
       loaded: true,
     })
@@ -113,12 +116,16 @@ export class BaseMapState {
   @Action(ChangeMapStyle)
   changeMapStyle({ getState, patchState }: StateContext<BaseMapStateModel>, action: ChangeMapStyle) {
     const state = getState()
-    patchState({
-      active: {
-        ...state.active,
-        style: action.payload,
-      },
-    })
+    if (state.active.style === action.payload) {
+      this.notification.openSnackBar('Ce fond de carte est déjà chargé.', 'X')
+    } else {
+      patchState({
+        active: {
+          ...state.active,
+          style: action.payload,
+        },
+      })
+    }
   }
 
   @Action(GetActiveMap)
@@ -134,7 +141,7 @@ export class BaseMapState {
   saveActiveMap({ getState, patchState }: StateContext<BaseMapStateModel>) {
     const state = getState()
     patchState({
-      saved: state.active,
+      saved: { ...state.default, ...state.active },
     })
   }
 

@@ -1,6 +1,6 @@
 @import 'treo';
 
-mgl-map {
+.map {
   height: 100%;
   width: calc(100vw - 100px); // $treo-vertical-navigation-compact-width = 100
   @include treo-breakpoint('xs') {

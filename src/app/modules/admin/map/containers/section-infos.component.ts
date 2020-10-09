@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { ID } from 'app/shared/shared.model'
+import { Map } from 'mapbox-gl'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
-import { take } from 'rxjs/operators'
 import { Section } from '../models/section.model'
 import { CloseDrawer, GetSectionById, OpenDrawer } from '../store'
 import { SectionsState } from '../store/states/section.state'
@@ -111,19 +111,20 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
   @Select(SectionsState.getSelectedSection) selectedSection$: Observable<Section>
   @Select(SectionsState.getSectionColor) sectionColor$: Observable<string>
   @Select((state) => state.router.state.params.id) id$: Observable<ID>
+  map: Map
 
   constructor(private mapComponent: CustomMapComponent, private store: Store) {}
 
   ngOnInit(): void {
+    this.map = this.mapComponent.mapInstance
     this.id$.subscribe((id) => {
       if (id !== undefined) {
         this.store
           .dispatch(new GetSectionById(id))
-          .pipe(take(1))
-          .subscribe((state) => {
+          .toPromise()
+          .then((state) => {
             this.openDrawer()
-            const selectedSection = state.map.sections.selectedSection
-            this.goToSection(selectedSection)
+            setTimeout(() => this.goToSection(state.map.sections.selectedSection), 200)
           })
       }
     })
@@ -131,15 +132,14 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
 
   goToSection(section: Section): void {
     this.flyToSection(section)
-    setTimeout(() => this.displaySelectedSection(section), 200)
+    setTimeout(() => this.displaySelectedSection(section), 100)
   }
 
   private flyToSection(section: Section): void {
     if (section.bbox) {
-      const map = this.mapComponent.map.mapInstance
       // padding right depend of the drawer size (375px)
       // don't tuch padding because bug !
-      map.fitBounds([section.bbox[0], section.bbox[1], section.bbox[2], section.bbox[3]], {
+      this.mapComponent.mapInstance.fitBounds([section.bbox[0], section.bbox[1], section.bbox[2], section.bbox[3]], {
         padding: { top: 200, bottom: 200, left: 200, right: 550 },
       })
     }
@@ -147,7 +147,7 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
 
   private displaySelectedSection(section: Section): void {
     if (section.geometry) {
-      const map = this.mapComponent.map.mapInstance
+      const map = this.mapComponent.mapInstance
       const id = 'selectedSection'
 
       this.sectionColor$.subscribe((color) => {
@@ -190,7 +190,7 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
   }
 
   private removeSourceAndLayer(id: string): void {
-    const map = this.mapComponent.map.mapInstance
+    const map = this.mapComponent.mapInstance
     if (map.getLayer(id) && map.getSource(id)) {
       map.removeLayer(id)
       map.removeSource(id)
