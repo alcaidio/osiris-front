@@ -2,7 +2,7 @@
 
 .map {
   height: 100%;
-  width: calc(100vw - 100px); // $treo-vertical-navigation-compact-width = 100
+  max-width: 100vw;
   @include treo-breakpoint('xs') {
     min-width: 100vw !important;
     max-width: 100vw !important;
