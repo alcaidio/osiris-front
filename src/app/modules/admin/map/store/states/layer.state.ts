@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators'
 import { Layer } from '../../models/layer.model'
 import { LoadLayers, LoadLayersFailure, LoadLayersSuccess, ToggleLayer } from '../actions/layer.action'
 import { ID } from './../../../../../shared/shared.model'
+import { Filter } from './../../models/layer.model'
 import { DiagService } from './../../services/diag.service'
 
 export interface LayersStateModel {
@@ -12,6 +13,7 @@ export interface LayersStateModel {
   entities: {
     [id: string]: Layer
   }
+  filters: Filter[]
   loading: boolean
   loaded: boolean
   error: string | null
@@ -20,6 +22,7 @@ export interface LayersStateModel {
 export const layersStateDefaults: LayersStateModel = {
   ids: [],
   entities: {},
+  filters: [],
   loading: false,
   loaded: false,
   error: null,
@@ -34,6 +37,16 @@ export class LayersState {
   constructor(private diagService: DiagService) {}
 
   @Selector()
+  static getLoading(state: LayersStateModel) {
+    return state.loading
+  }
+
+  @Selector()
+  static getLoaded(state: LayersStateModel) {
+    return state.loaded
+  }
+
+  @Selector()
   static getEntities(state: LayersStateModel) {
     return state.entities
   }
@@ -45,11 +58,7 @@ export class LayersState {
 
   @Selector()
   static getFilter(state: LayersStateModel) {
-    const res = []
-    Object.values(state.entities).map((l) => {
-      res.push({ id: l.id, name: l.name, visible: l.visible, paint: l.paint['line-color'] })
-    })
-    return res
+    return state.filters
   }
 
   @Action(LoadLayers)
@@ -72,9 +81,11 @@ export class LayersState {
   loadSuccess({ getState, patchState }: StateContext<LayersStateModel>, action: LoadLayersSuccess) {
     action.payload.map((layer: Layer) => {
       const state = getState()
+      const filter = { id: layer.id, name: layer.name, visible: layer.visible, color: layer.paint['line-color'] }
       patchState({
         ids: [...state.ids.filter((e) => e !== layer.id), layer.id],
         entities: { ...state.entities, [layer.id]: layer },
+        filters: [...state.filters, filter],
         loading: false,
         loaded: true,
       })

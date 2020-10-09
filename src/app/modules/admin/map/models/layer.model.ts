@@ -29,5 +29,5 @@ export interface Filter {
   id: ID
   name: string
   visible: boolean
-  paint: string
+  color: string
 }
