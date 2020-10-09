@@ -50,6 +50,8 @@
         "@ngxs/router-plugin": "^3.6.2",
         "@ngxs/storage-plugin": "^3.6.2",
         "@ngxs/store": "^3.6.2",
+        "@sentry/angular": "^5.25.0",
+        "@sentry/tracing": "^5.25.0",
         "apexcharts": "3.19.3",
         "crypto-js": "3.3.0",
         "highlight.js": "10.1.1",
