@@ -8,7 +8,7 @@ import { Item } from '../components/button-fab-map.component'
 import { Layer } from '../models/layer.model'
 import { BaseMapState, GetSectionId, LayersState, LoadBaseMap, UIState } from '../store'
 import { BaseMap } from './../models/base-map.model'
-import { GetActiveMap, SaveActiveMap } from './../store/actions/base-map.action'
+import { GetActiveMap, MapIsLoaded, SaveActiveMap } from './../store/actions/base-map.action'
 import { LoadLayers } from './../store/actions/layer.action'
 
 @Component({
@@ -87,11 +87,9 @@ export class CustomMapComponent implements OnInit, OnDestroy {
   @Select(BaseMapState.getSavedMapOrDefault) defaultOrSavedMap$: Observable<BaseMap>
   @Select(BaseMapState.getActiveMap) activeMap$: Observable<BaseMap>
   @Select(BaseMapState.getLoaded) isLoaded$: Observable<boolean>
-
   @Select(BaseMapState.isBuildings) isBuildings$: Observable<boolean>
   @Select(LayersState.getLayers) layers$: Observable<Layer[]>
   @Select(UIState.getDrawer) drawer$: Observable<MatDrawer>
-
   @ViewChild('mapbox', { static: true }) map: MapComponent
   mapInstance: Map
   mapTools: Item[]
@@ -138,6 +136,7 @@ export class CustomMapComponent implements OnInit, OnDestroy {
 
   onLoad(evt: Map) {
     this.mapInstance = evt
+    this.store.dispatch(new MapIsLoaded())
   }
 
   onClick(evt: MapMouseEvent): void {

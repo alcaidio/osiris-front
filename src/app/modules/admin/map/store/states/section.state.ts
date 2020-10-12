@@ -11,7 +11,7 @@ import {
   GetSectionByIdSuccess,
   GetSectionId,
   GetSectionIdFailure,
-  GetSectionIdSuccess,
+  GetSectionIdSuccess
 } from '../actions/section.action'
 import { ID } from './../../../../../shared/shared.model'
 import { Section, SectionIdDTO } from './../../models/section.model'
@@ -61,6 +61,11 @@ export class SectionsState {
   @Selector()
   static getSelectedSection(state: SectionsStateModel) {
     return state.selectedSection.id && state.entities[state.selectedSection.id]
+  }
+
+  @Selector([SectionsState.getSelectedSection])
+  static getBboxSelectedSection(state: SectionsStateModel, section: Section) {
+    return [section.bbox[0], section.bbox[1], section.bbox[2], section.bbox[3]]
   }
 
   @Action(GetSectionId)

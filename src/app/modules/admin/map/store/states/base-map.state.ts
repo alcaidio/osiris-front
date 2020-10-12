@@ -8,8 +8,9 @@ import {
   LoadBaseMapFailure,
   LoadBaseMapSuccess,
   LoadSavedMap,
+  MapIsLoaded,
   SaveActiveMap,
-  ToggleBuildindsLayer,
+  ToggleBuildindsLayer
 } from '../actions/base-map.action'
 import { NotificationService } from './../../../../../shared/services/notification.service'
 import { BaseMap } from './../../models/base-map.model'
@@ -17,6 +18,7 @@ import { DiagService } from './../../services/diag.service'
 import { GetActiveMap } from './../actions/base-map.action'
 
 export interface BaseMapStateModel {
+  isRender: boolean
   default: BaseMap | null
   active: BaseMap | null
   saved: BaseMap | null
@@ -29,6 +31,7 @@ export interface BaseMapStateModel {
 @State<BaseMapStateModel>({
   name: 'baseMap',
   defaults: {
+    isRender: false,
     default: null,
     active: null,
     saved: null,
@@ -57,6 +60,11 @@ export class BaseMapState {
   }
 
   @Selector()
+  static getMapIsRender(state: BaseMapStateModel) {
+    return state.isRender
+  }
+
+  @Selector()
   static getLoaded(state: BaseMapStateModel) {
     return state.loaded
   }
@@ -69,6 +77,13 @@ export class BaseMapState {
   @Selector()
   static isBuildings(state: BaseMapStateModel) {
     return state.buildings
+  }
+
+  @Action(MapIsLoaded)
+  mapIsloaded({ patchState }: StateContext<BaseMapStateModel>) {
+    patchState({
+      isRender: true,
+    })
   }
 
   @Action(LoadBaseMap)

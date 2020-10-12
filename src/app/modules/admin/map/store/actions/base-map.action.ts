@@ -1,5 +1,9 @@
 import { BaseMap } from './../../models/base-map.model'
 
+export class MapIsLoaded {
+  static readonly type = '[Base Map] Map render and load'
+}
+
 export class LoadBaseMap {
   static readonly type = '[Base Map] Load'
 }

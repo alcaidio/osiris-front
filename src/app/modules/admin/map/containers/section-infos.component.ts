@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { ID } from 'app/shared/shared.model'
-import { Map } from 'mapbox-gl'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { Section } from '../models/section.model'
-import { CloseDrawer, GetSectionById, OpenDrawer } from '../store'
+import { BaseMapState, CloseDrawer, GetSectionById, OpenDrawer } from '../store'
 import { SectionsState } from '../store/states/section.state'
 import { TreoMediaWatcherService } from './../../../../../@treo/services/media-watcher/media-watcher.service'
 import { CustomMapComponent } from './map.component'
@@ -112,34 +111,38 @@ import { CustomMapComponent } from './map.component'
 export class SectionInfosComponent implements OnInit, OnDestroy {
   @Select(SectionsState.getSelectedSection) selectedSection$: Observable<Section>
   @Select(SectionsState.getSectionColor) sectionColor$: Observable<string>
+  @Select(BaseMapState.getMapIsRender) mapIsRender$: Observable<boolean>
   @Select((state) => state.router.state.params.id) id$: Observable<ID>
-  map: Map
   isScreenSmall: boolean
 
   constructor(private mapComponent: CustomMapComponent, private store: Store, private media: TreoMediaWatcherService) {}
 
   ngOnInit(): void {
-    this.map = this.mapComponent.mapInstance
     this.id$.subscribe((id) => {
       if (id !== undefined) {
-        this.store
-          .dispatch(new GetSectionById(id))
-          .toPromise()
-          .then((state) => {
-            this.openDrawer()
-            setTimeout(() => this.goToSection(state.map.sections.selectedSection), 200)
-          })
+        this.store.dispatch(new GetSectionById(id))
       }
     })
 
     this.media.onMediaChange$.subscribe(({ matchingAliases }) => {
       this.isScreenSmall = matchingAliases.includes('xs')
     })
+
+    this.selectedSection$.subscribe(section => {   
+      this.mapIsRender$.subscribe(isLoad => {  
+        if (isLoad && section) {     
+          setTimeout(() => {
+            this.openDrawer()
+            this.goToSection(section)
+          })   
+        }
+      })
+    })
   }
 
   goToSection(section: Section): void {
     this.flyToSection(section)
-    setTimeout(() => this.displaySelectedSection(section), 100)
+    setTimeout(() => this.displaySelectedSection(section), 250)
   }
 
   onClose() {
@@ -147,13 +150,12 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
   }
 
   private flyToSection(section: Section): void {
-    if (section.bbox) {
-      // padding right depend of the drawer size (375px)
-      // don't tuch padding because bug !
-      this.mapComponent.mapInstance.fitBounds([section.bbox[0], section.bbox[1], section.bbox[2], section.bbox[3]], {
-        padding: { top: 200, bottom: 200, left: 200, right: 575 },
-      })
-    }
+    // padding right depend of the drawer size (375px)
+    // don't tuch padding because bug !
+    this.mapComponent.mapInstance.fitBounds([section.bbox[0], section.bbox[1], section.bbox[2], section.bbox[3]], {
+      padding: { top: 200, bottom: 200, left: 200, right: 575 },
+      maxDuration: 2000
+    })
   }
 
   private displaySelectedSection(section: Section): void {
