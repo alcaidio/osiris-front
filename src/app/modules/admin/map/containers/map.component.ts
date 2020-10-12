@@ -4,6 +4,7 @@ import { Select, Store } from '@ngxs/store'
 import { Map, MapMouseEvent } from 'mapbox-gl'
 import { MapComponent } from 'ngx-mapbox-gl'
 import { Observable } from 'rxjs'
+import { Item } from '../components/button-fab-map.component'
 import { Layer } from '../models/layer.model'
 import { BaseMapState, GetSectionId, LayersState, LoadBaseMap, UIState } from '../store'
 import { BaseMap } from './../models/base-map.model'
@@ -29,8 +30,21 @@ import { LoadLayers } from './../store/actions/layer.action'
           <ng-container *ngIf="isLoaded$ | async">
             <app-drawer-switch></app-drawer-switch>
             <app-buttons-menu></app-buttons-menu>
-            <app-map-tools></app-map-tools>
-            <app-switch-map-style></app-switch-map-style>
+            <div class="absolute left-0 z-99" style="top: 75%">
+              <div class="relative ml-4">
+                <app-button-fab-map [iconFirst]="'feather:tool'" [items]="mapTools"></app-button-fab-map>
+              </div>
+            </div>
+            <div class="absolute left-0 z-99" style="top: 83%">
+              <div class="relative ml-4">
+                <app-button-fab-map
+                  [iconFirst]="'feather:map'"
+                  [items]="mapStyle"
+                  [isImage]="true"
+                ></app-button-fab-map>
+              </div>
+            </div>
+
             <mgl-map
               #mapbox
               class="map"
@@ -77,14 +91,49 @@ export class CustomMapComponent implements OnInit, OnDestroy {
   @Select(BaseMapState.isBuildings) isBuildings$: Observable<boolean>
   @Select(LayersState.getLayers) layers$: Observable<Layer[]>
   @Select(UIState.getDrawer) drawer$: Observable<MatDrawer>
+
   @ViewChild('mapbox', { static: true }) map: MapComponent
   mapInstance: Map
+  mapTools: Item[]
+  mapStyle: Item[]
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(new LoadBaseMap())
     this.store.dispatch(new LoadLayers())
+
+    this.mapTools = [
+      { id: '3d', icon: 'feather:codepen', tooltip: '3D', action: '3d' },
+      { id: 'distance', icon: 'iconsmind:ruler', tooltip: 'Distance' },
+    ]
+
+    this.mapStyle = [
+      {
+        id: 'mapbox://styles/mapbox/outdoors-v11',
+        icon: 'assets/images/topografic-map.png',
+        tooltip: 'Topografic map',
+        action: 'switchMap',
+      },
+      {
+        id: 'mapbox://styles/mapbox/streets-v11',
+        icon: 'assets/images/light-map.png',
+        tooltip: 'Light map',
+        action: 'switchMap',
+      },
+      {
+        id: 'mapbox://styles/mapbox/satellite-v9',
+        icon: 'assets/images/satellite-map.png',
+        tooltip: 'Satellite map',
+        action: 'switchMap',
+      },
+      {
+        id: 'mapbox://styles/mapbox/dark-v10',
+        icon: 'assets/images/dark-map.png',
+        tooltip: 'Dark map',
+        action: 'switchMap',
+      },
+    ]
   }
 
   onLoad(evt: Map) {

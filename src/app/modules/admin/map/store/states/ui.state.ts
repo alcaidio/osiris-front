@@ -1,20 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
 import {
-  CloseButtonStyle,
-  CloseButtonTools,
   CloseDrawer,
-  OpenButtonStyle,
-  OpenButtonTools,
   OpenDrawer,
-  ToggleButtonStyle,
-  ToggleButtonTools,
-  ToggleDrawer,
+  ToggleDrawer
 } from '../actions/ui.action'
 
 export interface UIStateModel {
-  buttonTools: boolean
-  buttonStyle: boolean
   drawer: {
     mode: 'over' | 'push' | 'side'
     position: 'start' | 'end'
@@ -23,8 +15,6 @@ export interface UIStateModel {
 }
 
 export const UIStateDefaults: UIStateModel = {
-  buttonTools: false,
-  buttonStyle: false,
   drawer: {
     mode: 'side',
     position: 'end',
@@ -48,16 +38,6 @@ export class UIState {
   @Selector()
   static getDrawerOpened(state: UIStateModel) {
     return state.drawer.opened
-  }
-
-  @Selector()
-  static getButtonTools(state: UIStateModel) {
-    return state.buttonTools
-  }
-
-  @Selector()
-  static getButtonStyle(state: UIStateModel) {
-    return state.buttonStyle
   }
 
   @Action(ToggleDrawer)
@@ -93,35 +73,5 @@ export class UIState {
     })
   }
 
-  @Action(ToggleButtonStyle)
-  toggleButtonStyle({ patchState, getState }: StateContext<UIStateModel>) {
-    const state = getState()
-    patchState({ buttonStyle: !state.buttonStyle })
-  }
 
-  @Action(OpenButtonStyle)
-  openButtonStyle({ patchState }: StateContext<UIStateModel>) {
-    patchState({ buttonStyle: true })
-  }
-
-  @Action(CloseButtonStyle)
-  closeButtonStyle({ patchState }: StateContext<UIStateModel>) {
-    patchState({ buttonStyle: false })
-  }
-
-  @Action(ToggleButtonTools)
-  toggleButtonTools({ patchState, getState }: StateContext<UIStateModel>) {
-    const state = getState()
-    patchState({ buttonTools: !state.buttonTools })
-  }
-
-  @Action(OpenButtonTools)
-  openButtonTools({ patchState }: StateContext<UIStateModel>) {
-    patchState({ buttonTools: true })
-  }
-
-  @Action(CloseButtonTools)
-  closeButtonTools({ patchState }: StateContext<UIStateModel>) {
-    patchState({ buttonTools: false })
-  }
 }
