@@ -9,8 +9,9 @@ import { ButtonFabMapComponent } from './components/button-fab-map.component'
 import { ButtonsMenuComponent } from './components/buttons-menu.component'
 import { DrawerSwitchComponent } from './components/drawer-switch.component'
 import { LayerComponent } from './components/layer.component'
-import { MapDetailsComponent } from './components/map-details.component'
+import { MapDrawerComponent } from './components/map-drawer.component'
 import { FilterDetailsComponent } from './containers/filter-details.component'
+import { MapDetailsComponent } from './containers/map-details.component'
 import { CustomMapComponent } from './containers/map.component'
 import { SectionInfosComponent } from './containers/section-infos.component'
 import { MapRoutingModule } from './map.routing'
@@ -27,6 +28,7 @@ import { MapStates } from './store'
     MapDetailsComponent,
     BuildingsComponent,
     ButtonFabMapComponent,
+    MapDrawerComponent,
   ],
   imports: [
     SharedModule,

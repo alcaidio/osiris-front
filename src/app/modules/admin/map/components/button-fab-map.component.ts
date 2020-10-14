@@ -16,13 +16,14 @@ export interface Item {
   animations: TreoAnimations,
   template: `
     <div class="flex items-center justify-center">
-      <button mat-mini-fab (click)="onToggleButton()" class="rotate">
-        <mat-icon color="primary" [svgIcon]="iconFirst"></mat-icon>
+      <button color="primary" mat-mini-fab (click)="onToggleButton()" class="rotate">
+        <mat-icon [svgIcon]="iconFirst"></mat-icon>
       </button>
       <ng-container *ngIf="opened">
         <button
           *ngFor="let item of items"
           mat-mini-fab
+          color="warn"
           class="ml-4"
           [matTooltipPosition]="'above'"
           [matTooltip]="item.tooltip"
@@ -30,7 +31,7 @@ export interface Item {
           @slideInLeft
           @zoomOut
         >
-          <mat-icon *ngIf="!isImage" color="primary" [svgIcon]="item.icon"></mat-icon>
+          <mat-icon *ngIf="!isImage" [svgIcon]="item.icon"></mat-icon>
           <img *ngIf="isImage" class="h-10 w-10 rounded-full overflow-hidden" [src]="item.icon" />
         </button>
       </ng-container>

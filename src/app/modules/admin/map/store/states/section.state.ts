@@ -44,6 +44,11 @@ export class SectionsState {
   constructor(private diagService: DiagService, private notification: NotificationService) {}
 
   @Selector()
+  static getLoading(state: SectionsStateModel) {
+    return state.loading
+  }
+
+  @Selector()
   static getEntities(state: SectionsStateModel) {
     return state.entities
   }

@@ -1,4 +1,4 @@
-import { Component, Injectable, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { Component, Injectable, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
 import { MatDrawer } from '@angular/material/sidenav'
 import { Select, Store } from '@ngxs/store'
 import { Map, MapMouseEvent } from 'mapbox-gl'
@@ -13,10 +13,10 @@ import { LoadLayers } from './../store/actions/layer.action'
 
 @Component({
   selector: 'app-map',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./styles/map.component.scss'],
   template: `
-    <div class="content-layout right-sidebar-fullheight-basic-inner-scroll">
-      <mat-drawer-container>
+      <mat-drawer-container class="overflow-hidden">
         <!-- Drawer -->
         <mat-drawer
           [mode]="(drawer$ | async)?.mode"
@@ -77,7 +77,6 @@ import { LoadLayers } from './../store/actions/layer.action'
           </ng-container>
         </mat-drawer-content>
       </mat-drawer-container>
-    </div>
   `,
 })
 @Injectable({

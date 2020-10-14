@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { MapDetailsComponent } from './components/map-details.component'
 import { FilterDetailsComponent } from './containers/filter-details.component'
+import { MapDetailsComponent } from './containers/map-details.component'
 import { CustomMapComponent } from './containers/map.component'
 import { SectionInfosComponent } from './containers/section-infos.component'
 import { CanDeactivateSectionDetails } from './guards/section.guards'
