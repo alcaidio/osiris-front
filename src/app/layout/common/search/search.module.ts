@@ -1,23 +1,15 @@
-import { NgModule } from '@angular/core'
-import { RouterModule } from '@angular/router'
 import { Overlay } from '@angular/cdk/overlay'
-import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY, MatAutocompleteModule } from '@angular/material/autocomplete'
-import { MatButtonModule } from '@angular/material/button'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatIconModule } from '@angular/material/icon'
-import { MatInputModule } from '@angular/material/input'
-import { SharedModule } from 'app/shared/shared.module'
+import { NgModule } from '@angular/core'
+import { MatAutocompleteModule, MAT_AUTOCOMPLETE_SCROLL_STRATEGY } from '@angular/material/autocomplete'
+import { RouterModule } from '@angular/router'
 import { SearchComponent } from 'app/layout/common/search/search.component'
+import { SharedModule } from 'app/shared/shared.module'
 
 @NgModule({
   declarations: [SearchComponent],
   imports: [
     RouterModule.forChild([]),
     MatAutocompleteModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
     SharedModule,
   ],
   exports: [SearchComponent],

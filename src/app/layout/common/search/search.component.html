@@ -11,12 +11,14 @@
   @slideInTop
   @slideOutTop
 >
+<ng-container *transloco="let t; read: 'search'">
   <mat-form-field class="treo-mat-no-subscript search-input" #searchInput>
     <mat-icon matPrefix [svgIcon]="'search'"></mat-icon>
+
     <input
       matInput
       [formControl]="searchControl"
-      [placeholder]="'Search for a page or a contact'"
+      [placeholder]="t('placeholder')"
       [matAutocomplete]="matAutocomplete"
       (keydown)="onKeydown($event)"
     />
@@ -28,7 +30,7 @@
     [disableRipple]="true"
   >
     <mat-option class="no-results" *ngIf="results && !results.length">
-      No results found!
+      {{ t('no.results') }}
     </mat-option>
 
     <mat-option *ngFor="let result of results" [routerLink]="result.link">
@@ -59,4 +61,5 @@
   <button class="search-toggle-close" mat-icon-button *ngIf="appearance === 'bar'" (click)="close()">
     <mat-icon [svgIcon]="'close'"></mat-icon>
   </button>
+  </ng-container>
 </div>

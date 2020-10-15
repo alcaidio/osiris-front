@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core'
-import { cloneDeep } from 'lodash-es'
 import { TreoNavigationItem } from '@treo/components/navigation'
 import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces'
 import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service'
 import {
-  compactNavigation,
   defaultNavigation,
   futuristicNavigation,
-  horizontalNavigation,
+  horizontalNavigation
 } from 'app/data/mock/common/navigation/data'
+import { cloneDeep } from 'lodash-es'
+import { compactNavigation } from './../../../../core/config/navigation.config'
 
 @Injectable({
   providedIn: 'root',
@@ -79,9 +79,9 @@ export class NavigationMockApi implements TreoMockApi {
         200,
         {
           compact: cloneDeep(this._compactNavigation),
-          default: cloneDeep(this._defaultNavigation),
-          futuristic: cloneDeep(this._futuristicNavigation),
-          horizontal: cloneDeep(this._horizontalNavigation),
+          // default: cloneDeep(this._defaultNavigation),
+          // futuristic: cloneDeep(this._futuristicNavigation),
+          // horizontal: cloneDeep(this._horizontalNavigation),
         },
       ]
     })

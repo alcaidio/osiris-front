@@ -94,7 +94,7 @@ export class TreoNavigationService {
    * @param flatNavigation
    * @returns {TreoNavigationItem[]}
    */
-  getFlatNavigation(navigation: TreoNavigationItem[], flatNavigation: TreoNavigationItem[] = []): TreoNavigationItem[] {
+  getFlatNavigation(navigation: Partial<TreoNavigationItem>[], flatNavigation: Partial<TreoNavigationItem>[] = []): Partial<TreoNavigationItem>[] {
     for (const item of navigation) {
       if (item.type === 'basic') {
         flatNavigation.push(item)

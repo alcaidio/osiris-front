@@ -11,29 +11,29 @@ export const defaultNavigation: TreoNavigationItem[] = [
     link: 'dashboard',
   },
 ]
-export const compactNavigation: TreoNavigationItem[] = [
-  {
-    id: 'dashboard',
-    title: 'Dashboard',
-    type: 'basic',
-    icon: 'heroicons_outline:chart-square-bar',
-    link: '/dashboard',
-  },
-  {
-    id: 'map',
-    title: 'Carte',
-    type: 'basic',
-    icon: 'heroicons_outline:location-marker',
-    link: '/map',
-  },
-  {
-    id: 'travaux',
-    title: 'Travaux',
-    type: 'basic',
-    icon: 'heroicons_outline:lightning-bolt',
-    link: '/works',
-  },
-]
+// export const compactNavigation: TreoNavigationItem[] = [
+//   {
+//     id: 'dashboard',
+//     title: 'Dashboard',
+//     type: 'basic',
+//     icon: 'heroicons_outline:chart-square-bar',
+//     link: '/dashboard',
+//   },
+//   {
+//     id: 'map',
+//     title: 'Carte',
+//     type: 'basic',
+//     icon: 'heroicons_outline:location-marker',
+//     link: '/map',
+//   },
+//   {
+//     id: 'travaux',
+//     title: 'Travaux',
+//     type: 'basic',
+//     icon: 'heroicons_outline:lightning-bolt',
+//     link: '/works',
+//   },
+// ]
 export const futuristicNavigation: TreoNavigationItem[] = [
   {
     id: 'starter.example',
