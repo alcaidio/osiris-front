@@ -1,32 +1,16 @@
 import { Route } from '@angular/router'
+import { AuthGuard } from 'app/auth/guards/auth.guard'
 import { ComingSoonComponent } from './coming-soon.component'
 
 export const comingSoonRoutes: Route[] = [
-  // Redirect empty route
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'classic',
+    redirectTo: 'soon',
   },
-  // // Use 'empty' layout on 'fullscreen' style
-  // {
-  //   path: 'fullscreen',
-  //   component: ComingSoonComponent,
-  //   data: {
-  //     layout: 'empty',
-  //   },
-  // },
-  // // Use 'empty' layout on 'fullscreen-alt' style
-  // {
-  //   path: 'fullscreen-alt',
-  //   component: ComingSoonComponent,
-  //   data: {
-  //     layout: 'empty',
-  //   },
-  // },
-  // Use defaults on other styles
   {
-    path: '**',
+    path: 'soon',
     component: ComingSoonComponent,
+    canActivate: [AuthGuard],
   },
 ]

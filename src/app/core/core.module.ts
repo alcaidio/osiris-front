@@ -25,7 +25,6 @@ import { AppStates } from './store'
     NgxsReduxDevtoolsPluginModule.forRoot({
       name: 'Osiris Store DevTools',
     }),
-    // NgxsLoggerPluginModule.forRoot({ disabled: environment.production }),
   ],
   providers: [
     {

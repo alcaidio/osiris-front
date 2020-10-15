@@ -32,22 +32,27 @@ export const routes: Route[] = [
       {
         path: 'map',
         loadChildren: () => import('./modules/admin/map/map.module').then((m) => m.MapModule),
+        data : { title : 'Map' }
       },
       {
         path: 'dashboard',
         loadChildren: () => import('app/modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+        data : { title : 'Dashboard' }
       },
       {
         path: 'works',
         loadChildren: () => import('app/modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+        data : { title : 'Travaux' }
       },
       {
         path: 'settings',
-        loadChildren: () => import('app/modules/admin/settings/settings.module').then((m) => m.SettingsModule),
+        loadChildren: () => import('app/modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+        data : { title : 'Settings' }
       },
       {
         path: 'profile',
         loadChildren: () => import('app/modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
+        data : { title : 'Profile' }
       },
     ],
   },

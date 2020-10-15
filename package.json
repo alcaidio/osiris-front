@@ -46,7 +46,6 @@
         "@fullcalendar/timegrid": "4.4.2",
         "@ngneat/transloco": "^2.17.3",
         "@ngxs/devtools-plugin": "^3.6.2",
-        "@ngxs/logger-plugin": "^3.6.2",
         "@ngxs/router-plugin": "^3.6.2",
         "@ngxs/storage-plugin": "^3.6.2",
         "@ngxs/store": "^3.6.2",

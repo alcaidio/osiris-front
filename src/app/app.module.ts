@@ -47,7 +47,7 @@ import { SharedModule } from './shared/shared.module'
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({
-        showDialog: true,
+        showDialog: false,
       }),
     },
     {

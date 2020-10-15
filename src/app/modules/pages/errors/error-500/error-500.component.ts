@@ -7,9 +7,4 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Error500Component {
-  /**
-   * Constructor
-   */
-  constructor() {}
-}
+export class Error500Component {}

@@ -13,10 +13,10 @@ export const defaultNavigation: TreoNavigationItem[] = [
 ]
 export const compactNavigation: TreoNavigationItem[] = [
   {
-    id: 'dashboards',
-    title: 'Dashboards',
+    id: 'dashboard',
+    title: 'Dashboard',
     type: 'basic',
-    icon: 'heroicons_outline:home',
+    icon: 'heroicons_outline:chart-square-bar',
     link: '/dashboard',
   },
   {
@@ -32,20 +32,6 @@ export const compactNavigation: TreoNavigationItem[] = [
     type: 'basic',
     icon: 'heroicons_outline:lightning-bolt',
     link: '/works',
-  },
-  {
-    id: 'settings',
-    title: 'Paramètres',
-    type: 'basic',
-    icon: 'heroicons_outline:cog',
-    link: '/settings',
-  },
-  {
-    id: 'profile',
-    title: 'Profile',
-    type: 'basic',
-    icon: 'heroicons_outline:user',
-    link: '/profile',
   },
 ]
 export const futuristicNavigation: TreoNavigationItem[] = [

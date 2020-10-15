@@ -50,7 +50,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this._userService.update(this.user)
   }
 
-  signOut(): void {
-    this._router.navigate(['/sign-out'])
+  onNavigate(url: string): void {
+    this._router.navigate([url])
   }
 }
