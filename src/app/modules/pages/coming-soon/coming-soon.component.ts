@@ -14,7 +14,6 @@ import { NotificationService } from './../../../shared/services/notification.ser
   encapsulation: ViewEncapsulation.None,
 })
 export class ComingSoonComponent implements OnInit, OnDestroy {
-  // TODO : add i18n 
   @Select(AuthStatusState.getEmail) email$: Observable<string>
   isLoading: boolean  // TODO: getIsLoading 
   alreadySubscribed: boolean // TODO : getIsSubscribed

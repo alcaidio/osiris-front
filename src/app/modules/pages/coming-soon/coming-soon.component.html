@@ -2,16 +2,18 @@
   <treo-card class="auth-card">
       <div class="form-container">
         <div class="form">
+          <ng-container *transloco="let t; read: 'coming-soon'">
+
           <img src="assets/images/pages/coming-soon/soon.svg" alt="Image en construction"/>
 
-          <div class="title">Bientôt disponible !</div>
+          <div class="title">{{ t('title') }}</div>
           <div class="subtitle">
-            Le module "{{ featureName }}" est en construction. 
+            {{ t('subtitle1', { module: featureName }) }}
             <ng-container *ngIf="!alreadySubscribed">
-              Cliquez ci-dessous pour ne pas rater son lancement.
+              {{ t('subtitle2') }}
             </ng-container> 
             <ng-container *ngIf="alreadySubscribed">
-              Vous serez informé lors de son lancement.
+              {{ t('subtitle3') }}
             </ng-container> 
           </div>
 
@@ -26,7 +28,7 @@
               (click)="onclick()"
             >
               <span *ngIf="!isLoading">
-                Être informé du lancement
+                {{ t('button') }}
               </span>
               <mat-progress-spinner
                 *ngIf="isLoading"
@@ -36,9 +38,10 @@
             </button>
 
             <div class="form-footer">
-              Notre équipe travail dur pour vous livrer de nouvelles fonctionnalitées ❤️
+              {{ t('footer') }}
             </div>
           </form>
+          </ng-container>
         </div>
       </div>
     </treo-card>

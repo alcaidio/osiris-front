@@ -1,4 +1,12 @@
 {
+    "coming-soon": {
+        "title": "Coming soon!",
+        "subtitle1": "The feature {{module}} is under construction.",
+        "subtitle2": "Click below not to miss its launch.",
+        "subtitle3": "You will be informed when it is launched.",
+        "button": "Notify me of the launch",
+        "footer": "Our team is working hard to deliver new features to you ❤️"
+    },
     "search": {
         "placeholder": "Search a page",
         "no.results": "No results found!"

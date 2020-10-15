@@ -1,4 +1,12 @@
 {
+    "coming-soon": {
+        "title": "Bientôt disponible !",
+        "subtitle1": "Le module {{module}} est en construction.",
+        "subtitle2": "Cliquez ci-dessous pour ne pas rater son lancement",
+        "subtitle3": "Vous serez informé lors de son lancement.",
+        "button": "M'informer du lancement",
+        "footer": "Notre équipe travail dur pour vous livrer de nouvelles fonctionnalitées ❤️"
+    },
     "search": {
         "placeholder": "Rechercher une page",
         "no.results": "Aucun résultat trouvé !"
