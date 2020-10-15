@@ -2,5 +2,20 @@
     "search": {
         "placeholder": "Search a page",
         "no.results": "No results found!"
+    }, 
+    "shortcuts": {
+        "title": "Shortcuts",
+        "edit": "Enter edit mode",
+        "add": "Add shortcut",
+        "exit": "Exit edit mode",
+        "cancel": "Cancel",
+        "no.shortcuts": "No shortcuts",
+        "label": "Label",
+        "description": "Description",
+        "icon": "Icon",
+        "link": "Link",
+        "router.toggle": "Use router for the link",
+        "delete": "Delete",
+        "update": "Update"
     }
 }

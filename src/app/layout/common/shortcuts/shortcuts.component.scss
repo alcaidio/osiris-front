@@ -3,6 +3,10 @@
 shortcuts {
   display: flex;
   align-items: center;
+
+  #add {
+    cursor: add;
+  }
 }
 
 // Shortcuts panel
@@ -11,7 +15,7 @@ shortcuts {
   max-width: 360px !important;
   border-radius: 4px;
   max-height: calc(100vh - 80px);
-  overflow: hidden;
+  overflow-y: auto;
   @include treo-elevation('lg');
   @include treo-breakpoint('xs') {
     min-width: 0 !important;
@@ -55,12 +59,8 @@ shortcuts {
     flex: 1 1 auto;
     flex-wrap: wrap;
     padding: 0;
-    margin-bottom: -1px;
     overflow-y: auto;
-
-    @include treo-breakpoint('xs') {
-      max-height: 480px;
-    }
+    max-height: 520px;
 
     // Modify mode
     &.mode-modify {

@@ -1,3 +1,5 @@
+import { Overlay, OverlayRef } from '@angular/cdk/overlay'
+import { TemplatePortal } from '@angular/cdk/portal'
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -8,17 +10,16 @@ import {
   TemplateRef,
   ViewChild,
   ViewContainerRef,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Overlay, OverlayRef } from '@angular/cdk/overlay'
-import { TemplatePortal } from '@angular/cdk/portal'
 import { MatButton } from '@angular/material/button'
-import { takeUntil } from 'rxjs/operators'
-import { Subject } from 'rxjs'
-import { Shortcut } from 'app/layout/common/shortcuts/shortcuts.types'
 import { ShortcutsService } from 'app/layout/common/shortcuts/shortcuts.service'
+import { Shortcut } from 'app/layout/common/shortcuts/shortcuts.types'
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
+import { material } from './../../../data/mock/ui/icons/data'
 
+@AutoUnsubscribe()
 @Component({
   selector: 'shortcuts',
   templateUrl: './shortcuts.component.html',
@@ -30,11 +31,12 @@ import { ShortcutsService } from 'app/layout/common/shortcuts/shortcuts.service'
 export class ShortcutsComponent implements OnInit, OnDestroy {
   mode: 'view' | 'modify' | 'add' | 'edit'
   shortcutForm: FormGroup
+  selectedIconValue: string
+  icons = material
 
   // Private
   private _overlayRef: OverlayRef
   private _shortcuts: Shortcut[]
-  private _unsubscribeAll: Subject<any>
 
   @ViewChild('shortcutsOrigin')
   private _shortcutsOrigin: MatButton
@@ -58,9 +60,6 @@ export class ShortcutsComponent implements OnInit, OnDestroy {
     private _overlay: Overlay,
     private _viewContainerRef: ViewContainerRef
   ) {
-    // Set the private defaults
-    this._unsubscribeAll = new Subject()
-
     // Set the defaults
     this.mode = 'view'
   }
@@ -97,11 +96,10 @@ export class ShortcutsComponent implements OnInit, OnDestroy {
       description: [''],
       icon: ['', Validators.required],
       link: ['', Validators.required],
-      useRouter: ['', Validators.required],
     })
 
     // Get the shortcuts
-    this._shortcutsService.shortcuts$.pipe(takeUntil(this._unsubscribeAll)).subscribe((shortcuts: Shortcut[]) => {
+    this._shortcutsService.shortcuts$.subscribe((shortcuts: Shortcut[]) => {
       // Load the shortcuts
       this._shortcuts = shortcuts
 
@@ -114,10 +112,6 @@ export class ShortcutsComponent implements OnInit, OnDestroy {
    * On destroy
    */
   ngOnDestroy(): void {
-    // Unsubscribe from all subscriptions
-    this._unsubscribeAll.next()
-    this._unsubscribeAll.complete()
-
     // Dispose the overlay if it's still on the DOM
     if (this._overlayRef) {
       this._overlayRef.dispose()
@@ -271,4 +265,5 @@ export class ShortcutsComponent implements OnInit, OnDestroy {
     // Go back the modify mode
     this.mode = 'modify'
   }
+
 }

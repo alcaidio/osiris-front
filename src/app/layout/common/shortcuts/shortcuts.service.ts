@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Shortcut } from 'app/layout/common/shortcuts/shortcuts.types'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map, switchMap, take } from 'rxjs/operators'
-import { Shortcut } from 'app/layout/common/shortcuts/shortcuts.types'
-import { Notification } from 'app/layout/common/notifications/notifications.types'
 
 @Injectable({
   providedIn: 'root',

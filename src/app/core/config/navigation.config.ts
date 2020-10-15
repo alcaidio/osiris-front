@@ -7,21 +7,21 @@ export const compactNavigation: TreoNavigationItem[] = [
         id: 'dashboard',
         title: 'Dashboard',
         type: 'basic',
-        icon: 'heroicons_outline:chart-square-bar',
+        icon: 'mat_outline:dashboard',
         link: '/dashboard',
     },
     {
         id: 'map',
         title: 'Carte',
         type: 'basic',
-        icon: 'heroicons_outline:location-marker',
+        icon: 'mat_outline:map',
         link: '/map',
     },
     {
         id: 'travaux',
         title: 'Travaux',
         type: 'basic',
-        icon: 'heroicons_outline:lightning-bolt',
+        icon: 'mat_outline:work_outline',
         link: '/works',
     }
 ]
