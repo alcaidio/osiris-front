@@ -15,7 +15,8 @@ import { MapDetailsComponent } from './containers/map-details.component'
 import { CustomMapComponent } from './containers/map.component'
 import { SectionInfosComponent } from './containers/section-infos.component'
 import { MapRoutingModule } from './map.routing'
-import { MapStates } from './store'
+import { MapStates } from './store';
+import { TreeListComponent } from './components/tree-list/tree-list.component'
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MapStates } from './store'
     BuildingsComponent,
     ButtonFabMapComponent,
     MapDrawerComponent,
+    TreeListComponent,
   ],
   imports: [
     SharedModule,
