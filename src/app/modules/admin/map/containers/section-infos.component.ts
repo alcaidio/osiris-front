@@ -94,9 +94,10 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
   private displaySelectedSection(section: Section): void {
     if (section.geometry) {
       const map = this.mapComponent.mapInstance
-      const id = 'selectedSection'
+      const id = 'selectedSection'      
 
       this.sectionColor$.subscribe((color) => {
+                
         this.removeSourceAndLayer('selectedSection')
 
         map.addSource(id, {
@@ -108,7 +109,7 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
                 type: 'Feature',
                 properties: {},
                 geometry: {
-                  type: 'LineString',
+                  type: section.geometry.type,
                   coordinates: section.geometry.coordinates,
                 },
               },

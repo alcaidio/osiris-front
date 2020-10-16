@@ -26,7 +26,8 @@ export class DiagService {
   }
 
   getSectionIdByLngLat(point: { lng: number; lat: number }): Observable<SectionIdDTO> {
-    return this.http.get<SectionIdDTO>(`${this.api}/diag/feature?typeName=sections&lng=${point.lng}&lat=${point.lat}`)
+    // TODO : li_section_view est en dure le récupérer via api 
+    return this.http.get<SectionIdDTO>(`${this.api}/diag/feature?typeName=li_section_view&lng=${point.lng}&lat=${point.lat}`)
   }
 
   getSectionById(id: ID): Observable<Section> {
