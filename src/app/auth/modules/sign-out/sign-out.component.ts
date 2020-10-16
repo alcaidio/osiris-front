@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { Router } from '@angular/router'
-import { Store } from '@ngxs/store'
-import { Logout } from 'app/auth/store'
 import { interval, Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
 
@@ -15,10 +13,9 @@ export class AuthSignOutComponent implements OnInit, OnDestroy {
   countdown = 4
   private sub = new Subject()
 
-  constructor(private router: Router, private store: Store) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new Logout())
 
     const duration = this.countdown
 

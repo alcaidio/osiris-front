@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
-import { Router } from '@angular/router'
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
-import { AuthStatusState } from 'app/auth/store'
+import { AuthStatusState, Logout } from 'app/auth/store'
 import { UserService } from 'app/layout/common/user/user.service'
 import { User } from 'app/layout/common/user/user.types'
 import { Observable, Subject } from 'rxjs'
@@ -22,7 +21,7 @@ export class UserComponent implements OnInit, OnDestroy {
   private _unsubscribeAll = new Subject()
   private _user: User
 
-  constructor(private _router: Router, private _userService: UserService, private store: Store) {}
+  constructor(private cd: ChangeDetectorRef, private _userService: UserService, private store: Store) {}
 
   @Input()
   set user(value: User) {

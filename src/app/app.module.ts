@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common'
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -18,6 +19,7 @@ import { environment } from 'environments/environment'
 import { MarkdownModule } from 'ngx-markdown'
 import { AppRoutingModule, CustomRouterStateSerializer } from './app.routing'
 import { httpLoader } from './core/i18n/transloco.loader'
+import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor'
 import { SharedModule } from './shared/shared.module'
 
 @NgModule({
@@ -44,6 +46,11 @@ import { SharedModule } from './shared/shared.module'
   ],
   providers: [
     httpLoader,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    },
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({

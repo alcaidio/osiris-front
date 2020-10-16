@@ -7,7 +7,7 @@ import {
   Route,
   RouterStateSnapshot,
   UrlSegment,
-  UrlTree,
+  UrlTree
 } from '@angular/router'
 import { Navigate } from '@ngxs/router-plugin'
 import { Select, Store } from '@ngxs/store'

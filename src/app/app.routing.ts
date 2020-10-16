@@ -22,7 +22,7 @@ export const routes: Route[] = [
   // Admin routes
   {
     path: '',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     component: LayoutComponent,
     resolve: {
@@ -54,8 +54,29 @@ export const routes: Route[] = [
         loadChildren: () => import('app/modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
         data : { title : 'Profile' }
       },
+      { 
+        path: '404', 
+        loadChildren: () => import('app/modules/pages/errors/error-404/error-404.module').then((m) => m.Error404Module)
+      },
+      { path: '**', pathMatch: 'full', redirectTo: '404' },
     ],
   },
+
+  { 
+    path: 'error', 
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: '404' },
+      { 
+        path: '404', 
+        loadChildren: () => import('app/modules/pages/errors/error-404/error-404.module').then((m) => m.Error404Module)
+      },
+      { 
+        path: '500', 
+        loadChildren: () => import('app/modules/pages/errors/error-500/error-500.module').then((m) => m.Error500Module)
+      },
+    ]
+  },
+
 ]
 
 @NgModule({

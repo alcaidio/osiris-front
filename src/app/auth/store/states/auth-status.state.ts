@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { Navigate } from '@ngxs/router-plugin'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
 import { LoginRedirect, Logout } from '../actions/auth.actions'
 import { IsAuth } from './../actions/auth.actions'
@@ -50,6 +49,6 @@ export class AuthStatusState {
   logout({ dispatch, setState }: StateContext<AuthStatusStateModel>) {
     localStorage.removeItem('auth.status')
     setState(authStatusStateDefaults)
-    dispatch(new Navigate(['sign-out']))
+    // dispatch(new Navigate(['sign-out']))
   }
 }

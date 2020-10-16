@@ -2,11 +2,11 @@
   "404": {
     "title": "Ooops... 404!",
     "description": "The page you requested could not be found.",
-    "link": "Back to {{location}}"
+    "link": "Back to the {{location}}"
   },
   "500": {
     "title": "Something went wrong!",
     "description": "Server Error 500. Our staff has been notified, thank you for your understanding.",
-    "link": "Back to {{location}}"
+    "link": "Back to the {{location}}"
   }
 }

@@ -40,12 +40,30 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/reset-password/reset-password.module').then((m) => m.AuthResetPasswordModule),
       },
+      {
+        path: 'sign-out',
+        loadChildren: () => import('./modules/sign-out/sign-out.module').then((m) => m.AuthSignOutModule),
+      },
+      { 
+        path: 'error', 
+        children: [
+          { path: '', pathMatch: 'full', redirectTo: '404' },
+          { 
+            path: '404', 
+            loadChildren: () => import('app/modules/pages/errors/error-404/error-404.module').then((m) => m.Error404Module)
+          },
+          { 
+            path: '500', 
+            loadChildren: () => import('app/modules/pages/errors/error-500/error-500.module').then((m) => m.Error500Module)
+          },
+        ]
+      },
     ],
   },
 
   // Auth routes (logged in)
   {
-    path: '',
+    path: 'auth',
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     component: LayoutComponent,
