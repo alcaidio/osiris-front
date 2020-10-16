@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Select } from '@ngxs/store'
-import { AuthStatusState } from 'app/auth/store'
+import { AuthStatusState } from 'app/modules/auth/store'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { NotificationService } from './../../../shared/services/notification.service'

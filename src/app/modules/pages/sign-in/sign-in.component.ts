@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Select, Store } from '@ngxs/store'
-import { Login, LoginPageState } from 'app/auth/store'
+import { Login } from 'app/modules/auth/store'
 import { Observable, Subscription } from 'rxjs'
 import { TreoAnimations } from '../../../../@treo/animations/public-api'
+import { LoginPageState } from '../../auth/store/'
 
 @Component({
   selector: 'auth-sign-in',

@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngxs/store'
-import { Logout } from 'app/auth/store'
 import { interval, Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
+import { Logout } from '../../auth/store'
 
 @Component({
   selector: 'auth-sign-out',

@@ -6,9 +6,9 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin'
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
 import { NgxsModule } from '@ngxs/store'
-import { AuthInterceptor } from 'app/auth/interceptors/auth.interceptor'
 import { environment } from 'environments/environment'
-import { AuthModule } from '../auth'
+import { AuthModule } from './../modules/auth/auth.module'
+import { AuthInterceptor } from './../modules/auth/interceptors/auth.interceptor'
 import { AppStates } from './store'
 
 @NgModule({

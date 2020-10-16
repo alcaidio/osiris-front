@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Subject } from 'rxjs'
 import { TreoAnimations } from '../../../../@treo/animations/public-api'
-import { AuthService } from '../../services/auth.service'
+import { AuthService } from './../../auth/services/auth.service'
 
 @Component({
   selector: 'auth-sign-up',

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { Router } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
-import { AuthStatusState } from 'app/auth/store'
 import { UserService } from 'app/layout/common/user/user.service'
 import { User } from 'app/layout/common/user/user.types'
+import { AuthStatusState } from 'app/modules/auth/store'
 import { Observable, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 

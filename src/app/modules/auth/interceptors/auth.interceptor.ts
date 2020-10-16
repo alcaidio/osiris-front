@@ -1,10 +1,10 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Store } from '@ngxs/store'
-import { AuthUtils } from 'app/auth/auth.utils'
 import { Observable, throwError } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 import { Logout } from '../store'
+import { AuthUtils } from './../auth.utils'
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
