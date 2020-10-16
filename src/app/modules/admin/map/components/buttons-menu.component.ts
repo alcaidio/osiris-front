@@ -9,14 +9,14 @@ import { OpenDrawer } from './../store/actions/ui.action'
   template: `
     <div class="absolute right-0 z-99" style="top: 250px">
       <div class="flex flex-col">
-        <button mat-raised-button color="primary" (click)="onClick()" routerLink="/map/filter" routerLinkActive="active" class="first" >
-          <mat-icon  [svgIcon]="'feather:layers'" [matTooltipPosition]="'left'" matTooltip="Filtres"></mat-icon>
+        <button mat-raised-button color="primary" (click)="onClick()" routerLink="/map/layers" routerLinkActive="active" class="first" >
+          <mat-icon  [svgIcon]="'feather:layers'" [matTooltipPosition]="'left'" matTooltip="Layers"></mat-icon>
         </button>
         <button mat-raised-button color="primary" (click)="onClick()" routerLinkActive="active" class="between" >
-          <mat-icon [svgIcon]="'feather:sliders'" [matTooltipPosition]="'left'" matTooltip="Exemple"></mat-icon>
+          <mat-icon [svgIcon]="'feather:sliders'" [matTooltipPosition]="'left'" matTooltip="Exemple 1"></mat-icon>
         </button>
         <button mat-raised-button color="primary" (click)="onClick()" routerLinkActive="active" class="last" >
-          <mat-icon [svgIcon]="'feather:map'" [matTooltipPosition]="'left'" matTooltip="Exemple"></mat-icon>
+          <mat-icon [svgIcon]="'feather:settings'" [matTooltipPosition]="'left'" matTooltip="Exemple 2"></mat-icon>
         </button>
       </div>
     </div>

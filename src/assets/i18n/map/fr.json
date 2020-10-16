@@ -11,7 +11,9 @@
   "info.city": "Ville",
   "info.further": "Information complémentaire",
   "info.no": "Aucune informations disponibles pour le tronçon n°{{ id }}.",
-  "filter.title": "Filtres",
-  "filter.state.title": "Etat de la voirie",
-  "filter.no": "Pas de filtres disponibles"
+  "layers": {
+    "title": "Couches",
+    "state.title": "Etat de la voirie",
+    "unvailable": "Pas de couches disponibles"
+  }
 }

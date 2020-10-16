@@ -10,7 +10,7 @@ import { ButtonsMenuComponent } from './components/buttons-menu.component'
 import { DrawerSwitchComponent } from './components/drawer-switch.component'
 import { LayerComponent } from './components/layer.component'
 import { MapDrawerComponent } from './components/map-drawer.component'
-import { FilterDetailsComponent } from './containers/filter-details.component'
+import { LayersComponent } from './containers/layers.component'
 import { MapDetailsComponent } from './containers/map-details.component'
 import { CustomMapComponent } from './containers/map.component'
 import { SectionInfosComponent } from './containers/section-infos.component'
@@ -22,7 +22,7 @@ import { MapStates } from './store'
     CustomMapComponent,
     LayerComponent,
     SectionInfosComponent,
-    FilterDetailsComponent,
+    LayersComponent,
     ButtonsMenuComponent,
     DrawerSwitchComponent,
     MapDetailsComponent,

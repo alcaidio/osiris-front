@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { FilterDetailsComponent } from './containers/filter-details.component'
+import { LayersComponent } from './containers/layers.component'
 import { MapDetailsComponent } from './containers/map-details.component'
 import { CustomMapComponent } from './containers/map.component'
 import { SectionInfosComponent } from './containers/section-infos.component'
@@ -16,8 +16,8 @@ const routes: Routes = [
         component: MapDetailsComponent,
       },
       {
-        path: 'filter',
-        component: FilterDetailsComponent,
+        path: 'layers',
+        component: LayersComponent,
       },
       {
         path: 'section/:id',

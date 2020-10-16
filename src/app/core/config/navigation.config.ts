@@ -47,9 +47,9 @@ export const otherNavigation: Partial<TreoNavigationItem>[] = [
         link: '/map/section/1/infos',
     },
     {
-        id: 'filter-map',
-        title: 'Filter map',
-        subtitle: 'filtre, layers, couches',
-        link: '/map/filter',
+        id: 'map.layers',
+        title: 'Map layers',
+        subtitle: 'filtre, layers, couches, map',
+        link: '/map/layers',
     },
 ]
