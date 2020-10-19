@@ -19,12 +19,11 @@ import { Component, Input } from '@angular/core'
         }"
       ></mgl-layer>
     </ng-container>
-  `,
-  styles: [],
+  `
 })
 export class BuildingsComponent {
   @Input() visible = false
   @Input() color = '#aaa'
-  @Input() opacity = 0.6
+  @Input() opacity = 0.70
   @Input() minZoom = 14
 }

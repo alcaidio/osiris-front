@@ -146,10 +146,18 @@ export class BaseMapState {
   @Action(GetActiveMap)
   getActiveMap({ getState, patchState }: StateContext<BaseMapStateModel>, action: GetActiveMap) {
     const state = getState()
-    const activeMap = { ...state.active, ...action.payload }
-    patchState({
-      active: activeMap,
-    })
+    const activeMap = { ...state.active, ...action.payload }    
+    if (activeMap.pitch > 20) {
+      patchState({
+        active: activeMap,
+        buildings: true
+      })
+    } else {
+      patchState({
+        active: activeMap,
+        buildings: false
+      })
+    }
   }
 
   @Action(SaveActiveMap)

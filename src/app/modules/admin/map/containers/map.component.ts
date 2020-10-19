@@ -7,6 +7,7 @@ import { Observable } from 'rxjs'
 import { Item } from '../components/button-fab-map.component'
 import { Layer } from '../models/layer.model'
 import { BaseMapState, GetSectionId, LayersState, LoadBaseMap, UIState } from '../store'
+import { mapStyle, mapTools } from './../../../../core/config/map.config'
 import { BaseMap } from './../models/base-map.model'
 import { GetActiveMap, MapIsLoaded, SaveActiveMap } from './../store/actions/base-map.action'
 import { LoadLayers } from './../store/actions/layer.action'
@@ -99,38 +100,8 @@ export class CustomMapComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(new LoadBaseMap())
     this.store.dispatch(new LoadLayers())
-
-    this.mapTools = [
-      { id: '3d', icon: 'feather:codepen', tooltip: '3D', action: '3d' },
-      { id: 'distance', icon: 'iconsmind:ruler', tooltip: 'Distance' },
-    ]
-
-    this.mapStyle = [
-      {
-        id: 'mapbox://styles/mapbox/outdoors-v11',
-        icon: 'assets/images/topografic-map.png',
-        tooltip: 'Topografic map',
-        action: 'switchMap',
-      },
-      {
-        id: 'mapbox://styles/mapbox/streets-v11',
-        icon: 'assets/images/light-map.png',
-        tooltip: 'Light map',
-        action: 'switchMap',
-      },
-      {
-        id: 'mapbox://styles/mapbox/satellite-v9',
-        icon: 'assets/images/satellite-map.png',
-        tooltip: 'Satellite map',
-        action: 'switchMap',
-      },
-      {
-        id: 'mapbox://styles/mapbox/dark-v10',
-        icon: 'assets/images/dark-map.png',
-        tooltip: 'Dark map',
-        action: 'switchMap',
-      },
-    ]
+    this.mapTools = mapTools // TODO : put this config in store 
+    this.mapStyle = mapStyle // TODO : put this config in store 
   }
 
   onLoad(evt: Map) {
@@ -148,6 +119,8 @@ export class CustomMapComponent implements OnInit, OnDestroy {
   getActiveMap() {
     if (this.mapInstance !== undefined) {
       this.store.dispatch(new GetActiveMap(this.getBaseMapConfig()))
+    } else {
+      throw new Error('We can not get active map if mapInstance is undefined')
     }
   }
 
