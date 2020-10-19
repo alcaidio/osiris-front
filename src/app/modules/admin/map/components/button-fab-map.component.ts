@@ -16,14 +16,14 @@ export interface Item {
   animations: TreoAnimations,
   template: `
     <div class="flex items-center justify-center">
-      <button color="primary" mat-mini-fab (click)="onToggleButton()" class="rotate">
+      <button color="warn" mat-mini-fab (click)="onToggleButton()" class="rotate">
         <mat-icon [svgIcon]="iconFirst"></mat-icon>
       </button>
       <ng-container *ngIf="opened">
         <button
           *ngFor="let item of items"
           mat-mini-fab
-          color="warn"
+          color="primary"
           class="ml-4"
           [matTooltipPosition]="'above'"
           [matTooltip]="item.tooltip"

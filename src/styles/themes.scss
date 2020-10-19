@@ -9,7 +9,7 @@
 //   'treo-light-theme' and/or 'treo-dark-theme' functions which uses 'mat-light-theme' and
 //   'mat-dark-theme' functions respectively to generate the themes.
 //
-// @ 'treo-palette' values are coming from '$treo-color' map which can be found in
+// @ '' values are coming from '$treo-color' map which can be found in
 //   '@treo/styles/utilities/_colors.scss'.
 // -----------------------------------------------------------------------------------------------------
 $treo-themes: (
@@ -19,10 +19,10 @@ $treo-themes: (
     //   likings.
     // -----------------------------------------------------------------------------------------------------
     // Dark theme - DO NOT REMOVE or RENAME
-    'treo-theme-dark': treo-dark-theme(treo-palette('blue', 700), treo-palette('teal', 500), treo-palette('pink', 500)),
+    'treo-theme-dark': treo-dark-theme(treo-palette('teal', 500), treo-palette('teal', 300), treo-palette('blue', 500)),
   // Light theme - DO NOT REMOVE or RENAME
     'treo-theme-light':
-    treo-light-theme(treo-palette('cool-gray', 600), treo-palette('blue', 600), treo-palette('teal', 500)),
+    treo-light-theme(treo-palette('teal', 500), treo-palette('blue', 300), treo-palette('blue', 500)),
   // -----------------------------------------------------------------------------------------------------
     // @ Dark & Light themes - DO NOT REMOVE or RENAME
     //   These are generic themes which are useful if you want to adjust the theming of certain container

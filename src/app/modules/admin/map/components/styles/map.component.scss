@@ -43,7 +43,7 @@ app-buttons-menu {
 
   app-buttons-menu {
     .active {
-      background-color: map-get($primary, 400) !important;
+      background-color: map-get($warn, 300) !important;
       width: 100%;
     }
   }

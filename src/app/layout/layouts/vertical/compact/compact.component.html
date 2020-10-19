@@ -18,10 +18,15 @@
 <div class="wrapper">
   <!-- Header -->
   <div class="header">
-    <!-- Navigation toggle button -->
-    <button class="navigation-toggle-button" mat-icon-button (click)="toggleNavigation('mainNavigation')">
-      <mat-icon [svgIcon]="'menu'"></mat-icon>
-    </button>
+
+    <div class="flex flex-row items-center justify-start">
+      <!-- Navigation toggle button -->
+      <button class="navigation-toggle-button" mat-icon-button (click)="toggleNavigation('mainNavigation')">
+        <mat-icon [svgIcon]="'menu'"></mat-icon>
+      </button>
+      <!-- Logo text -->
+      <img *ngIf="!isScreenSmall" src="assets/images/logo/logo-text.svg" class="h-12 w-auto -ml-16 "/>
+    </div>
 
     <!-- Spacer -->
     <div class="spacer"></div>
