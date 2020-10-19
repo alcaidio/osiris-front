@@ -6,16 +6,16 @@ export const messages: Message[] = [
   {
     id: '832276cc-c5e9-4fcc-8e23-d38e2e267bc9',
     image: 'assets/images/avatars/male-01.jpg',
-    title: 'Francis Morel',
-    description: 'On devrait en parler au déjeuner !',
+    title: 'Gary Peters',
+    description: 'We should talk about that at lunch!',
     time: moment().subtract(25, 'minutes').toISOString(), // 25 minutes ago
     read: false,
   },
   {
     id: '608b4479-a3ac-4e26-8675-3609c52aca58',
     image: 'assets/images/avatars/male-04.jpg',
-    title: 'Alexandre Fournier',
-    description: 'Vous pouvez télécharger les dernières factures dès maintenant. Veuillez vérifier et laissez-moi savoir.',
+    title: 'Leo Gill (Client #8817)',
+    description: 'You can download the latest invoices now. Please check and let me know.',
     time: moment().subtract(50, 'minutes').toISOString(), // 50 minutes ago
     read: false,
   },
@@ -67,7 +67,7 @@ export const messages: Message[] = [
     time: moment().subtract(1, 'day').toISOString(), // 1 day ago
     read: true,
     link: 'https://www.google.com',
-    useRouter: true,
+    useRouter: false,
   },
   {
     id: '059f3738-633b-48ea-ad83-19016ce24c62',
@@ -90,8 +90,3 @@ export const messages: Message[] = [
     useRouter: true,
   },
 ]
-
-
-// "Visite 12 rue du puits, effectuée le 19/10 RAS"
-// "Aggravation des nids de poule sur le rue du stade"
-// "Devis demandé à l'entreprise XX pour le rebouchage des fissures, rue henri IV"

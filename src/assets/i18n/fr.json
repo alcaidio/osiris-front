@@ -14,7 +14,7 @@
     "shortcuts": {
         "title": "Raccourcis",
         "edit": "Entrer en mode édition",
-        "add": "Ajouter le raccourci",
+        "add": "Ajouter un raccourci",
         "exit": "Quitter le mode édition",
         "cancel": "Quitter",
         "no.shortcuts": "Pas de raccourcis",
