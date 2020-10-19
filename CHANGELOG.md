@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://gitlab.immergis.fr/osiris/osiris-front/compare/v0.0.0...v0.1.0) (2020-10-19)
+
+
+### Features
+
+* **map:** auto generate 3d buildings layer when pitch is more than 20 ([57c95bd](https://gitlab.immergis.fr/osiris/osiris-front/commit/57c95bd6c0ffce213d72f4ee1e24f39989c7327f))
+* add coming soon page to feature in construction ([0dc1571](https://gitlab.immergis.fr/osiris/osiris-front/commit/0dc157174ab6b3c48520ad28176c587b9f58d9b7))
+
+
+### Bug Fixes
+
+* **section-info:** wait map is load to fitbound ([0dec922](https://gitlab.immergis.fr/osiris/osiris-front/commit/0dec922421e5882565780932b3626e584a25fe76))
+
 ## 0.0.0 (2020-10-09)
 
 
