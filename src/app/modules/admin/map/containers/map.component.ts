@@ -65,6 +65,7 @@ import { LoadLayers } from './../store/actions/layer.action'
               <mgl-control mglNavigation position="top-left"></mgl-control>
               <mgl-control mglScale position="bottom-left"></mgl-control>
               <mgl-control
+                id="search"
                 mglGeocoder
                 [proximity]="(activeMap$ | async)?.center"
                 [bbox]="(defaultOrSavedMap$ | async)?.bounds"

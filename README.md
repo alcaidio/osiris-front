@@ -38,7 +38,10 @@ $ npm start
 - [Mapbox](https://www.mapbox.com/) maps library. Use [Ngx-mapbox-gl](https://github.com/Wykks/ngx-mapbox-gl) for angular.
 - [Transloco](https://ngneat.github.io/transloco/) the internationalization (i18n) library for Angular.
 - [Jest](https://jestjs.io/) a delightful JavaScript Testing Framework with a focus on simplicity.
-- [Sentry](https://sentry.io/welcome/) monitoring platform helps every developer
+- [Cypress](https://www.cypress.io/) Fast, easy and reliable testing for anything that runs in a browser.
+- [Gitlab CI](https://sentry.io/welcome/) is a tool built into GitLab for software development through the continuous methodologies.
+- [Docker](https://www.docker.com/) create image for the last developement versioon and all release.
+- [Sentry](https://sentry.io/welcome/) monitoring platform helps every developer.
   diagnose, fix, and optimize the performance of their code.
 
 ## Convention
