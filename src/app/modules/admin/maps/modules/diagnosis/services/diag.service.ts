@@ -4,9 +4,9 @@ import { environment } from 'environments/environment'
 import { Layer } from 'mapbox-gl'
 import { Observable, of } from 'rxjs'
 import { catchError, mergeMap } from 'rxjs/operators'
-import { ID } from './../../../../shared/shared.model'
-import { BaseMap } from './../models/base-map.model'
-import { Section, SectionIdDTO } from './../models/section.model'
+import { ID } from '../../../../../../shared/shared.model'
+import { BaseMap } from '../models/base-map.model'
+import { Section, SectionIdDTO } from '../models/section.model'
 
 @Injectable({
   providedIn: 'root',

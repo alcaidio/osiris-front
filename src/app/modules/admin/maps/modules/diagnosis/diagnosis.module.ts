@@ -14,7 +14,7 @@ import { LayersComponent } from './containers/layers.component'
 import { MapDetailsComponent } from './containers/map-details.component'
 import { CustomMapComponent } from './containers/map.component'
 import { SectionInfosComponent } from './containers/section-infos.component'
-import { MapRoutingModule } from './map.routing'
+import { DiagnosisRoutingModule } from './diagnosis.routing'
 import { MapStates } from './store'
 
 @NgModule({
@@ -32,12 +32,12 @@ import { MapStates } from './store'
   ],
   imports: [
     SharedModule,
-    MapRoutingModule,
+    DiagnosisRoutingModule,
     NgxsModule.forFeature(MapStates),
     NgxMapboxGLModule.withConfig({
       accessToken: environment.mapbox.api.token,
     }),
   ],
-  providers: [MapService, { provide: TRANSLOCO_SCOPE, useValue: 'map' }],
+  providers: [MapService, { provide: TRANSLOCO_SCOPE, useValue: 'diagnosis' }],
 })
-export class MapModule {}
+export class DiagnosisModule {}

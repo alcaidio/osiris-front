@@ -7,10 +7,10 @@ import { Observable } from 'rxjs'
 import { Item } from '../components/button-fab-map.component'
 import { Layer } from '../models/layer.model'
 import { BaseMapState, GetSectionId, LayersState, LoadBaseMap, UIState } from '../store'
-import { mapStyle, mapTools } from './../../../../core/config/map.config'
-import { BaseMap } from './../models/base-map.model'
-import { GetActiveMap, MapIsLoaded, SaveActiveMap } from './../store/actions/base-map.action'
-import { LoadLayers } from './../store/actions/layer.action'
+import { mapStyle, mapTools } from '../../../../../../core/config/map.config'
+import { BaseMap } from '../models/base-map.model'
+import { GetActiveMap, MapIsLoaded, SaveActiveMap } from '../store/actions/base-map.action'
+import { LoadLayers } from '../store/actions/layer.action'
 
 @Component({
   selector: 'app-map',

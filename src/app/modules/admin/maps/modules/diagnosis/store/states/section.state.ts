@@ -13,8 +13,8 @@ import {
   GetSectionIdFailure,
   GetSectionIdSuccess
 } from '../actions/section.action'
-import { ID } from './../../../../../shared/shared.model'
-import { Section, SectionIdDTO } from './../../models/section.model'
+import { ID } from '../../../../../../../shared/shared.model'
+import { Section, SectionIdDTO } from '../../models/section.model'
 import { LayersState, LayersStateModel } from './layer.state'
 
 export interface SectionsStateModel {

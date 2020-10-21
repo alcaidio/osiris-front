@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core'
 import { Store } from '@ngxs/store'
 import { NotificationService } from 'app/shared/services/notification.service'
 import { ChangeMapStyle, ToggleBuildindsLayer } from '../store'
-import { TreoAnimations } from './../../../../../@treo/animations/public-api'
+import { TreoAnimations } from '../../../../../../../@treo/animations/public-api'
 
 export interface Item {
   id: string

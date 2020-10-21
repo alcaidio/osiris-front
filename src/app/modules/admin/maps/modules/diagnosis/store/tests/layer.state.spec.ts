@@ -3,8 +3,8 @@ import { NgxsModule, Store } from '@ngxs/store'
 import { MockProvider } from 'ngx-mock-provider'
 import { DiagService } from '../../services/diag.service'
 import { LoadLayers, LoadLayersFailure, LoadLayersSuccess, ToggleLayer } from '../actions/layer.action'
-import { generateMockLayer, Layer } from './../../models/layer.model'
-import { LayersState, layersStateDefaults } from './../states/layer.state'
+import { generateMockLayer, Layer } from '../../models/layer.model'
+import { LayersState, layersStateDefaults } from '../states/layer.state'
 
 describe('Layers State', () => {
   let store: Store

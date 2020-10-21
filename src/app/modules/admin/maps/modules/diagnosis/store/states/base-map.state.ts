@@ -12,10 +12,10 @@ import {
   SaveActiveMap,
   ToggleBuildindsLayer
 } from '../actions/base-map.action'
-import { NotificationService } from './../../../../../shared/services/notification.service'
-import { BaseMap } from './../../models/base-map.model'
-import { DiagService } from './../../services/diag.service'
-import { GetActiveMap } from './../actions/base-map.action'
+import { NotificationService } from '../../../../../../../shared/services/notification.service'
+import { BaseMap } from '../../models/base-map.model'
+import { DiagService } from '../../services/diag.service'
+import { GetActiveMap } from '../actions/base-map.action'
 
 export interface BaseMapStateModel {
   isRender: boolean

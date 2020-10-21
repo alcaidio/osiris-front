@@ -11,11 +11,11 @@ export const compactNavigation: TreoNavigationItem[] = [
         link: '/dashboard',
     },
     {
-        id: 'map',
-        title: 'Carte',
+        id: 'maps',
+        title: 'Cartes',
         type: 'basic',
         icon: 'mat_outline:map',
-        link: '/map',
+        link: '/maps',
     },
     {
         id: 'travaux',

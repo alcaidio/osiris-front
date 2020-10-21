@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core'
 import { Store } from '@ngxs/store'
-import { OpenDrawer } from './../store/actions/ui.action'
+import { OpenDrawer } from '../store/actions/ui.action'
 
 @Component({
   selector: 'app-buttons-menu',

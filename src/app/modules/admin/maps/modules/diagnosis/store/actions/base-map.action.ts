@@ -1,4 +1,4 @@
-import { BaseMap } from './../../models/base-map.model'
+import { BaseMap } from '../../models/base-map.model'
 
 export class MapIsLoaded {
   static readonly type = '[Base Map] Map render and load'

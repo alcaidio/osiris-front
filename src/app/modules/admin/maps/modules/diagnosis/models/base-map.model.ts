@@ -1,5 +1,5 @@
 import { LngLatBoundsLike, LngLatLike, Style } from 'mapbox-gl'
-import { CursorStyle } from './../../../../shared/models/ui.models'
+import { CursorStyle } from '../../../../../../shared/models/ui.models'
 
 export interface BaseMap {
   style: string | Style

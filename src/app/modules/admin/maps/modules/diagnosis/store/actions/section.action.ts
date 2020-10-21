@@ -1,5 +1,5 @@
-import { ID } from './../../../../../shared/shared.model'
-import { Section, SectionIdDTO } from './../../models/section.model'
+import { ID } from '../../../../../../../shared/shared.model'
+import { Section, SectionIdDTO } from '../../models/section.model'
 
 export class GetSectionId {
   static readonly type = '[Section] Get section id'

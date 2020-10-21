@@ -4,9 +4,9 @@ import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { Layer } from '../../models/layer.model'
 import { LoadLayers, LoadLayersFailure, LoadLayersSuccess, ToggleLayer } from '../actions/layer.action'
-import { ID } from './../../../../../shared/shared.model'
-import { Filter } from './../../models/layer.model'
-import { DiagService } from './../../services/diag.service'
+import { ID } from '../../../../../../../shared/shared.model'
+import { Filter } from '../../models/layer.model'
+import { DiagService } from '../../services/diag.service'
 
 export interface LayersStateModel {
   ids: ID[]
