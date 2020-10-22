@@ -18,6 +18,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { TranslocoModule } from '@ngneat/transloco'
+import { TreoCardModule } from '@treo/components/card'
 
 
 const MATERIAL = [
@@ -40,7 +41,7 @@ const MATERIAL = [
 ]
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, MATERIAL],
-  exports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, MATERIAL],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, MATERIAL],
+  exports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, MATERIAL],
 })
 export class SharedModule {}

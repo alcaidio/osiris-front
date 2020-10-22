@@ -9,7 +9,7 @@ import { OpenDrawer } from '../store/actions/ui.action'
   template: `
     <div class="absolute right-0 z-99" style="top: 250px">
       <div class="flex flex-col">
-        <button mat-raised-button color="warn" (click)="onClick()" routerLink="/map/layers" routerLinkActive="active" class="first">
+        <button mat-raised-button color="warn" (click)="onClick()" routerLink="/maps/diagnosis/layers" routerLinkActive="active" class="first">
           <mat-icon [svgIcon]="'feather:layers'" [matTooltipPosition]="'left'" matTooltip="Layers"></mat-icon>
         </button>
         <button mat-raised-button color="warn" (click)="onClick()" routerLinkActive="active" class="between">
