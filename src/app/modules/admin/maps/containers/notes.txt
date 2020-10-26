@@ -1,0 +1,112 @@
+Pour implementer le viewer voici du code utile pour le template 
+
+
+HTML
+
+    <!-- <div class="wrapper" *ngIf="imageFrontAndMapBack">
+      <div class="background">
+        <div id="in-back">
+          <app-map-image></app-map-image>
+        </div>
+      </div>
+      <div class="foreground">
+        <div id="in-front" class="relative">
+        <lib-ngx-image-zoom
+                  [thumbImage]="'assets/images/test.jpg'"
+                  [enableScrollZoom]="true"
+                  [zoomMode]="'hover'"
+              ></lib-ngx-image-zoom>
+          <div class="absolute right-0 bottom-0" (click)="onToggleTemplate()">
+            <div class="triangle relative"></div>
+            <span class="material-icons absolute right-0 bottom-0 p-1">
+              south_east
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper flex p-8" *ngIf="!imageFrontAndMapBack">
+      TODO
+    </div> -->
+
+
+SCSS
+
+
+app-image-map {
+  .wrapper {
+    height: 100%;
+    position: relative;
+  }
+
+  .background {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .foreground {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    margin: 25px;
+  }
+
+  #in-back {
+    width: 100%;
+    height: 100%;
+  }
+
+  #in-front {
+    width: 300px;
+    height: 250px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    border: 2px solid #bdc2d1;
+    overflow: hidden;
+    transition: all 200ms ease-out;
+    transition-delay: 200ms;
+    background-color: #e5e7ec;
+  }
+
+  .triangle {
+    width: 0;
+    height: 0;
+    border-bottom: 60px solid #88d7db;
+    border-left: 60px solid transparent;
+    z-index: 20;
+    opacity: 0.5;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+  }
+
+  .triangle:hover {
+    z-index: 20;
+    opacity: 0.6;
+  }
+
+  @include treo-breakpoint('xs') {
+    #in-front {
+      width: 300px !important;
+      height: 250px !important;
+      margin: 0 auto;
+    }
+  }
+
+  .card {
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 200ms ease-out;
+    background-color: #e5e7ec;
+  }
+
+  .left {
+    width: 400px;
+  }
+
+}

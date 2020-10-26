@@ -12,8 +12,8 @@ import { Section, SectionIdDTO } from '../models/section.model'
   providedIn: 'root',
 })
 export class DiagService {
-  api = environment.osiris.api
-  diagNum = 1
+  private api = environment.osiris.api
+  private diagNum = 1
 
   constructor(private http: HttpClient) {}
 

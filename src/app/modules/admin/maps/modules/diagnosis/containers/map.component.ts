@@ -59,6 +59,7 @@ import { LoadLayers } from '../store/actions/layer.action'
               (zoomEnd)="getActiveMap()"
               (pitchEnd)="getActiveMap()"
               [movingMethod]="'easeTo'"
+              [attributionControl]="false"
             >
               <!-- Controls -->
               <mgl-control mglFullscreen position="top-left"></mgl-control>

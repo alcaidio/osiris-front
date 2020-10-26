@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+import { ImageMapComponent } from './containers/image-map.component'
 import { MapsListComponent } from './containers/maps-list.component'
 
 
@@ -12,6 +13,10 @@ const routes: Routes = [
         path: 'diagnosis',
         loadChildren: () => import('./modules/diagnosis/diagnosis.module').then((m) => m.DiagnosisModule),
       }, 
+      {
+        path: 'image',
+        component: ImageMapComponent
+      },
       {
         path: '**', 
         pathMatch: 'full',

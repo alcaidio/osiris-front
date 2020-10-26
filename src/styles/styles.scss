@@ -4,3 +4,8 @@
 // @ Styles from this file will override anything from 'vendors.scss' file allowing customizations and
 //  modifications of third party libraries.
 // -----------------------------------------------------------------------------------------------------
+
+// remove mapbox logo in bottom left on mapbox map
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
