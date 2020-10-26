@@ -15,10 +15,10 @@ const routerConfig: ExtraOptions = {
 // tslint:disable:max-line-length
 export const routes: Route[] = [
   // Redirect empty path to '/map'
-  {path: '', pathMatch : 'full', redirectTo: 'map'},
+  {path: '', pathMatch : 'full', redirectTo: 'maps'},
 
   // Redirect signed in user to the '/map'
-  {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'map'},
+  {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'maps'},
 
   // Auth routes (guest)
   {
