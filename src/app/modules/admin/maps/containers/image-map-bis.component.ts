@@ -96,10 +96,10 @@ export class ImageMapBisComponent implements OnDestroy {
       this.point = picturePoint.geom
       this.pictures = picturePoint.pictures
       this.pictureLength = picturePoint.pictures.length
+      if (this.minimize && this.pictures) {
+        this.minimize = false
+      }
     })
-    if (this.minimize) {
-      this.minimize = false
-    }
   }
 
   get currentImagePath() {

@@ -12,7 +12,7 @@ export const mapCards: MapCard[] = [
         }, 
         {
                 id: TreoMockApiUtils.guid(), 
-                image: 'assets/images/pages/maps/map.png', 
+                image: 'assets/images/pages/maps/map2.png', 
                 title: 'Relevé Imajebox', 
                 subtitle: 'Saint-Denis (94)',
                 link: '/maps/image-bis'

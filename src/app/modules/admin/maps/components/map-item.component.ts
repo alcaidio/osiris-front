@@ -10,8 +10,8 @@ import { MapCard } from './../models/maps.model'
     <treo-card class="flex flex-col w-full" @fadeIn>
         <div class="overflow-hidden">
             <a [routerLink]="card.link">
-                <img *ngIf="card.image && !imageError" class="object-cover" [src]="card.image" class="zoom" (error)="onImageLoadError()">
-                <img *ngIf="!card.image || imageError" class="object-cover" src="assets/images/pages/maps/no-image.png">
+                <img *ngIf="card.image && !imageError" class="object-cover zoom h-48" [src]="card.image" (error)="onImageLoadError()">
+                <img *ngIf="!card.image || imageError" class="object-cover h-48" src="assets/images/pages/maps/no-image.png">
             </a>
         </div>
         <div class="m-6 z-0">
