@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <title>Immergis Road</title>
@@ -74,6 +74,11 @@
         animation: treo-bouncedelay 1s infinite ease-in-out both;
       }
 
+      body treo-splash-screen > img {
+        -webkit-animation: breathing 2s infinite ease-in-out both;
+        animation: breathing 2s infinite ease-in-out both;
+      }
+
       body treo-splash-screen .spinner .bounce1 {
         -webkit-animation-delay: -0.32s;
         animation-delay: -0.32s;
@@ -107,6 +112,20 @@
           transform: scale(1);
         }
       }
+
+      @keyframes breathing {
+      0%, 50%, 100% {
+        -webkit-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+      }
+
+      25%, 75% {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+      }
+    }
 
       body:not(.treo-splash-screen-hidden) {
         overflow: hidden;

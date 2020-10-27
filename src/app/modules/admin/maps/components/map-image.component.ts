@@ -22,6 +22,8 @@ import { Map, MapMouseEvent } from 'mapbox-gl'
       <mgl-marker *ngIf="point" [lngLat]="[point.coordinates[0], point.coordinates[1]]">
         <div><img src="assets/images/pages/maps/camera.svg"></div>
       </mgl-marker>
+      
+      <ng-content></ng-content>
 
     </mgl-map>
   `

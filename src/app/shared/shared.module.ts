@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatBadgeModule } from '@angular/material/badge'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
 import { MatCheckboxModule } from '@angular/material/checkbox'
@@ -19,6 +20,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { TranslocoModule } from '@ngneat/transloco'
 import { TreoCardModule } from '@treo/components/card'
+import { MouseWheelDirective } from './directives/mouse-wheel.directive'
+
 
 
 const MATERIAL = [
@@ -37,11 +40,13 @@ const MATERIAL = [
   MatExpansionModule,
   MatInputModule, 
   MatSlideToggleModule,
-  MatSelectModule
+  MatSelectModule, 
+  MatBadgeModule
 ]
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, MATERIAL],
-  exports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, MATERIAL],
+  exports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, MouseWheelDirective, MATERIAL],
+  declarations: [MouseWheelDirective],
 })
 export class SharedModule {}
