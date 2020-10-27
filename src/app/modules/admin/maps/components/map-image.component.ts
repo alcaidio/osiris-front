@@ -37,6 +37,9 @@ export class MapImageComponent implements OnChanges {
 
   onLoad(evt: Map) {
     this.mapInstance = evt
+    if (this.point) {
+      this.flyToPoint(this.point)
+    }
   }
 
   ngOnChanges(): void {
