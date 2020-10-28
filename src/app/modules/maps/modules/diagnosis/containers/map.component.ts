@@ -62,7 +62,6 @@ import { mapStyle, mapTools } from './../../../../../core/config/map.config'
               [attributionControl]="false"
             >
               <!-- Controls -->
-              <mgl-control mglFullscreen position="top-left"></mgl-control>
               <mgl-control mglNavigation position="top-left"></mgl-control>
               <mgl-control mglScale position="bottom-left"></mgl-control>
               <mgl-control

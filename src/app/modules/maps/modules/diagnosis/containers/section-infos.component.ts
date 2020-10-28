@@ -12,14 +12,14 @@ import { CustomMapComponent } from './map.component'
 @Component({
   selector: 'app-section-infos',
   template: `
-    <ng-container *transloco="let t">
-      <app-map-drawer [title]="t('map.info.title')" [icon]="'location_searching'" [tooltip]="t('map.info.tooltip')" (action)="goToSection()">
+    <ng-container *transloco="let t; read: 'diagnosis.info'">
+      <app-map-drawer [title]="t('title')" [icon]="'location_searching'" [tooltip]="t('tooltip')" (action)="goToSection()">
         <ng-container *ngIf="section; else noSection">
           <mat-list *ngIf="section.properties as property" class="px-5 py-2 ml-5 mt-4">
             <div mat-list-item class="mt-2">
-              <div class="mb-2 mt-3 text-lg font-medium" mat-line>{{ t('map.info.characteristics') }}</div>
+              <div class="mb-2 mt-3 text-lg font-medium" mat-line>{{ t('characteristics') }}</div>
               <div mat-line *ngIf="property.state">
-                {{ t('map.info.state') }}: {{ property.state | titlecase }}
+                {{ t('state') }}: {{ property.state | titlecase }}
                 <mat-icon
                   class="icon-size-12 text-gray cursor-pointer"
                   [svgIcon]="'dripicons:question'"
@@ -27,23 +27,23 @@ import { CustomMapComponent } from './map.component'
                   matTooltip="Good / Medium / Bad / Very bad"
                 ></mat-icon>
               </div>
-              <div mat-line *ngIf="property.length">{{ t('map.info.length') }}: {{ property.length + ' m' }}</div> 
-              <div mat-line *ngIf="property.width">{{ t('map.info.width') }}: {{ property.width + ' m' }}</div> 
+              <div mat-line *ngIf="property.length">{{ t('length') }}: {{ property.length + ' m' }}</div> 
+              <div mat-line *ngIf="property.width">{{ t('width') }}: {{ property.width + ' m' }}</div> 
             </div>
             <div mat-list-item class="mt-5">
-              <div class="mb-2 mt-2 text-lg font-medium" mat-line>{{ t('map.info.localisation') }}</div>
-              <div mat-line *ngIf="property.streetName">{{ t('map.info.street') }}: {{ property.streetName }}</div> 
-              <div mat-line *ngIf="property.neighborhood">{{ t('map.info.neighborhood') }}: {{ property.neighborhood }}</div> 
-              <div mat-line *ngIf="property.city">{{ t('map.info.city') }}:  {{ property.city }}</div> 
+              <div class="mb-2 mt-2 text-lg font-medium" mat-line>{{ t('localisation') }}</div>
+              <div mat-line *ngIf="property.streetName">{{ t('street') }}: {{ property.streetName }}</div> 
+              <div mat-line *ngIf="property.neighborhood">{{ t('neighborhood') }}: {{ property.neighborhood }}</div> 
+              <div mat-line *ngIf="property.city">{{ t('city') }}:  {{ property.city }}</div> 
             </div>
             <div *ngIf="property.optionalProperties.length > 0" mat-list-item class="mt-5">
-              <div class="mb-2 mt-3 text-lg font-medium" mat-line>{{ t('map.info.further') }}</div>
+              <div class="mb-2 mt-3 text-lg font-medium" mat-line>{{ t('further') }}</div>
               <div mat-line *ngFor="let item of property.optionalProperties">{{ item.key | titlecase }}: {{ item.value | titlecase }}</div> 
             </div>
           </mat-list>
         </ng-container>
         <ng-template #noSection>
-          <div class="px-4 py-3 mt-3" *ngIf="id$ | async as id">{{ t('map.info.no', { id: id }) }}</div>
+          <div class="px-4 py-3 mt-3" *ngIf="id$ | async as id">{{ t('no', { id: id }) }}</div>
         </ng-template>
       </app-map-drawer>
     </ng-container>
