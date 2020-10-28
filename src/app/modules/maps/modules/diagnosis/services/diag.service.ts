@@ -1,10 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { ID } from 'app/shared/shared.model'
 import { environment } from 'environments/environment'
 import { Layer } from 'mapbox-gl'
 import { Observable, of } from 'rxjs'
 import { catchError, mergeMap } from 'rxjs/operators'
-import { ID } from '../../../../../../shared/shared.model'
 import { BaseMap } from '../models/base-map.model'
 import { Section, SectionIdDTO } from '../models/section.model'
 

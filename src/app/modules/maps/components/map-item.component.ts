@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core'
-import { TreoAnimations } from './../../../../../@treo/animations/public-api'
+import { TreoAnimations } from 'app/../@treo/animations/public-api'
 import { MapCard } from './../models/maps.model'
 
 @Component({

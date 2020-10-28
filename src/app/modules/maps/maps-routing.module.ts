@@ -15,12 +15,12 @@ const routes: Routes = [
         loadChildren: () => import('./modules/diagnosis/diagnosis.module').then((m) => m.DiagnosisModule),
       }, 
       {
-        path: 'image',
-        component: ImageMapComponent
+        path: 'imajebox',
+        component: ImageMapBisComponent
       },
       {
-        path: 'image-bis',
-        component: ImageMapBisComponent
+        path: 'roadview',
+        component: ImageMapComponent
       },
       {
         path: '**', 

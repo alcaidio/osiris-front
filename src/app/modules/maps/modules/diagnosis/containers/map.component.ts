@@ -4,13 +4,13 @@ import { Select, Store } from '@ngxs/store'
 import { Map, MapMouseEvent } from 'mapbox-gl'
 import { MapComponent } from 'ngx-mapbox-gl'
 import { Observable } from 'rxjs'
-import { mapStyle, mapTools } from '../../../../../../core/config/map.config'
 import { Item } from '../components/button-fab-map.component'
 import { BaseMap } from '../models/base-map.model'
 import { Layer } from '../models/layer.model'
 import { BaseMapState, GetSectionId, LayersState, LoadBaseMap, UIState } from '../store'
 import { GetActiveMap, MapIsLoaded, SaveActiveMap } from '../store/actions/base-map.action'
 import { LoadLayers } from '../store/actions/layer.action'
+import { mapStyle, mapTools } from './../../../../../core/config/map.config'
 
 @Component({
   selector: 'app-map',

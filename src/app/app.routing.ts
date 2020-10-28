@@ -77,7 +77,7 @@ export const routes: Route[] = [
     children: [
       {
         path: 'maps',
-        loadChildren: () => import('./modules/admin/maps/maps.module').then((m) => m.MapsModule),
+        loadChildren: () => import('./modules/maps/maps.module').then((m) => m.MapsModule),
         data : { title : 'Maps' }
       },
       {

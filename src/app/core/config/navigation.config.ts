@@ -13,9 +13,31 @@ export const compactNavigation: TreoNavigationItem[] = [
     {
         id: 'maps',
         title: 'Cartes',
-        type: 'basic',
+        type: 'aside',
         icon: 'mat_outline:map',
-        link: '/maps',
+        children: [
+            {
+                id   : 'maps.diagnosis',
+                title: 'Diagnostic',
+                type : 'basic',
+                icon : 'mat_outline:assessment',
+                link : '/maps/diagnosis'
+            },
+            {
+                id   : 'maps.imajbox',
+                title: 'Imajebox',
+                type : 'basic',
+                icon : 'mat_outline:image',
+                link : '/maps/imajebox', 
+            },
+            {
+                id   : 'maps.imajebox',
+                title: 'Roadview',
+                type : 'basic',
+                icon : 'mat_outline:360',
+                link : '/maps/roadview',
+            }
+        ]
     },
     {
         id: 'travaux',

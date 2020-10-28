@@ -1,5 +1,5 @@
-import { TreoMockApiUtils } from './../../../../@treo/lib/mock-api/mock-api.utils'
-import { MapCard } from './../../../modules/admin/maps/models/maps.model'
+import { TreoMockApiUtils } from 'app/../@treo/lib/mock-api/mock-api.utils'
+import { MapCard } from 'app/modules/maps/models/maps.model'
 
 /* tslint:disable */
 export const mapCards: MapCard[] = [
@@ -15,13 +15,13 @@ export const mapCards: MapCard[] = [
                 image: 'assets/images/pages/maps/map2.png', 
                 title: 'Relevé Imajebox', 
                 subtitle: 'Saint-Denis (94)',
-                link: '/maps/image-bis'
+                link: '/maps/roadview'
         },
         {
                 id: TreoMockApiUtils.guid(), 
                 title: 'Example', 
                 subtitle: 'Example map for demo',
-                link: '/maps/image'
+                link: '/maps/imajbox'
         }, 
         {
                 id: TreoMockApiUtils.guid(), 

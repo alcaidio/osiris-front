@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { ID } from 'app/shared/shared.model'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
-import { Layer } from '../../models/layer.model'
-import { LoadLayers, LoadLayersFailure, LoadLayersSuccess, ToggleLayer } from '../actions/layer.action'
-import { ID } from '../../../../../../../shared/shared.model'
-import { Filter } from '../../models/layer.model'
+import { Filter, Layer } from '../../models/layer.model'
 import { DiagService } from '../../services/diag.service'
+import { LoadLayers, LoadLayersFailure, LoadLayersSuccess, ToggleLayer } from '../actions/layer.action'
 
 export interface LayersStateModel {
   ids: ID[]

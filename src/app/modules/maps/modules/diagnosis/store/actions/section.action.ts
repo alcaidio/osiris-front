@@ -1,4 +1,4 @@
-import { ID } from '../../../../../../../shared/shared.model'
+import { ID } from 'app/shared/shared.model'
 import { Section, SectionIdDTO } from '../../models/section.model'
 
 export class GetSectionId {

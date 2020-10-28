@@ -1,5 +1,5 @@
+import { ID } from 'app/shared/shared.model'
 import { LngLatBounds } from 'mapbox-gl'
-import { ID } from '../../../../../../shared/shared.model'
 
 const enum State {
   Good = 'GOOD',

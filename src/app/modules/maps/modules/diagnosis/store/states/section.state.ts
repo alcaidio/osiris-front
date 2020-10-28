@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core'
 import { Navigate } from '@ngxs/router-plugin'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
 import { NotificationService } from 'app/shared/services/notification.service'
+import { ID } from 'app/shared/shared.model'
 import { catchError, map } from 'rxjs/operators'
+import { Section, SectionIdDTO } from '../../models/section.model'
 import { DiagService } from '../../services/diag.service'
 import {
   DeselectSection,
@@ -13,8 +15,6 @@ import {
   GetSectionIdFailure,
   GetSectionIdSuccess
 } from '../actions/section.action'
-import { ID } from '../../../../../../../shared/shared.model'
-import { Section, SectionIdDTO } from '../../models/section.model'
 import { LayersState, LayersStateModel } from './layer.state'
 
 export interface SectionsStateModel {
@@ -91,7 +91,7 @@ export class SectionsState {
       loading: false,
     })
     if (featureId !== null) {
-      dispatch(new Navigate(['/map/section/', featureId]))
+      dispatch(new Navigate(['/maps/diagnosis/section/', featureId]))
     } else {
       this.notification.openSnackBar(`Aucune section trouvée dans un rayon de ${distance}m.`)
     }

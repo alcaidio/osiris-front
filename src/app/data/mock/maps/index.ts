@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
+import { TreoMockApi } from 'app/../@treo/lib/mock-api/mock-api.interfaces'
+import { TreoMockApiService } from 'app/../@treo/lib/mock-api/mock-api.service'
+import { MapCard } from 'app/modules/maps/models/maps.model'
 import { cloneDeep } from 'lodash-es'
-import { TreoMockApi } from './../../../../@treo/lib/mock-api/mock-api.interfaces'
-import { TreoMockApiService } from './../../../../@treo/lib/mock-api/mock-api.service'
-import { MapCard } from './../../../modules/admin/maps/models/maps.model'
 import { mapCards as mapCardsData } from './data'
 
 @Injectable({

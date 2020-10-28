@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { environment } from 'app/../environments/environment'
 import { Observable } from 'rxjs'
-import { environment } from './../../../../../environments/environment'
 import { PicturePoint } from './../models/maps.model'
 
 @Injectable({

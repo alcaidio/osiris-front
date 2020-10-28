@@ -1,5 +1,5 @@
+import { ID } from 'app/shared/shared.model'
 import { Layer as l } from 'mapbox-gl'
-import { ID } from '../../../../../../shared/shared.model'
 
 export interface Layer extends l {
   name?: string

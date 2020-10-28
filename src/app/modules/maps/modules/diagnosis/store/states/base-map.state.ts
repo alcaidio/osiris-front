@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { NotificationService } from 'app/shared/services/notification.service'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
+import { BaseMap } from '../../models/base-map.model'
+import { DiagService } from '../../services/diag.service'
 import {
-  ChangeMapStyle,
-  LoadBaseMap,
+  ChangeMapStyle, GetActiveMap, LoadBaseMap,
   LoadBaseMapFailure,
   LoadBaseMapSuccess,
   LoadSavedMap,
@@ -12,10 +14,6 @@ import {
   SaveActiveMap,
   ToggleBuildindsLayer
 } from '../actions/base-map.action'
-import { NotificationService } from '../../../../../../../shared/services/notification.service'
-import { BaseMap } from '../../models/base-map.model'
-import { DiagService } from '../../services/diag.service'
-import { GetActiveMap } from '../actions/base-map.action'
 
 export interface BaseMapStateModel {
   isRender: boolean
