@@ -95,7 +95,7 @@ export class ImageMapBisComponent implements OnDestroy {
     this.service.getImageByLngLat(position).subscribe((picturePoint: PicturePoint) => {
       this.point = picturePoint.geom
       this.pictures = picturePoint.pictures
-      this.pictureLength = picturePoint.pictures.length
+      this.pictureLength = picturePoint.pictures.length      
       if (this.minimize && this.pictures) {
         this.minimize = false
       }

@@ -1,4 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core'
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
+import { ConfirmDialogComponent } from 'app/shared/components/confirm-dialog/confirm-dialog.component'
 import { TreoAnimations } from './../../../../../@treo/animations/public-api'
 import { MapCard } from './../models/maps.model'
 
@@ -35,7 +37,7 @@ import { MapCard } from './../models/maps.model'
                     <mat-icon matPrefix [svgIcon]="'edit'" class="icon-size-18"></mat-icon> 
                     Edit
                 </button>
-                <button mat-menu-item (click)="true">
+                <button mat-menu-item (click)="deleteMapItem(card.title)">
                     <mat-icon matPrefix [svgIcon]="'delete'" class="icon-size-18"></mat-icon> 
                     Delete
                 </button>
@@ -55,7 +57,22 @@ import { MapCard } from './../models/maps.model'
 export class MapItemComponent {
     @Input() card: MapCard
     imageError = false 
+
+    constructor(private dialog: MatDialog) {}
+
     onImageLoadError() {
         this.imageError = true
+    }
+
+    deleteMapItem(name: string) {
+        const dialogConfig = new MatDialogConfig()
+        dialogConfig.disableClose = false
+        dialogConfig.autoFocus = false
+        dialogConfig.width = '400px'
+        dialogConfig.data = { name }
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, dialogConfig)
+        dialogRef.afterClosed().subscribe(
+            val => console.log('Dialog output:', val)
+        )
     }
 }
