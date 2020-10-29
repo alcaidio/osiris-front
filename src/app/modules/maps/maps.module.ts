@@ -6,15 +6,15 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl'
 import { environment } from './../../../environments/environment'
 import { MapImageComponent } from './components/map-image.component'
 import { MapItemComponent } from './components/map-item.component'
+import { ViewerTemplateComponent } from './components/viewer-template.component'
 import { ImageMapBisComponent } from './containers/image-map-bis.component'
 import { ImageMapComponent } from './containers/image-map.component'
 import { MapsListComponent } from './containers/maps-list.component'
 import { MapsRoutingModule } from './maps-routing.module'
 import { MapsComponent } from './maps.component'
 
-
 @NgModule({
-  declarations: [MapsListComponent, MapsComponent, MapItemComponent, ImageMapComponent, MapImageComponent, ImageMapBisComponent],
+  declarations: [MapsListComponent, MapsComponent, MapItemComponent, ImageMapComponent, MapImageComponent, ImageMapBisComponent, ViewerTemplateComponent],
   imports: [
     CommonModule,
     MapsRoutingModule, 
