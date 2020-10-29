@@ -18,8 +18,7 @@ export class MouseWheelDirective {
 
   mouseWheelFunc(event: any, maxScale: number, step: number) {
     const delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)))
-    // console.log(this.el.nativeElement)
-    // console.log(event)
+
     
     if (delta > 0) {
       if (this.scale < (maxScale + step)) {

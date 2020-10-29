@@ -8,11 +8,11 @@ import { PictureService } from '../services/picture.service'
   <app-viewer-template [minimize]="minimize">
     <!-- Background  -->
     <ng-container background>
-      <ng-container >
+      <ng-container *ngIf="!imageInBig">
         <app-map-image [point]="point" (position)="getNearestPoint($event)"></app-map-image>
       </ng-container>
-      <ng-container appMouseWheel *ngIf="imageInBig">
-        <img *ngIf="!imageError && pictures" class="object-cover object-bottom-bis h-full w-full" [src]="currentImagePath" (error)="onImageLoadError()">
+      <ng-container *ngIf="imageInBig">
+        <img appMouseWheel *ngIf="!imageError && pictures" class="object-cover object-bottom-bis h-full w-full" [src]="currentImagePath" (error)="onImageLoadError()">
         <img *ngIf="imageError" class="object-cover h-full w-full" src="assets/images/pages/maps/broken-image.png">
         <img *ngIf="!pictures && !imageError" class="object-cover h-full w-full" src="assets/images/pages/maps/image-unvailable.png">
       </ng-container>
