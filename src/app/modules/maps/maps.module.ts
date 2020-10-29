@@ -10,11 +10,12 @@ import { ImageMapBisComponent } from './containers/image-map-bis.component'
 import { ImageMapComponent } from './containers/image-map.component'
 import { MapsListComponent } from './containers/maps-list.component'
 import { MapsRoutingModule } from './maps-routing.module'
-import { MapsComponent } from './maps.component'
+import { MapsComponent } from './maps.component';
+import { ViewerTemplateComponent } from './components/viewer-template.component'
 
 
 @NgModule({
-  declarations: [MapsListComponent, MapsComponent, MapItemComponent, ImageMapComponent, MapImageComponent, ImageMapBisComponent],
+  declarations: [MapsListComponent, MapsComponent, MapItemComponent, ImageMapComponent, MapImageComponent, ImageMapBisComponent, ViewerTemplateComponent],
   imports: [
     CommonModule,
     MapsRoutingModule, 
