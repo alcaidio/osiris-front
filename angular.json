@@ -32,7 +32,9 @@
               "suggestions",
               "@mapbox/mapbox-gl-geocoder",
               "@mapbox/mapbox-sdk/services/geocoding",
-              "@mapbox/mapbox-sdk"
+              "@mapbox/mapbox-sdk", 
+              "marzipano", 
+              "hammerjs"
             ],
             "assets": ["src/favicon-16x16.png", "src/favicon-32x32.png", "src/assets"],
             "stylePreprocessorOptions": {
