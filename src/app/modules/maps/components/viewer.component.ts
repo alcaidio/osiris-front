@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core'
-import { MarzipanoService } from '../services/marzipano.service'
+import { convertDegreesToRadians, MarzipanoService } from '../services/marzipano.service'
 import { ViewParams } from './../services/marzipano.service'
 
 @Component({
@@ -26,6 +26,7 @@ import { ViewParams } from './../services/marzipano.service'
 export class ViewerComponent implements OnInit, OnChanges {
   @Input() image: string
   @Input() config: ViewParams
+
   viewer: any
 
   constructor(private marzipano: MarzipanoService) { }
@@ -40,6 +41,15 @@ export class ViewerComponent implements OnInit, OnChanges {
   }
 
   private loadScene(image: string) {
+    if (!this.config) {
+      this.config = { yaw: 0, pitch: 0, fov: convertDegreesToRadians(65) }
+    }
+    if (!this.image) {
+      this.image = 'http://192.168.0.147/pcrs/MdL/Photos_360/2019-12-31/stream_00007-000000_10851_0053305.jpg'
+    }
+    if (!this.viewer) {
+      return
+    }
     return this.marzipano.loadScene(
       this.viewer,
       image,

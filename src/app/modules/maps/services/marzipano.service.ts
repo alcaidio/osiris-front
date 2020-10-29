@@ -33,38 +33,35 @@ export interface ViewParams {
 })
 export class MarzipanoService {
   viewer: any
-  view: any
-  defaultViewerOptions = {
-    controls: {
-      mouseViewMode: 'drag', // drag|qtvr
-    },
-  }
-  defaultSceneLevels = [{ width: 1024 }, { width: 2048 }, { width: 4096 }]
-  limiter = RectilinearView.limit.vfov(
-    convertDegreesToRadians(10), // max zoom
-    convertDegreesToRadians(65) // min zoom
-  )
 
   constructor() {}
 
-  initialize(domElement: Element, options = this.defaultViewerOptions) {
-    return new Viewer(domElement, options)
+  initialize(domElement: Element) {
+    return new Viewer(domElement, {
+      controls: {
+        mouseViewMode: 'drag', // drag|qtvr
+      }
+    })
   }
 
   loadScene(viewer: Viewer, image: string, viewConfig: ViewParams) {
-    const geometry = new EquirectGeometry(this.defaultSceneLevels)
+    const geometry = new EquirectGeometry([{ width: 1024 }, { width: 2048 }, { width: 4096 }])
     const source = ImageUrlSource.fromString(image)
-    this.view = new RectilinearView(viewConfig, this.limiter)
+    const view = new RectilinearView(viewConfig, RectilinearView.limit.vfov(
+      convertDegreesToRadians(15), // max zoom
+      convertDegreesToRadians(65) // min zoom
+    ))
+    
     const scene = viewer.createScene({
       source,
       geometry,
-      view: this.view,
+      view,
     })
 
     // keep the config of the last view
-    this.view.setYaw(viewConfig.yaw)
-    this.view.setPitch(viewConfig.pitch)
-    this.view.setFov(viewConfig.fov)
+    view.setYaw(viewConfig.yaw)
+    view.setPitch(viewConfig.pitch)
+    view.setFov(viewConfig.fov)
 
     scene.switchTo({
       transitionDuration: 2500,

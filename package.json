@@ -46,6 +46,7 @@
         "@fullcalendar/moment": "4.4.2",
         "@fullcalendar/rrule": "4.4.2",
         "@fullcalendar/timegrid": "4.4.2",
+        "@mapbox/mapbox-gl-draw": "^1.2.0",
         "@ngneat/transloco": "^2.17.3",
         "@ngxs/devtools-plugin": "^3.6.2",
         "@ngxs/router-plugin": "^3.6.2",

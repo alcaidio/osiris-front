@@ -6,25 +6,13 @@ import { convertDegreesToRadians } from './../services/marzipano.service'
   template: `
   <app-viewer-template [minimize]="minimize">
     <!-- Background  -->
-    <ng-container background>
-      <ng-container *ngIf="!imageInBig">
+    <ng-container foreground>
         <app-map-image [point]="point" (position)="getNearestPoint($event)"></app-map-image>
-      </ng-container>
-      <ng-container *ngIf="imageInBig">
-        <!-- image -->
-        <app-viewer [image]='image' [config]="config"></app-viewer>
-      </ng-container>
     </ng-container>
 
     <!-- Foreground  -->
-    <ng-container foreground>
-      <ng-container *ngIf="imageInBig">
-        <app-map-image [point]="point" (position)="getNearestPoint($event)"></app-map-image>
-      </ng-container>
-      <ng-container *ngIf="!imageInBig">
-        <!-- image -->
+    <ng-container background>
         <app-viewer [image]='image' [config]="config"></app-viewer>
-      </ng-container>
     </ng-container>
 
     <!-- Fab  -->
@@ -35,7 +23,6 @@ import { convertDegreesToRadians } from './../services/marzipano.service'
 })
 export class ImagePanoramaComponent {
   minimize = false
-  imageInBig = true
   point: GeoJSON.Point
 
   // mock 
