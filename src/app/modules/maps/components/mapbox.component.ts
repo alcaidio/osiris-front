@@ -1,12 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, Output, ViewEncapsulation } from '@angular/core'
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core'
 import { Map, MapMouseEvent } from 'mapbox-gl'
 
 @Component({
-  selector: 'app-map-image',
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./styles/maps.component.scss'],
+  selector: 'app-mapbox',
   template: `
     <mgl-map
+      class="h-full w-full"
       [style]="'mapbox://styles/mapbox/streets-v9'"
       [zoom]="14"
       [center]="[2.3573340555402185, 48.932427625380875]"
@@ -20,20 +19,19 @@ import { Map, MapMouseEvent } from 'mapbox-gl'
 
       <!-- Markers  -->
       <mgl-marker *ngIf="point" [lngLat]="[point.coordinates[0], point.coordinates[1]]">
-        <div><img src="assets/images/pages/maps/camera.svg"></div>
+        <div><img src="assets/images/pages/maps/camera.svg" /></div>
       </mgl-marker>
-      
-      <ng-content></ng-content>
 
+      <ng-content></ng-content>
     </mgl-map>
-  `
+  `,
 })
-export class MapImageComponent implements OnChanges {
+export class MapboxComponent implements OnChanges {
   @Input() point: GeoJSON.Point
   @Output() position = new EventEmitter<GeoJSON.Position>()
   mapInstance: Map
 
-  constructor() { }
+  constructor() {}
 
   onLoad(evt: Map) {
     this.mapInstance = evt
@@ -58,5 +56,4 @@ export class MapImageComponent implements OnChanges {
       this.mapInstance.flyTo({ center: [point.coordinates[0], point.coordinates[1]] })
     }
   }
-
 }

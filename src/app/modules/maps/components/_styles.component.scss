@@ -1,23 +1,6 @@
 @import 'treo';
 
-app-map-image {
-  mgl-map {
-    height: 100%;
-    width: 100%;
-    // max-width: calc(100vw - 100px) !important;
-    // width: calc(100vw - 100px) !important;
-    // @include treo-breakpoint('xs') {
-    //   width: 100vw !important;
-    //   max-width: 100vw !important;
-    // }
-    // @include treo-breakpoint('sm') {
-    //   width: 100vw !important;
-    //   max-width: 100vw !important;
-    // }
-  }
-}
-
-app-viewer-template {
+app-template-one {
   body {
     overflow: hidden !important;
   }
@@ -105,6 +88,6 @@ app-viewer-template {
   $warn: map-get($theme, warn);
   $is-dark: map-get($theme, is-dark);
 
-  app-map-image {
+  app-template-one {
   }
 }
