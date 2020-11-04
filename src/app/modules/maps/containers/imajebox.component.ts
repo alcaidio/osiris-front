@@ -1,5 +1,7 @@
-import { Component, OnDestroy } from '@angular/core'
-import { Picture, PicturePoint } from '../models/maps.model'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Observable } from 'rxjs'
+import { shareReplay, take } from 'rxjs/operators'
+import { Baselayer, BaseMap, MapConfig, Overlay, Picture, PicturePoint } from '../models/maps.model'
 import { PictureService } from '../services/picture.service'
 
 @Component({
@@ -9,7 +11,13 @@ import { PictureService } from '../services/picture.service'
       <!-- Background  -->
       <ng-container background>
         <ng-container *ngIf="!imageInBig">
-          <app-mapbox [point]="point" (position)="getNearestPoint($event)"></app-mapbox>
+          <app-mapbox
+            [config]="mapConfig"
+            [baselayers]="baselayers"
+            [overlays]="overlays"
+            [point]="point"
+            (position)="getNearestPoint($event)"
+          ></app-mapbox>
         </ng-container>
         <ng-container *ngIf="imageInBig">
           <img
@@ -31,7 +39,13 @@ import { PictureService } from '../services/picture.service'
       <!-- Foreground  -->
       <ng-container foreground>
         <ng-container *ngIf="imageInBig">
-          <app-mapbox [point]="point" (position)="getNearestPoint($event)"></app-mapbox>
+          <app-mapbox
+            [config]="mapConfig"
+            [baselayers]="baselayers"
+            [overlays]="overlays"
+            [point]="point"
+            (position)="getNearestPoint($event)"
+          ></app-mapbox>
         </ng-container>
         <ng-container *ngIf="!imageInBig">
           <img
@@ -117,8 +131,13 @@ import { PictureService } from '../services/picture.service'
     </app-template-one>
   `,
 })
-export class ImajeboxComponent implements OnDestroy {
+export class ImajeboxComponent implements OnInit, OnDestroy {
+  baseMap$: Observable<BaseMap>
   pictures: Picture[]
+  baselayers: Baselayer[]
+  overlays: Overlay[]
+  mapConfig: MapConfig
+
   point: GeoJSON.Point
   pictureLength: number
   cameraTooltipMessage = 'Charger la vue arrière'
@@ -130,6 +149,25 @@ export class ImajeboxComponent implements OnDestroy {
   imageError = false
 
   constructor(private service: PictureService) {}
+
+  ngOnInit(): void {
+    this.baseMap$ = this.service.getBaseMap('pictures').pipe(take(1), shareReplay())
+
+    this.baseMap$.subscribe((basemap: BaseMap) => {
+      const { id, overlays, baselayers, ...config } = basemap
+      this.overlays = overlays
+      this.baselayers = baselayers
+      this.mapConfig = config as any
+    })
+  }
+
+  mapIsLoaded() {
+    this.baseMap$.subscribe((basemap: BaseMap) => {
+      const { overlays, baselayers } = basemap
+      this.overlays = overlays
+      this.baselayers = baselayers
+    })
+  }
 
   onToggleTemplate() {
     this.imageInBig = !this.imageInBig

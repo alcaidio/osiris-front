@@ -1,18 +1,26 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { environment } from 'app/../environments/environment'
 import { Observable } from 'rxjs'
-import { PicturePoint } from './../models/maps.model'
+import { BaseMap, PicturePoint } from './../models/maps.model'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PictureService {
   private api = environment.osiris.api
 
-  constructor(private http: HttpClient) { }
-  
+  constructor(private http: HttpClient) {}
+
   getImageByLngLat(point: GeoJSON.Position): Observable<PicturePoint> {
-    return this.http.get<PicturePoint>(`${this.api}/pictures/position/findNearestBySensorAndLngLat?lng=${point[0]}&lat=${point[1]}&sensorTypeName=ImajBox`)
+    return this.http.get<PicturePoint>(
+      `${this.api}/pictures/position/findNearestBySensorAndLngLat?lng=${point[0]}&lat=${point[1]}&sensorTypeName=ImajBox`
+    )
+  }
+
+  getBaseMap(name: 'pictures' | 'road_asset'): Observable<BaseMap> {
+    // TODO: change header
+    const requestOptions = { headers: new HttpHeaders().set('userId', '1') }
+    return this.http.get<BaseMap>(`${this.api}/carto/map/${name}`, requestOptions)
   }
 }
