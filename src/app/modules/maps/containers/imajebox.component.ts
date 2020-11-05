@@ -20,19 +20,12 @@ import { PictureService } from '../services/picture.service'
           ></app-mapbox>
         </ng-container>
         <ng-container *ngIf="imageInBig">
-          <img
-            appMouseWheel
-            *ngIf="!imageError && pictures"
-            class="object-cover object-bottom-bis h-full w-full"
-            [src]="currentImagePath"
-            (error)="onImageLoadError()"
-          />
-          <img *ngIf="imageError" class="object-cover h-full w-full" src="assets/images/pages/maps/broken-image.png" />
-          <img
-            *ngIf="!pictures && !imageError"
-            class="object-cover h-full w-full"
-            src="assets/images/pages/maps/image-unvailable.png"
-          />
+          <app-image
+            [pictures]="pictures"
+            [firstImage]="imageFront"
+            [zoom]="true"
+            (cameraTooltipMessage)="this.cameraTooltipMessage = $event"
+          ></app-image>
         </ng-container>
       </ng-container>
 
@@ -48,18 +41,11 @@ import { PictureService } from '../services/picture.service'
           ></app-mapbox>
         </ng-container>
         <ng-container *ngIf="!imageInBig">
-          <img
-            *ngIf="!imageError && pictures"
-            class="object-cover object-bottom-bis h-full w-full"
-            [src]="currentImagePath"
-            (error)="onImageLoadError()"
-          />
-          <img *ngIf="imageError" class="object-cover h-full w-full" src="assets/images/pages/maps/broken-image.png" />
-          <img
-            *ngIf="!pictures && !imageError"
-            class="object-cover h-full w-full"
-            src="assets/images/pages/maps/image-unvailable.png"
-          />
+          <app-image
+            [pictures]="pictures"
+            [firstImage]="imageFront"
+            (cameraTooltipMessage)="this.cameraTooltipMessage = $event"
+          ></app-image>
         </ng-container>
 
         <!-- Bottom right button -->
@@ -111,7 +97,7 @@ import { PictureService } from '../services/picture.service'
         >
           <mat-icon>camera_alt</mat-icon>
           <span
-            class=" absolute right-0 top-0 -mr-3 mt-2"
+            class="tip absolute right-0 top-0 -mr-3 mt-2"
             [matBadge]="pictureLength"
             matBadgePosition="after"
             matBadgeColor="primary"
@@ -130,6 +116,20 @@ import { PictureService } from '../services/picture.service'
       </ng-container>
     </app-template-one>
   `,
+  styles: [
+    `
+      .tip {
+        animation: beat 600ms infinite alternate;
+        transform-origin: center;
+      }
+
+      @keyframes beat {
+        to {
+          transform: scale(1.2);
+        }
+      }
+    `,
+  ],
 })
 export class ImajeboxComponent implements OnInit, OnDestroy {
   baseMap$: Observable<BaseMap>
@@ -137,21 +137,19 @@ export class ImajeboxComponent implements OnInit, OnDestroy {
   baselayers: Baselayer[]
   overlays: Overlay[]
   mapConfig: MapConfig
-
+  cameraTooltipMessage: string
   point: GeoJSON.Point
   pictureLength: number
-  cameraTooltipMessage = 'Charger la vue arrière'
 
   // UI
+  imageFront = true
   imageInBig = false
   minimize = true
-  imageFront = true
-  imageError = false
 
   constructor(private service: PictureService) {}
 
   ngOnInit(): void {
-    this.baseMap$ = this.service.getBaseMap('pictures').pipe(take(1), shareReplay())
+    this.baseMap$ = this.service.getBaseMap().pipe(take(1), shareReplay())
 
     this.baseMap$.subscribe((basemap: BaseMap) => {
       const { id, overlays, baselayers, ...config } = basemap
@@ -174,12 +172,7 @@ export class ImajeboxComponent implements OnInit, OnDestroy {
   }
 
   onToggleImageToDisplay() {
-    this.imageError = false
     this.imageFront = !this.imageFront
-  }
-
-  onImageLoadError() {
-    this.imageError = true
   }
 
   onToggleMinimize() {
@@ -187,25 +180,15 @@ export class ImajeboxComponent implements OnInit, OnDestroy {
   }
 
   getNearestPoint(position: GeoJSON.Position) {
-    this.imageError = false
     this.service.getImageByLngLat(position).subscribe((picturePoint: PicturePoint) => {
       this.point = picturePoint.geom
       this.pictures = picturePoint.pictures
       this.pictureLength = picturePoint.pictures.length
-      if (this.minimize && this.pictures) {
-        this.minimize = false
-      }
+      // re open the small container when a new point is loaded
+      // if (this.minimize && this.pictures) {
+      //   this.minimize = false
+      // }
     })
-  }
-
-  get currentImagePath() {
-    if (this.imageFront) {
-      this.cameraTooltipMessage = 'Charger la vue arrière'
-      return this.pictures[0].path
-    } else {
-      this.cameraTooltipMessage = 'Charger la vue avant'
-      return this.pictures[1].path
-    }
   }
 
   ngOnDestroy(): void {

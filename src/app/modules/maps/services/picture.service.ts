@@ -18,9 +18,9 @@ export class PictureService {
     )
   }
 
-  getBaseMap(name: 'pictures' | 'road_asset'): Observable<BaseMap> {
+  getBaseMap(): Observable<BaseMap> {
     // TODO: change header
     const requestOptions = { headers: new HttpHeaders().set('userId', '1') }
-    return this.http.get<BaseMap>(`${this.api}/carto/map/${name}`, requestOptions)
+    return this.http.get<BaseMap>(`${this.api}/carto/map/pictures`, requestOptions)
   }
 }
