@@ -26,20 +26,13 @@ import { SharedModule } from './shared/shared.module'
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    SharedModule,
     AppRoutingModule,
-    // Treo & Treo Mock API
     TreoModule,
     TreoConfigModule.forRoot(appConfig),
     TreoMockApiModule.forRoot(mockDataServices),
-
-    // Core
-    CoreModule,
-
-    // Layout
     LayoutModule,
-
-    // 3rd party modules
+    CoreModule,
+    SharedModule,
     MarkdownModule.forRoot({}),
   ],
   providers: [

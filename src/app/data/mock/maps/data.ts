@@ -1,5 +1,5 @@
 import { TreoMockApiUtils } from 'app/../@treo/lib/mock-api/mock-api.utils'
-import { MapCard } from 'app/modules/maps/models/maps.model'
+import { MapCard } from 'app/shared/models/maps.model'
 
 /* tslint:disable */
 export const mapCards: MapCard[] = [

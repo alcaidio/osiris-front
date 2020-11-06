@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { TreoAnimations } from 'app/../@treo/animations/public-api'
-import { MapCard } from './../models/maps.model'
+import { MapCard } from '../../../shared/models/maps.model'
 
 @Component({
   selector: 'app-map-item',

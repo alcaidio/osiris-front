@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
-import { MapCard } from './../models/maps.model'
+import { MapCard } from '../../../shared/models/maps.model'
 import { MapListService } from './../services/map-list.service'
 
 @Component({

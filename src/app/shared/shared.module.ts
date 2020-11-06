@@ -20,9 +20,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { TranslocoModule } from '@ngneat/transloco'
 import { TreoCardModule } from '@treo/components/card'
+import { TemplateOneComponent } from './components/template-one.component'
 import { MouseWheelDirective } from './directives/mouse-wheel.directive'
-
-
 
 const MATERIAL = [
   MatIconModule,
@@ -34,19 +33,28 @@ const MATERIAL = [
   MatCheckboxModule,
   MatListModule,
   MatSnackBarModule,
-  MatCardModule, 
+  MatCardModule,
   MatProgressSpinnerModule,
   MatFormFieldModule,
   MatExpansionModule,
-  MatInputModule, 
+  MatInputModule,
   MatSlideToggleModule,
-  MatSelectModule, 
-  MatBadgeModule
+  MatSelectModule,
+  MatBadgeModule,
 ]
 
 @NgModule({
+  declarations: [MouseWheelDirective, TemplateOneComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, MATERIAL],
-  exports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, MouseWheelDirective, MATERIAL],
-  declarations: [MouseWheelDirective],
+  exports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TemplateOneComponent,
+    TranslocoModule,
+    TreoCardModule,
+    MouseWheelDirective,
+    MATERIAL,
+  ],
 })
 export class SharedModule {}
