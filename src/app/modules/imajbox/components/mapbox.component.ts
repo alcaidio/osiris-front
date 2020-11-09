@@ -88,7 +88,7 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
               <img
                 class="cursor-pointer"
                 src="assets/images/pages/maps/camera.svg"
-                [style.transform]="'rotate(' + -direction + 'deg)'"
+                [style.transform]="'rotate(' + cameraRotation + 'deg)'"
                 (click)="flyToPoint(this.point, 17)"
               />
             </div>
@@ -159,13 +159,17 @@ export class MapboxComponent implements OnInit, OnChanges {
     }
   }
 
+  get cameraRotation() {
+    return (this.config.bearing + this.direction) * -1
+  }
+
   get baseMapConfig(): Partial<MapConfig> {
     const { lng, lat } = this.mapInstance.getCenter()
     return {
       center: [lng, lat],
       zoom: this.mapInstance.getZoom(),
       pitch: this.mapInstance.getPitch(),
-      // bearing: this.mapInstance.getBearing(),
+      bearing: this.mapInstance.getBearing(),
       bounds: this.mapInstance.getBounds(),
     }
   }
