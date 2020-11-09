@@ -1,5 +1,5 @@
-import { CursorStyle } from 'app/shared/models/ui.model'
 import { ID } from 'app/shared/models/shared.model'
+import { CursorStyle } from 'app/shared/models/ui.model'
 import { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
 
 export interface MapCard {
@@ -14,19 +14,36 @@ export interface PicturePoint {
   id: number
   geom: GeoJSON.Point
   pictures: Picture[]
+  timestamp: number
+  neighbours: {
+    previous: number
+    next: number
+    previous_far: number
+    next_far: number
+  }
 }
+
+export type CameraPositionType =
+  | 'front'
+  | 'back'
+  | 'right'
+  | 'left'
+  | 'front-right'
+  | 'front-left'
+  | 'back-right'
+  | 'back-left'
 
 export interface Picture {
   name: string
   path: string
-  camera: 'front' | 'back'
+  camera: CameraPositionType
   direction: number | null
 }
 
 export interface MapConfig {
-  style: string
-  maxBounds: LngLatBoundsLike
-  bounds: LngLatBoundsLike
+  style?: string
+  maxBounds?: LngLatBoundsLike
+  bounds?: LngLatBoundsLike
   minZoom?: number
   maxZoom?: number
   pitch?: number

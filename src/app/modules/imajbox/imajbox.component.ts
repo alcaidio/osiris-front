@@ -1,28 +1,43 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Select, Store } from '@ngxs/store'
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
-import { shareReplay, take } from 'rxjs/operators'
-import { Baselayer, BaseMap, MapConfig, Overlay, Picture, PicturePoint } from '../../shared/models'
-import { PictureService } from './services/picture.service'
+import { take } from 'rxjs/operators'
+import { BaseMap, MapConfig, Picture, PicturePoint } from '../../shared/models'
+import {
+  BaseMapState,
+  ChangeCameraPosition,
+  LoadBaseMap,
+  LoadPicturesPoint,
+  PicturesState,
+  SetMapConfig,
+  ToggleForeground,
+  ToggleMinimize,
+  UiState,
+} from './store'
 
+AutoUnsubscribe()
 @Component({
   selector: 'app-imajbox',
   template: `
-    <app-template-one [minimize]="minimize">
+    <app-template-one [minimize]="minimize$ | async">
       <!-- Background  -->
       <ng-container background>
-        <ng-container *ngIf="!imageInBig">
+        <ng-container *ngIf="!(imageInBig$ | async)">
           <app-mapbox
-            [config]="mapConfig"
-            [baselayers]="baselayers"
-            [overlays]="overlays"
-            [point]="point"
+            *ngIf="baseMap$ | async as map"
+            [baselayers]="map.baselayers"
+            [config]="map.config"
+            [overlays]="map.overlays"
+            [point]="(picturesPoint$ | async)?.geom"
             (position)="getNearestPoint($event)"
+            (mapConfig)="setMapConfig($event)"
+            [direction]="(selectedPicture$ | async)?.direction"
           ></app-mapbox>
         </ng-container>
-        <ng-container *ngIf="imageInBig">
+        <ng-container *ngIf="imageInBig$ | async">
           <app-flat-image
-            [pictures]="pictures"
-            [firstImage]="imageFront"
+            [picture]="selectedPicture$ | async"
             [zoom]="true"
             (cameraTooltipMessage)="this.cameraTooltipMessage = $event"
           ></app-flat-image>
@@ -31,19 +46,21 @@ import { PictureService } from './services/picture.service'
 
       <!-- Foreground  -->
       <ng-container foreground>
-        <ng-container *ngIf="imageInBig">
+        <ng-container *ngIf="imageInBig$ | async">
           <app-mapbox
-            [config]="mapConfig"
-            [baselayers]="baselayers"
-            [overlays]="overlays"
-            [point]="point"
+            *ngIf="baseMap$ | async as map"
+            [baselayers]="map.baselayers"
+            [config]="map.config"
+            [overlays]="map.overlays"
+            [point]="(picturesPoint$ | async)?.geom"
             (position)="getNearestPoint($event)"
+            (mapConfig)="setMapConfig($event)"
+            [direction]="(selectedPicture$ | async).direction"
           ></app-mapbox>
         </ng-container>
-        <ng-container *ngIf="!imageInBig">
+        <ng-container *ngIf="!(imageInBig$ | async)">
           <app-flat-image
-            [pictures]="pictures"
-            [firstImage]="imageFront"
+            [picture]="selectedPicture$ | async"
             (cameraTooltipMessage)="this.cameraTooltipMessage = $event"
           ></app-flat-image>
         </ng-container>
@@ -51,7 +68,7 @@ import { PictureService } from './services/picture.service'
         <!-- Bottom right button -->
         <div
           class="absolute right-0 bottom-0"
-          (click)="onToggleTemplate()"
+          (click)="onToggleForeground()"
           [matTooltip]="'Etendre'"
           matTooltipPosition="below"
         >
@@ -75,7 +92,7 @@ import { PictureService } from './services/picture.service'
           <button
             mat-icon-button
             color="primary"
-            (click)="onToggleImageToDisplay()"
+            (click)="onChangeCameraPosition()"
             [matTooltip]="cameraTooltipMessage"
             matTooltipPosition="after"
           >
@@ -87,7 +104,7 @@ import { PictureService } from './services/picture.service'
       <!-- Fab  -->
       <ng-container fab>
         <button
-          *ngIf="!imageInBig"
+          *ngIf="!(imageInBig$ | async)"
           mat-fab
           color="accent"
           (click)="onToggleMinimize()"
@@ -98,13 +115,13 @@ import { PictureService } from './services/picture.service'
           <mat-icon>camera_alt</mat-icon>
           <span
             class="tip absolute right-0 top-0 -mr-3 mt-2"
-            [matBadge]="pictureLength"
+            [matBadge]="(picturesPoint$ | async)?.pictures.length"
             matBadgePosition="after"
             matBadgeColor="primary"
           ></span>
         </button>
         <button
-          *ngIf="imageInBig"
+          *ngIf="imageInBig$ | async"
           mat-fab
           color="accent"
           (click)="onToggleMinimize()"
@@ -132,63 +149,48 @@ import { PictureService } from './services/picture.service'
   ],
 })
 export class ImajboxComponent implements OnInit, OnDestroy {
-  baseMap$: Observable<BaseMap>
-  pictures: Picture[]
-  baselayers: Baselayer[]
-  overlays: Overlay[]
-  mapConfig: MapConfig
+  @Select(BaseMapState.getMap) baseMap$: Observable<BaseMap>
+  // TODO : template load bones
+  // @Select(BaseMapState.getLoading) isLoading$: Observable<boolean>
+  @Select(UiState.getImageInBig) imageInBig$: Observable<boolean>
+  @Select(UiState.getMinimize) minimize$: Observable<boolean>
+  @Select(PicturesState.getSelectedPicturesPoint) picturesPoint$: Observable<PicturePoint>
+  @Select(PicturesState.getSelectedPicture) selectedPicture$: Observable<Picture>
+
   cameraTooltipMessage: string
-  point: GeoJSON.Point
-  pictureLength: number
-
-  // UI
   imageFront = true
-  imageInBig = false
-  minimize = true
 
-  constructor(private service: PictureService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.baseMap$ = this.service.getBaseMap().pipe(take(1), shareReplay())
+    this.store.dispatch(new LoadBaseMap())
+  }
 
-    this.baseMap$.subscribe((basemap: BaseMap) => {
-      const { id, overlays, baselayers, ...config } = basemap
-      this.overlays = overlays
-      this.baselayers = baselayers
-      this.mapConfig = config as any
+  onToggleForeground(): void {
+    this.store.dispatch(new ToggleForeground())
+  }
+
+  onToggleMinimize(): void {
+    this.store.dispatch(new ToggleMinimize())
+  }
+
+  onChangeCameraPosition(): void {
+    // TODO: plus tard mettre ceci dans le store
+    this.selectedPicture$.pipe(take(1)).subscribe((selected: Picture) => {
+      if (selected.camera === 'front') {
+        this.store.dispatch(new ChangeCameraPosition('back'))
+      } else {
+        this.store.dispatch(new ChangeCameraPosition('front'))
+      }
     })
-  }
-
-  mapIsLoaded() {
-    this.baseMap$.subscribe((basemap: BaseMap) => {
-      const { overlays, baselayers } = basemap
-      this.overlays = overlays
-      this.baselayers = baselayers
-    })
-  }
-
-  onToggleTemplate() {
-    this.imageInBig = !this.imageInBig
-  }
-
-  onToggleImageToDisplay() {
-    this.imageFront = !this.imageFront
-  }
-
-  onToggleMinimize() {
-    this.minimize = !this.minimize
   }
 
   getNearestPoint(position: GeoJSON.Position) {
-    this.service.getImageByLngLat(position).subscribe((picturePoint: PicturePoint) => {
-      this.point = picturePoint.geom
-      this.pictures = picturePoint.pictures
-      this.pictureLength = picturePoint.pictures.length
-      // re open the small container when a new point is loaded
-      // if (this.minimize && this.pictures) {
-      //   this.minimize = false
-      // }
-    })
+    this.store.dispatch(new LoadPicturesPoint(position))
+  }
+
+  setMapConfig(evt: Partial<MapConfig>) {
+    this.store.dispatch(new SetMapConfig(evt))
   }
 
   ngOnDestroy(): void {
