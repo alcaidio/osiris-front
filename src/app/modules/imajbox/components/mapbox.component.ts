@@ -38,6 +38,16 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
     >
       <ng-container *ngIf="isLoaded">
         <!-- Controls -->
+        <mgl-control mglScale position="bottom-left"></mgl-control>
+        <mgl-control *ngIf="mapInBig" mglNavigation position="top-right"></mgl-control>
+        <mgl-control
+          *ngIf="mapInBig"
+          mglGeocoder
+          [proximity]="config.center"
+          [bbox]="[config.bounds[0], config.bounds[1], config.bounds[2], config.bounds[3]]"
+          placeholder="Recherche"
+          position="bottom-right"
+        ></mgl-control>
 
         <!-- Layers  -->
         <app-buildings-layer [visible]="baseMapConfig.pitch > 30"></app-buildings-layer>
@@ -110,6 +120,7 @@ export class MapboxComponent implements OnInit, OnChanges {
   @Input() overlays: Overlay[]
   @Input() point: GeoJSON.Point
   @Input() direction: number
+  @Input() mapInBig: boolean
   @Output() position = new EventEmitter<GeoJSON.Position>()
   @Output() mapConfig = new EventEmitter<Partial<MapConfig>>()
   cursorStyle: string

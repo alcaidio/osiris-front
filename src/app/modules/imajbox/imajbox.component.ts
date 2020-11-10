@@ -33,6 +33,7 @@ AutoUnsubscribe()
             (position)="getNearestPoint($event)"
             (mapConfig)="setMapConfig($event)"
             [direction]="(selectedPicture$ | async)?.direction"
+            [mapInBig]="!(imageInBig$ | async)"
           ></app-mapbox>
         </ng-container>
         <ng-container *ngIf="imageInBig$ | async">
@@ -56,6 +57,7 @@ AutoUnsubscribe()
             (position)="getNearestPoint($event)"
             (mapConfig)="setMapConfig($event)"
             [direction]="(selectedPicture$ | async)?.direction"
+            [mapInBig]="!(imageInBig$ | async)"
           ></app-mapbox>
         </ng-container>
         <ng-container *ngIf="!(imageInBig$ | async)">
