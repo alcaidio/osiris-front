@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core'
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
 import { Map, MapMouseEvent, Visibility } from 'mapbox-gl'
 import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model'
 import { Section } from './../models/section.model'
@@ -41,6 +41,8 @@ import { MapboxService } from './../services/mapbox.service'
         ></mgl-control>
 
         <!-- Layers  -->
+        <app-buildings-layer [visible]="baseMapConfig.pitch > 30"></app-buildings-layer>
+
         <ng-container *ngIf="overlays">
           <ng-container *ngFor="let layer of overlays">
             <ng-container *ngIf="layer.type === 'raster'">
@@ -64,7 +66,7 @@ import { MapboxService } from './../services/mapbox.service'
     </mgl-map>
   `,
 })
-export class MapboxComponent implements OnChanges, OnDestroy {
+export class MapboxComponent implements OnChanges {
   @Input() config: MapConfig
   @Input() baselayers: Baselayer[]
   @Input() overlays: Overlay[]
@@ -168,13 +170,11 @@ export class MapboxComponent implements OnChanges, OnDestroy {
   }
 
   private removeSourceAndLayer(id: string, map: Map): void {
-    if (map.getLayer(id) && map.getSource(id)) {
+    if (map.getLayer(id)) {
       map.removeLayer(id)
+    }
+    if (map.getSource(id)) {
       map.removeSource(id)
     }
-  }
-
-  ngOnDestroy(): void {
-    this.removeSourceAndLayer('selectedSection', this.mapInstance)
   }
 }

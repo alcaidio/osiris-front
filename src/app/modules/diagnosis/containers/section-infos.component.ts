@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
 import { TreoMediaWatcherService } from '@treo/services/media-watcher'
@@ -55,7 +55,7 @@ import { SectionState } from './../store/section/section.state'
     </app-drawer-sidenav>
   `,
 })
-export class SectionInfosComponent implements OnInit {
+export class SectionInfosComponent implements OnInit, OnDestroy {
   @Select(UIState.getDrawerOpened) isOpen$: Observable<boolean>
   @Select(SectionState.getSelectedSection) selectedSection$: Observable<Section>
   isScreenSmall: boolean
@@ -64,13 +64,9 @@ export class SectionInfosComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new ChangeDrawerMode('side'))
-    const isOpened = this.store.selectSnapshot<boolean>((state) => {
-      return state.diagnosis.diagnosisUi.drawer.opened
-    })
-
-    if (isOpened) {
-      this.store.dispatch(new CloseDrawer())
-    }
+    // const isOpened = this.store.selectSnapshot<boolean>((state) => {
+    //   return state.diagnosis.diagnosisUi.drawer.opened
+    // })
 
     this.media.onMediaChange$.subscribe(({ matchingAliases }) => {
       this.isScreenSmall = matchingAliases.includes('xs')
@@ -83,5 +79,9 @@ export class SectionInfosComponent implements OnInit {
 
   public onClose(): Promise<boolean> {
     return this.store.dispatch(new CloseDrawer()).toPromise()
+  }
+
+  ngOnDestroy(): void {
+    this.onClose()
   }
 }

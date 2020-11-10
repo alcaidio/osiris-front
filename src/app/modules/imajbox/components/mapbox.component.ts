@@ -40,6 +40,8 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
         <!-- Controls -->
 
         <!-- Layers  -->
+        <app-buildings-layer [visible]="baseMapConfig.pitch > 30"></app-buildings-layer>
+
         <ng-container *ngIf="overlays">
           <ng-container *ngFor="let layer of overlays">
             <ng-container *ngIf="layer.type === 'raster'">
@@ -98,6 +100,7 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
         </mgl-popup> -->
         </ng-container>
       </ng-container>
+      <!-- end of is loaded -->
     </mgl-map>
   `,
 })
