@@ -30,13 +30,13 @@ export const compactNavigation: TreoNavigationItem[] = [
         icon: 'mat_outline:image',
         link: '/imajbox/',
       },
-      {
-        id: 'roadview',
-        title: 'Roadview',
-        type: 'basic',
-        icon: 'mat_outline:360',
-        link: '/roadview/',
-      },
+      // {
+      //   id: 'roadview',
+      //   title: 'Roadview',
+      //   type: 'basic',
+      //   icon: 'mat_outline:360',
+      //   link: '/roadview/',
+      // },
     ],
   },
   {

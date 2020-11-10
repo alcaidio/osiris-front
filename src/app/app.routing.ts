@@ -91,10 +91,10 @@ export const routes: Route[] = [
         path: 'diagnosis',
         loadChildren: () => import('./modules/diagnosis/diagnosis.module').then((m) => m.DiagnosisModule),
       },
-      {
-        path: 'roadview',
-        loadChildren: () => import('./modules/roadview/roadview.module').then((m) => m.RoadviewModule),
-      },
+      // {
+      //   path: 'roadview',
+      //   loadChildren: () => import('./modules/roadview/roadview.module').then((m) => m.RoadviewModule),
+      // },
       {
         path: 'maps',
         loadChildren: () => import('./modules/maps/maps.module').then((m) => m.MapsModule),

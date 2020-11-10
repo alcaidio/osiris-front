@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://gitlab.immergis.fr/osiris/osiris-front/compare/v0.1.0...v0.2.0) (2020-11-10)
+
+
+### Features
+
+* **imajbox:** add basemap, pictures and ui states ([b608c2b](https://gitlab.immergis.fr/osiris/osiris-front/commit/b608c2b8cb5ac1e3dacfe4bd6fee285a9b81c618))
+* **imajbox:** add controls on map ([396b723](https://gitlab.immergis.fr/osiris/osiris-front/commit/396b723a4b1dd532e1c07c7ab306d2f1d3d5ce32))
+* **maps:** add images map template to visualize imajebox ([867ae0b](https://gitlab.immergis.fr/osiris/osiris-front/commit/867ae0bda82b86ea9bd2cf8adb83bc8ec02c25c7))
+* **maps:** add imajebox overlays ([35f9c19](https://gitlab.immergis.fr/osiris/osiris-front/commit/35f9c19ad722e4de1bf1532c9963710c3bffebd5))
+* **maps:** add maps list page ([abad74d](https://gitlab.immergis.fr/osiris/osiris-front/commit/abad74d479f9f3fa0e9012815b1569b27252021a))
+* **maps:** add new imajbox template ([1e18ac4](https://gitlab.immergis.fr/osiris/osiris-front/commit/1e18ac4757a2764aa0361d89bf2cb2f19bd779f1))
+* **roadview:** add marzipano to visualize image 360 ([b58a183](https://gitlab.immergis.fr/osiris/osiris-front/commit/b58a1832ad74dcf170216e38318db18da6a5fcbc))
+
+
+### Bug Fixes
+
+* **app:** auto routing to maps ([e41cf60](https://gitlab.immergis.fr/osiris/osiris-front/commit/e41cf6008a267d05c8f9b8755452d5b70c388ccc))
+* **image:** template load image in big ([1b1c40f](https://gitlab.immergis.fr/osiris/osiris-front/commit/1b1c40f07bd2843a77a42d72638307aeb6907999))
+* **imajbox:** rotate camera icon after map bearing change ([2d71cda](https://gitlab.immergis.fr/osiris/osiris-front/commit/2d71cda04c6ff2988c7a13e3bfd97d08cd1c7914))
+* **map:** fix some bug and add 3d layer ([5155329](https://gitlab.immergis.fr/osiris/osiris-front/commit/51553292880dd11558668a23e7d534edcd8e79bd))
+* **map-list:** image in responsive and cover the parent fixed div ([aeb3926](https://gitlab.immergis.fr/osiris/osiris-front/commit/aeb39268faded357a005b89a3255e50db056942a))
+* **viewer:** cancel error because viewer undefined ([32b0538](https://gitlab.immergis.fr/osiris/osiris-front/commit/32b0538221d96d8d82a50514024924e19a2dc466))
+* i18n translate after refacto ([5e8da51](https://gitlab.immergis.fr/osiris/osiris-front/commit/5e8da51bc0418f80407bda14108a12dc8f76ec15))
+* **map-image:** fly to selected picture point when map reload ([e9baaec](https://gitlab.immergis.fr/osiris/osiris-front/commit/e9baaec3e8d35a5256acc0f6b3b797b8e93bce81))
+
 ## [0.1.0](https://gitlab.immergis.fr/osiris/osiris-front/compare/v0.0.0...v0.1.0) (2020-10-19)
 
 
