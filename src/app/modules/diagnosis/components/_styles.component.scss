@@ -1,0 +1,21 @@
+@import 'treo';
+
+@include treo-theme {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $primary: map-get($theme, primary);
+  $is-dark: map-get($theme, is-dark);
+
+  app-drawer-sidenav {
+    .header {
+      background-color: map-get($background, hover) !important;
+    }
+
+    .content {
+      background-color: map-get($background, card) !important;
+      height: 100%;
+    }
+  }
+}

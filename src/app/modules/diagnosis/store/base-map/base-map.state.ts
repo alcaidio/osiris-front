@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { NotificationService } from 'app/shared/services/notification.service'
+import { config } from 'process'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
-import { PictureService } from '../../services/picture.service'
-import { BaseMap } from './../../../../shared/models/maps.model'
-import { LoadBaseMap, LoadBaseMapFailure, LoadBaseMapSuccess, SetMapConfig } from './base-map.action'
+import { BaseMap } from '../../../../shared/models/maps.model'
+import { DiagService } from '../../services/diag.service'
+import { ChangeBaseLayer, LoadBaseMap, LoadBaseMapFailure, LoadBaseMapSuccess, SetMapConfig } from './base-map.action'
 
 export interface BaseMapStateModel {
   model: BaseMap | null
@@ -21,12 +23,12 @@ export const baseMapStateDefaults: BaseMapStateModel = {
 }
 
 @State<BaseMapStateModel>({
-  name: 'imajboxBaseMap',
+  name: 'diagnosisBaseMap',
   defaults: baseMapStateDefaults,
 })
 @Injectable()
 export class BaseMapState {
-  constructor(private pictureService: PictureService) {}
+  constructor(private diagService: DiagService, private notification: NotificationService) {}
 
   @Selector()
   static getMap(state: BaseMapStateModel): any {
@@ -44,7 +46,7 @@ export class BaseMapState {
       patchState({
         loading: true,
       })
-      return this.pictureService.getBaseMap().pipe(
+      return this.diagService.getBaseMap().pipe(
         map((baseMap: BaseMap) => dispatch(new LoadBaseMapSuccess(baseMap))),
         catchError((err) => {
           dispatch(new LoadBaseMapFailure(err))
@@ -81,5 +83,25 @@ export class BaseMapState {
         config: { ...state.model.config, ...action.payload },
       },
     })
+  }
+
+  // TODO : toggle layers
+
+  @Action(ChangeBaseLayer)
+  changeBaseLayer({ getState, patchState }: StateContext<BaseMapStateModel>, action: ChangeBaseLayer) {
+    const state = getState()
+    if (state.model.config.style === action.payload) {
+      this.notification.openSnackBar('Ce fond de carte est déjà chargé.', 'X')
+    } else {
+      patchState({
+        model: {
+          ...state.model,
+          config: {
+            ...config,
+            style: action.payload,
+          },
+        },
+      })
+    }
   }
 }

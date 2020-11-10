@@ -21,6 +21,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { TranslocoModule } from '@ngneat/transloco'
 import { TreoCardModule } from '@treo/components/card'
 import { TemplateOneComponent } from './components/template-one.component'
+import { TemplateTwoComponent } from './components/template-two.component'
 import { MouseWheelDirective } from './directives/mouse-wheel.directive'
 
 const MATERIAL = [
@@ -44,13 +45,14 @@ const MATERIAL = [
 ]
 
 @NgModule({
-  declarations: [MouseWheelDirective, TemplateOneComponent],
+  declarations: [MouseWheelDirective, TemplateOneComponent, TemplateTwoComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, MATERIAL],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     TemplateOneComponent,
+    TemplateTwoComponent,
     TranslocoModule,
     TreoCardModule,
     MouseWheelDirective,

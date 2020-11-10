@@ -13,7 +13,7 @@ export const uiStateDefaults: UiStateModel = {
 }
 
 @State<UiStateModel>({
-  name: 'ui',
+  name: 'imajboxUi',
   defaults: uiStateDefaults,
 })
 @Injectable()

@@ -96,3 +96,15 @@ export interface Baselayer {
   type: string
   visible: boolean
 }
+
+/// Map components
+/// All components that go on the map
+
+export interface ButtonMapItem {
+  id: string
+  icon: string
+  tooltip?: string
+  action?: ButtonMapActionType
+}
+
+export type ButtonMapActionType = 'changeBaseLayer'

@@ -33,7 +33,7 @@ export const picturesStateDefaults: PicturesStateModel = {
 }
 
 @State<PicturesStateModel>({
-  name: 'pictures',
+  name: 'imajeboxPictures',
   defaults: picturesStateDefaults,
 })
 @Injectable()

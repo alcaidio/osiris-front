@@ -14,3 +14,13 @@ export enum CursorStyle {
   GRAB = 'grab',
   GRABIN = 'grabbin',
 }
+
+export type DrawerMode = 'over' | 'push' | 'side'
+
+export type DrawerPosition = 'start' | 'end'
+
+export interface Drawer {
+  mode: DrawerMode
+  position: DrawerPosition
+  opened: boolean
+}

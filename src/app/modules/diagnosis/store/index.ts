@@ -1,16 +1,13 @@
-import { BaseMapState } from './states/base-map.state'
-import { LayersState } from './states/layer.state'
-import { MapState } from './states/map.state'
-import { SectionsState } from './states/section.state'
-import { UIState } from './states/ui.state'
+import { BaseMapState } from './base-map/base-map.state'
+import { DiagnosisState } from './diagnosis.state'
+import { SectionState } from './section/section.state'
+import { UIState } from './ui/ui.state'
 
-export const MapStates = [MapState, LayersState, SectionsState, UIState, BaseMapState]
+export const DiagnosisStates = [DiagnosisState, BaseMapState, UIState, SectionState]
 
-export * from './actions/base-map.action'
-export * from './actions/layer.action'
-export * from './actions/section.action'
-export * from './actions/ui.action'
-export * from './states/base-map.state'
-export * from './states/layer.state'
-export * from './states/section.state'
-export * from './states/ui.state'
+export * from './base-map/base-map.action'
+export * from './base-map/base-map.state'
+export * from './section/section.action'
+export * from './section/section.state'
+export * from './ui/ui.action'
+export * from './ui/ui.state'

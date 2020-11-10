@@ -1,0 +1,34 @@
+@import 'treo';
+
+app-diagnosis {
+  mat-drawer {
+    min-width: 375px !important;
+    max-width: 375px !important;
+    width: 375px !important;
+
+    @include treo-breakpoint('xs') {
+      min-width: 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Theming
+// -----------------------------------------------------------------------------------------------------
+@include treo-theme {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $is-dark: map-get($theme, is-dark);
+
+  app-diagnosis {
+    mat-drawer {
+      background: map-get($background, card);
+      color: map-get($foreground, secondary-text);
+    }
+  }
+}
