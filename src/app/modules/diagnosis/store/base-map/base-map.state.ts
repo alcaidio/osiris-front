@@ -4,9 +4,16 @@ import { NotificationService } from 'app/shared/services/notification.service'
 import { config } from 'process'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
-import { BaseMap } from '../../../../shared/models/maps.model'
+import { BaseMap, Overlay } from '../../../../shared/models'
 import { DiagService } from '../../services/diag.service'
-import { ChangeBaseLayer, LoadBaseMap, LoadBaseMapFailure, LoadBaseMapSuccess, SetMapConfig } from './base-map.action'
+import {
+  ChangeBaseLayer,
+  LoadBaseMap,
+  LoadBaseMapFailure,
+  LoadBaseMapSuccess,
+  SetMapConfig,
+  ToggleOverlay,
+} from './base-map.action'
 
 export interface BaseMapStateModel {
   model: BaseMap | null
@@ -33,6 +40,11 @@ export class BaseMapState {
   @Selector()
   static getMap(state: BaseMapStateModel): any {
     return state.model
+  }
+
+  @Selector()
+  static getOverlays(state: BaseMapStateModel): Overlay[] {
+    return state.model.overlays
   }
 
   @Selector()
@@ -85,7 +97,24 @@ export class BaseMapState {
     })
   }
 
-  // TODO : toggle layers
+  @Action(ToggleOverlay)
+  toggle({ getState, patchState }: StateContext<BaseMapStateModel>, action: ToggleOverlay) {
+    const state = getState()
+    const copy = state.model.overlays.slice()
+
+    copy.forEach((element, index) => {
+      if (element.id === action.payload) {
+        copy[index] = { ...element, visible: !element.visible }
+      }
+    })
+
+    patchState({
+      model: {
+        ...state.model,
+        overlays: copy,
+      },
+    })
+  }
 
   @Action(ChangeBaseLayer)
   changeBaseLayer({ getState, patchState }: StateContext<BaseMapStateModel>, action: ChangeBaseLayer) {

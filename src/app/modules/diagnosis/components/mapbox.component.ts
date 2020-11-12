@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
-import { Map, MapMouseEvent, Visibility } from 'mapbox-gl'
+import { Map, MapMouseEvent } from 'mapbox-gl'
 import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model'
 import { Section } from './../models/section.model'
 import { MapboxService } from './../services/mapbox.service'
@@ -47,16 +47,12 @@ import { MapboxService } from './../services/mapbox.service'
           <ng-container *ngFor="let layer of overlays">
             <ng-container *ngIf="layer.type === 'raster'">
               <mgl-raster-source
+                *ngIf="layer.visible"
                 [id]="layer.id"
                 [tiles]="layer.source.tiles"
                 [tileSize]="layer.source.tileSize"
               ></mgl-raster-source>
-              <mgl-layer
-                [id]="layer.id"
-                [type]="layer.type"
-                [source]="layer.id"
-                [layout]="{ visibility: booleanToVisibility(layer.visible) }"
-              ></mgl-layer>
+              <mgl-layer *ngIf="layer.visible" [id]="layer.id" [type]="layer.type" [source]="layer.id"></mgl-layer>
             </ng-container>
           </ng-container>
         </ng-container>
@@ -105,10 +101,6 @@ export class MapboxComponent implements OnChanges {
         }
       }
     }
-  }
-
-  booleanToVisibility(visible: boolean): Visibility {
-    return visible ? 'visible' : 'none'
   }
 
   private goToSection(section: Section, map: Map): void {

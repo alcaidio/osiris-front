@@ -21,8 +21,6 @@ export const UIStateDefaults: UIStateModel = {
 })
 @Injectable()
 export class UIState {
-  constructor() {}
-
   @Selector()
   static getDrawer(state: UIStateModel): Drawer {
     return state.drawer

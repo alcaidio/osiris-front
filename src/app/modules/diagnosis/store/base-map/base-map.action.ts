@@ -1,4 +1,4 @@
-import { BaseMap, MapConfig } from '../../../../shared/models/maps.model'
+import { BaseMap, ID, MapConfig } from '../../../../shared/models'
 
 export class LoadBaseMap {
   static readonly type = '[Diagnosis - Base Map] Load'
@@ -19,9 +19,9 @@ export class SetMapConfig {
   constructor(public payload: Partial<MapConfig>) {}
 }
 
-export class ToggleLayer {
-  static readonly type = '[Diagnosis - Base Map] Toggle layer'
-  constructor(public payload: string) {}
+export class ToggleOverlay {
+  static readonly type = '[Diagnosis - Base Map] Toggle overlay'
+  constructor(public payload: ID) {}
 }
 
 export class ChangeBaseLayer {

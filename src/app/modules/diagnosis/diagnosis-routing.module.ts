@@ -1,25 +1,19 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { SectionInfosComponent } from './containers/section-infos.component'
-import { DiagnosisComponent } from './diagnosis.component'
-import { CanDeactivateSectionDetails } from './guards/section.guard'
+import * as fromContainers from './containers'
 
 const routes: Routes = [
   {
     path: '',
-    component: DiagnosisComponent,
+    component: fromContainers.DiagnosisComponent,
     children: [
       {
         path: 'section/:id',
-        children: [
-          { path: '', redirectTo: 'infos', pathMatch: 'full' },
-          {
-            path: 'infos',
-            component: SectionInfosComponent,
-            canDeactivate: [CanDeactivateSectionDetails],
-          },
-          // TODO add other path for the drawer section
-        ],
+        component: fromContainers.SectionInfosComponent,
+      },
+      {
+        path: 'overlays',
+        component: fromContainers.OverlaysComponent,
       },
     ],
   },

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
 import { TreoMediaWatcherService } from '@treo/services/media-watcher'
 import { Observable } from 'rxjs'
-import { ChangeDrawerMode, CloseDrawer, UIState } from '../store'
+import { ChangeDrawerMode, CloseDrawer, OpenDrawer, UIState } from '../store'
 import { Section } from './../models/section.model'
 import { SectionState } from './../store/section/section.state'
 
@@ -64,9 +64,13 @@ export class SectionInfosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(new ChangeDrawerMode('side'))
-    // const isOpened = this.store.selectSnapshot<boolean>((state) => {
-    //   return state.diagnosis.diagnosisUi.drawer.opened
-    // })
+    const isOpened = this.store.selectSnapshot<boolean>((state) => {
+      return state.diagnosis.diagnosisUi.drawer.opened
+    })
+
+    if (!isOpened) {
+      this.store.dispatch(new OpenDrawer())
+    }
 
     this.media.onMediaChange$.subscribe(({ matchingAliases }) => {
       this.isScreenSmall = matchingAliases.includes('xs')

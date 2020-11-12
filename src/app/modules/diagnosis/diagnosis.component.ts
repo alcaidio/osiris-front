@@ -21,6 +21,7 @@ AutoUnsubscribe()
       </ng-container>
       <ng-container content>
         <app-sidenav-toggle *ngIf="section$ | async"></app-sidenav-toggle>
+        <app-map-menu></app-map-menu>
         <app-map-button-list></app-map-button-list>
         <app-mapbox
           *ngIf="baseMap$ | async as map"
