@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-} from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core'
 import { Picture } from '../../../shared/models/maps.model'
 
 @Component({
@@ -40,12 +32,17 @@ import { Picture } from '../../../shared/models/maps.model'
       src="assets/images/pages/maps/image-unvailable.png"
     />
   `,
-  styles: [],
+  styles: [
+    `
+      .object-bottom-bis {
+        object-position: 50% 90%;
+      }
+    `,
+  ],
 })
 export class FlatImageComponent implements OnChanges {
   @Input() picture: Picture
   @Input() zoom = false
-  @Output() cameraTooltipMessage = new EventEmitter<string>()
   error = false
 
   constructor() {}
@@ -67,10 +64,6 @@ export class FlatImageComponent implements OnChanges {
   }
 
   onLoaded() {
-    if (this.picture.camera === 'front') {
-      this.cameraTooltipMessage.emit('Charger la vue arrière')
-    } else {
-      this.cameraTooltipMessage.emit('Charger la vue avant')
-    }
+    // image is loaded
   }
 }

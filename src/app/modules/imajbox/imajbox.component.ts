@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
-import { take } from 'rxjs/operators'
 import { BaseMap, MapConfig, Picture, PicturePoint } from '../../shared/models'
+import { CameraPositionType } from './../../shared/models/maps.model'
 import {
   BaseMapState,
   ChangeCameraPosition,
@@ -37,76 +37,97 @@ AutoUnsubscribe()
           ></app-mapbox>
         </ng-container>
         <ng-container *ngIf="imageInBig$ | async">
-          <app-flat-image
-            [picture]="selectedPicture$ | async"
-            [zoom]="true"
-            (cameraTooltipMessage)="this.cameraTooltipMessage = $event"
-          ></app-flat-image>
+          <app-flat-image [picture]="selectedPicture$ | async" [zoom]="true"></app-flat-image>
         </ng-container>
       </ng-container>
 
       <!-- Foreground  -->
       <ng-container foreground>
-        <ng-container *ngIf="imageInBig$ | async">
-          <app-mapbox
-            *ngIf="baseMap$ | async as map"
-            [baselayers]="map.baselayers"
-            [config]="map.config"
-            [overlays]="map.overlays"
-            [point]="(picturesPoint$ | async)?.geom"
-            (position)="getNearestPoint($event)"
-            (mapConfig)="setMapConfig($event)"
-            [direction]="(selectedPicture$ | async)?.direction"
-            [mapInBig]="!(imageInBig$ | async)"
-          ></app-mapbox>
-        </ng-container>
-        <ng-container *ngIf="!(imageInBig$ | async)">
-          <app-flat-image
-            [picture]="selectedPicture$ | async"
-            (cameraTooltipMessage)="this.cameraTooltipMessage = $event"
-          ></app-flat-image>
-        </ng-container>
+        <div class="flex flex-column">
+          <ng-container *ngIf="imageInBig$ | async">
+            <div class="in-front">
+              <app-mapbox
+                *ngIf="baseMap$ | async as map"
+                [baselayers]="map.baselayers"
+                [config]="map.config"
+                [overlays]="map.overlays"
+                [point]="(picturesPoint$ | async)?.geom"
+                (position)="getNearestPoint($event)"
+                (mapConfig)="setMapConfig($event)"
+                [direction]="(selectedPicture$ | async)?.direction"
+                [mapInBig]="!(imageInBig$ | async)"
+              ></app-mapbox>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!(imageInBig$ | async) && (picturesPoint$ | async)?.pictures">
+            <div class="in-front">
+              <app-flat-image
+                [picture]="selectedPicture$ | async"
+                [matTooltip]="
+                  ((selectedPicture$ | async)?.camera | titlecase) +
+                  ' camera &bull; ' +
+                  ((picturesPoint$ | async)?.timestamp | date: 'medium')
+                "
+                [matTooltipPosition]="'below'"
+              ></app-flat-image>
+            </div>
+          </ng-container>
 
-        <!-- Bottom right button -->
-        <div
-          class="absolute right-0 bottom-0"
-          (click)="onToggleForeground()"
-          [matTooltip]="'Etendre'"
-          matTooltipPosition="below"
-        >
-          <div class="triangle relative"></div>
-          <span class="material-icons absolute right-0 bottom-0 p-1 z-40 cursor-pointer">south_east</span>
-        </div>
-        <!-- Top left button -->
-        <div class="absolute left-0 top-0">
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="onToggleMinimize()"
-            [matTooltip]="'Réduire'"
-            matTooltipPosition="after"
-          >
-            <mat-icon class="icon-size-16">close</mat-icon>
-          </button>
-        </div>
-        <!-- Top right button -->
-        <div class="absolute right-0 top-0">
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="onChangeCameraPosition()"
-            [matTooltip]="cameraTooltipMessage"
-            matTooltipPosition="after"
-          >
-            <mat-icon class="icon-size-16">switch_camera</mat-icon>
-          </button>
+          <mat-list *ngIf="(picturesPoint$ | async)?.pictures">
+            <mat-list-item>
+              <button
+                mat-mini-fab
+                color="accent"
+                (click)="onToggleMinimize()"
+                [matTooltip]="(imageInBig$ | async) ? 'Réduire la map' : 'Réduire image'"
+                matTooltipPosition="after"
+              >
+                <mat-icon>menu_open</mat-icon>
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-mini-fab
+                color="accent"
+                (click)="onToggleForeground()"
+                [matTooltip]="(imageInBig$ | async) ? 'Étendre la map' : 'Étendre image'"
+                matTooltipPosition="after"
+              >
+                <mat-icon>fullscreen</mat-icon>
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-mini-fab
+                color="accent"
+                [matTooltip]="'Selectionner une autre caméra'"
+                matTooltipPosition="after"
+                mat-menu
+                [matMenuTriggerFor]="cameraMenu"
+                xPosition="after"
+              >
+                <mat-icon class="icon-size-16">switch_camera</mat-icon>
+              </button>
+              <mat-menu #cameraMenu="matMenu">
+                <ng-container *ngFor="let picture of (picturesPoint$ | async)?.pictures">
+                  <button
+                    [disabled]="(selectedPicture$ | async)?.camera === picture.camera"
+                    mat-menu-item
+                    (click)="onChangeCameraPosition(picture.camera)"
+                  >
+                    {{ picture.camera | titlecase }}
+                  </button>
+                </ng-container>
+              </mat-menu>
+            </mat-list-item>
+          </mat-list>
         </div>
       </ng-container>
 
       <!-- Fab  -->
       <ng-container fab>
         <button
-          *ngIf="!(imageInBig$ | async)"
+          *ngIf="!(imageInBig$ | async) && (picturesPoint$ | async)?.pictures"
           mat-fab
           color="accent"
           (click)="onToggleMinimize()"
@@ -147,6 +168,23 @@ AutoUnsubscribe()
           transform: scale(1.2);
         }
       }
+      ::ng-deep .mat-menu-panel {
+        margin-top: 10px !important;
+      }
+
+      .in-front {
+        width: 400px;
+        height: 250px;
+        min-width: 400px;
+        max-width: 400px;
+        min-height: 250px;
+        max-height: 250px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border-radius: 8px;
+        border: 1px solid #bdc2d1;
+        overflow: hidden;
+        background-color: #e5e7ec;
+      }
     `,
   ],
 })
@@ -158,9 +196,6 @@ export class ImajboxComponent implements OnInit, OnDestroy {
   @Select(UiState.getMinimize) minimize$: Observable<boolean>
   @Select(PicturesState.getSelectedPicturesPoint) picturesPoint$: Observable<PicturePoint>
   @Select(PicturesState.getSelectedPicture) selectedPicture$: Observable<Picture>
-
-  cameraTooltipMessage: string
-  imageFront = true
 
   constructor(private store: Store) {}
 
@@ -176,15 +211,8 @@ export class ImajboxComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ToggleMinimize())
   }
 
-  onChangeCameraPosition(): void {
-    // TODO: plus tard mettre ceci dans le store
-    this.selectedPicture$.pipe(take(1)).subscribe((selected: Picture) => {
-      if (selected.camera === 'front') {
-        this.store.dispatch(new ChangeCameraPosition('back'))
-      } else {
-        this.store.dispatch(new ChangeCameraPosition('front'))
-      }
-    })
+  onChangeCameraPosition(position: CameraPositionType): void {
+    this.store.dispatch(new ChangeCameraPosition(position))
   }
 
   getNearestPoint(position: GeoJSON.Position) {

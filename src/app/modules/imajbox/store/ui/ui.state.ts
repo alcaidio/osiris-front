@@ -9,7 +9,7 @@ export interface UiStateModel {
 
 export const uiStateDefaults: UiStateModel = {
   imageInbig: false,
-  minimize: true,
+  minimize: false,
 }
 
 @State<UiStateModel>({
