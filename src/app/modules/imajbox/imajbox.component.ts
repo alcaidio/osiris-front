@@ -184,6 +184,7 @@ AutoUnsubscribe()
         border: 1px solid #bdc2d1;
         overflow: hidden;
         background-color: #e5e7ec;
+        cursor: help;
       }
     `,
   ],
