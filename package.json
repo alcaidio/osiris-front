@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --aot",
+    "start": "ng serve",
     "start:prod": "http-server ./dist/osiris -p 4201",
     "start:mem": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng serve --open",
     "build": "ng build",

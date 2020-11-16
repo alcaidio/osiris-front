@@ -36,7 +36,7 @@ import { MapboxService } from './../services/mapbox.service'
           mglGeocoder
           [proximity]="config.center"
           [bbox]="config.bounds"
-          placeholder="Recherche"
+          [placeholder]="'imajbox.mapbox.search' | transloco"
           position="bottom-right"
         ></mgl-control>
 

@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco'
 import { NgxsModule } from '@ngxs/store'
 import { MapService, NgxMapboxGLModule } from 'ngx-mapbox-gl'
 import { environment } from '../../../environments/environment'
@@ -22,6 +21,9 @@ import { DiagnosisStates } from './store'
       accessToken: environment.mapbox.api.token,
     }),
   ],
-  providers: [MapService, { provide: TRANSLOCO_SCOPE, useValue: 'diagnosis' }],
+  providers: [
+    MapService,
+    // { provide: TRANSLOCO_SCOPE, useValue: 'diagnosis' }
+  ],
 })
 export class DiagnosisModule {}

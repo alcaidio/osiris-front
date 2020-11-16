@@ -19,6 +19,7 @@ import { TreoVerticalNavigationDividerItemComponent } from '@treo/components/nav
 import { TreoVerticalNavigationGroupItemComponent } from '@treo/components/navigation/vertical/components/group/group.component'
 import { TreoVerticalNavigationSpacerItemComponent } from '@treo/components/navigation/vertical/components/spacer/spacer.component'
 import { TreoVerticalNavigationComponent } from '@treo/components/navigation/vertical/vertical.component'
+import { TranslocoModule } from '@ngneat/transloco'
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { TreoVerticalNavigationComponent } from '@treo/components/navigation/ver
     MatMenuModule,
     MatTooltipModule,
     TreoScrollbarModule,
+    TranslocoModule,
   ],
   exports: [TreoHorizontalNavigationComponent, TreoVerticalNavigationComponent],
 })

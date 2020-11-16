@@ -5,34 +5,34 @@ import { TreoNavigationItem } from './../../../@treo/components/navigation/navig
 export const compactNavigation: TreoNavigationItem[] = [
   {
     id: 'dashboard',
-    title: 'Dashboard',
+    title: 'core.navigation.dashboard',
     type: 'basic',
     icon: 'mat_outline:dashboard',
     link: '/dashboard',
   },
   {
     id: 'maps',
-    title: 'Cartes',
+    title: 'core.navigation.maps',
     type: 'aside',
     icon: 'mat_outline:map',
     children: [
       {
         id: 'diagnosis',
-        title: 'Diagnostic',
+        title: 'core.navigation.diagnosis',
         type: 'basic',
         icon: 'mat_outline:assessment',
         link: '/diagnosis/',
       },
       {
         id: 'imajbox',
-        title: 'Imajebox',
+        title: 'core.navigation.imajbox',
         type: 'basic',
         icon: 'mat_outline:image',
         link: '/imajbox/',
       },
       // {
       //   id: 'roadview',
-      //   title: 'Roadview',
+      //   title: 'core.navigation.roadview',
       //   type: 'basic',
       //   icon: 'mat_outline:360',
       //   link: '/roadview/',
@@ -40,8 +40,8 @@ export const compactNavigation: TreoNavigationItem[] = [
     ],
   },
   {
-    id: 'travaux',
-    title: 'Travaux',
+    id: 'works',
+    title: 'core.navigation.works',
     type: 'basic',
     icon: 'mat_outline:work_outline',
     link: '/works',

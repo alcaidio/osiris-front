@@ -3,7 +3,7 @@ import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { Router } from '@angular/router'
-import { TranslocoConfig, TRANSLOCO_CONFIG } from '@ngneat/transloco'
+import { TranslocoConfig, TranslocoModule, TRANSLOCO_CONFIG } from '@ngneat/transloco'
 import { RouterStateSerializer } from '@ngxs/router-plugin'
 import * as Sentry from '@sentry/angular'
 import { TreoModule } from '@treo'
@@ -56,17 +56,14 @@ import { SharedModule } from './shared/shared.module'
     {
       provide: TRANSLOCO_CONFIG,
       useValue: {
-        prodMode: environment.production,
-        availableLangs: [
-          { id: 'en', label: 'English' },
-          { id: 'fr', label: 'French' },
-        ],
+        availableLangs: ['fr', 'en'],
         reRenderOnLangChange: true,
-        defaultLang: 'fr',
+        prodMode: environment.production,
       } as TranslocoConfig,
     },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
   bootstrap: [AppComponent],
+  exports: [TranslocoModule],
 })
 export class AppModule {}

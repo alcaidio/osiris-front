@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core'
-import { TreoDrawerModule } from '@treo/components/drawer'
 import { LayoutComponent } from 'app/layout/layout.component'
 import { EmptyLayoutModule } from 'app/layout/layouts/empty/empty.module'
 import { CenteredLayoutModule } from 'app/layout/layouts/horizontal/centered/centered.module'

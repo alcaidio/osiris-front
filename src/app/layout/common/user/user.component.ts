@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 import { Router } from '@angular/router'
-import { Select, Store } from '@ngxs/store'
+import { Select } from '@ngxs/store'
 import { UserService } from 'app/layout/common/user/user.service'
 import { User } from 'app/layout/common/user/user.types'
 import { AuthStatusState } from 'app/modules/auth/store'
+import { SettingsDialogComponent } from 'app/shared/components/settings-dialog.component'
 import { Observable, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 
@@ -18,21 +20,18 @@ import { takeUntil } from 'rxjs/operators'
 export class UserComponent implements OnInit, OnDestroy {
   @Input() showAvatar = true
   @Select(AuthStatusState.getEmail) email$: Observable<string>
-
   private _unsubscribeAll = new Subject()
   private _user: User
-
-  constructor(private _router: Router, private _userService: UserService, private store: Store) {}
-
   @Input()
   set user(value: User) {
     this._user = value
     this._userService.user = value
   }
-
   get user(): User {
     return this._user
   }
+
+  constructor(private _router: Router, private _userService: UserService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this._userService.user$.pipe(takeUntil(this._unsubscribeAll)).subscribe((user: User) => {
@@ -52,5 +51,9 @@ export class UserComponent implements OnInit, OnDestroy {
 
   onNavigate(url: string): void {
     this._router.navigate([url])
+  }
+
+  openSettingsDialog() {
+    this.dialog.open(SettingsDialogComponent)
   }
 }

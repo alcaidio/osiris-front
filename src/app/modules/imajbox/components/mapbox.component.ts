@@ -45,7 +45,7 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
           mglGeocoder
           [proximity]="config.center"
           [bbox]="[config.bounds[0], config.bounds[1], config.bounds[2], config.bounds[3]]"
-          placeholder="Recherche"
+          [placeholder]="'imajbox.mapbox.search' | transloco"
           position="bottom-right"
         ></mgl-control>
 

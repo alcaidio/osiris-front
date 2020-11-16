@@ -5,6 +5,7 @@ import { MatBadgeModule } from '@angular/material/badge'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatDialogModule } from '@angular/material/dialog'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -13,6 +14,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatListModule } from '@angular/material/list'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatRadioModule } from '@angular/material/radio'
 import { MatSelectModule } from '@angular/material/select'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
@@ -23,6 +25,7 @@ import { TreoCardModule } from '@treo/components/card'
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl'
 import { environment } from './../../environments/environment'
 import { BuildingsLayerComponent } from './components/buildings-layer.component'
+import { SettingsDialogComponent } from './components/settings-dialog.component'
 import { TemplateOneComponent } from './components/template-one.component'
 import { TemplateTwoComponent } from './components/template-two.component'
 import { MouseWheelDirective } from './directives/mouse-wheel.directive'
@@ -45,10 +48,18 @@ const MATERIAL = [
   MatSlideToggleModule,
   MatSelectModule,
   MatBadgeModule,
+  MatDialogModule,
+  MatRadioModule,
 ]
 
 @NgModule({
-  declarations: [MouseWheelDirective, TemplateOneComponent, TemplateTwoComponent, BuildingsLayerComponent],
+  declarations: [
+    MouseWheelDirective,
+    TemplateOneComponent,
+    TemplateTwoComponent,
+    BuildingsLayerComponent,
+    SettingsDialogComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -70,6 +81,7 @@ const MATERIAL = [
     TreoCardModule,
     MouseWheelDirective,
     BuildingsLayerComponent,
+    SettingsDialogComponent,
     MATERIAL,
   ],
 })

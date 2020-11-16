@@ -65,7 +65,7 @@ import { mapStyle, mapTools } from './../../../core/config/map.config'
               mglGeocoder
               [proximity]="(activeMap$ | async)?.center"
               [bbox]="(defaultOrSavedMap$ | async)?.bounds"
-              placeholder="Recherche"
+              [placeholder]="'imajbox.mapbox.search' | transloco"
               position="bottom-right"
             ></mgl-control>
             <!-- Layers  -->

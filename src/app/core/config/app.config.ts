@@ -1,15 +1,16 @@
 import { Layout } from 'app/layout/layout.types'
 
-// Theme type
-export type Theme = 'auto' | 'dark' | 'light'
+export type Theme = 'dark' | 'light'
+export type Language = 'fr' | 'en'
 
 /**
  * AppConfig interface. Update this interface to strictly type your config
  * object.
  */
 export interface AppConfig {
-  layout: Layout
   theme: Theme
+  language: Language
+  layout?: Layout
 }
 
 /**
@@ -21,6 +22,7 @@ export interface AppConfig {
  * 'ConfigService'.
  */
 export const appConfig: AppConfig = {
-  layout: 'compact',
   theme: 'light',
+  language: 'fr',
+  layout: 'compact',
 }

@@ -79,7 +79,9 @@ AutoUnsubscribe()
                 mat-mini-fab
                 color="accent"
                 (click)="onToggleMinimize()"
-                [matTooltip]="(imageInBig$ | async) ? 'Réduire la map' : 'Réduire image'"
+                [matTooltip]="
+                  (imageInBig$ | async) ? ('imajbox.image.extand' | transloco) : ('imajbox.image.minimize' | transloco)
+                "
                 matTooltipPosition="after"
               >
                 <mat-icon>menu_open</mat-icon>
@@ -90,7 +92,9 @@ AutoUnsubscribe()
                 mat-mini-fab
                 color="accent"
                 (click)="onToggleForeground()"
-                [matTooltip]="(imageInBig$ | async) ? 'Étendre la map' : 'Étendre image'"
+                [matTooltip]="
+                  (imageInBig$ | async) ? ('imajbox.map.extand' | transloco) : ('imajbox.map.extand' | transloco)
+                "
                 matTooltipPosition="after"
               >
                 <mat-icon>fullscreen</mat-icon>
@@ -100,7 +104,7 @@ AutoUnsubscribe()
               <button
                 mat-mini-fab
                 color="accent"
-                [matTooltip]="'Selectionner une autre caméra'"
+                [matTooltip]="'imajbox.camera.select' | transloco"
                 matTooltipPosition="after"
                 mat-menu
                 [matMenuTriggerFor]="cameraMenu"
@@ -131,7 +135,7 @@ AutoUnsubscribe()
           mat-fab
           color="accent"
           (click)="onToggleMinimize()"
-          [matTooltip]="'Ouvrir les images'"
+          [matTooltip]="'imajbox.fab.images' | transloco"
           matTooltipPosition="after"
           class="relative"
         >
@@ -148,7 +152,7 @@ AutoUnsubscribe()
           mat-fab
           color="accent"
           (click)="onToggleMinimize()"
-          [matTooltip]="'Ouvrir la carte'"
+          [matTooltip]="'imajbox.fab.map' | transloco"
           matTooltipPosition="after"
         >
           <mat-icon>map</mat-icon>

@@ -1,29 +1,94 @@
 {
-    "coming-soon": {
-        "title": "Bientôt disponible !",
-        "subtitle1": "Le module {{module}} est en construction.",
-        "subtitle2": "Cliquez ci-dessous pour ne pas rater son lancement",
-        "subtitle3": "Vous serez informé lors de son lancement.",
-        "button": "M'informer du lancement",
-        "footer": "Notre équipe travail dur pour vous livrer de nouvelles fonctionnalitées ❤️"
-    },
-    "search": {
-        "placeholder": "Rechercher une page",
-        "no.results": "Aucun résultat trouvé !"
-    }, 
-    "shortcuts": {
-        "title": "Raccourcis",
-        "edit": "Entrer en mode édition",
-        "add": "Ajouter le raccourci",
-        "exit": "Quitter le mode édition",
-        "cancel": "Quitter",
-        "no.shortcuts": "Pas de raccourcis",
-        "label": "Label",
-        "description": "Description",
-        "icon": "Icon",
-        "link": "Lien",
-        "router.toggle": "Utiliser le routeur pour le lien",
-        "delete": "Supprimer",
-        "update": "Mettre à jour"
+  "core": {
+    "navigation": {
+      "imajbox": "Imajbox",
+      "dashboard": "Dashboard",
+      "maps": "Cartes",
+      "diagnosis": "Diagnostic",
+      "roadview": "Roadview",
+      "works": "Travaux"
     }
+  },
+  "coming-soon": {
+    "title": "Bientôt disponible !",
+    "subtitle1": "Le module {{module}} est en construction.",
+    "subtitle2": "Cliquez ci-dessous pour ne pas rater son lancement",
+    "subtitle3": "Vous serez informé lors de son lancement.",
+    "button": "M'informer du lancement",
+    "footer": "Notre équipe travail dur pour vous livrer de nouvelles fonctionnalitées ❤️"
+  },
+  "search": {
+    "placeholder": "Rechercher une page",
+    "no.results": "Aucun résultat trouvé !"
+  },
+  "shortcuts": {
+    "title": "Raccourcis",
+    "edit": "Entrer en mode édition",
+    "add": "Ajouter le raccourci",
+    "exit": "Quitter le mode édition",
+    "cancel": "Quitter",
+    "no.shortcuts": "Pas de raccourcis",
+    "label": "Label",
+    "description": "Description",
+    "icon": "Icon",
+    "link": "Lien",
+    "router.toggle": "Utiliser le routeur pour le lien",
+    "delete": "Supprimer",
+    "update": "Mettre à jour"
+  },
+  "diagnosis": {
+    "info": {
+      "title": "Information du tronçon",
+      "tooltip": "Aller au tronçon",
+      "characteristics": "Caractéristiques",
+      "state": "Etat",
+      "length": "Longueur",
+      "width": "Largeur",
+      "localisation": "Localisation",
+      "street": "Rue",
+      "neighborhood": "Quartier",
+      "city": "Ville",
+      "further": "Information complémentaire",
+      "no": "Aucune informations disponibles pour le tronçon n°{{ id }}."
+    },
+    "layers": {
+      "title": "Couches",
+      "state.title": "Etat de la voirie",
+      "unvailable": "Pas de couches disponibles"
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "theme": {
+      "title": "Thème",
+      "dark": "Sombre",
+      "light": "Clair"
+    },
+    "language": {
+      "title": "Language",
+      "fr": "Français",
+      "en": "Anglais"
+    },
+    "button": "Fermer"
+  },
+  "imajbox": {
+    "map": {
+      "minimize": "Réduire la carte",
+      "extand": "Étendre la carte"
+    },
+    "image": {
+      "minimize": "Réduire l'image",
+      "extand": "Étendre l'image"
+    },
+    "camera": {
+      "select": "Seléctionner une autre caméra"
+    },
+    "fab": {
+      "images": "Ouvrir les images",
+      "map": "Ouvrir la carte"
+    },
+    "mapbox": {
+      "search": "Rechercher"
+    }
+  }
 }

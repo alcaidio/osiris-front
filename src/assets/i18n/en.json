@@ -1,29 +1,94 @@
 {
-    "coming-soon": {
-        "title": "Coming soon!",
-        "subtitle1": "The feature {{module}} is under construction.",
-        "subtitle2": "Click below not to miss its launch.",
-        "subtitle3": "You will be informed when it is launched.",
-        "button": "Notify me of the launch",
-        "footer": "Our team is working hard to deliver new features to you ❤️"
-    },
-    "search": {
-        "placeholder": "Search a page",
-        "no.results": "No results found!"
-    }, 
-    "shortcuts": {
-        "title": "Shortcuts",
-        "edit": "Enter edit mode",
-        "add": "Add shortcut",
-        "exit": "Exit edit mode",
-        "cancel": "Cancel",
-        "no.shortcuts": "No shortcuts",
-        "label": "Label",
-        "description": "Description",
-        "icon": "Icon",
-        "link": "Link",
-        "router.toggle": "Use router for the link",
-        "delete": "Delete",
-        "update": "Update"
+  "core": {
+    "navigation": {
+      "imajbox": "Imajbox",
+      "dashboard": "Dashboard",
+      "maps": "Maps",
+      "diagnosis": "Diagnosis",
+      "roadview": "Roadview",
+      "works": "Works"
     }
+  },
+  "coming-soon": {
+    "title": "Coming soon!",
+    "subtitle1": "The feature {{module}} is under construction.",
+    "subtitle2": "Click below not to miss its launch.",
+    "subtitle3": "You will be informed when it is launched.",
+    "button": "Notify me of the launch",
+    "footer": "Our team is working hard to deliver new features to you ❤️"
+  },
+  "search": {
+    "placeholder": "Search a page",
+    "no.results": "No results found!"
+  },
+  "shortcuts": {
+    "title": "Shortcuts",
+    "edit": "Enter edit mode",
+    "add": "Add shortcut",
+    "exit": "Exit edit mode",
+    "cancel": "Cancel",
+    "no.shortcuts": "No shortcuts",
+    "label": "Label",
+    "description": "Description",
+    "icon": "Icon",
+    "link": "Link",
+    "router.toggle": "Use router for the link",
+    "delete": "Delete",
+    "update": "Update"
+  },
+  "diagnosis": {
+    "info": {
+      "title": "Section information",
+      "tooltip": "Go to section",
+      "characteristics": "Characteristics",
+      "state": "State",
+      "length": "Length",
+      "width": "Width",
+      "localisation": "Localisation",
+      "street": "Street",
+      "neighborhood": "Neighborhood",
+      "city": "City",
+      "further": "Further information",
+      "no": "No information available for the section n°{{id}}."
+    },
+    "layers": {
+      "title": "Layers",
+      "state.title": "State of the roads",
+      "unvailable": "No layers available"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": {
+      "title": "Theme",
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "language": {
+      "title": "Language",
+      "fr": "French",
+      "en": "English"
+    },
+    "button": "Close"
+  },
+  "imajbox": {
+    "map": {
+      "minimize": "Minimize the map",
+      "extand": "Extand the map"
+    },
+    "image": {
+      "minimize": "Minimize the image",
+      "extand": "Extand the image"
+    },
+    "camera": {
+      "select": "Select another camera"
+    },
+    "fab": {
+      "images": "Open images",
+      "map": "Open the map"
+    },
+    "mapbox": {
+      "search": "Search"
+    }
+  }
 }

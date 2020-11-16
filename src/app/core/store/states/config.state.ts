@@ -1,20 +1,87 @@
-import { Injectable } from '@angular/core'
-import { State } from '@ngxs/store'
-import { Layout } from './../../../layout/layout.types'
-
-export type Theme = 'auto' | 'dark' | 'light'
+import { DOCUMENT } from '@angular/common'
+import { Inject, Injectable } from '@angular/core'
+import { getBrowserLang, TranslocoService } from '@ngneat/transloco'
+import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store'
+import { Language } from 'app/core/config/app.config'
+import { LayoutTheme, Theme } from '../../../shared/models/shared.model'
+import { ChangeLanguage, ChangeTheme } from '../actions/config.actions'
 
 export interface ConfigStateModel {
-  layout: Layout
+  language: Language
   theme: Theme
+  layout?: LayoutTheme
 }
 
 @State<ConfigStateModel>({
   name: 'config',
   defaults: {
-    layout: 'compact',
+    language: 'fr',
     theme: 'light',
+    layout: 'compact',
   },
 })
 @Injectable()
-export class ConfigState {}
+export class ConfigState implements NgxsOnInit {
+  @Selector()
+  static getActiveLanguage(state: ConfigStateModel): Language {
+    return state.language
+  }
+
+  @Selector()
+  static getActiveTheme(state: ConfigStateModel): Theme {
+    return state.theme
+  }
+
+  @Selector()
+  static getActiveLayoutTheme(state: ConfigStateModel): LayoutTheme {
+    return state.layout
+  }
+
+  constructor(@Inject(DOCUMENT) private document: any, private translocoService: TranslocoService) {}
+
+  ngxsOnInit({ patchState }: StateContext<ConfigStateModel>) {
+    // TODO: get language in the bdd settings by user
+    const languages = this.translocoService.getAvailableLangs()
+    const browserLang = getBrowserLang()
+    if (languages.includes(browserLang as any)) {
+      this.translocoService.setActiveLang(browserLang)
+      patchState({
+        language: browserLang as Language,
+      })
+    } else {
+      this.translocoService.setActiveLang('en')
+      patchState({
+        language: 'en' as Language,
+      })
+    }
+  }
+
+  @Action(ChangeTheme)
+  changeTheme({ patchState }: StateContext<ConfigStateModel>, action: ChangeTheme) {
+    this.updateTheme(action.payload)
+    patchState({
+      theme: action.payload,
+    })
+  }
+
+  @Action(ChangeLanguage)
+  changeLanguage({ patchState }: StateContext<ConfigStateModel>, action: ChangeLanguage) {
+    this.translocoService.setActiveLang(action.payload)
+    if (action.payload === this.translocoService.getActiveLang()) {
+      patchState({
+        language: action.payload,
+      })
+    } else {
+      console.warn('Language problem')
+    }
+  }
+
+  private updateTheme(theme: Theme): void {
+    this.document.body.classList.forEach((className: string) => {
+      if (className.startsWith('treo-theme-')) {
+        this.document.body.classList.remove(className)
+      }
+    })
+    this.document.body.classList.add('treo-theme-' + theme)
+  }
+}

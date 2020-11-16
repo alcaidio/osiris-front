@@ -5,7 +5,7 @@ import { PicturesState } from './pictures/pictures.state'
 import { UiState } from './ui/ui.state'
 
 @State({
-  name: 'imajebox',
+  name: 'imajbox',
   children: [BaseMapState, PicturesState, UiState],
 })
 @Injectable()
