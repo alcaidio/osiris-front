@@ -7,7 +7,8 @@ import { AuthGuard } from './modules/auth/guards/auth.guard'
 import { NoAuthGuard } from './modules/auth/guards/noAuth.guard'
 
 const routerConfig: ExtraOptions = {
-  scrollPositionRestoration: 'enabled',
+    scrollPositionRestoration: 'enabled',
+    relativeLinkResolution: 'legacy'
 }
 
 // @formatter:off
