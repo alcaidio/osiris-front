@@ -37,7 +37,14 @@ AutoUnsubscribe()
           ></app-mapbox>
         </ng-container>
         <ng-container *ngIf="imageInBig$ | async">
-          <app-flat-image [picture]="selectedPicture$ | async" [zoom]="true"></app-flat-image>
+          <app-flat-image [picture]="selectedPicture$ | async" [zoom]="true" class="relative"></app-flat-image>
+          <div class="absolute bottom-0 right-0 mb-2 mr-1">
+            <app-car-compass
+              [pictures]="(picturesPoint$ | async)?.pictures"
+              [selected]="(selectedPicture$ | async)?.camera"
+              (camera)="onChangeCameraPosition($event)"
+            ></app-car-compass>
+          </div>
         </ng-container>
       </ng-container>
 
@@ -100,7 +107,7 @@ AutoUnsubscribe()
                 <mat-icon>fullscreen</mat-icon>
               </button>
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="!(imageInBig$ | async)">
               <button
                 mat-mini-fab
                 color="accent"

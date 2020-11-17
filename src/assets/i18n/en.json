@@ -89,6 +89,7 @@
     },
     "mapbox": {
       "search": "Search"
-    }
+    },
+    "car": "You can select a camera by clicking on a triangle."
   }
 }
