@@ -45,6 +45,15 @@ AutoUnsubscribe()
               (camera)="onChangeCameraPosition($event)"
             ></app-car-compass>
           </div>
+          <div class="absolute top-0 right-0 mt-2 mr-1">
+            <div class="block px-4 py-2 text-sm font-medium leading-5 text-white bg-gray-800 opacity-75 rounded">
+              {{
+                ((selectedPicture$ | async)?.camera | titlecase) +
+                  ' camera &bull; ' +
+                  ((picturesPoint$ | async)?.timestamp | date: 'medium')
+              }}
+            </div>
+          </div>
         </ng-container>
       </ng-container>
 
