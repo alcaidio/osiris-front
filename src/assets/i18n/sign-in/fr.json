@@ -3,7 +3,7 @@
     "title": "Connexion",
     "sub-title": "Pas de compte ?",
     "link": "S'inscrire",
-    "label-email": "Adresse email",
+    "label-login": "Identifiant",
     "label-password": "Mot de passe",
     "remember-me": "Se souvenir de moi",
     "forgot-password": "Mot de passe oublié ?",
@@ -22,5 +22,6 @@
   "server.auth.error.internal_server": "Erreur interne du serveur.",
   "email.errors.email": "Cet email n'ai pas valide.",
   "email.errors.required": "L'email est requis.",
-  "password.errors.required": "Le mot de passe est requis."
+  "password.errors.required": "Le mot de passe est requis.",
+  "unknown.error": "Une erreur inconnu est survenue."
 }

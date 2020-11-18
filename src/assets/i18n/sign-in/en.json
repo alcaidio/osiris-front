@@ -3,7 +3,7 @@
     "title": "Sign in",
     "sub-title": "Don't have an account?",
     "link": "Sign up",
-    "label-email": "Email address",
+    "label-login": "Username",
     "label-password": "Password",
     "remember-me": "Remember me",
     "forgot-password": "Forgot password?",
@@ -22,5 +22,6 @@
   "server.auth.error.internal_server": "Internal Server Error.",
   "email.error.email": "This is not a valid email.",
   "email.error.required": "Email is required.",
-  "password.error.required": "Password is required."
+  "password.error.required": "Password is required.",
+  "unknown.error": "An unknown error has occurred."
 }

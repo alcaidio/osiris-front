@@ -42,7 +42,7 @@ export class AuthStatusState {
     patchState({
       loggedIn: true,
       jwt: action.payload.jwt,
-      email: action.payload.email,
+      email: action.payload.login,
     })
   }
 

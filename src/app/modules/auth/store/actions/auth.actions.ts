@@ -11,7 +11,7 @@ export class LoginSuccess {
 
 export class IsAuth {
   static readonly type = '[Auth] Is auth'
-  constructor(public payload: { jwt: string; email: string }) {}
+  constructor(public payload: { jwt: string; login: string }) {}
 }
 
 export class LoginFailure {

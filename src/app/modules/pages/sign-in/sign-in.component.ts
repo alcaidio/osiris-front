@@ -17,10 +17,9 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   @Select(LoginPageState.getErrorMessage) message$: Observable<string>
   @Select(LoginPageState.getPending) pending$: Observable<boolean>
   @ViewChild('passwordField') passwordField: ElementRef
-
   loginForm: FormGroup
-  private sub = new Subscription()
   passwordPlaceholder = '**********'
+  private sub = new Subscription()
 
   constructor(private fb: FormBuilder, private store: Store) {}
 
@@ -31,12 +30,12 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   onSignIn(): void {
     const credentials = this.loginForm.value
     if (credentials['rememberMe']) {
-      this.remember(credentials['email'])
+      this.remember(credentials['login'])
     }
     this.store.dispatch(new Login(credentials))
   }
 
-  onPressEmail(): void {
+  onPressLogin(): void {
     this.passwordField.nativeElement.focus()
   }
 
@@ -50,8 +49,8 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
     }
   }
 
-  get email() {
-    return this.loginForm.get('email')
+  get login() {
+    return this.loginForm.get('login')
   }
 
   get password() {
@@ -60,20 +59,20 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
 
   private setupForm() {
     this.loginForm = this.fb.group({
-      email: [this.emailInStorage(), [Validators.email, Validators.required]],
+      login: [this.loginInStorage(), [Validators.required]],
       password: ['', [Validators.required]],
       rememberMe: [''],
     })
   }
 
-  private remember(email: string): void {
-    localStorage.setItem('email.remember', email)
+  private remember(login: string): void {
+    localStorage.setItem('login.remember', login)
   }
 
-  private emailInStorage() {
-    const email = localStorage.getItem('email.remember')
-    if (email) {
-      return email
+  private loginInStorage() {
+    const login = localStorage.getItem('login.remember')
+    if (login) {
+      return login
     }
   }
 

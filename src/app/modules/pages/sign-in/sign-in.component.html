@@ -1,6 +1,6 @@
 <div class="content-layout fullwidth-basic-normal-scroll">
   <treo-card class="auth-card fullscreen">
-    <ng-container *transloco="let t">
+    <ng-container *transloco="let t; read: 'signIn'">
       <!-- Form container -->
       <div class="form-container">
         <div class="form">
@@ -10,10 +10,10 @@
           </div>
 
           <!-- Title -->
-          <div class="title">{{ t('signIn.form.title') }}</div>
+          <div class="title">{{ t('form.title') }}</div>
           <div class="subtitle">
-            <span>{{ t('signIn.form.sub-title') }}</span>
-            <a class="link" [routerLink]="['/sign-up']">{{ t('signIn.form.link') }}</a>
+            <span>{{ t('form.sub-title') }}</span>
+            <a class="link" [routerLink]="['/sign-up']">{{ t('form.link') }}</a>
           </div>
 
           <!-- Message -->
@@ -25,27 +25,27 @@
             [type]="'error'"
             [@shake]="true"
           >
-            <div *ngIf="message.length > 5; else unknown">{{ t('signIn.' + message) }}</div>
-            <ng-template #unknown>Une erreur inconnu est survenue.</ng-template>
+            <div *ngIf="message.length > 5; else unknown">{{ t(message) }}</div>
+            <ng-template #unknown>{{ t('unknown.error') }}</ng-template>
           </treo-message>
 
           <!-- Sign in form -->
           <form [formGroup]="loginForm">
             <!-- Email field -->
             <mat-form-field>
-              <mat-label>{{ t('signIn.form.label-email') }}</mat-label>
+              <mat-label>{{ t('form.label-login') }}</mat-label>
               <input
-                id="email"
+                id="login"
                 matInput
-                [formControlName]="'email'"
+                [formControlName]="'login'"
                 placeholder="email@company.com"
-                (keyup.enter)="onPressEmail()"
+                (keyup.enter)="onPressLogin()"
               />
             </mat-form-field>
 
             <!-- Password field -->
             <mat-form-field>
-              <mat-label>{{ t('signIn.form.label-password') }}</mat-label>
+              <mat-label>{{ t('form.label-password') }}</mat-label>
               <input
                 id="password"
                 matInput
@@ -65,10 +65,10 @@
             <div class="field-footer">
               <div class="remember-me">
                 <mat-checkbox [color]="'primary'" [formControlName]="'rememberMe'">
-                  {{ t('signIn.form.remember-me') }}
+                  {{ t('form.remember-me') }}
                 </mat-checkbox>
               </div>
-              <a class="link" [routerLink]="['/forgot-password']">{{ t('signIn.form.forgot-password') }}</a>
+              <a class="link" [routerLink]="['/forgot-password']">{{ t('form.forgot-password') }}</a>
             </div>
 
             <!-- Submit button -->
@@ -82,7 +82,7 @@
               (click)="onSignIn()"
             >
               <span *ngIf="!(pending$ | async)">
-                {{ t('signIn.form.button') }}
+                {{ t('form.button') }}
               </span>
               <mat-progress-spinner
                 *ngIf="pending$ | async"
@@ -92,9 +92,9 @@
             </button>
 
             <!-- Single sign-on -->
-            <div class="sso">
+            <!-- <div class="sso">
               <div class="separator">
-                {{ t('signIn.form.continue-with') }}
+                {{ t('form.continue-with') }}
               </div>
               <div class="buttons">
                 <button class="sso-button" mat-stroked-button>
@@ -107,7 +107,7 @@
                   <mat-icon [svgIcon]="'feather:github'"></mat-icon>
                 </button>
               </div>
-            </div>
+            </div> -->
           </form>
         </div>
       </div>
@@ -121,13 +121,13 @@
 
         <!-- <div class="content">
           <div class="title">
-            <span>{{ t('signIn.content.title') }}</span>
+            <span>{{ t('content.title') }}</span>
           </div>
           <div class="description">
-            {{ t('signIn.content.description') }}
+            {{ t('content.description') }}
           </div>
           <button class="learn-more-button" mat-stroked-button>
-            {{ t('signIn.content.button') }}
+            {{ t('content.button') }}
           </button>
         </div> -->
       </div>

@@ -41,7 +41,7 @@ export class LoginPageState {
     })
     return this.authService.signIn(action.payload).pipe(
       map((res) => {
-        dispatch(new IsAuth({ jwt: res['jwt'], email: action.payload.email }))
+        dispatch(new IsAuth({ jwt: res['jwt'], login: action.payload.email }))
         dispatch(new LoginSuccess())
       }),
       catchError((error) => {
