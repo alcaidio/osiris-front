@@ -7,8 +7,8 @@ import { AuthGuard } from './modules/auth/guards/auth.guard'
 import { NoAuthGuard } from './modules/auth/guards/noAuth.guard'
 
 const routerConfig: ExtraOptions = {
-    scrollPositionRestoration: 'enabled',
-    relativeLinkResolution: 'legacy'
+  scrollPositionRestoration: 'enabled',
+  relativeLinkResolution: 'legacy',
 }
 
 // @formatter:off
@@ -31,8 +31,16 @@ export const routes: Route[] = [
     },
     children: [
       // {path: 'confirmation-required', loadChildren: () => import('./modules/pages/confirmation-required/confirmation-required.module').then(m => m.AuthConfirmationRequiredModule)},
-      // {path: 'forgot-password', loadChildren: () => import('./modules/pages/forgot-password/forgot-password.module').then(m => m.AuthForgotPasswordModule)},
-      // {path: 'reset-password', loadChildren: () => import('./modules/pages/reset-password/reset-password.module').then(m => m.AuthResetPasswordModule)},
+      {
+        path: 'forgot-password',
+        loadChildren: () =>
+          import('./modules/pages/forgot-password/forgot-password.module').then((m) => m.AuthForgotPasswordModule),
+      },
+      {
+        path: 'reset-password',
+        loadChildren: () =>
+          import('./modules/pages/reset-password/reset-password.module').then((m) => m.AuthResetPasswordModule),
+      },
       {
         path: 'sign-in',
         loadChildren: () => import('./modules/pages/sign-in/sign-in.module').then((m) => m.AuthSignInModule),

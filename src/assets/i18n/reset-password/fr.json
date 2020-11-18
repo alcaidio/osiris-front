@@ -1,0 +1,14 @@
+{
+  "title": "Réinitialisez votre mot de passe",
+  "subtitle": "Créez un nouveau mot de passe pour votre compte",
+  "input1": "Mot de passe",
+  "input2": "Confirmation du mot de passe",
+  "input1.required": "Le mot de passe est requis",
+  "input1.minlength": "Le mot de passe doit contenir au moins 5 caractères",
+  "input2.required": "Le mot de passe de confirmation est requis",
+  "input.notMatch": "Les mots de passe doivent correspondre",
+  "button": "Réinitialisez",
+  "footer": "Revenir à",
+  "signin": "connexion",
+  "message": "Votre mot de passe a bien été réinitialisé."
+}

@@ -16,6 +16,18 @@ export class AuthService {
     return this.http.post<string>(`${this.api}/auth/login`, credentials)
   }
 
+  forgottenPasswordRequest(email: string): Observable<string> {
+    return this.http.post<string>(`${this.api}/auth/forgottenpassword/mail-request`, email)
+  }
+
+  forgottenPasswordValidation(body: { email: string; uuid: string }): Observable<string> {
+    return this.http.post<string>(`${this.api}/auth/forgottenpassword/uuid-validation`, body)
+  }
+
+  forgottenPasswordReset(body: { email: string; uuid: string; newPassword: string }): Observable<string> {
+    return this.http.post<string>(`${this.api}/auth/forgottenpassword/reset`, body)
+  }
+
   // TODO : do a refresh token
   //
   // /**

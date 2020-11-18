@@ -1,0 +1,14 @@
+{
+  "title": "Reset your password",
+  "subtitle": "Create a new password for your account",
+  "input1": "Password",
+  "input2": "Password (Confirm)",
+  "input1.required": "Password is required",
+  "input1.minlength": "Password must contain at least 5 characters",
+  "input2.required": "Password confirmation is required",
+  "input.notMatch": "Passwords must match",
+  "button": "Reset your password",
+  "footer": "Return to",
+  "signin": "sign in",
+  "message": "Your password has been reset."
+}

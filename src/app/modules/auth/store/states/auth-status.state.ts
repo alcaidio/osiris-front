@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Navigate } from '@ngxs/router-plugin'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { AuthService } from '../../services/auth.service'
 import { LoginRedirect, Logout } from '../actions/auth.actions'
 import { IsAuth } from './../actions/auth.actions'
 
@@ -22,6 +23,8 @@ const authStatusStateDefaults: AuthStatusStateModel = {
 })
 @Injectable()
 export class AuthStatusState {
+  constructor(private authService: AuthService) {}
+
   @Selector()
   static getLoggedIn(state: AuthStatusStateModel): boolean {
     return state.loggedIn
@@ -52,4 +55,19 @@ export class AuthStatusState {
     setState(authStatusStateDefaults)
     dispatch(new Navigate(['sign-out']))
   }
+
+  //   @Action(RequestForgottenPassword)
+  //   requestForgottenPassword(ctx: StateContext<AuthStatusStateModel>, action: RequestForgottenPassword) {
+  //     this.authService.forgottenPasswordRequest(action.email)
+  //   }
+
+  //   @Action(ValidationForgottenPassword)
+  //   validationForgottenPassword(ctx: StateContext<AuthStatusStateModel>, action: ValidationForgottenPassword) {
+  //     this.authService.forgottenPasswordValidation(action.payload)
+  //   }
+
+  //   @Action(ResetForgottenPassword)
+  //   resetForgottenPassword(ctx: StateContext<AuthStatusStateModel>, action: ResetForgottenPassword) {
+  //     this.authService.forgottenPasswordReset(action.payload)
+  //   }
 }

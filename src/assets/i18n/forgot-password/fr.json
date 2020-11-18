@@ -1,7 +1,7 @@
 {
   "form": {
-    "title": "Mot de passe oublié ?",
-    "subtitle": "Remplissez le formulaire pour recevoir un lien de réinitialisation de votre mot de passe.",
+    "title": "Réinitialisation du mot de passe",
+    "subtitle": "Saisissez votre email pour recevoir un lien de réinitialisation.",
     "label-email": "Adresse email",
     "error-required": "L'adresse email est requise.",
     "error-email": "S'il vous plaît, entrez une adresse email valide.",
@@ -13,5 +13,8 @@
     "title": "Mettez de la réalité dans vos données",
     "description": "Immergis vous aide à optimiser la gestion de votre patrimoine urbain en vous offrant un outil de visualisation puissant et efficace.",
     "button": "En savoir plus"
+  },
+  "message": {
+    "send": "Réinitialisation du mot de passe envoyée! Merci de consulter vos emails."
   }
 }

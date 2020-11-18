@@ -1,9 +1,12 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Subject } from 'rxjs'
+import { ActivatedRoute, Data, Router } from '@angular/router'
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { TreoAnimations } from '../../../../@treo/animations/public-api'
 import { TreoValidators } from '../../../../@treo/validators/validators'
+import { AuthService } from '../../auth/services/auth.service'
 
+@AutoUnsubscribe()
 @Component({
   selector: 'auth-reset-password',
   templateUrl: './reset-password.component.html',
@@ -12,91 +15,84 @@ import { TreoValidators } from '../../../../@treo/validators/validators'
   animations: TreoAnimations,
 })
 export class AuthResetPasswordComponent implements OnInit, OnDestroy {
-  message: any
   resetPasswordForm: FormGroup
+  message = null
+  dataFromResolver: { email: string; uuid: string }
 
-  // Private
-  private _unsubscribeAll: Subject<any>
+  @ViewChild('passwordConfirmField') password2: ElementRef
 
-  /**
-   * Constructor
-   *
-   * @param {FormBuilder} _formBuilder
-   */
-  constructor(private _formBuilder: FormBuilder) {
-    // Set the defaults
-    this.message = null
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-    // Set the private defaults
-    this._unsubscribeAll = new Subject()
-  }
-
-  // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On init
-   */
   ngOnInit(): void {
-    // Create the form
-    this.resetPasswordForm = this._formBuilder.group(
+    this.resetPasswordForm = this.fb.group(
       {
-        password: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(5)]],
         passwordConfirm: ['', Validators.required],
       },
       {
         validators: TreoValidators.mustMatch('password', 'passwordConfirm'),
       }
     )
+
+    this.route.data.subscribe((data: Data) => {
+      this.dataFromResolver = data['payload']
+    })
   }
 
-  /**
-   * On destroy
-   */
-  ngOnDestroy(): void {
-    // Unsubscribe from all subscriptions
-    this._unsubscribeAll.next()
-    this._unsubscribeAll.complete()
+  onPressPassword1() {
+    this.password2.nativeElement.focus()
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Reset password
-   */
   resetPassword(): void {
-    // Do nothing if the form is invalid
     if (this.resetPasswordForm.invalid) {
       return
     }
 
-    // Disable the form
     this.resetPasswordForm.disable()
-
-    // Hide the message
     this.message = null
 
-    // Do your action here...
+    // TODO :
+    // if (isAuthenticated) {
+    //     this.store.dispatch(new ResetPassword(...toolbar))
+    // } else {
+    //   this.store.dispatch(new ResetForgottenPassword())
+    // }
 
-    // Emulate server delay
+    this.authService.forgottenPasswordReset({
+      ...this.dataFromResolver,
+      newPassword: this.resetPasswordForm.value.password,
+    })
+
     setTimeout(() => {
-      // Re-enable the form
-      this.resetPasswordForm.enable()
-
-      // Reset the form
-      this.resetPasswordForm.reset({})
-
-      // Show the message
       this.message = {
         appearance: 'outline',
-        content: 'Your password has been reset.',
+        content: 'message',
         shake: false,
         showIcon: false,
         type: 'success',
       }
+      setTimeout(() => {
+        this.resetPasswordForm.enable()
+        this.resetPasswordForm.reset({})
+        this.router.navigate(['/sign-in'])
+      }, 3000)
     }, 1000)
+  }
+
+  onSwitchPasswordIcon(passwordField: HTMLInputElement): void {
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text'
+    } else {
+      passwordField.type = 'password'
+    }
+  }
+
+  ngOnDestroy() {
+    // because AutoUnsubscribe
   }
 }

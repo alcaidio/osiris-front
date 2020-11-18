@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { TreoAnimations } from '../../../../@treo/animations/public-api'
+import { AuthService } from '../../auth/services/auth.service'
 
 @Component({
   selector: 'auth-forgot-password',
@@ -13,63 +14,35 @@ export class AuthForgotPasswordComponent implements OnInit {
   forgotPasswordForm: FormGroup
   message: any
 
-  /**
-   * Constructor
-   *
-   * @param {FormBuilder} _formBuilder
-   */
-  constructor(private _formBuilder: FormBuilder) {
-    // Set the defaults
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.message = null
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On init
-   */
   ngOnInit(): void {
-    // Create the form
-    this.forgotPasswordForm = this._formBuilder.group({
+    this.forgotPasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
     })
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Send the reset link
-   */
   sendResetLink(): void {
-    // Do nothing if the form is invalid
     if (this.forgotPasswordForm.invalid) {
       return
     }
-
-    // Disable the form
+    const email = this.forgotPasswordForm.value.email.toString()
     this.forgotPasswordForm.disable()
-
-    // Hide the message
     this.message = null
+    console.log(email)
 
-    // Do your action here...
+    this.authService.forgottenPasswordRequest(email)
 
-    // Emulate server delay
+    // si status 200 ou 404 voir code sur wiki
+
     setTimeout(() => {
-      // Re-enable the form
       this.forgotPasswordForm.enable()
-
-      // Reset the form
       this.forgotPasswordForm.reset({})
-
-      // Show the message
       this.message = {
         appearance: 'outline',
-        content: 'Password reset sent! You will receive an email if you are registered on our system.',
+        content: 'forgotPassword.message.send',
         shake: false,
         showIcon: false,
         type: 'success',

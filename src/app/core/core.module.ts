@@ -8,7 +8,8 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
 import { NgxsModule } from '@ngxs/store'
 import { environment } from 'environments/environment'
 import { AuthModule } from './../modules/auth/auth.module'
-import { AuthInterceptor } from './../modules/auth/interceptors/auth.interceptor'
+import { AuthInterceptor } from './interceptors/auth.interceptor'
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor'
 import { AppStates } from './store'
 
 @NgModule({
@@ -30,6 +31,11 @@ import { AppStates } from './store'
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true,
     },
   ],
