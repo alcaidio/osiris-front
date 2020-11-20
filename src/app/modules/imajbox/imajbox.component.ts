@@ -34,7 +34,12 @@ AutoUnsubscribe()
             (mapConfig)="setMapConfig($event)"
             [direction]="(selectedPicture$ | async)?.direction"
             [mapInBig]="!(imageInBig$ | async)"
+            (loaded)="mapIsLoaded = $event"
+            [dragend]="dragEnd"
           ></app-mapbox>
+          <div class="absolute right-0 top-105" *ngIf="mapIsLoaded">
+            <app-drag-and-search (dragEnd)="dragEnd = true"></app-drag-and-search>
+          </div>
         </ng-container>
         <ng-container *ngIf="imageInBig$ | async">
           <app-flat-image [picture]="selectedPicture$ | async" [zoom]="true" class="relative"></app-flat-image>
@@ -208,6 +213,10 @@ AutoUnsubscribe()
         background-color: #e5e7ec;
         cursor: help;
       }
+
+      .top-105 {
+        top: 105px;
+      }
     `,
   ],
 })
@@ -219,6 +228,8 @@ export class ImajboxComponent implements OnInit, OnDestroy {
   @Select(UiState.getMinimize) minimize$: Observable<boolean>
   @Select(PicturesState.getSelectedPicturesPoint) picturesPoint$: Observable<PicturePoint>
   @Select(PicturesState.getSelectedPicture) selectedPicture$: Observable<Picture>
+  mapIsLoaded = false
+  dragEnd = false
 
   constructor(private store: Store) {}
 
@@ -227,6 +238,7 @@ export class ImajboxComponent implements OnInit, OnDestroy {
   }
 
   onToggleForeground(): void {
+    this.mapIsLoaded = false
     this.store.dispatch(new ToggleForeground())
   }
 
@@ -240,6 +252,7 @@ export class ImajboxComponent implements OnInit, OnDestroy {
 
   getNearestPoint(position: GeoJSON.Position) {
     this.store.dispatch(new LoadPicturesPoint(position))
+    this.dragEnd = false
   }
 
   setMapConfig(evt: Partial<MapConfig>) {

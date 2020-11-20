@@ -17,6 +17,7 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <mgl-map
+      id="mapbox"
       *ngIf="config && baselayers"
       class="h-full w-full"
       [style]="baselayers[config.style]?.url"
@@ -35,6 +36,7 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
       (dragEnd)="mapConfig.emit(baseMapConfig)"
       (zoomEnd)="mapConfig.emit(baseMapConfig)"
       (pitchEnd)="mapConfig.emit(baseMapConfig)"
+      (mouseUp)="onFeature($event)"
     >
       <ng-container *ngIf="isLoaded">
         <!-- Controls -->
@@ -65,7 +67,7 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
                 [id]="layer.id"
                 [type]="layer.type"
                 [source]="layer.id"
-                [maxzoom]="15"
+                [maxzoom]="16"
                 [layout]="{ visibility: booleanToVisibility(true) }"
               ></mgl-layer>
             </ng-container>
@@ -76,9 +78,9 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
                 [id]="layer.id"
                 [type]="layer.type"
                 [source]="'points-source'"
-                [minzoom]="15"
+                [minzoom]="16"
                 [paint]="{
-                  'circle-radius': ['interpolate', ['linear'], ['zoom'], 15, 3, 22, 15],
+                  'circle-radius': ['interpolate', ['linear'], ['zoom'], 16, 5, 22, 16],
                   'circle-opacity': 0.8,
                   'circle-color': '#0FA8AF'
                 }"
@@ -121,8 +123,10 @@ export class MapboxComponent implements OnInit, OnChanges {
   @Input() point: GeoJSON.Point
   @Input() direction: number
   @Input() mapInBig: boolean
+  @Input() dragend: boolean
   @Output() position = new EventEmitter<GeoJSON.Position>()
   @Output() mapConfig = new EventEmitter<Partial<MapConfig>>()
+  @Output() loaded = new EventEmitter<boolean>(false)
   cursorStyle: string
   isLoaded = false
   mapInstance: Map
@@ -132,6 +136,7 @@ export class MapboxComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   onLoad(evt: Map) {
+    this.loaded.emit(true)
     this.isLoaded = true
     this.mapInstance = evt
     if (this.point) {
@@ -148,6 +153,14 @@ export class MapboxComponent implements OnInit, OnChanges {
             break
         }
       }
+    }
+  }
+
+  onFeature(evt: any) {
+    if (evt.lngLat && this.dragend) {
+      const { lng, lat } = evt.lngLat
+      this.position.emit([lng, lat])
+      this.cdr.detectChanges()
     }
   }
 

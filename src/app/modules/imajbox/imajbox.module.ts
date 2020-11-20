@@ -6,12 +6,13 @@ import { environment } from '../../../environments/environment'
 import { SharedModule } from '../../shared/shared.module'
 import * as fromComponents from './components'
 import { CarCompassComponent } from './components/car-compass.component'
+import { DragAndSearchComponent } from './components/drag-and-search.component'
 import { ImajboxRoutingModule } from './imajbox-routing.module'
 import { ImajboxComponent } from './imajbox.component'
 import { ImajboxStates } from './store'
 
 @NgModule({
-  declarations: [ImajboxComponent, ...fromComponents.components, CarCompassComponent],
+  declarations: [ImajboxComponent, ...fromComponents.components, CarCompassComponent, DragAndSearchComponent],
   imports: [
     CommonModule,
     SharedModule,
