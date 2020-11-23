@@ -8,7 +8,9 @@ import { ID, Picture, PicturePoint } from './../../../../shared/models'
 import { CameraPositionType } from './../../../../shared/models/maps.model'
 import {
   ChangeCameraPosition,
-  LoadPicturesPoint,
+  GoToNeighbour,
+  LoadPicturesPointById,
+  LoadPicturesPointByLngLat,
   LoadPicturesPointFailure,
   LoadPicturesPointSuccess,
 } from './pictures.action'
@@ -52,8 +54,8 @@ export class PicturesState {
     return picturePoint.pictures.find((images: Picture) => images.camera === state.selectedCamera)
   }
 
-  @Action(LoadPicturesPoint)
-  load({ dispatch, patchState }: StateContext<PicturesStateModel>, action: LoadPicturesPoint) {
+  @Action(LoadPicturesPointByLngLat)
+  loadbyLngLat({ dispatch, patchState }: StateContext<PicturesStateModel>, action: LoadPicturesPointByLngLat) {
     patchState({
       loading: true,
     })
@@ -62,6 +64,20 @@ export class PicturesState {
       map((picturePoint: PicturePoint) => dispatch(new LoadPicturesPointSuccess(picturePoint))),
       catchError((error) => {
         dispatch(new LoadPicturesPointFailure({ error, distance }))
+        return of(error)
+      })
+    )
+  }
+
+  @Action(LoadPicturesPointById)
+  loadById({ dispatch, patchState }: StateContext<PicturesStateModel>, action: LoadPicturesPointById) {
+    patchState({
+      loading: true,
+    })
+    return this.pictureService.getImageById(action.payload).pipe(
+      map((picturePoint: PicturePoint) => dispatch(new LoadPicturesPointSuccess(picturePoint))),
+      catchError((error) => {
+        dispatch(new LoadPicturesPointFailure({ error }))
         return of(error)
       })
     )
@@ -84,7 +100,11 @@ export class PicturesState {
       error: action.payload.error,
       loading: false,
     })
-    this.notification.openSnackBar(`Aucun point n'a été trouvé dans un rayon de ${action.payload.distance}m.`)
+    if (action.payload.distance) {
+      this.notification.openSnackBar(`Aucun point n'a été trouvé dans un rayon de ${action.payload.distance}m.`)
+    } else {
+      this.notification.openSnackBar('Aucun point disponible', 'X', 1500)
+    }
   }
 
   @Action(ChangeCameraPosition)
@@ -92,5 +112,12 @@ export class PicturesState {
     patchState({
       selectedCamera: action.payload,
     })
+  }
+
+  @Action(GoToNeighbour)
+  goToNeighbour({ dispatch, getState }: StateContext<PicturesStateModel>, action: GoToNeighbour) {
+    const state = getState()
+    const pointId = state.entities[state.selectedPointId].neighbours[action.payload]
+    dispatch(new LoadPicturesPointById(pointId))
   }
 }

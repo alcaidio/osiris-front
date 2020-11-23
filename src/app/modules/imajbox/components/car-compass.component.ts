@@ -10,7 +10,7 @@ import { CameraPositionType, Picture } from './../../../shared/models/'
       viewBox="0 0 731 786"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      class="h-32 w-32"
+      class="h-28 w-28"
     >
       <g filter="url(#filter0_b)" *ngIf="isFront" (click)="onClickCamera('front')">
         <path
@@ -240,12 +240,12 @@ import { CameraPositionType, Picture } from './../../../shared/models/'
       }
 
       .inactive {
-        fill: #e2f5f6 !important;
+        fill: #ffffff !important;
         cursor: pointer;
       }
 
       .car {
-        fill: #e2f5f6 !important;
+        fill: #ffffff !important;
         cursor: help;
       }
     `,

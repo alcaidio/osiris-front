@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { ID } from 'app/shared/models'
 import { environment } from 'environments/environment'
 import { Observable } from 'rxjs'
 import { BaseMap, PicturePoint } from '../../../shared/models/maps.model'
@@ -16,6 +17,10 @@ export class PictureService {
     return this.http.get<PicturePoint>(
       `${this.api}/pictures/position/findNearestBySensorAndLngLat?lng=${point[0]}&lat=${point[1]}&sensorTypeName=ImajBox&distance=${distance}`
     )
+  }
+
+  getImageById(id: ID): Observable<PicturePoint> {
+    return this.http.get<PicturePoint>(`${this.api}/pictures/position/${id}?sensorTypeName=ImajBox`)
   }
 
   getBaseMap(): Observable<BaseMap> {

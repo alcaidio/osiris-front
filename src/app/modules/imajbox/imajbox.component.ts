@@ -8,7 +8,7 @@ import {
   BaseMapState,
   ChangeCameraPosition,
   LoadBaseMap,
-  LoadPicturesPoint,
+  LoadPicturesPointByLngLat,
   PicturesState,
   SetMapConfig,
   ToggleForeground,
@@ -61,6 +61,12 @@ AutoUnsubscribe()
               }}
             </div>
           </div>
+          <div class="navigation-perspective">
+            <app-navigation-perspective
+              [picturePoint]="picturesPoint$ | async"
+              [camera]="(selectedPicture$ | async)?.camera"
+            ></app-navigation-perspective>
+          </div>
         </ng-container>
       </ng-container>
 
@@ -103,7 +109,7 @@ AutoUnsubscribe()
                 color="accent"
                 (click)="onToggleMinimize()"
                 [matTooltip]="
-                  (imageInBig$ | async) ? ('imajbox.image.extand' | transloco) : ('imajbox.image.minimize' | transloco)
+                  (imageInBig$ | async) ? ('imajbox.map.minimize' | transloco) : ('imajbox.image.minimize' | transloco)
                 "
                 matTooltipPosition="after"
               >
@@ -116,7 +122,7 @@ AutoUnsubscribe()
                 color="accent"
                 (click)="onToggleForeground()"
                 [matTooltip]="
-                  (imageInBig$ | async) ? ('imajbox.map.extand' | transloco) : ('imajbox.map.extand' | transloco)
+                  (imageInBig$ | async) ? ('imajbox.map.extand' | transloco) : ('imajbox.image.extand' | transloco)
                 "
                 matTooltipPosition="after"
               >
@@ -217,6 +223,13 @@ AutoUnsubscribe()
       .top-105 {
         top: 105px;
       }
+
+      .navigation-perspective {
+        position: absolute;
+        bottom: -15px;
+        left: calc(50% - 150px);
+        margin: 5px;
+      }
     `,
   ],
 })
@@ -252,7 +265,7 @@ export class ImajboxComponent implements OnInit, OnDestroy {
 
   getNearestPoint(position: GeoJSON.Position) {
     const distance = 120
-    this.store.dispatch(new LoadPicturesPoint({ position, distance }))
+    this.store.dispatch(new LoadPicturesPointByLngLat({ position, distance }))
     this.dragEnd = false
   }
 

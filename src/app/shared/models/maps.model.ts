@@ -15,12 +15,8 @@ export interface PicturePoint {
   geom: GeoJSON.Point
   pictures: Picture[]
   timestamp: number
-  neighbours: {
-    previous: number
-    next: number
-    previous_far: number
-    next_far: number
-  }
+  neighbours: { [id: string]: ID }
+  // neighbours.id is type NeighboursDirectionType
 }
 
 export type CameraPositionType =
@@ -32,6 +28,8 @@ export type CameraPositionType =
   | 'front-left'
   | 'back-right'
   | 'back-left'
+
+export type NeighboursDirectionType = 'front' | 'back' | 'front_right' | 'front_left' | 'back_right' | 'back_left'
 
 export interface Picture {
   name: string
