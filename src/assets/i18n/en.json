@@ -90,6 +90,7 @@
     "mapbox": {
       "search": "Search"
     },
-    "car": "You can select a camera by clicking on a triangle."
+    "car": "You can select a camera by clicking on a triangle.",
+    "no-point-found": "No point was found within {{ distance }}m."
   }
 }

@@ -12,9 +12,9 @@ export class PictureService {
 
   constructor(private http: HttpClient) {}
 
-  getImageByLngLat(point: GeoJSON.Position): Observable<PicturePoint> {
+  getImageByLngLat(point: GeoJSON.Position, distance: string): Observable<PicturePoint> {
     return this.http.get<PicturePoint>(
-      `${this.api}/pictures/position/findNearestBySensorAndLngLat?lng=${point[0]}&lat=${point[1]}&sensorTypeName=ImajBox`
+      `${this.api}/pictures/position/findNearestBySensorAndLngLat?lng=${point[0]}&lat=${point[1]}&sensorTypeName=ImajBox&distance=${distance}`
     )
   }
 

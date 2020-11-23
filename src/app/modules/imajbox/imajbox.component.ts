@@ -251,7 +251,8 @@ export class ImajboxComponent implements OnInit, OnDestroy {
   }
 
   getNearestPoint(position: GeoJSON.Position) {
-    this.store.dispatch(new LoadPicturesPoint(position))
+    const distance = 120
+    this.store.dispatch(new LoadPicturesPoint({ position, distance }))
     this.dragEnd = false
   }
 

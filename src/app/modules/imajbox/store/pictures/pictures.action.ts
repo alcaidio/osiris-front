@@ -2,7 +2,7 @@ import { CameraPositionType, PicturePoint } from './../../../../shared/models/ma
 
 export class LoadPicturesPoint {
   static readonly type = '[Imajbox - Pictures] Load picture point'
-  constructor(public payload: GeoJSON.Position) {}
+  constructor(public payload: { position: GeoJSON.Position; distance: number }) {}
 }
 
 export class LoadPicturesPointSuccess {
@@ -12,7 +12,7 @@ export class LoadPicturesPointSuccess {
 
 export class LoadPicturesPointFailure {
   static readonly type = '[Imajbox - Pictures] Load picture point Failure'
-  constructor(public payload: any) {}
+  constructor(public payload: { error: any; distance: number }) {}
 }
 
 export class ChangeCameraPosition {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
+import { NotificationService } from '../../../../shared/services/notification.service'
 import { PictureService } from '../../services/picture.service'
 import { ID, Picture, PicturePoint } from './../../../../shared/models'
 import { CameraPositionType } from './../../../../shared/models/maps.model'
@@ -38,7 +39,7 @@ export const picturesStateDefaults: PicturesStateModel = {
 })
 @Injectable()
 export class PicturesState {
-  constructor(private pictureService: PictureService) {}
+  constructor(private pictureService: PictureService, private notification: NotificationService) {}
 
   @Selector()
   static getSelectedPicturesPoint(state: PicturesStateModel): PicturePoint {
@@ -56,11 +57,12 @@ export class PicturesState {
     patchState({
       loading: true,
     })
-    return this.pictureService.getImageByLngLat(action.payload).pipe(
+    const distance = action.payload.distance
+    return this.pictureService.getImageByLngLat(action.payload.position, distance.toString()).pipe(
       map((picturePoint: PicturePoint) => dispatch(new LoadPicturesPointSuccess(picturePoint))),
-      catchError((err) => {
-        dispatch(new LoadPicturesPointFailure(err))
-        return of(err)
+      catchError((error) => {
+        dispatch(new LoadPicturesPointFailure({ error, distance }))
+        return of(error)
       })
     )
   }
@@ -79,9 +81,10 @@ export class PicturesState {
   @Action(LoadPicturesPointFailure)
   loadFailure({ patchState }: StateContext<PicturesStateModel>, action: LoadPicturesPointFailure) {
     patchState({
-      error: action.payload,
+      error: action.payload.error,
       loading: false,
     })
+    this.notification.openSnackBar(`Aucun point n'a été trouvé dans un rayon de ${action.payload.distance}m.`)
   }
 
   @Action(ChangeCameraPosition)
