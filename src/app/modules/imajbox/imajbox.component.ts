@@ -52,12 +52,15 @@ AutoUnsubscribe()
           </div>
           <div class="absolute top-0 right-0 m-3">
             <div
-              class="block px-4 p-2 text-sm font-medium leading-5 text-white bg-gray-800 opacity-75 rounded hover:opacity-100"
+              class="block px-4 p-2 text-sm font leading-5 text-white bg-gray-800 opacity-75 rounded hover:opacity-100"
             >
               {{
-                ((selectedPicture$ | async)?.camera | titlecase) +
-                  ' camera &bull; ' +
-                  ((picturesPoint$ | async)?.timestamp | date: 'medium')
+                'Image n°' +
+                  (picturesPoint$ | async)?.id +
+                  ' (' +
+                  (selectedPicture$ | async)?.camera +
+                  ') &bull; ' +
+                  ((picturesPoint$ | async)?.timestamp | date: 'mediumDate')
               }}
             </div>
           </div>
