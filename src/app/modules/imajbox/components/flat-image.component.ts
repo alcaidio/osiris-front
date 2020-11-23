@@ -26,11 +26,11 @@ import { Picture } from '../../../shared/models/maps.model'
     </ng-container>
 
     <img *ngIf="error" class="object-cover h-full w-full" src="assets/images/pages/maps/broken-image.png" />
-    <img
+    <!-- <img
       *ngIf="!picture && !error"
       class="object-cover h-full w-full"
       src="assets/images/pages/maps/image-unvailable.png"
-    />
+    /> -->
   `,
   styles: [
     `
