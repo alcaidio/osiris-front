@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
+import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
 import { CameraPositionType, Picture } from './../../../shared/models/'
 
 @Component({
@@ -316,5 +316,25 @@ export class CarCompassComponent implements OnChanges {
       default:
         console.warn(`No Image available for ${picture}`)
     }
+  }
+
+  @HostListener('document:keydown.alt.arrowup')
+  cameraFront() {
+    this.onClickCamera('front')
+  }
+
+  @HostListener('document:keydown.alt.arrowdown')
+  cameraBack() {
+    this.onClickCamera('back')
+  }
+
+  @HostListener('document:keydown.alt.arrowright')
+  cameraRight() {
+    this.onClickCamera('right')
+  }
+
+  @HostListener('document:keydown.alt.arrowleft')
+  cameraLeft() {
+    this.onClickCamera('left')
   }
 }
