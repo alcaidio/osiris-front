@@ -272,9 +272,11 @@ export class CarCompassComponent implements OnChanges {
       if (changes.hasOwnProperty(propName)) {
         switch (propName) {
           case 'pictures':
-            this.pictures.map((picture) => {
-              this.defineCameraPosition(picture)
-            })
+            if (this.pictures) {
+              this.pictures.map((picture) => {
+                this.defineCameraPosition(picture)
+              })
+            }
             break
         }
       }
