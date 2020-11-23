@@ -140,7 +140,11 @@ export class MapboxComponent implements OnInit, OnChanges {
     this.isLoaded = true
     this.mapInstance = evt
     if (this.point) {
-      this.flyToPoint(this.point)
+      if (!this.mapInBig) {
+        this.flyToPoint(this.point, 17)
+      } else {
+        this.flyToPoint(this.point)
+      }
     }
   }
 

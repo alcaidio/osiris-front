@@ -1,48 +1,48 @@
-import { Component, Input, OnChanges } from '@angular/core'
+import { Component, HostListener, Input, OnChanges } from '@angular/core'
 import { Store } from '@ngxs/store'
 import { ID } from 'app/shared/models'
 import { CameraPositionType, PicturePoint } from '../../../shared/models/maps.model'
-import { GoToNeighbour } from '../store'
 import { NeighboursDirectionType } from './../../../shared/models/maps.model'
+import { GoToNeighbour } from './../store/pictures/pictures.action'
 
 @Component({
   selector: 'app-navigation-perspective',
   template: `
     <div class="wrapper-direction relative">
-      <div
+      <button
         *ngIf="isFrontLeft"
         class="direction absolute direction-top-5 direction-left-5"
         (click)="onClick('front_left')"
       >
         <img [src]="'/assets/icons/direction-turn.svg'" class="front-left" />
-      </div>
-      <div
+      </button>
+      <button
         *ngIf="isFrontRight"
         class="direction absolute direction-top-5 direction-right-5"
         (click)="onClick('front_right')"
       >
         <img [src]="'/assets/icons/direction-turn.svg'" class="front-right" />
-      </div>
-      <div
+      </button>
+      <button
         *ngIf="isBackLeft"
         class="direction absolute direction-bottom-5 direction-left-5"
         (click)="onClick('back_left')"
       >
         <img [src]="'/assets/icons/direction-turn-back.svg'" class="back-left" />
-      </div>
-      <div
+      </button>
+      <button
         *ngIf="isBackRight"
         class="direction absolute direction-bottom-5 direction-right-5"
         (click)="onClick('back_right')"
       >
         <img [src]="'/assets/icons/direction-turn-back.svg'" class="back-right" />
-      </div>
-      <div *ngIf="isFront" class="direction absolute top-0 direction-left-50" (click)="onClick('front')">
+      </button>
+      <button *ngIf="isFront" class="direction absolute top-0 direction-left-50" (click)="onClick('front')">
         <img [src]="'/assets/icons/direction.svg'" class="front" />
-      </div>
-      <div *ngIf="isBack" class="direction absolute bottom-0 direction-left-50" (click)="onClick('back')">
+      </button>
+      <button *ngIf="isBack" class="direction absolute bottom-0 direction-left-50" (click)="onClick('back')">
         <img [src]="'/assets/icons/direction.svg'" class="back" />
-      </div>
+      </button>
     </div>
   `,
   styles: [
@@ -65,7 +65,11 @@ import { NeighboursDirectionType } from './../../../shared/models/maps.model'
 
       .direction:hover {
         background: #11afb6;
-        opacity: 0.4;
+        opacity: 0.5;
+      }
+
+      .direction:active {
+        opacity: 0.75;
       }
 
       .direction-left-50 {
@@ -107,7 +111,7 @@ import { NeighboursDirectionType } from './../../../shared/models/maps.model'
       }
 
       .back {
-        transform: rotate(180deg) translateY(-50%);
+        transform: rotate(180deg) translateY(-25%);
         fill: #ffffff !important;
         filter: drop-shadow(0px -8px 5px rgba(0, 0, 0, 0.75));
       }
@@ -146,7 +150,10 @@ export class NavigationPerspectiveComponent implements OnChanges {
   }
 
   onClick(direction: NeighboursDirectionType) {
-    // TODO test with back right and back left
+    this.goToNeighbour(direction)
+  }
+
+  private goToNeighbour(direction: NeighboursDirectionType) {
     this.store.dispatch(
       new GoToNeighbour(
         this.camera === 'back' || this.camera === 'back-right' || this.camera === 'back-left'
@@ -226,6 +233,38 @@ export class NavigationPerspectiveComponent implements OnChanges {
         this.isBackLeft = true
       } else {
         this.isBackLeft = false
+      }
+    }
+  }
+
+  @HostListener('document:keydown.arrowup')
+  arrowUp() {
+    this.goToNeighbour('front')
+  }
+
+  @HostListener('document:keydown.arrowdown')
+  arrowDown() {
+    this.goToNeighbour('back')
+  }
+
+  @HostListener('document:keydown.arrowright')
+  arrowRight() {
+    if (this.isFrontRight) {
+      this.goToNeighbour('front_right')
+    } else {
+      if (this.isBackRight) {
+        this.goToNeighbour('back_right')
+      }
+    }
+  }
+
+  @HostListener('document:keydown.arrowleft')
+  arrowLeft() {
+    if (this.isFrontLeft) {
+      this.goToNeighbour('front_left')
+    } else {
+      if (this.isBackLeft) {
+        this.goToNeighbour('back_left')
       }
     }
   }
