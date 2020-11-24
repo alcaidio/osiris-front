@@ -161,6 +161,40 @@ export class PicturesState {
     this.store.dispatch(new Navigate(['/'], { camera }, { queryParamsHandling: 'merge' }))
   }
 
+  @Action(SwitchCameraPosition)
+  switchCameraPosition({ patchState }: StateContext<PicturesStateModel>, action: SwitchCameraPosition) {
+    let camera: CameraPositionType
+    switch (action.payload) {
+      case 'front':
+        camera = 'back'
+        break
+      case 'back':
+        camera = 'front'
+        break
+      case 'right':
+        camera = 'left'
+        break
+      case 'left':
+        camera = 'right'
+        break
+      case 'front-right':
+        camera = 'back-left'
+        break
+      case 'front-left':
+        camera = 'back-right'
+        break
+      case 'back-right':
+        camera = 'front-left'
+        break
+      case 'back-left':
+        camera = 'front-right'
+        break
+    }
+    patchState({
+      selectedCamera: camera,
+    })
+  }
+
   @Action(GoToNeighbour)
   goToNeighbour({ dispatch, getState }: StateContext<PicturesStateModel>, action: GoToNeighbour) {
     const state = getState()
