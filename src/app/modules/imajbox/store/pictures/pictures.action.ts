@@ -26,6 +26,11 @@ export class ChangeCameraPosition {
   constructor(public payload: CameraPositionType) {}
 }
 
+export class SwitchCameraPosition {
+  static readonly type = '[Imajbox - Pictures] Switch camera position'
+  constructor(public payload: CameraPositionType) {}
+}
+
 export class GoToNeighbour {
   static readonly type = '[Imajbox - Pictures] Go to neighbour'
   constructor(public payload: NeighboursDirectionType) {}

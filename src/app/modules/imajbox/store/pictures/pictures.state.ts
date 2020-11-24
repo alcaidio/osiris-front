@@ -13,6 +13,7 @@ import {
   LoadPicturesPointByLngLat,
   LoadPicturesPointFailure,
   LoadPicturesPointSuccess,
+  SwitchCameraPosition,
 } from './pictures.action'
 
 export interface PicturesStateModel {
@@ -111,6 +112,40 @@ export class PicturesState {
   changeCameraPosition({ patchState }: StateContext<PicturesStateModel>, action: ChangeCameraPosition) {
     patchState({
       selectedCamera: action.payload,
+    })
+  }
+
+  @Action(SwitchCameraPosition)
+  switchCameraPosition({ patchState }: StateContext<PicturesStateModel>, action: SwitchCameraPosition) {
+    let camera: CameraPositionType
+    switch (action.payload) {
+      case 'front':
+        camera = 'back'
+        break
+      case 'back':
+        camera = 'front'
+        break
+      case 'right':
+        camera = 'left'
+        break
+      case 'left':
+        camera = 'right'
+        break
+      case 'front-right':
+        camera = 'back-left'
+        break
+      case 'front-left':
+        camera = 'back-right'
+        break
+      case 'back-right':
+        camera = 'front-left'
+        break
+      case 'back-left':
+        camera = 'front-right'
+        break
+    }
+    patchState({
+      selectedCamera: camera,
     })
   }
 

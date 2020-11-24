@@ -1,7 +1,7 @@
-import { Component, HostListener, Input, OnChanges } from '@angular/core'
+import { Component, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core'
 import { Store } from '@ngxs/store'
 import { ID } from 'app/shared/models'
-import { CameraPositionType, PicturePoint } from '../../../shared/models/maps.model'
+import { Picture, PicturePoint } from '../../../shared/models/maps.model'
 import { NeighboursDirectionType } from './../../../shared/models/maps.model'
 import { GoToNeighbour } from './../store/pictures/pictures.action'
 
@@ -132,7 +132,10 @@ import { GoToNeighbour } from './../store/pictures/pictures.action'
 })
 export class NavigationPerspectiveComponent implements OnChanges {
   @Input() picturePoint: PicturePoint
-  @Input() camera: CameraPositionType
+  @Input() picture: Picture
+
+  previousDirection: number
+  previousAction: NeighboursDirectionType
 
   isFront = false
   isBack = false
@@ -143,9 +146,17 @@ export class NavigationPerspectiveComponent implements OnChanges {
 
   constructor(private store: Store) {}
 
-  ngOnChanges() {
-    if (this.picturePoint) {
-      this.addDirectionIcon(this.picturePoint.neighbours)
+  ngOnChanges(changes: SimpleChanges) {
+    for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        switch (propName) {
+          case 'picturePoint':
+            if (this.picturePoint) {
+              this.addDirectionIcon(this.picturePoint.neighbours)
+            }
+            break
+        }
+      }
     }
   }
 
@@ -154,13 +165,15 @@ export class NavigationPerspectiveComponent implements OnChanges {
   }
 
   private goToNeighbour(direction: NeighboursDirectionType) {
-    this.store.dispatch(
-      new GoToNeighbour(
-        this.camera === 'back' || this.camera === 'back-right' || this.camera === 'back-left'
-          ? this.adaptDirection(direction)
-          : direction
+    if (this.picture) {
+      this.store.dispatch(
+        new GoToNeighbour(
+          this.picture.camera === 'back' || this.picture.camera === 'back-right' || this.picture.camera === 'back-left'
+            ? this.adaptDirection(direction)
+            : direction
+        )
       )
-    )
+    }
   }
 
   private adaptDirection(direction: NeighboursDirectionType): NeighboursDirectionType {
@@ -181,18 +194,17 @@ export class NavigationPerspectiveComponent implements OnChanges {
   }
 
   private addDirectionIcon(neighbours: { [id: string]: ID }) {
-    if (neighbours['front']) {
-      this.isFront = true
-    } else {
-      this.isFront = false
-    }
-    if (neighbours['back']) {
-      this.isBack = true
-    } else {
-      this.isBack = false
-    }
-
-    if (this.camera === 'back') {
+    if (this.picture && this.picture.camera === 'back') {
+      if (neighbours['back']) {
+        this.isFront = true
+      } else {
+        this.isFront = false
+      }
+      if (neighbours['front']) {
+        this.isBack = true
+      } else {
+        this.isBack = false
+      }
       if (neighbours['front_right']) {
         this.isBackLeft = true
       } else {
@@ -214,6 +226,16 @@ export class NavigationPerspectiveComponent implements OnChanges {
         this.isFrontRight = false
       }
     } else {
+      if (neighbours['front']) {
+        this.isFront = true
+      } else {
+        this.isFront = false
+      }
+      if (neighbours['back']) {
+        this.isBack = true
+      } else {
+        this.isBack = false
+      }
       if (neighbours['front_right']) {
         this.isFrontRight = true
       } else {

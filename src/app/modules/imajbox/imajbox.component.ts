@@ -67,7 +67,7 @@ AutoUnsubscribe()
           <div class="navigation-perspective">
             <app-navigation-perspective
               [picturePoint]="picturesPoint$ | async"
-              [camera]="(selectedPicture$ | async)?.camera"
+              [picture]="(selectedPicture$ | async)"
             ></app-navigation-perspective>
           </div>
         </ng-container>

@@ -103,7 +103,7 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
                 class="cursor-pointer"
                 src="assets/images/pages/maps/camera.svg"
                 [style.transform]="'rotate(' + cameraRotation + 'deg)'"
-                (click)="flyToPoint(this.point, 17)"
+                (click)="easeToPoint(this.point, 17)"
               />
             </div>
           </mgl-marker>
@@ -141,9 +141,9 @@ export class MapboxComponent implements OnInit, OnChanges {
     this.mapInstance = evt
     if (this.point) {
       if (!this.mapInBig) {
-        this.flyToPoint(this.point, 17)
+        this.easeToPoint(this.point, 17)
       } else {
-        this.flyToPoint(this.point)
+        this.easeToPoint(this.point)
       }
     }
   }
@@ -153,7 +153,7 @@ export class MapboxComponent implements OnInit, OnChanges {
       if (changes.hasOwnProperty(propName)) {
         switch (propName) {
           case 'point':
-            this.flyToPoint(this.point)
+            this.easeToPoint(this.point)
             break
         }
       }
@@ -180,12 +180,12 @@ export class MapboxComponent implements OnInit, OnChanges {
     return visible ? 'visible' : 'none'
   }
 
-  flyToPoint(point: GeoJSON.Point, zoom?: number): void {
+  easeToPoint(point: GeoJSON.Point, zoom?: number): void {
     if (point && this.mapInstance) {
       if (zoom) {
-        this.mapInstance.flyTo({ center: [point.coordinates[0], point.coordinates[1]], zoom: zoom })
+        this.mapInstance.easeTo({ center: [point.coordinates[0], point.coordinates[1]], zoom: zoom })
       } else {
-        this.mapInstance.flyTo({ center: [point.coordinates[0], point.coordinates[1]] })
+        this.mapInstance.easeTo({ center: [point.coordinates[0], point.coordinates[1]] })
       }
     }
   }
