@@ -1,10 +1,30 @@
 import { Injectable } from '@angular/core'
-import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { Navigate } from '@ngxs/router-plugin'
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { PictureService } from '../../services/picture.service'
 import { BaseMap } from './../../../../shared/models/maps.model'
-import { LoadBaseMap, LoadBaseMapFailure, LoadBaseMapSuccess, SetMapConfig } from './base-map.action'
+import {
+  LoadBaseMap,
+  LoadBaseMapFailure,
+  LoadBaseMapSuccess,
+  LoadBaseMapWithParams,
+  SetMapConfig,
+} from './base-map.action'
+
+export const convertBounds = (bound: any): number[] => {
+  return [bound._sw.lng, bound._sw.lat, bound._ne.lng, bound._ne.lat]
+}
+
+export const convertBoundsFromUrlAndVerify = (bounds: string): number[] => {
+  if (bounds) {
+    const b = bounds.split(',')
+    if (+b[0] && +b[1] && +b[2] && +b[3]) {
+      return [+b[0], +b[1], +b[2], +b[3]]
+    }
+  }
+}
 
 export interface BaseMapStateModel {
   model: BaseMap | null
@@ -26,7 +46,7 @@ export const baseMapStateDefaults: BaseMapStateModel = {
 })
 @Injectable()
 export class BaseMapState {
-  constructor(private pictureService: PictureService) {}
+  constructor(private pictureService: PictureService, private store: Store) {}
 
   @Selector()
   static getMap(state: BaseMapStateModel): any {
@@ -61,6 +81,10 @@ export class BaseMapState {
       loading: false,
       loaded: true,
     })
+
+    const bounds = action.payload.config.bounds
+    const bbox = `${bounds[0].toFixed(5)},${bounds[1].toFixed(5)},${bounds[2].toFixed(5)},${bounds[3].toFixed(5)}`
+    this.store.dispatch(new Navigate(['/'], { bbox }))
   }
 
   @Action(LoadBaseMapFailure)
@@ -75,11 +99,15 @@ export class BaseMapState {
   @Action(SetMapConfig)
   saveMap({ getState, patchState }: StateContext<BaseMapStateModel>, action: SetMapConfig) {
     const state = getState()
+    const newConfig = { ...state.model.config, ...action.payload }
     patchState({
       model: {
         ...state.model,
-        config: { ...state.model.config, ...action.payload },
+        config: newConfig,
       },
     })
+    const bounds = newConfig.bounds
+    const bbox = `${bounds[0].toFixed(5)},${bounds[1].toFixed(5)},${bounds[2].toFixed(5)},${bounds[3].toFixed(5)}`
+    this.store.dispatch(new Navigate(['/'], { bbox }))
   }
 }

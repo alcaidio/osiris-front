@@ -11,6 +11,7 @@ import {
 } from '@angular/core'
 import { Map, Visibility } from 'mapbox-gl'
 import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model'
+import { convertBounds } from './../store/base-map/base-map.state'
 
 @Component({
   selector: 'app-mapbox',
@@ -24,8 +25,6 @@ import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model
       [bounds]="config.bounds"
       [bearing]="config.bearing"
       [pitch]="config.pitch === null ? 0 : config.pitch"
-      [zoom]="config.zoom"
-      [center]="config.center"
       [maxBounds]="config.maxBounds"
       [minZoom]="config.minZoom === null ? 0 : config.minZoom"
       [maxZoom]="config.maxZoom === null ? 25 : config.maxZoom"
@@ -187,6 +186,7 @@ export class MapboxComponent implements OnInit, OnChanges {
       } else {
         this.mapInstance.easeTo({ center: [point.coordinates[0], point.coordinates[1]] })
       }
+      this.mapConfig.emit(this.baseMapConfig)
     }
   }
 
@@ -201,7 +201,7 @@ export class MapboxComponent implements OnInit, OnChanges {
       zoom: this.mapInstance.getZoom(),
       pitch: this.mapInstance.getPitch(),
       bearing: this.mapInstance.getBearing(),
-      bounds: this.mapInstance.getBounds(),
+      bounds: convertBounds(this.mapInstance.getBounds()) as any,
     }
   }
 }

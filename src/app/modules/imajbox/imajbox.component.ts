@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
-import { BaseMap, MapConfig, Picture, PicturePoint } from '../../shared/models'
-import { CameraPositionType } from './../../shared/models/maps.model'
+import { BaseMap, CameraPositionType, MapConfig, Picture, PicturePoint } from '../../shared/models'
 import {
   BaseMapState,
   ChangeCameraPosition,
@@ -67,7 +67,7 @@ AutoUnsubscribe()
           <div class="navigation-perspective">
             <app-navigation-perspective
               [picturePoint]="picturesPoint$ | async"
-              [picture]="(selectedPicture$ | async)"
+              [picture]="selectedPicture$ | async"
             ></app-navigation-perspective>
           </div>
         </ng-container>
@@ -247,7 +247,7 @@ export class ImajboxComponent implements OnInit, OnDestroy {
   mapIsLoaded = false
   dragEnd = false
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.store.dispatch(new LoadBaseMap())
