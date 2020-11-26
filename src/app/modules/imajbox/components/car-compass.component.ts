@@ -11,6 +11,7 @@ import { CameraPositionType, Picture } from './../../../shared/models/'
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       class="h-28 w-28"
+      *ngIf="pictures"
     >
       <g filter="url(#filter0_b)" *ngIf="isFront" (click)="onClickCamera('front')">
         <path

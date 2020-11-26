@@ -4,8 +4,8 @@ import { Select, Store } from '@ngxs/store'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
-import { BaseMap, CameraPositionType, MapConfig, Picture, PicturePoint } from '../../shared/models'
-import { RouterSelectors } from './../../core/store/states/router.state.selector'
+import { RouterSelectors } from '../../../core/store/states/router.state.selector'
+import { BaseMap, CameraPositionType, MapConfig, Picture, PicturePoint } from '../../../shared/models'
 import {
   BaseMapState,
   ChangeCameraPosition,
@@ -20,7 +20,7 @@ import {
   ToggleForeground,
   ToggleMinimize,
   UiState,
-} from './store'
+} from '../store'
 
 export enum QueryParamsFromImajebox {
   bbox = 'bbox',
@@ -51,37 +51,52 @@ AutoUnsubscribe()
             (loaded)="mapIsLoaded = $event"
             [dragend]="dragEnd"
           ></app-mapbox>
-          <div class="absolute right-0 top-105" *ngIf="mapIsLoaded">
+          <div class="absolute right-0 top-and-marge" *ngIf="mapIsLoaded">
             <app-drag-and-search (dragEnd)="dragEnd = true"></app-drag-and-search>
+          </div>
+
+          <div class="absolute top-0 right m-3">
+            <button
+              mat-mini-fab
+              color="accent"
+              [matTooltip]="'Changer de template'"
+              matTooltipPosition="before"
+              class="relative"
+              routerLink="./split"
+            >
+              <mat-icon>looks_one</mat-icon>
+            </button>
           </div>
         </ng-container>
         <ng-container *ngIf="imageInBig$ | async">
           <app-flat-image [picture]="selectedPicture$ | async" [zoom]="true" class="relative"></app-flat-image>
-          <div class="absolute bottom-0 right-0 mb-2 mr-1">
+          <div class="absolute bottom-0 right-0 mb-6 mr-2">
             <app-car-compass
               [pictures]="(picturesPoint$ | async)?.pictures"
               [selected]="(selectedPicture$ | async)?.camera"
               (camera)="onChangeCameraPosition($event)"
             ></app-car-compass>
           </div>
-          <div class="absolute bottom-0 left-0 m-3" *ngIf="selectedPicture$ | async">
-            <div
-              class="block px-4 p-2 text-sm font leading-5 text-white bg-gray-800 opacity-75 rounded hover:opacity-100"
+          <div class="absolute bottom-0 left-0 m-3">
+            <app-image-infos [point]="picturesPoint$ | async" [picture]="selectedPicture$ | async"></app-image-infos>
+          </div>
+          <div class="absolute top-0 right-0 m-3">
+            <button
+              mat-mini-fab
+              color="accent"
+              [matTooltip]="'Changer de template'"
+              matTooltipPosition="before"
+              class="relative"
+              routerLink="./split"
             >
-              {{
-                'Camera ' +
-                  ((selectedPicture$ | async)?.camera | titlecase) +
-                  ' &bull; ' +
-                  ((picturesPoint$ | async)?.timestamp | date: 'medium')
-              }}
-            </div>
+              <mat-icon>looks_one</mat-icon>
+            </button>
           </div>
-          <div class="navigation-perspective">
-            <app-navigation-perspective
-              [picturePoint]="picturesPoint$ | async"
-              [picture]="selectedPicture$ | async"
-            ></app-navigation-perspective>
-          </div>
+
+          <app-navigation-perspective
+            [picturePoint]="picturesPoint$ | async"
+            [picture]="selectedPicture$ | async"
+          ></app-navigation-perspective>
         </ng-container>
       </ng-container>
 
@@ -235,15 +250,19 @@ AutoUnsubscribe()
         cursor: help;
       }
 
-      .top-105 {
-        top: 105px;
+      .top-and-marge {
+        top: 100px;
+        margin: 10px 10px 0 0;
       }
 
-      .navigation-perspective {
+      .right {
+        right: 50px;
+      }
+
+      app-navigation-perspective {
         position: absolute;
-        bottom: -15px;
+        bottom: 30px;
         left: calc(50% - 150px);
-        margin: 5px;
       }
     `,
   ],
@@ -259,6 +278,8 @@ export class ImajboxComponent implements OnInit, OnDestroy {
   @Select(RouterSelectors.queryParams) queryParams$: Observable<Params>
   mapIsLoaded = false
   dragEnd = false
+
+  myFlagForSlideToggle = true
 
   constructor(private store: Store) {}
 

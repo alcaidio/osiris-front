@@ -90,7 +90,9 @@
     "mapbox": {
       "search": "Rechercher"
     },
-    "car": "Changez de caméra en cliquant sur un des triangles.", 
-    "no-point-found": "Aucun point n'a été trouvé dans un rayon de {{ distance }}m."
+    "car": "Changez de caméra en cliquant sur un des triangles.",
+    "no-point-found": "Aucun point n'a été trouvé dans un rayon de {{ distance }}m.",
+    "drag-man": "Faite moi glisser sur la carte où vous souhaitez aller.",
+    "change-template": "Changer le template"
   }
 }

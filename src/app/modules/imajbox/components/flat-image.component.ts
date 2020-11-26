@@ -7,9 +7,9 @@ import { Picture } from '../../../shared/models/maps.model'
   template: `
     <ng-container *ngIf="zoom">
       <img
-        *ngIf="!error && picture"
         appMouseWheel
-        class="object-cover object-bottom-bis h-full w-full"
+        *ngIf="!error && picture"
+        class="relative object-cover object-bottom-bis h-full w-full"
         [src]="picture.path"
         (error)="onError()"
         (load)="onLoaded()"
@@ -18,14 +18,14 @@ import { Picture } from '../../../shared/models/maps.model'
     <ng-container *ngIf="!zoom">
       <img
         *ngIf="!error && picture"
-        class="object-cover object-bottom-bis h-full w-full"
+        class="relative object-cover object-bottom-bis h-full w-full"
         [src]="picture.path"
         (error)="onError()"
         (load)="onLoaded()"
       />
     </ng-container>
 
-    <img *ngIf="error" class="object-cover h-full w-full" src="assets/images/pages/maps/broken-image.png" />
+    <img *ngIf="error" class="relative object-cover h-full w-full" src="assets/images/pages/maps/broken-image.png" />
     <!-- <img
       *ngIf="!picture && !error"
       class="object-cover h-full w-full"

@@ -91,6 +91,8 @@
       "search": "Search"
     },
     "car": "You can select a camera by clicking on a triangle.",
-    "no-point-found": "No point was found within {{ distance }}m."
+    "no-point-found": "No point was found within {{ distance }}m.",
+    "drag-man": "Drag me on the map where you want to go.",
+    "change-template": "Change the template"
   }
 }

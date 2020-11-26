@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { Navigate } from '@ngxs/router-plugin'
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { SetForeground, SetMinimize, ToggleForeground, ToggleMinimize } from './ui.action'
@@ -19,7 +20,7 @@ export const uiStateDefaults: UiStateModel = {
 })
 @Injectable()
 export class UiState {
-  constructor(private store: Store) {}
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   @Selector()
   static getImageInBig(state: UiStateModel) {
@@ -37,7 +38,9 @@ export class UiState {
     patchState({
       imageInbig: !state.imageInbig,
     })
-    this.store.dispatch(new Navigate(['/'], { image: !state.imageInbig }, { queryParamsHandling: 'merge' }))
+    this.store.dispatch(
+      new Navigate([], { image: !state.imageInbig }, { queryParamsHandling: 'merge', relativeTo: this.route })
+    )
   }
 
   @Action(ToggleMinimize)
@@ -46,7 +49,9 @@ export class UiState {
     patchState({
       minimize: !state.minimize,
     })
-    this.store.dispatch(new Navigate(['/'], { minimize: !state.minimize }, { queryParamsHandling: 'merge' }))
+    this.store.dispatch(
+      new Navigate([], { minimize: !state.minimize }, { queryParamsHandling: 'merge', relativeTo: this.route })
+    )
   }
 
   @Action(SetForeground)
@@ -54,7 +59,9 @@ export class UiState {
     patchState({
       imageInbig: action.payload,
     })
-    this.store.dispatch(new Navigate(['/'], { image: action.payload }, { queryParamsHandling: 'merge' }))
+    this.store.dispatch(
+      new Navigate([], { image: action.payload }, { queryParamsHandling: 'merge', relativeTo: this.route })
+    )
   }
 
   @Action(SetMinimize)
@@ -62,6 +69,8 @@ export class UiState {
     patchState({
       minimize: action.payload,
     })
-    this.store.dispatch(new Navigate(['/'], { minimize: action.payload }, { queryParamsHandling: 'merge' }))
+    this.store.dispatch(
+      new Navigate([], { minimize: action.payload }, { queryParamsHandling: 'merge', relativeTo: this.route })
+    )
   }
 }

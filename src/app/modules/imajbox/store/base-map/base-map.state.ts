@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { Navigate } from '@ngxs/router-plugin'
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { of } from 'rxjs'
@@ -46,7 +47,7 @@ export const baseMapStateDefaults: BaseMapStateModel = {
 })
 @Injectable()
 export class BaseMapState {
-  constructor(private pictureService: PictureService, private store: Store) {}
+  constructor(private pictureService: PictureService, private store: Store, private route: ActivatedRoute) {}
 
   @Selector()
   static getMap(state: BaseMapStateModel): any {
@@ -106,7 +107,7 @@ export class BaseMapState {
 
     const bounds = action.payload.config.bounds
     const bbox = `${bounds[0].toFixed(5)},${bounds[1].toFixed(5)},${bounds[2].toFixed(5)},${bounds[3].toFixed(5)}`
-    this.store.dispatch(new Navigate(['/'], { bbox }, { queryParamsHandling: 'merge' }))
+    this.store.dispatch(new Navigate([], { bbox }, { queryParamsHandling: 'merge', relativeTo: this.route }))
   }
 
   @Action(LoadBaseMapFailure)
@@ -130,6 +131,6 @@ export class BaseMapState {
     })
     const bounds = newConfig.bounds
     const bbox = `${bounds[0].toFixed(5)},${bounds[1].toFixed(5)},${bounds[2].toFixed(5)},${bounds[3].toFixed(5)}`
-    this.store.dispatch(new Navigate(['/'], { bbox }, { queryParamsHandling: 'merge' }))
+    this.store.dispatch(new Navigate([], { bbox }, { queryParamsHandling: 'merge', relativeTo: this.route }))
   }
 }

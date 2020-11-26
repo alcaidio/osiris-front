@@ -20,7 +20,7 @@ import { convertBounds } from './../store/base-map/base-map.state'
     <mgl-map
       id="mapbox"
       *ngIf="config && baselayers"
-      class="h-full w-full"
+      class="h-full w-full relative"
       [style]="baselayers[config.style]?.url"
       [bounds]="config.bounds"
       [bearing]="config.bearing"
@@ -138,12 +138,10 @@ export class MapboxComponent implements OnInit, OnChanges {
     this.loaded.emit(true)
     this.isLoaded = true
     this.mapInstance = evt
-    if (this.point) {
-      if (!this.mapInBig) {
-        this.easeToPoint(this.point, 17)
-      } else {
-        this.easeToPoint(this.point)
-      }
+    if (!this.mapInBig) {
+      this.easeToPoint(this.point, 17)
+    } else {
+      this.easeToPoint(this.point)
     }
   }
 
@@ -152,7 +150,8 @@ export class MapboxComponent implements OnInit, OnChanges {
       if (changes.hasOwnProperty(propName)) {
         switch (propName) {
           case 'point':
-            this.easeToPoint(this.point)
+          case 'position':
+            this.easeToPoint(this.point, 17)
             break
         }
       }

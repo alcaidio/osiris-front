@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 @Component({
   selector: 'app-drag-and-search',
@@ -9,7 +9,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
         cdkDragBoundary=".mapbox"
         cdkDrag
         [matTooltipPosition]="'below'"
-        [matTooltip]="'Faite moi glisser où vous souhaiter aller'"
+        [matTooltip]="tooltip === true ? 'Faite moi glisser où vous souhaiter aller' : ''"
       >
         <div *cdkDragPlaceholder>
           <svg width="20" height="22" viewBox="0 0 20 22" fill="#DDDDDD" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +23,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
         </div>
         accessibility
       </div>
-      <div class="icon" *cdkDragPreview></div>
     </div>
   `,
   styles: [
@@ -31,16 +30,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
       .button {
         height: 29px;
         width: 29px;
-        margin: 10px 10px 0 0;
         background: #fff;
         float: right;
         border-radius: 4px;
         box-shadow: 0 0 0 2px rgb(0, 0, 0, 0.1);
         cursor: grab;
-      }
-      .button:active,
-      .icon {
-        cursor: url('/assets/icons/man.svg'), auto;
       }
       .button:hover {
         background: #f2f2f2;
@@ -50,6 +44,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 })
 export class DragAndSearchComponent implements OnInit {
   @Output() dragEnd = new EventEmitter<void>()
+  @Input() tooltip = true
 
   constructor() {}
 

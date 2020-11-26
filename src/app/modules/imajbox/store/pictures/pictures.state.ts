@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { Navigate } from '@ngxs/router-plugin'
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { of } from 'rxjs'
@@ -46,7 +47,8 @@ export class PicturesState {
   constructor(
     private pictureService: PictureService,
     private notification: NotificationService,
-    private store: Store
+    private store: Store,
+    private route: ActivatedRoute
   ) {}
 
   @Selector()
@@ -70,7 +72,9 @@ export class PicturesState {
     return this.pictureService.getImageByLngLat(position, distance.toString()).pipe(
       map((picturePoint: PicturePoint) => {
         dispatch(new LoadPicturesPointSuccess(picturePoint))
-        this.store.dispatch(new Navigate(['/'], { point: picturePoint.id }, { queryParamsHandling: 'merge' }))
+        this.store.dispatch(
+          new Navigate([], { point: picturePoint.id }, { queryParamsHandling: 'merge', relativeTo: this.route })
+        )
       }),
       catchError((error) => {
         dispatch(new LoadPicturesPointFailure({ error, distance }))
@@ -96,7 +100,6 @@ export class PicturesState {
   @Action(LoadPicturesPointSuccess)
   loadSuccess({ patchState, getState }: StateContext<PicturesStateModel>, action: LoadPicturesPointSuccess) {
     const state = getState()
-    this.store.dispatch(new Navigate(['/'], { point: action.payload.id }, { queryParamsHandling: 'merge' }))
     patchState({
       ids: [...state.ids, action.payload.id],
       entities: { ...state.entities, [action.payload.id]: action.payload },
@@ -123,7 +126,9 @@ export class PicturesState {
     patchState({
       selectedCamera: action.payload,
     })
-    this.store.dispatch(new Navigate(['/'], { camera: action.payload }, { queryParamsHandling: 'merge' }))
+    this.store.dispatch(
+      new Navigate([], { camera: action.payload }, { queryParamsHandling: 'merge', relativeTo: this.route })
+    )
   }
 
   @Action(SwitchCameraPosition)
@@ -158,41 +163,7 @@ export class PicturesState {
     patchState({
       selectedCamera: camera,
     })
-    this.store.dispatch(new Navigate(['/'], { camera }, { queryParamsHandling: 'merge' }))
-  }
-
-  @Action(SwitchCameraPosition)
-  switchCameraPosition({ patchState }: StateContext<PicturesStateModel>, action: SwitchCameraPosition) {
-    let camera: CameraPositionType
-    switch (action.payload) {
-      case 'front':
-        camera = 'back'
-        break
-      case 'back':
-        camera = 'front'
-        break
-      case 'right':
-        camera = 'left'
-        break
-      case 'left':
-        camera = 'right'
-        break
-      case 'front-right':
-        camera = 'back-left'
-        break
-      case 'front-left':
-        camera = 'back-right'
-        break
-      case 'back-right':
-        camera = 'front-left'
-        break
-      case 'back-left':
-        camera = 'front-right'
-        break
-    }
-    patchState({
-      selectedCamera: camera,
-    })
+    this.store.dispatch(new Navigate([], { camera }, { queryParamsHandling: 'merge', relativeTo: this.route }))
   }
 
   @Action(GoToNeighbour)
@@ -200,6 +171,6 @@ export class PicturesState {
     const state = getState()
     const pointId = state.entities[state.selectedPointId].neighbours[action.payload]
     dispatch(new LoadPicturesPointById(pointId))
-    this.store.dispatch(new Navigate(['/'], { point: pointId }, { queryParamsHandling: 'merge' }))
+    this.store.dispatch(new Navigate([], { point: pointId }, { queryParamsHandling: 'merge', relativeTo: this.route }))
   }
 }

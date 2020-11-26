@@ -54,6 +54,7 @@
     "@ngxs/store": "^3.6.2",
     "@sentry/angular": "^5.25.0",
     "@sentry/tracing": "^5.25.0",
+    "@turf/center": "^6.0.1",
     "apexcharts": "3.19.3",
     "crypto-js": "3.3.0",
     "highlight.js": "10.1.1",

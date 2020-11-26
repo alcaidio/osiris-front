@@ -1,14 +1,13 @@
 import { Directive, ElementRef, HostListener } from '@angular/core'
 
 @Directive({
-  selector: '[appMouseWheel]'
+  selector: '[appMouseWheel]',
 })
 export class MouseWheelDirective {
-
-  scale = 1
   // TODO add translate to zoom on cursor : https://jsfiddle.net/oepyf6hL/
-  // position = { x: -100, y: -200 }
-  // this.el.nativeElement.style.setProperty('transform', `scale(${this.scale}) translate(${-this.position.x}px, ${-this.position.y}px)`)
+  // position = { x: 0, y: 0 }
+  // target = { x: 0, y: 0 }
+  scale = 1
 
   constructor(private el: ElementRef) {}
 
@@ -16,27 +15,33 @@ export class MouseWheelDirective {
     this.mouseWheelFunc(event, 5, 0.2)
   }
 
-  mouseWheelFunc(event: any, maxScale: number, step: number) {
-    const delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)))
+  private update() {
+    this.el.nativeElement.style.setProperty('transform', `scale(${this.scale}) `)
+  }
 
-    
+  private mouseWheelFunc(event: any, maxScale: number, step: number) {
+    const delta = Math.max(-1, Math.min(1, event.wheelDelta || -event.detail))
+    const { layerX, layerY } = event
+
     if (delta > 0) {
-      if (this.scale < (maxScale + step)) {
+      // zoom
+      if (this.scale < maxScale - step) {
         this.scale += step
-        this.el.nativeElement.style.setProperty('transform', `scale(${this.scale})`)
+        this.update()
       } else {
         this.scale = maxScale
       }
-    } else if (delta < 0) {
-      if (this.scale > (1 + step)) {
+    } else {
+      // dezoom
+      if (this.scale > 1) {
         this.scale -= step
-        this.el.nativeElement.style.setProperty('transform', `scale(${this.scale})`)
+        this.update()
       } else {
         this.scale = 1
       }
     }
     if (event.preventDefault) {
-        event.preventDefault()
+      event.preventDefault()
     }
   }
 }

@@ -28,6 +28,7 @@ import { environment } from './../../environments/environment'
 import { BuildingsLayerComponent } from './components/buildings-layer.component'
 import { SettingsDialogComponent } from './components/settings-dialog.component'
 import { TemplateOneComponent } from './components/template-one.component'
+import { TemplateThreeComponent } from './components/template-three.component'
 import { TemplateTwoComponent } from './components/template-two.component'
 import { MouseWheelDirective } from './directives/mouse-wheel.directive'
 
@@ -61,6 +62,7 @@ const MATERIAL = [
     TemplateTwoComponent,
     BuildingsLayerComponent,
     SettingsDialogComponent,
+    TemplateThreeComponent,
   ],
   imports: [
     CommonModule,
@@ -84,6 +86,7 @@ const MATERIAL = [
     MouseWheelDirective,
     BuildingsLayerComponent,
     SettingsDialogComponent,
+    TemplateThreeComponent,
     MATERIAL,
   ],
 })

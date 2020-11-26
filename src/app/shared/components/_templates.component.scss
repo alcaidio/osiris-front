@@ -74,3 +74,11 @@ body {
     margin: 0 auto;
   }
 }
+
+.h-screen-custom {
+  height: calc(100vh - 64px) !important;
+}
+
+.min-h-screen-custom {
+  min-height: calc(100vh - 64px) !important;
+}

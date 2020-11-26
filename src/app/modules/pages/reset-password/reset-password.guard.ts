@@ -34,8 +34,6 @@ export class ResetPasswordGuard implements Resolve<any> {
       }),
       mergeMap((something) => {
         if (something) {
-          console.log(something)
-
           return of(something)
         } else {
           return EMPTY
