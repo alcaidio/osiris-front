@@ -16,8 +16,9 @@ import { mockDataServices } from 'app/data/mock'
 import { LayoutModule } from 'app/layout/layout.module'
 import { environment } from 'environments/environment'
 import { MarkdownModule } from 'ngx-markdown'
-import { AppRoutingModule, CustomRouterStateSerializer } from './app.routing'
+import { AppRoutingModule } from './app.routing'
 import { httpLoader } from './core/i18n/transloco.loader'
+import { CustomRouterStateSerializer } from './core/store/states/router.state.serializer'
 import { SharedModule } from './shared/shared.module'
 
 @NgModule({
