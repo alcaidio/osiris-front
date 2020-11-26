@@ -151,6 +151,7 @@ export class NavigationPerspectiveComponent implements OnChanges {
       if (changes.hasOwnProperty(propName)) {
         switch (propName) {
           case 'picturePoint':
+          case 'picture':
             if (this.picturePoint) {
               this.addDirectionIcon(this.picturePoint.neighbours)
             }

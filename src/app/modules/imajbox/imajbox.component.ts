@@ -64,17 +64,15 @@ AutoUnsubscribe()
               (camera)="onChangeCameraPosition($event)"
             ></app-car-compass>
           </div>
-          <div class="absolute top-0 right-0 m-3">
+          <div class="absolute bottom-0 left-0 m-3" *ngIf="selectedPicture$ | async">
             <div
               class="block px-4 p-2 text-sm font leading-5 text-white bg-gray-800 opacity-75 rounded hover:opacity-100"
             >
               {{
-                'Image n°' +
-                  (picturesPoint$ | async)?.id +
-                  ' (' +
-                  (selectedPicture$ | async)?.camera +
-                  ') &bull; ' +
-                  ((picturesPoint$ | async)?.timestamp | date: 'mediumDate')
+                'Camera ' +
+                  ((selectedPicture$ | async)?.camera | titlecase) +
+                  ' &bull; ' +
+                  ((picturesPoint$ | async)?.timestamp | date: 'medium')
               }}
             </div>
           </div>
