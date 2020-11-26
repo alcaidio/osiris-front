@@ -74,6 +74,28 @@ export class BaseMapState {
     }
   }
 
+  @Action(LoadBaseMapWithParams)
+  loadWithParams({ getState, dispatch, patchState }: StateContext<BaseMapStateModel>, action: LoadBaseMapWithParams) {
+    if (!getState().loaded) {
+      patchState({
+        loading: true,
+      })
+      return this.pictureService.getBaseMap().pipe(
+        map((baseMap: BaseMap) => {
+          const baseMapWithParams = {
+            ...baseMap,
+            config: { ...baseMap.config, bounds: convertBoundsFromUrlAndVerify(action.payload) },
+          }
+          dispatch(new LoadBaseMapSuccess(baseMapWithParams as any))
+        }),
+        catchError((err) => {
+          dispatch(new LoadBaseMapFailure(err))
+          return of(err)
+        })
+      )
+    }
+  }
+
   @Action(LoadBaseMapSuccess)
   loadSuccess({ patchState }: StateContext<BaseMapStateModel>, action: LoadBaseMapSuccess) {
     patchState({
@@ -84,7 +106,7 @@ export class BaseMapState {
 
     const bounds = action.payload.config.bounds
     const bbox = `${bounds[0].toFixed(5)},${bounds[1].toFixed(5)},${bounds[2].toFixed(5)},${bounds[3].toFixed(5)}`
-    this.store.dispatch(new Navigate(['/'], { bbox }))
+    this.store.dispatch(new Navigate(['/'], { bbox }, { queryParamsHandling: 'merge' }))
   }
 
   @Action(LoadBaseMapFailure)
@@ -108,6 +130,6 @@ export class BaseMapState {
     })
     const bounds = newConfig.bounds
     const bbox = `${bounds[0].toFixed(5)},${bounds[1].toFixed(5)},${bounds[2].toFixed(5)},${bounds[3].toFixed(5)}`
-    this.store.dispatch(new Navigate(['/'], { bbox }))
+    this.store.dispatch(new Navigate(['/'], { bbox }, { queryParamsHandling: 'merge' }))
   }
 }

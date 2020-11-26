@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
-import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { Navigate } from '@ngxs/router-plugin'
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { NotificationService } from '../../../../shared/services/notification.service'
@@ -42,7 +43,11 @@ export const picturesStateDefaults: PicturesStateModel = {
 })
 @Injectable()
 export class PicturesState {
-  constructor(private pictureService: PictureService, private notification: NotificationService) {}
+  constructor(
+    private pictureService: PictureService,
+    private notification: NotificationService,
+    private store: Store
+  ) {}
 
   @Selector()
   static getSelectedPicturesPoint(state: PicturesStateModel): PicturePoint {
@@ -61,8 +66,12 @@ export class PicturesState {
       loading: true,
     })
     const distance = action.payload.distance
-    return this.pictureService.getImageByLngLat(action.payload.position, distance.toString()).pipe(
-      map((picturePoint: PicturePoint) => dispatch(new LoadPicturesPointSuccess(picturePoint))),
+    const position = action.payload.position
+    return this.pictureService.getImageByLngLat(position, distance.toString()).pipe(
+      map((picturePoint: PicturePoint) => {
+        dispatch(new LoadPicturesPointSuccess(picturePoint))
+        this.store.dispatch(new Navigate(['/'], { point: picturePoint.id }, { queryParamsHandling: 'merge' }))
+      }),
       catchError((error) => {
         dispatch(new LoadPicturesPointFailure({ error, distance }))
         return of(error)
@@ -75,7 +84,7 @@ export class PicturesState {
     patchState({
       loading: true,
     })
-    return this.pictureService.getImageById(action.payload).pipe(
+    return this.pictureService.getImageById(+action.payload).pipe(
       map((picturePoint: PicturePoint) => dispatch(new LoadPicturesPointSuccess(picturePoint))),
       catchError((error) => {
         dispatch(new LoadPicturesPointFailure({ error }))
@@ -87,6 +96,7 @@ export class PicturesState {
   @Action(LoadPicturesPointSuccess)
   loadSuccess({ patchState, getState }: StateContext<PicturesStateModel>, action: LoadPicturesPointSuccess) {
     const state = getState()
+    this.store.dispatch(new Navigate(['/'], { point: action.payload.id }, { queryParamsHandling: 'merge' }))
     patchState({
       ids: [...state.ids, action.payload.id],
       entities: { ...state.entities, [action.payload.id]: action.payload },
@@ -113,6 +123,7 @@ export class PicturesState {
     patchState({
       selectedCamera: action.payload,
     })
+    this.store.dispatch(new Navigate(['/'], { camera: action.payload }, { queryParamsHandling: 'merge' }))
   }
 
   @Action(SwitchCameraPosition)
@@ -147,6 +158,7 @@ export class PicturesState {
     patchState({
       selectedCamera: camera,
     })
+    this.store.dispatch(new Navigate(['/'], { camera }, { queryParamsHandling: 'merge' }))
   }
 
   @Action(GoToNeighbour)
@@ -154,5 +166,6 @@ export class PicturesState {
     const state = getState()
     const pointId = state.entities[state.selectedPointId].neighbours[action.payload]
     dispatch(new LoadPicturesPointById(pointId))
+    this.store.dispatch(new Navigate(['/'], { point: pointId }, { queryParamsHandling: 'merge' }))
   }
 }

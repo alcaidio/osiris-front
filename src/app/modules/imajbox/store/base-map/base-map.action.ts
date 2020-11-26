@@ -6,7 +6,7 @@ export class LoadBaseMap {
 
 export class LoadBaseMapWithParams {
   static readonly type = '[Imajbox - Base Map] Load with params bounds'
-  constructor(public payload: number[]) {}
+  constructor(public payload: string) {}
 }
 
 export class LoadBaseMapSuccess {

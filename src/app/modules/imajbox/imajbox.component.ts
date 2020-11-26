@@ -1,20 +1,34 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { Params } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
+import { take } from 'rxjs/operators'
 import { BaseMap, CameraPositionType, MapConfig, Picture, PicturePoint } from '../../shared/models'
+import { RouterSelectors } from './../../core/store/states/router.state.selector'
 import {
   BaseMapState,
   ChangeCameraPosition,
   LoadBaseMap,
+  LoadBaseMapWithParams,
+  LoadPicturesPointById,
   LoadPicturesPointByLngLat,
   PicturesState,
+  SetForeground,
   SetMapConfig,
+  SetMinimize,
   ToggleForeground,
   ToggleMinimize,
   UiState,
 } from './store'
+
+export enum QueryParamsFromImajebox {
+  bbox = 'bbox',
+  image = 'image',
+  point = 'point',
+  minimize = 'minimize',
+  camera = 'camera',
+}
 
 AutoUnsubscribe()
 @Component({
@@ -244,13 +258,42 @@ export class ImajboxComponent implements OnInit, OnDestroy {
   @Select(UiState.getMinimize) minimize$: Observable<boolean>
   @Select(PicturesState.getSelectedPicturesPoint) picturesPoint$: Observable<PicturePoint>
   @Select(PicturesState.getSelectedPicture) selectedPicture$: Observable<Picture>
+  @Select(RouterSelectors.queryParams) queryParams$: Observable<Params>
   mapIsLoaded = false
   dragEnd = false
 
-  constructor(private store: Store, private route: ActivatedRoute) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadBaseMap())
+    this.queryParams$.pipe(take(1)).subscribe((queryParams) => {
+      this.initState(queryParams)
+    })
+  }
+
+  private initState(params: Params) {
+    const bbox = params[QueryParamsFromImajebox.bbox]
+    const point = params[QueryParamsFromImajebox.point]
+    const minimize = params[QueryParamsFromImajebox.minimize]
+    const image = params[QueryParamsFromImajebox.image]
+    const camera = params[QueryParamsFromImajebox.camera]
+
+    if (bbox) {
+      this.store.dispatch(new LoadBaseMapWithParams(bbox))
+    } else {
+      this.store.dispatch(new LoadBaseMap())
+    }
+    if (point) {
+      this.store.dispatch(new LoadPicturesPointById(point))
+    }
+    if (minimize) {
+      this.store.dispatch(new SetMinimize(minimize))
+    }
+    if (image) {
+      this.store.dispatch(new SetForeground(image))
+    }
+    if (camera) {
+      this.store.dispatch(new ChangeCameraPosition(camera))
+    }
   }
 
   onToggleForeground(): void {
