@@ -25,7 +25,8 @@ export class LoginPageState {
 
   @Selector()
   static getErrorMessage(state: LoginPageStateModel) {
-    return state.error['error'].message
+    // see http core interceptor
+    return state.error
   }
 
   @Selector()

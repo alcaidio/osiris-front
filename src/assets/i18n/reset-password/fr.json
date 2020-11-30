@@ -10,5 +10,18 @@
   "button": "Réinitialisez",
   "footer": "Revenir à",
   "signin": "connexion",
-  "message": "Votre mot de passe a bien été réinitialisé."
+  "message": "Votre mot de passe a bien été réinitialisé.",
+
+  "server.auth.auth.error.wrong_email": "L'email n'est pas référencé dans notre base de donnée.",
+  "server.auth.error.bad_credentials": "Votre e-mail et votre mot de passe ne correspondent pas.",
+  "server.auth.error.disabled_account": "Votre compte n'est plus actif.",
+  "server.auth.error.locked_account": "Votre compte est verrouillé.",
+  "server.auth.error.authentication_failure": "L'authentification a échoué.",
+  "server.auth.error.internal_server": "Erreur interne du serveur.",
+  "server.auth.error.wrong_password": "Erreur dans la saisie de votre mot de passe actuel.",
+  "server.auth.error.password_modification_failure": "Votre mot de passe n'a pas pu être modifié.",
+  "server.auth.ok.password_modified": "Votre mot de passe a bien été modifié.",
+  "server.auth.error.wrong_email": "Aucun compte ne correspond à cet e-mail.",
+  "server.auth.ok.valid_uuid": "Lien d'accès à la page valide.",
+  "server.auth.error.expired_uuid": "Votre lien d'accès à cette page a expiré."
 }

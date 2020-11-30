@@ -17,11 +17,12 @@ export class AuthService {
   }
 
   forgottenPasswordRequest(email: string): Observable<string> {
-    return this.http.post<string>(`${this.api}/auth/forgottenpassword/mail-request`, email)
+    return this.http.post<string>(`${this.api}/auth/forgottenpassword/mail-request`, email, { responseType: 'json' })
   }
 
-  forgottenPasswordValidation(body: { email: string; uuid: string }): Observable<string> {
-    return this.http.post<string>(`${this.api}/auth/forgottenpassword/uuid-validation`, body)
+  forgottenPasswordValidation(body: { email: string; uuid: string }): Observable<any> {
+    const res = this.http.post<any>(`${this.api}/auth/forgottenpassword/uuid-validation`, body)
+    return res
   }
 
   forgottenPasswordReset(body: { email: string; uuid: string; newPassword: string }): Observable<string> {

@@ -1,8 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
+import { of } from 'rxjs'
+import { catchError } from 'rxjs/operators'
 import { TreoAnimations } from '../../../../@treo/animations/public-api'
 import { AuthService } from '../../auth/services/auth.service'
 
+@AutoUnsubscribe()
 @Component({
   selector: 'auth-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -10,7 +14,7 @@ import { AuthService } from '../../auth/services/auth.service'
   encapsulation: ViewEncapsulation.None,
   animations: TreoAnimations,
 })
-export class AuthForgotPasswordComponent implements OnInit {
+export class AuthForgotPasswordComponent implements OnInit, OnDestroy {
   forgotPasswordForm: FormGroup
   message: any
 
@@ -31,22 +35,36 @@ export class AuthForgotPasswordComponent implements OnInit {
     const email = this.forgotPasswordForm.value.email.toString()
     this.forgotPasswordForm.disable()
     this.message = null
-    console.log(email)
+    this.authService
+      .forgottenPasswordRequest(email)
+      .pipe(
+        catchError((error) => {
+          if (error) {
+            this.setMessage(error, 'error')
+          }
+          return of(error)
+        })
+      )
+      .subscribe((res) => {
+        if (res.message) {
+          this.setMessage(res.message, 'success')
+        }
+        this.forgotPasswordForm.enable()
+        this.forgotPasswordForm.reset({})
+      })
+  }
 
-    this.authService.forgottenPasswordRequest(email)
+  private setMessage(message: string, type: string) {
+    this.message = {
+      appearance: 'outline',
+      content: message,
+      shake: false,
+      showIcon: false,
+      type,
+    }
+  }
 
-    // si status 200 ou 404 voir code sur wiki
-
-    setTimeout(() => {
-      this.forgotPasswordForm.enable()
-      this.forgotPasswordForm.reset({})
-      this.message = {
-        appearance: 'outline',
-        content: 'forgotPassword.message.send',
-        shake: false,
-        showIcon: false,
-        type: 'success',
-      }
-    }, 1000)
+  ngOnDestroy() {
+    //
   }
 }

@@ -94,5 +94,21 @@
     "no-point-found": "Aucun point n'a été trouvé dans un rayon de {{ distance }}m.",
     "drag-man": "Faite moi glisser sur la carte où vous souhaitez aller.",
     "change-template": "Changer le template"
+  },
+  "server": {
+    "auth.error.invalid_uuid": "Votre lien semble avoir expiré, veuillez en regénérer un nouveau.",
+    "auth.ok.mail.sent": "Réinitialisation du mot de passe envoyée! Merci de consulter vos emails.",
+    "auth.auth.error.wrong_email": "L'email n'est pas référencé dans notre base de donnée.",
+    "auth.error.bad_credentials": "Votre e-mail et votre mot de passe ne correspondent pas.",
+    "auth.error.disabled_account": "Votre compte n'est plus actif.",
+    "auth.error.locked_account": "Votre compte est verrouillé.",
+    "auth.error.authentication_failure": "L'authentification a échoué.",
+    "auth.error.internal_server": "Erreur interne du serveur.",
+    "auth.error.wrong_password": "Erreur dans la saisie de votre mot de passe actuel.",
+    "auth.error.password_modification_failure": "Votre mot de passe n'a pas pu être modifié.",
+    "auth.ok.password_modified": "Votre mot de passe a bien été modifié.",
+    "auth.error.wrong_email": "Aucun compte ne correspond à cet e-mail.",
+    "auth.ok.valid_uuid": "Lien d'accès à la page valide.",
+    "auth.error.expired_uuid": "Votre lien d'accès à cette page a expiré."
   }
 }

@@ -2,6 +2,8 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Data, Router } from '@angular/router'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
+import { of } from 'rxjs'
+import { catchError } from 'rxjs/operators'
 import { TreoAnimations } from '../../../../@treo/animations/public-api'
 import { TreoValidators } from '../../../../@treo/validators/validators'
 import { AuthService } from '../../auth/services/auth.service'
@@ -18,8 +20,7 @@ export class AuthResetPasswordComponent implements OnInit, OnDestroy {
   resetPasswordForm: FormGroup
   message = null
   dataFromResolver: { email: string; uuid: string }
-
-  @ViewChild('passwordConfirmField') password2: ElementRef
+  @ViewChild('passwordConfirmField') passwordConfirmField: ElementRef
 
   constructor(
     private fb: FormBuilder,
@@ -44,8 +45,8 @@ export class AuthResetPasswordComponent implements OnInit, OnDestroy {
     })
   }
 
-  onPressPassword1() {
-    this.password2.nativeElement.focus()
+  onPressPasswordConfirm() {
+    this.passwordConfirmField.nativeElement.focus()
   }
 
   resetPassword(): void {
@@ -63,25 +64,34 @@ export class AuthResetPasswordComponent implements OnInit, OnDestroy {
     //   this.store.dispatch(new ResetForgottenPassword())
     // }
 
-    this.authService.forgottenPasswordReset({
+    const params = {
       ...this.dataFromResolver,
-      newPassword: this.resetPasswordForm.value.password,
-    })
+      newPassword: this.resetPasswordForm.value.password.toString(),
+    }
 
-    setTimeout(() => {
-      this.message = {
-        appearance: 'outline',
-        content: 'message',
-        shake: false,
-        showIcon: false,
-        type: 'success',
-      }
-      setTimeout(() => {
-        this.resetPasswordForm.enable()
-        this.resetPasswordForm.reset({})
-        this.router.navigate(['/sign-in'])
-      }, 3000)
-    }, 1000)
+    this.authService
+      .forgottenPasswordReset(params)
+      .pipe(
+        catchError((error) => {
+          if (error) {
+            this.setMessage(error, 'error')
+          }
+          return of(error)
+        })
+      )
+      .subscribe((res) => {
+        if (res.message) {
+          this.setMessage(res.message, 'success')
+          setTimeout(() => {
+            this.router.navigate(['./sign-in'])
+            this.resetPasswordForm.enable()
+            this.resetPasswordForm.reset({})
+          }, 3500)
+        } else {
+          this.resetPasswordForm.enable()
+          this.resetPasswordForm.reset({})
+        }
+      })
   }
 
   onSwitchPasswordIcon(passwordField: HTMLInputElement): void {
@@ -89,6 +99,16 @@ export class AuthResetPasswordComponent implements OnInit, OnDestroy {
       passwordField.type = 'text'
     } else {
       passwordField.type = 'password'
+    }
+  }
+
+  private setMessage(message: string, type: string) {
+    this.message = {
+      appearance: 'outline',
+      content: message,
+      shake: false,
+      showIcon: false,
+      type,
     }
   }
 

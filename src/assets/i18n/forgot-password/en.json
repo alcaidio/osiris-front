@@ -16,5 +16,21 @@
   },
   "message": {
     "send": "Password reset sent! Please check your emails."
+  }, 
+  "server": {
+    "auth.error.invalid_uuid": "Your link appears to have expired, please regenerate a new one.",
+    "auth.ok.mail.sent": "Password reset sent! Please check your emails.",
+    "auth.auth.error.wrong_email": "The email is not referenced in our database.",
+    "auth.error.bad_credentials": "Your e-mail address and password do not match.",
+    "auth.error.disabled_account": "Your account is no longer active.",
+    "auth.error.locked_account": "Your account is locked.",
+    "auth.error.authentication_failure": "Authentication failed.",
+    "auth.error.internal_server": "Internal server error.",
+    "auth.error.wrong_password": "Error entering your current password.",
+    "auth.error.password_modification_failure": "Your password could not be changed.",
+    "auth.ok.password_modified": "Your password has been successfully changed.",
+    "auth.error.wrong_email": "There is no account matching this email.",
+    "auth.ok.valid_uuid": "Access link to the valid page.",
+    "auth.error.expired_uuid": "Your link to this page has expired."
   }
 }
