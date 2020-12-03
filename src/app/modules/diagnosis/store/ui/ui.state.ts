@@ -9,7 +9,7 @@ export interface UIStateModel {
 
 export const UIStateDefaults: UIStateModel = {
   drawer: {
-    mode: 'push',
+    mode: 'side',
     position: 'end',
     opened: false,
   },

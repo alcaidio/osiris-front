@@ -28,13 +28,13 @@ export class DiagService {
     )
   }
 
-  private getSectionIdByLngLat(point: GeoJSON.Position): Observable<SectionIdDTO> {
+  getSectionIdByLngLat(point: GeoJSON.Position): Observable<SectionIdDTO> {
     return this.http.get<SectionIdDTO>(
       `${this.api}/diag/feature?typeName=li_section_view&lng=${point[0]}&lat=${point[1]}`
     )
   }
 
-  private getSectionById(id: ID): Observable<Section> {
+  getSectionById(id: ID): Observable<Section> {
     return this.http.get<Section>(`${this.api}/diag/section/${id}`)
   }
 }

@@ -2,15 +2,24 @@ import { Component } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { Observable } from 'rxjs'
 import { UIState } from '../store'
-import { ToggleDrawer } from '../store/ui/ui.action'
+import { CloseDrawer, OpenDrawer } from '../store/ui/ui.action'
 
 @Component({
   selector: 'app-sidenav-toggle',
   template: `
     <div class="absolute right-0 z-99" style="top: 0px">
       <div class="flex flex-col">
-        <button mat-raised-button color="warn" (click)="onToggle()" class="drawer-switch">
-          <mat-icon [svgIcon]="(drawerOpened$ | async) ? 'feather:chevron-right' : 'feather:chevron-left'"></mat-icon>
+        <button *ngIf="drawerOpened$ | async" mat-raised-button color="warn" (click)="onClose()" class="drawer-switch">
+          <mat-icon [svgIcon]="'feather:chevron-right'"></mat-icon>
+        </button>
+        <button
+          *ngIf="!(drawerOpened$ | async)"
+          mat-raised-button
+          color="warn"
+          (click)="onOpen()"
+          class="drawer-switch"
+        >
+          <mat-icon [svgIcon]="'feather:chevron-left'"></mat-icon>
         </button>
       </div>
     </div>
@@ -32,7 +41,11 @@ export class SidenavToggleComponent {
 
   constructor(private store: Store) {}
 
-  onToggle() {
-    this.store.dispatch(new ToggleDrawer())
+  onOpen() {
+    this.store.dispatch(new OpenDrawer())
+  }
+
+  onClose() {
+    this.store.dispatch(new CloseDrawer())
   }
 }

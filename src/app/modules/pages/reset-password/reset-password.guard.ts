@@ -21,8 +21,6 @@ export class ResetPasswordGuard implements Resolve<any> {
         return { email, uuid }
       }),
       catchError((error) => {
-        console.log(error)
-
         this.router.navigate(['/forgot-password'])
         setTimeout(() => this.notification.openSnackBarWithTraduction(error, 'X', 10000, 'start', 'top'), 1500)
         return EMPTY

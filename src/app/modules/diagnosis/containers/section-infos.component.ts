@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
 import { TreoMediaWatcherService } from '@treo/services/media-watcher'
 import { Observable } from 'rxjs'
-import { ChangeDrawerMode, CloseDrawer, OpenDrawer, UIState } from '../store'
+import { CloseDrawer, LoadSectionWithId } from '../store'
 import { Section } from './../models/section.model'
 import { SectionState } from './../store/section/section.state'
 
@@ -56,29 +56,19 @@ import { SectionState } from './../store/section/section.state'
   `,
 })
 export class SectionInfosComponent implements OnInit, OnDestroy {
-  @Select(UIState.getDrawerOpened) isOpen$: Observable<boolean>
   @Select(SectionState.getSelectedSection) selectedSection$: Observable<Section>
   isScreenSmall: boolean
 
   constructor(private store: Store, private media: TreoMediaWatcherService, public route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new ChangeDrawerMode('side'))
-    const isOpened = this.store.selectSnapshot<boolean>((state) => {
-      return state.diagnosis.diagnosisUi.drawer.opened
-    })
-
-    if (!isOpened) {
-      this.store.dispatch(new OpenDrawer())
-    }
-
     this.media.onMediaChange$.subscribe(({ matchingAliases }) => {
       this.isScreenSmall = matchingAliases.includes('xs')
     })
   }
 
   goToSection(): void {
-    console.log('aller à la section, voir router outlet on activate')
+    this.store.dispatch(new LoadSectionWithId(+this.route.snapshot.params.id))
   }
 
   public onClose(): Promise<boolean> {

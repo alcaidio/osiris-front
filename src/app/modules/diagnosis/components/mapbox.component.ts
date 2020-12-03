@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
+import { Select } from '@ngxs/store'
 import { Map, MapMouseEvent } from 'mapbox-gl'
+import { Observable } from 'rxjs'
 import { Baselayer, MapConfig, Overlay } from '../../../shared/models/maps.model'
+import { SectionState } from '../store'
 import { Section } from './../models/section.model'
 import { MapboxService } from './../services/mapbox.service'
 
@@ -72,6 +75,8 @@ export class MapboxComponent implements OnChanges {
   @Output() getSection = new EventEmitter<GeoJSON.Position>()
   @Output() getMapInstance = new EventEmitter<Map>()
 
+  @Select(SectionState.getSectionColor) sectionColor$: Observable<string>
+
   cursorStyle: string
   isLoaded = false
   mapInstance: Map
@@ -82,6 +87,9 @@ export class MapboxComponent implements OnChanges {
     this.isLoaded = true
     this.getMapInstance.emit(evt)
     this.mapInstance = evt
+    if (this.section) {
+      this.goToSection(this.section, this.mapInstance)
+    }
   }
 
   onClick(evt: MapMouseEvent): void {
@@ -105,8 +113,8 @@ export class MapboxComponent implements OnChanges {
 
   private goToSection(section: Section, map: Map): void {
     if (section && map) {
-      this.mapboxService.flyToSection(section, map)
-      setTimeout(() => this.displaySelectedSection(section, map), 200)
+      this.mapboxService.fitBounds(section, map)
+      this.displaySelectedSection(section, map)
     }
   }
 
@@ -124,7 +132,13 @@ export class MapboxComponent implements OnChanges {
   private displaySelectedSection(section: Section, map: Map): void {
     if (section.geometry) {
       const id = 'selectedSection'
+      let color: string
+
       this.removeSourceAndLayer('selectedSection', map)
+
+      this.sectionColor$.subscribe((sectionColor: string) => {
+        color = sectionColor
+      })
 
       map.addSource(id, {
         type: 'geojson',
@@ -152,7 +166,7 @@ export class MapboxComponent implements OnChanges {
           'line-cap': 'round',
         },
         paint: {
-          'line-color': '#444',
+          'line-color': color,
           'line-width': 18,
           'line-blur': 1.5,
           'line-opacity': 0.6,

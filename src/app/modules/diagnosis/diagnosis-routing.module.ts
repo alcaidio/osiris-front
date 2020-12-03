@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import * as fromContainers from './containers'
+import { SectionResolver } from './section.resolver'
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
       {
         path: 'section/:id',
         component: fromContainers.SectionInfosComponent,
+        resolve: { section: SectionResolver },
       },
       {
         path: 'overlays',

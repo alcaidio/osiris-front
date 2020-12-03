@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { Action, NgxsOnInit, Selector, State, StateContext, Store } from '@ngxs/store'
 import { NotificationService } from 'app/shared/services/notification.service'
 import { config } from 'process'
 import { of } from 'rxjs'
@@ -34,8 +34,8 @@ export const baseMapStateDefaults: BaseMapStateModel = {
   defaults: baseMapStateDefaults,
 })
 @Injectable()
-export class BaseMapState {
-  constructor(private diagService: DiagService, private notification: NotificationService) {}
+export class BaseMapState implements NgxsOnInit {
+  constructor(private diagService: DiagService, private notification: NotificationService, private store: Store) {}
 
   @Selector()
   static getMap(state: BaseMapStateModel): any {
@@ -50,6 +50,10 @@ export class BaseMapState {
   @Selector()
   static getLoading(state: BaseMapStateModel): boolean {
     return state.loading
+  }
+
+  ngxsOnInit() {
+    this.store.dispatch(new LoadBaseMap())
   }
 
   @Action(LoadBaseMap)

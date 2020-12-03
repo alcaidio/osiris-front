@@ -6,8 +6,11 @@ import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { ID } from '../../../../shared/models/shared.model'
 import { DiagService } from '../../services/diag.service'
-import { Section } from './../../models/section.model'
-import { LoadSection, LoadSectionFailure, LoadSectionSuccess } from './section.action'
+import { BaseMapState } from '../base-map/base-map.state'
+import { OpenDrawer } from '../ui/ui.action'
+import { Overlay } from './../../../../shared/models/maps.model'
+import { Section, SectionIdDTO } from './../../models/section.model'
+import { LoadSection, LoadSectionFailure, LoadSectionSuccess, LoadSectionWithId } from './section.action'
 
 export interface SectionStateModel {
   ids: ID[]
@@ -40,12 +43,35 @@ export class SectionState {
     return state.selectedSectionId && state.entities[state.selectedSectionId]
   }
 
+  @Selector([BaseMapState.getOverlays])
+  static getSectionColor(state: SectionStateModel, overlays: Overlay[]) {
+    return overlays.find((overlay) => overlay.id === SectionState.getSelectedSection(state).properties.layerIds.state)
+      .paint['line-color']
+  }
+
   @Action(LoadSection)
   load({ dispatch, patchState }: StateContext<SectionStateModel>, action: LoadSection) {
     patchState({
       loading: true,
     })
-    return this.diagService.getSection(action.payload).pipe(
+
+    return this.diagService.getSectionIdByLngLat(action.payload).pipe(
+      map((selected: SectionIdDTO) => {
+        dispatch(new Navigate(['/diagnosis/section/', selected.featureId]))
+      }),
+      catchError((err) => {
+        dispatch(new LoadSectionFailure(err))
+        return of(err)
+      })
+    )
+  }
+
+  @Action(LoadSectionWithId)
+  loadById({ dispatch, patchState }: StateContext<SectionStateModel>, action: LoadSectionWithId) {
+    patchState({
+      loading: true,
+    })
+    return this.diagService.getSectionById(action.payload).pipe(
       map((section: Section) => dispatch(new LoadSectionSuccess(section))),
       catchError((err) => {
         dispatch(new LoadSectionFailure(err))
@@ -65,7 +91,7 @@ export class SectionState {
       loading: false,
     })
     if (id !== null) {
-      dispatch(new Navigate(['/diagnosis/section/', id]))
+      dispatch(new OpenDrawer())
     } else {
       this.notification.openSnackBar(`Aucune section trouvée, veuillez réésayer.`, 'ok')
     }

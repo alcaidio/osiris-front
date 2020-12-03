@@ -1,12 +1,13 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, OnDestroy, ViewEncapsulation } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { Map } from 'mapbox-gl'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
+import { take } from 'rxjs/operators'
 import { BaseMap, Drawer, MapConfig } from '../../shared/models'
+import { Overlay } from './../../shared/models/maps.model'
 import { Section } from './models/section.model'
-import { BaseMapState, LoadBaseMap, OpenDrawer, SetMapConfig, UIState } from './store'
-import { LoadSection } from './store/section/section.action'
+import { BaseMapState, LoadSection, SetMapConfig, UIState } from './store'
 import { SectionState } from './store/section/section.state'
 
 AutoUnsubscribe()
@@ -20,7 +21,7 @@ AutoUnsubscribe()
         <router-outlet></router-outlet>
       </ng-container>
       <ng-container content>
-        <app-sidenav-toggle *ngIf="section$ | async"></app-sidenav-toggle>
+        <app-sidenav-toggle *ngIf="(section$ | async) || (overlays$ | async)"></app-sidenav-toggle>
         <app-map-menu></app-map-menu>
         <app-map-button-list></app-map-button-list>
         <app-mapbox
@@ -37,29 +38,23 @@ AutoUnsubscribe()
     </app-template-two>
   `,
 })
-export class DiagnosisComponent implements OnInit, OnDestroy {
+export class DiagnosisComponent implements OnDestroy {
   @Select(BaseMapState.getMap) baseMap$: Observable<BaseMap>
   @Select(UIState.getDrawer) drawer$: Observable<Drawer>
   // TODO : template load bones -> @Select(BaseMapState.getLoading) isLoading$: Observable<boolean>
   @Select(SectionState.getSelectedSection) section$: Observable<Section>
+  @Select(BaseMapState.getOverlays) overlays$: Observable<Overlay[]>
 
   mapInstance: Map
 
   constructor(private store: Store) {}
-
-  ngOnInit(): void {
-    this.store.dispatch(new LoadBaseMap())
-  }
 
   setMapConfig(evt: Partial<MapConfig>) {
     this.store.dispatch(new SetMapConfig(evt))
   }
 
   getSection(evt: GeoJSON.Position) {
-    this.store
-      .dispatch(new LoadSection(evt))
-      .toPromise()
-      .then(() => this.store.dispatch(new OpenDrawer()))
+    this.store.dispatch(new LoadSection(evt)).pipe(take(1))
   }
 
   ngOnDestroy(): void {
