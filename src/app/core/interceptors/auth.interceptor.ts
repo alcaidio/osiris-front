@@ -4,6 +4,7 @@ import { Store } from '@ngxs/store'
 import { Observable, throwError } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 import { AuthUtils } from '../../modules/auth/auth.utils'
+import { AuthStatusState } from './../../modules/auth/store/states/auth-status.state'
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -11,8 +12,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let newReq = req.clone()
-    const token = JSON.parse(localStorage.getItem('auth.status.jwt'))
-    
+    const token = this.store.selectSnapshot(AuthStatusState.getJWT)
+
     if (token && token !== null && !AuthUtils.isTokenExpired(token)) {
       newReq = req.clone({
         headers: req.headers.set('Authorization', 'Bearer ' + token),

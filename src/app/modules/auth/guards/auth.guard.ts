@@ -24,6 +24,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   private _check(): Observable<boolean> {
     const authenticated = this.store.selectSnapshot(AuthStatusState.getLoggedIn)
+
     if (!authenticated) {
       this.store.dispatch(new Navigate(['sign-in']))
       return of(false)
