@@ -26,18 +26,3 @@ export class LoginRedirect {
 export class Logout {
   static readonly type = '[Auth] Logout'
 }
-
-// export class RequestForgottenPassword {
-//   static readonly type = '[Auth] Request forgotten password email'
-//   constructor(public email: string) {}
-// }
-
-// export class ResetForgottenPassword {
-//   static readonly type = '[Auth] Reset forgotten password'
-//   constructor(public payload: { email: string; uuid: string; newPassword: string }) {}
-// }
-
-// export class ValidationForgottenPassword {
-//   static readonly type = '[Auth] Forgotten password validation'
-//   constructor(public payload: { email: string; uuid: string }) {}
-// }

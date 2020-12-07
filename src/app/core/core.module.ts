@@ -20,7 +20,7 @@ import { AppStates } from './store'
       developmentMode: !environment.production,
     }),
     NgxsStoragePluginModule.forRoot({
-      key: ['auth.status'],
+      key: ['auth.status.jwt'],
     }),
     NgxsRouterPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot({
