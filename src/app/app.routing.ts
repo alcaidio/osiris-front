@@ -120,11 +120,6 @@ export const routes: Route[] = [
         data: { title: 'Travaux' },
       },
       {
-        path: 'settings',
-        loadChildren: () => import('./modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
-        data: { title: 'Settings' },
-      },
-      {
         path: 'profile',
         loadChildren: () => import('./modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
         data: { title: 'Profile' },
