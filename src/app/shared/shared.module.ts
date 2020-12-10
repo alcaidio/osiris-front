@@ -26,7 +26,6 @@ import { TreoCardModule } from '@treo/components/card'
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl'
 import { environment } from './../../environments/environment'
 import { BuildingsLayerComponent } from './components/buildings-layer.component'
-import { SettingsDialogComponent } from './components/settings-dialog.component'
 import { TemplateOneComponent } from './components/template-one.component'
 import { TemplateThreeComponent } from './components/template-three.component'
 import { TemplateTwoComponent } from './components/template-two.component'
@@ -61,7 +60,6 @@ const MATERIAL = [
     TemplateOneComponent,
     TemplateTwoComponent,
     BuildingsLayerComponent,
-    SettingsDialogComponent,
     TemplateThreeComponent,
   ],
   imports: [
@@ -85,7 +83,6 @@ const MATERIAL = [
     TreoCardModule,
     MouseWheelDirective,
     BuildingsLayerComponent,
-    SettingsDialogComponent,
     TemplateThreeComponent,
     MATERIAL,
   ],
