@@ -3,7 +3,7 @@ import { Select, Store } from '@ngxs/store'
 import { Map } from 'mapbox-gl'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
-import { take } from 'rxjs/operators'
+import { shareReplay, take } from 'rxjs/operators'
 import { BaseMap, Drawer, MapConfig } from '../../shared/models'
 import { Overlay } from './../../shared/models/maps.model'
 import { Section } from './models/section.model'
@@ -54,7 +54,7 @@ export class DiagnosisComponent implements OnDestroy {
   }
 
   getSection(evt: GeoJSON.Position) {
-    this.store.dispatch(new LoadSection(evt)).pipe(take(1))
+    this.store.dispatch(new LoadSection(evt)).pipe(take(1), shareReplay())
   }
 
   ngOnDestroy(): void {

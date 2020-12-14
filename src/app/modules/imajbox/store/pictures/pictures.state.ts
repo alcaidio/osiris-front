@@ -15,7 +15,7 @@ import {
   LoadPicturesPointByLngLat,
   LoadPicturesPointFailure,
   LoadPicturesPointSuccess,
-  SwitchCameraPosition,
+  SwitchCameraPosition
 } from './pictures.action'
 
 export interface PicturesStateModel {
@@ -84,26 +84,33 @@ export class PicturesState {
   }
 
   @Action(LoadPicturesPointById)
-  loadById({ dispatch, patchState }: StateContext<PicturesStateModel>, action: LoadPicturesPointById) {
+  loadById({ dispatch, patchState, getState }: StateContext<PicturesStateModel>, action: LoadPicturesPointById) {
     patchState({
       loading: true,
     })
-    return this.pictureService.getImageById(+action.payload).pipe(
-      map((picturePoint: PicturePoint) => dispatch(new LoadPicturesPointSuccess(picturePoint))),
-      catchError((error) => {
-        dispatch(new LoadPicturesPointFailure({ error }))
-        return of(error)
-      })
-    )
+    const picturePoint = getState().entities[action.payload]
+
+    if (picturePoint) {
+      return dispatch(new LoadPicturesPointSuccess(picturePoint))
+    } else {
+      return this.pictureService.getImageById(+action.payload).pipe(
+        map((p: PicturePoint) => dispatch(new LoadPicturesPointSuccess(p))),
+        catchError((error) => {
+          dispatch(new LoadPicturesPointFailure({ error }))
+          return of(error)
+        })
+      )
+    }
   }
 
   @Action(LoadPicturesPointSuccess)
   loadSuccess({ patchState, getState }: StateContext<PicturesStateModel>, action: LoadPicturesPointSuccess) {
     const state = getState()
+    const id = action.payload.id
     patchState({
-      ids: [...state.ids, action.payload.id],
-      entities: { ...state.entities, [action.payload.id]: action.payload },
-      selectedPointId: action.payload.id,
+      ids: state.ids.indexOf(id) === -1 ? [...state.ids, id] : [...state.ids],
+      entities: { ...state.entities, [id]: action.payload },
+      selectedPointId: id,
       loading: false,
     })
   }

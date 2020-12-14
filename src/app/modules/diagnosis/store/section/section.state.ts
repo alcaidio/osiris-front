@@ -67,17 +67,24 @@ export class SectionState {
   }
 
   @Action(LoadSectionWithId)
-  loadById({ dispatch, patchState }: StateContext<SectionStateModel>, action: LoadSectionWithId) {
+  loadById({ dispatch, patchState, getState }: StateContext<SectionStateModel>, action: LoadSectionWithId) {
     patchState({
       loading: true,
     })
-    return this.diagService.getSectionById(action.payload).pipe(
-      map((section: Section) => dispatch(new LoadSectionSuccess(section))),
-      catchError((err) => {
-        dispatch(new LoadSectionFailure(err))
-        return of(err)
-      })
-    )
+
+    const section = getState().entities[action.payload]
+
+    if (section) {
+      return dispatch(new LoadSectionSuccess(section))
+    } else {
+      return this.diagService.getSectionById(action.payload).pipe(
+        map((s: Section) => dispatch(new LoadSectionSuccess(s))),
+        catchError((err) => {
+          dispatch(new LoadSectionFailure(err))
+          return of(err)
+        })
+      )
+    }
   }
 
   @Action(LoadSectionSuccess)
@@ -85,7 +92,7 @@ export class SectionState {
     const state = getState()
     const id = action.payload.id
     patchState({
-      ids: [...state.ids, id],
+      ids: state.ids.indexOf(id) === -1 ? [...state.ids, id] : [...state.ids],
       entities: { ...state.entities, [id]: action.payload },
       selectedSectionId: id,
       loading: false,

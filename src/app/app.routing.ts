@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core'
-import { ExtraOptions, Params, Route, RouterModule, RouterStateSnapshot } from '@angular/router'
-import { RouterStateSerializer } from '@ngxs/router-plugin'
+import { ExtraOptions, Route, RouterModule } from '@angular/router'
 import { InitialDataResolver } from 'app/app.resolvers'
 import { LayoutComponent } from 'app/layout/layout.component'
 import { AuthGuard } from './modules/auth/guards/auth.guard'
@@ -68,19 +67,19 @@ export const routes: Route[] = [
   },
 
   // Landing routes
-  {
-    path: '',
-    component: LayoutComponent,
-    data: {
-      layout: 'empty',
-    },
-    children: [
-      {
-        path: 'home',
-        loadChildren: () => import('./modules/landing/home/home.module').then((m) => m.LandingHomeModule),
-      },
-    ],
-  },
+  // {
+  //   path: '',
+  //   component: LayoutComponent,
+  //   data: {
+  //     layout: 'empty',
+  //   },
+  //   children: [
+  //     {
+  //       path: 'home',
+  //       loadChildren: () => import('./modules/landing/home/home.module').then((m) => m.LandingHomeModule),
+  //     },
+  //   ],
+  // },
 
   // Admin routes
   {
@@ -104,11 +103,11 @@ export const routes: Route[] = [
       //   path: 'roadview',
       //   loadChildren: () => import('./modules/roadview/roadview.module').then((m) => m.RoadviewModule),
       // },
-      {
-        path: 'maps',
-        loadChildren: () => import('./modules/maps/maps.module').then((m) => m.MapsModule),
-        data: { title: 'Maps' },
-      },
+      // {
+      //   path: 'maps',
+      //   loadChildren: () => import('./modules/maps/maps.module').then((m) => m.MapsModule),
+      //   data: { title: 'Maps' },
+      // },
       {
         path: 'dashboard',
         loadChildren: () => import('./modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
