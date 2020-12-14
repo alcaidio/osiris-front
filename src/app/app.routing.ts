@@ -8,6 +8,8 @@ import { NoAuthGuard } from './modules/auth/guards/noAuth.guard'
 const routerConfig: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
   relativeLinkResolution: 'legacy',
+  anchorScrolling: 'enabled',
+  scrollOffset: [0, 64],
 }
 
 // @formatter:off
@@ -119,9 +121,9 @@ export const routes: Route[] = [
         data: { title: 'Travaux' },
       },
       {
-        path: 'profile',
-        loadChildren: () => import('./modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
-        data: { title: 'Profile' },
+        path: 'settings',
+        loadChildren: () => import('./modules/pages/settings/settings.module').then((m) => m.SettingsModule),
+        data: { title: 'Settings' },
       },
 
       // 404 & Catch all

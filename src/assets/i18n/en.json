@@ -57,20 +57,6 @@
       "unvailable": "No layers available"
     }
   },
-  "settings": {
-    "title": "Settings",
-    "theme": {
-      "title": "Theme",
-      "dark": "Dark",
-      "light": "Light"
-    },
-    "language": {
-      "title": "Language",
-      "fr": "French",
-      "en": "English"
-    },
-    "button": "Close"
-  },
   "imajbox": {
     "map": {
       "minimize": "Minimize the map",
@@ -110,5 +96,45 @@
     "auth.error.wrong_email": "There is no account matching this email.",
     "auth.ok.valid_uuid": "Access link to the valid page.",
     "auth.error.expired_uuid": "Your link to this page has expired."
+  },
+  "settings": {
+    "title": "Settings",
+    "tab.profile": "Profile",
+    "tab.contact": "Contact",
+    "tab.preferences": "Preferences",
+
+    "profile.title": "Profile",
+    "profile.subtitle": "People here will get to know you with this information.",
+    "profile.firstname": "Firstname",
+    "profile.lastname": "Lastname",
+    "profile.job": "Job",
+    "profile.bio": "Bio",
+    "profile.firstname.placeholder": "Your firstname",
+    "profile.lastname.placeholder": "Your lastname",
+    "profile.job.placeholder": "Your job",
+    "profile.bio.placeholder": "A sentence or two to describe yourself.",
+    "profile.name.error": "Champ requis et n.",
+    "profile.job.error": "Max Length 40 and only letters accepted.",
+    "profile.bio.error": "Max Length 90",
+
+    "contact.title": "Contact",
+    "contact.subtitle": "Give the possibility to your collaborators to join you.",
+    "contact.email": "Email address",
+    "contact.phone": "Phone number",
+    "contact.email.error": "A valid email address is required.",
+    "contact.phone.error": "This does not have a valid phone number.",
+
+    "preferences.title": "Preferences",
+    "preferences.subtitle": "Set your preferences, help us personalize your experience.",
+    "preferences.language": "Language",
+    "preferences.theme": "Theme",
+
+    "language.fr": "French",
+    "language.en": "English",
+    "theme.light": "Light",
+    "theme.dark": "Dark",
+
+    "button.reset": "Reset",
+    "button.save": "Save"
   }
 }

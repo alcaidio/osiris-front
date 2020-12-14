@@ -1,0 +1,35 @@
+{
+  "timothy.alcaide@gmail.com": {
+    "avatar": "assets/images/avatars/male-01.jpg",
+    "firstName": "Timothy",
+    "lastName": "Alcaide",
+    "job": "Frontend developer",
+    "bio": "I'm a french Javascript developer and i love build beautiful things !",
+    "email": "timothy.alcaide@gmail.com",
+    "phone": "0745786742",
+    "language": "fr",
+    "theme": "light"
+  },
+  "jane.doe@email.com": {
+    "avatar": "assets/images/avatars/female-01.jpg",
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "job": null,
+    "bio": null,
+    "email": "john.doe@email.com",
+    "phone": "0600000000",
+    "language": "fr",
+    "theme": "dark"
+  },
+  "bob.bye@email.com": {
+    "avatar": "assets/images/avatars/male-02.jpg",
+    "firstName": "Bob",
+    "lastName": "bbye",
+    "job": null,
+    "bio": "I'm bob",
+    "email": "bob.by@email.com",
+    "phone": "0600000000",
+    "language": "en",
+    "theme": "light"
+  }
+}

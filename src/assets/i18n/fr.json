@@ -57,20 +57,6 @@
       "unvailable": "Pas de couches disponibles"
     }
   },
-  "settings": {
-    "title": "Paramètres",
-    "theme": {
-      "title": "Thème",
-      "dark": "Sombre",
-      "light": "Clair"
-    },
-    "language": {
-      "title": "Language",
-      "fr": "Français",
-      "en": "Anglais"
-    },
-    "button": "Fermer"
-  },
   "imajbox": {
     "map": {
       "minimize": "Réduire la carte",
@@ -110,5 +96,45 @@
     "auth.error.wrong_email": "Aucun compte ne correspond à cet e-mail.",
     "auth.ok.valid_uuid": "Lien d'accès à la page valide.",
     "auth.error.expired_uuid": "Votre lien d'accès à cette page a expiré."
+  },
+  "settings": {
+    "title": "Paramètres",
+    "tab.profile": "Profil",
+    "tab.contact": "Contact",
+    "tab.preferences": "Préférences",
+
+    "profile.title": "Votre profil",
+    "profile.subtitle": "Les gens ici apprendront à vous connaître grâce à ces informations.",
+    "profile.firstname": "Prénom",
+    "profile.lastname": "Nom",
+    "profile.job": "Poste actuel",
+    "profile.bio": "Bio",
+    "profile.firstname.placeholder": "Votre prénom",
+    "profile.lastname.placeholder": "Votre nom",
+    "profile.job.placeholder": "Votre poste actuel",
+    "profile.bio.placeholder": "Une phrase ou deux pour vous décrire",
+    "profile.name.error": "Champ requis et n'accepte que les lettres.",
+    "profile.job.error": "Taille maximale 40 et n'accepte que les lettres.",
+    "profile.bio.error": "Taille maximale 90",
+
+    "contact.title": "Vos coordonnées",
+    "contact.subtitle": "Laissez la possibilitée à vos collaborateurs de vous joindre.",
+    "contact.email": "Adresse email",
+    "contact.phone": "Numéro de téléphone",
+    "contact.email.error": "Une adresse email valide est requise.",
+    "contact.phone.error": "Ceci n'ai pas un numéro de téléphone valide.",
+
+    "preferences.title": "Préférences",
+    "preferences.subtitle": "Définissez vos préférences pour nous aider à personnaliser votre expérience.",
+    "preferences.language": "Language",
+    "preferences.theme": "Thème",
+
+    "language.fr": "Français",
+    "language.en": "Anglais",
+    "theme.light": "Clair",
+    "theme.dark": "Sombre",
+
+    "button.reset": "Réinitialiser",
+    "button.save": "Sauvegarder"
   }
 }

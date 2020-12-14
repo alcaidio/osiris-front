@@ -1,0 +1,17 @@
+::ng-deep {
+  mat-error {
+    color: #f05252 !important;
+    margin-left: 10px;
+  }
+
+  .mat-form-field-invalid .mat-form-field-flex {
+    border-color: #f05252 !important;
+  }
+
+  span .required {
+    color: #364152;
+    &:after {
+      content: ' *';
+    }
+  }
+}
