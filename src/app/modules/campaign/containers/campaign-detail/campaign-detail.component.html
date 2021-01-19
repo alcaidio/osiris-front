@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <app-map
+    class="map"
+    [config]="mapConfig$ | async"
+    [overlays]="overlaysVisible$ | async"
+    [mode]="MODE"
+    (selected)="featureSelected($event)"
+    (creating)="layerCreation($event)"
+  ></app-map>
+  <div class="infos">
+    <h4>Baselayers</h4>
+    <app-baselayer-list
+      [baselayers]="baselayers$ | async"
+      [activeBaselayerId]="activeBaselayerId$ | async"
+    ></app-baselayer-list>
+    <h4>Overlays</h4>
+    <app-overlay-list [overlays]="overlays$ | async"></app-overlay-list>
+
+    <br />
+    <h4>Menu</h4>
+    <app-menu></app-menu>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+@import 'treo';
+
+.wrapper {
+  display: flex;
+  width: 100vw;
+  height: calc(100vh - 64px);
+}
+
+.map {
+  width: 75%;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.infos {
+  width: 25%;
+  min-width: 250px;
+  height: 100%;
+  padding: 1.5rem;
+  border-left: 2px solid #dcdcdc;
+  overflow-y: scroll;
+
+  // TODO : add toggle button and put 100% below
+  @include treo-breakpoint('xs') {
+    min-width: 80% !important;
+    max-width: 80% !important;
+    width: 80% !important;
+    border-left: 0;
+  }
+}

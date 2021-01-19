@@ -1,0 +1,7 @@
+<p *ngIf="loading$ | async">Loading...</p>
+
+<ul *ngIf="!(loading$ | async)">
+  <li *ngFor="let campaign of campaigns$ | async">
+    <a [routerLink]="campaign.id">{{ campaign.name }}</a>
+  </li>
+</ul>

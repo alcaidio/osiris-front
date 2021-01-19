@@ -32,11 +32,20 @@
               "suggestions",
               "@mapbox/mapbox-gl-geocoder",
               "@mapbox/mapbox-sdk/services/geocoding",
-              "@mapbox/mapbox-sdk", 
-              "marzipano", 
+              "@mapbox/mapbox-sdk",
+              "marzipano",
               "hammerjs"
             ],
-            "assets": ["src/favicon-16x16.png", "src/favicon-32x32.png", "src/assets"],
+            "assets": [
+              "src/favicon-16x16.png",
+              "src/favicon-32x32.png",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/leaflet/dist/images",
+                "output": "/"
+              }
+            ],
             "stylePreprocessorOptions": {
               "includePaths": ["src/@treo/styles"]
             },
@@ -45,6 +54,8 @@
               "src/@treo/styles/main.scss",
               "src/styles/styles.scss",
               "src/styles/tailwind.scss",
+              "./node_modules/leaflet/dist/leaflet.css",
+              "./node_modules/leaflet-draw/dist/leaflet.draw.css",
               "./node_modules/mapbox-gl/dist/mapbox-gl.css",
               "./node_modules/@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css"
             ],
@@ -123,8 +134,6 @@
   "schematics": {
     "@schematics/angular": {
       "component": {
-        "inlineTemplate": true,
-        "inlineStyle": true,
         "skipTests": true
       }
     }

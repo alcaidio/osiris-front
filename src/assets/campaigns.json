@@ -1,0 +1,22 @@
+{
+  "1": {
+    "id": 1,
+    "name": "Lignes et points",
+    "mapId": 1
+  },
+  "2": {
+    "id": 2,
+    "name": "Arbres",
+    "mapId": 4
+  },
+  "3": {
+    "id": 3,
+    "name": "Une grande ligne",
+    "mapId": 3
+  },
+  "4": {
+    "id": 4,
+    "name": "example",
+    "mapId": 2
+  }
+}

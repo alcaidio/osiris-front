@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+  <!-- <mat-label>Base layers</mat-label> -->
+  <mat-select (selectionChange)="onBaselayerChange($event)" name="baselayer" [(value)]="activeBaselayerId">
+    <mat-option *ngFor="let baselayer of baselayers" [value]="baselayer.id">
+      {{ baselayer.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

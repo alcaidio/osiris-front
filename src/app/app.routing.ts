@@ -16,10 +16,10 @@ const routerConfig: ExtraOptions = {
 // tslint:disable:max-line-length
 export const routes: Route[] = [
   // Redirect empty path to '/map'
-  { path: '', pathMatch: 'full', redirectTo: 'imajbox' },
+  { path: '', pathMatch: 'full', redirectTo: 'campaign' },
 
   // Redirect signed in user to the '/map'
-  { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'imajbox' },
+  { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'campaign' },
 
   // Auth routes (guest)
   {
@@ -100,6 +100,10 @@ export const routes: Route[] = [
       {
         path: 'diagnosis',
         loadChildren: () => import('./modules/diagnosis/diagnosis.module').then((m) => m.DiagnosisModule),
+      },
+      {
+        path: 'campaign',
+        loadChildren: () => import('./modules/campaign/campaign.module').then((m) => m.CampaignModule),
       },
       // {
       //   path: 'roadview',

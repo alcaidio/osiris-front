@@ -1,0 +1,15 @@
+<div
+  id="map"
+  leaflet
+  appCustomLeafletDirective
+  [leafletOptions]="config"
+  (leafletMapReady)="onMapReady($event)"
+  (leafletMapZoomEnd)="onUpdateConfigMap()"
+  (leafletMapMoveEnd)="onUpdateConfigMap()"
+>
+  <ng-container *ngIf="mode === 'edit'">
+    <div leafletDraw [leafletDrawOptions]="drawOptions" (leafletDrawCreated)="onDrawCreated($event)"></div>
+    <div [leafletLayer]="drawItems"></div>
+  </ng-container>
+  <div *ngFor="let layer of leafletLayers" [leafletLayer]="layer"></div>
+</div>
