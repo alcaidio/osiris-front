@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <div class="alinea"></div>
+  <div class="property">
+    <div class="flex">
+      <mat-checkbox
+        *ngIf="truncateTo > value.name.length"
+        color="primary"
+        [checked]="value.checked"
+        (change)="onCheck(value, property, calque)"
+      >
+        {{ value.name | title }}
+      </mat-checkbox>
+      <mat-checkbox
+        *ngIf="value.name.length >= truncateTo"
+        color="primary"
+        [checked]="value.checked"
+        [matTooltip]="value.name"
+        [matTooltipPosition]="'right'"
+        [matTooltipClass]="'tooltipPropertyValue'"
+        (change)="onCheck(value, property, calque)"
+      >
+        {{ value.name | truncate: [truncateTo] | title }}
+      </mat-checkbox>
+    </div>
+  </div>
+</div>

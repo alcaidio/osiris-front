@@ -1,0 +1,49 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  color: white;
+  transition: background-color 0.5s ease;
+}
+
+.calque {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  border-top: 1px solid #dcdcdc;
+  background-color: #475569;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  z-index: 10 !important;
+}
+
+.icon {
+  margin-left: 8px;
+  z-index: 10;
+}
+
+.more {
+  z-index: 10 !important;
+}
+
+::ng-deep .tooltip-calque {
+  margin-left: 110px !important;
+}
+
+::ng-deep .menu {
+  margin-left: 58px !important;
+  margin-top: -45px !important;
+}
+
+.properties {
+  padding: 0 0 12px 0;
+  background-color: #475569;
+}

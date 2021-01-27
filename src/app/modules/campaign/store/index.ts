@@ -1,13 +1,23 @@
 import { BaselayerState } from './baselayers/baselayers.state'
+import { CalqueState } from './calques/calques.state'
 import { CampaignModuleState } from './campaign.store'
 import { CampaignsState } from './campaigns/campaigns.state'
 import { MapState } from './maps/maps.state'
 import { OverlayState } from './overlays/overlays.state'
 
-export const CampaignModuleStates = [CampaignModuleState, CampaignsState, OverlayState, BaselayerState, MapState]
+export const CampaignModuleStates = [
+  CampaignModuleState,
+  CampaignsState,
+  OverlayState,
+  BaselayerState,
+  MapState,
+  CalqueState,
+]
 
 export * from './baselayers/baselayers.actions'
 export * from './baselayers/baselayers.state'
+export * from './calques/calques.actions'
+export * from './calques/calques.state'
 export * from './campaigns/campaigns.actions'
 export * from './campaigns/campaigns.state'
 export * from './maps/maps.actions'

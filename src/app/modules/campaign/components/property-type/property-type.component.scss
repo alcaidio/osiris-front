@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  color: white;
+  background-color: #475569;
+}
+
+.property {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  z-index: 10 !important;
+}
+
+.alinea {
+  width: 33px;
+}
+
+.property {
+  flex-grow: 1;
+  background-color: #475569;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+}
+
+::ng-deep .tooltipProperty {
+  margin-left: 65px !important;
+}
+
+.icon {
+  margin-left: 8px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.values {
+  padding: 0 0 12px 0;
+}

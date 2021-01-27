@@ -6,13 +6,18 @@ import { NgxsModule } from '@ngxs/store'
 import { SharedModule } from 'app/shared/shared.module'
 import { CampaignRoutingModule } from './campaign.routing'
 import { BaselayerListComponent } from './components/baselayer-list/baselayer-list.component'
+import { CalqueListComponent } from './components/calque-list/calque-list.component'
+import { CalqueComponent } from './components/calque/calque.component'
 import { MapComponent } from './components/map/map.component'
 import { MenuComponent } from './components/menu/menu.component'
 import { OverlayListComponent } from './components/overlay-list/overlay-list.component'
 import { PopupContentComponent } from './components/popup-content/popup-content.component'
+import { PropertyTypeComponent } from './components/property-type/property-type.component'
+import { PropertyValueComponent } from './components/property-value/property-value.component'
 import { CampaignDetailComponent } from './containers/campaign-detail/campaign-detail.component'
 import { CampaignListComponent } from './containers/campaign-list/campaign-list.component'
 import { CustomDirective } from './directives/custom.directive'
+import { TitlePipe, TruncatePipe } from './pipe'
 import { CampaignModuleStates } from './store'
 
 @NgModule({
@@ -25,6 +30,12 @@ import { CampaignModuleStates } from './store'
     BaselayerListComponent,
     OverlayListComponent,
     MenuComponent,
+    CalqueComponent,
+    TruncatePipe,
+    TitlePipe,
+    CalqueListComponent,
+    PropertyTypeComponent,
+    PropertyValueComponent,
   ],
   imports: [
     CommonModule,

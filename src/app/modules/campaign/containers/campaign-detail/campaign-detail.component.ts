@@ -2,8 +2,16 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
 import { Observable } from 'rxjs'
-import { Config, Mode, Overlay } from '../../model/shared.model'
-import { BaselayerState, GetBaselayers, GetOverlays, MapState, OverlayState } from '../../store'
+import { Calque, Config, Mode, Overlay } from '../../model/shared.model'
+import {
+  BaselayerState,
+  CalqueState,
+  GetBaselayers,
+  GetCalques,
+  GetOverlays,
+  MapState,
+  OverlayState,
+} from '../../store'
 import { Baselayer } from './../../../../shared/models/maps.model'
 import { MapSmall } from './../../model/shared.model'
 
@@ -18,6 +26,7 @@ export class CampaignDetailComponent implements OnInit {
   @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
   @Select(OverlayState.getVisibleOverlays) overlaysVisible$: Observable<Overlay[]>
   @Select(BaselayerState.activeId) activeBaselayerId$: Observable<string>
+  @Select(CalqueState.entities) calques$: Observable<Calque[]>
 
   selectedFeature: GeoJSON.Feature
   config: Config
@@ -37,6 +46,7 @@ export class CampaignDetailComponent implements OnInit {
     const mapSmall = this.route.snapshot.data.mapSmall as MapSmall
     this.store.dispatch(new GetOverlays(mapSmall.overlayIds))
     this.store.dispatch(new GetBaselayers(mapSmall.baseLayerIds))
+    this.store.dispatch(new GetCalques(mapSmall.calqueIds))
   }
 
   featureSelected(feature: GeoJSON.Feature): void {

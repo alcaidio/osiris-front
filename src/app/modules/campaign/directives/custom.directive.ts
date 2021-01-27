@@ -1,6 +1,6 @@
 import { Directive, OnInit } from '@angular/core'
 import { LeafletDirective } from '@asymmetrik/ngx-leaflet'
-import { Control, DomUtil, Map } from 'leaflet'
+import { control, Control, DomUtil, Map } from 'leaflet'
 
 @Directive({
   selector: '[appCustomLeafletDirective]',
@@ -20,6 +20,9 @@ export class CustomDirective implements OnInit {
 
   init() {
     if (!!this.map) {
+      // add zoom control
+      this.map.addControl(control.zoom({ position: 'topright' }))
+
       this.map.on('boxzoomend', (e) => {
         console.log(e)
       })

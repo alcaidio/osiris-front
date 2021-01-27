@@ -1,0 +1,49 @@
+<div class="wrapper">
+  <div class="property">
+    <div class="alinea"></div>
+    <div class="property">
+      <div class="flex">
+        <button mat-icon-button color="primary" aria-label="Toggle the overlay" (click)="onToggle(property, calque)">
+          <mat-icon>{{ property.toggled ? 'expand_more' : 'chevron_right' }}</mat-icon>
+        </button>
+
+        <mat-checkbox
+          *ngIf="truncateTo > property.name.length"
+          color="primary"
+          [checked]="property.checked"
+          [indeterminate]="property.indeterminate"
+          (change)="onCheck(property, calque)"
+        >
+          {{ property.name | title }}
+        </mat-checkbox>
+        <mat-checkbox
+          *ngIf="property.name.length >= truncateTo"
+          color="primary"
+          [checked]="property.checked"
+          [indeterminate]="property.indeterminate"
+          [matTooltip]="property.name"
+          [matTooltipPosition]="'right'"
+          [matTooltipClass]="'tooltipProperty'"
+          (change)="onCheck(property, calque)"
+        >
+          {{ property.name | truncate: [truncateTo] | title }}
+        </mat-checkbox>
+        <mat-icon
+          *ngIf="currentStyle === property.name"
+          class="icon"
+          [matTooltip]="'This property is used for the style'"
+          [matTooltipPosition]="'right'"
+          >color_lens</mat-icon
+        >
+      </div>
+    </div>
+  </div>
+  <div *ngIf="property.toggled" class="values">
+    <app-property-value
+      *ngFor="let value of propertiesSortByName"
+      [value]="value"
+      [property]="property"
+      [calque]="calque"
+    ></app-property-value>
+  </div>
+</div>

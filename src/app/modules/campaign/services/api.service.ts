@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { BaseLayer, Campaign, ID, MapSmall, Overlay } from '../model/shared.model'
+import { BaseLayer, Calque, Campaign, ID, MapSmall, Overlay } from '../model/shared.model'
 import { filteredObjectByKeys } from '../utils/shared.utils'
 import { LoggerService } from './logger.service'
 
@@ -50,6 +50,14 @@ export class ApiService {
       res.subscribe((p) => this.log.message('All baselayer is loaded', p))
       return res
     }
+  }
+
+  getCalques(ids: string[]): Observable<Calque[]> {
+    const res = this.http
+      .get<Calque[]>('assets/calques.json')
+      .pipe(map((calque) => Object.values(filteredObjectByKeys(calque, ids)) as Calque[]))
+    res.subscribe((p) => this.log.message('All Calque is loaded', p))
+    return res
   }
 
   // getMap(mapId: ID): Observable<Map> {

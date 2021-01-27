@@ -1,0 +1,9 @@
+<div class="calque-list" cdkDropList [cdkDropListData]="calques" (cdkDropListDropped)="drop($event)">
+  <app-calque
+    class="calque-box"
+    *ngFor="let calque of calques"
+    [calque]="calque"
+    cdkDrag
+    cdkDragBoundary=".calque-list"
+  ></app-calque>
+</div>

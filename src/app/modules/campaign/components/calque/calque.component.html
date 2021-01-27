@@ -1,0 +1,66 @@
+<div class="wrapper">
+  <div class="calque">
+    <div class="flex">
+      <button mat-icon-button color="primary" aria-label="Toggle the overlay" (click)="onToggle(calque)">
+        <mat-icon>{{ calque.toggled ? 'expand_more' : 'chevron_right' }}</mat-icon>
+      </button>
+
+      <mat-checkbox
+        *ngIf="truncateTo > calque.name.length"
+        color="primary"
+        [checked]="calque.checked"
+        [indeterminate]="calque.indeterminate"
+        (change)="onCheck(calque)"
+      >
+        {{ calque.name | title }}
+      </mat-checkbox>
+      <mat-checkbox
+        *ngIf="calque.name.length >= truncateTo"
+        color="primary"
+        [checked]="calque.checked"
+        [indeterminate]="calque.indeterminate"
+        [matTooltip]="calque.name"
+        [matTooltipPosition]="'right'"
+        [matTooltipClass]="'tooltip-calque'"
+        (change)="onCheck(calque)"
+      >
+        {{ calque.name | truncate: [truncateTo] | title }}
+      </mat-checkbox>
+
+      <mat-icon class="icon">{{ generateIcon(calque.geomType) }}</mat-icon>
+    </div>
+
+    <div class="more">
+      <button mat-icon-button color="primary" [matMenuTriggerFor]="menu" aria-label="More actions on the layer">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu" [class]="'menu'">
+        <button mat-menu-item>
+          <mat-icon>create</mat-icon>
+          <span>Renommer</span>
+        </button>
+        <!-- desable true if data from immergis -->
+        <button mat-menu-item disabled>
+          <mat-icon>delete_outline</mat-icon>
+          <span>Supprimer</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>style</mat-icon>
+          <span>Style</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>list</mat-icon>
+          <span>Données</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div class="properties" *ngIf="calque.toggled">
+    <app-property-type
+      *ngFor="let property of propertiesSortByName"
+      [property]="property"
+      [calque]="calque"
+    ></app-property-type>
+  </div>
+</div>

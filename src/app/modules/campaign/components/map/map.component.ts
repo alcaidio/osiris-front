@@ -43,7 +43,7 @@ export class MapComponent implements OnChanges {
   leafletLayers: Layer[] // value to bind leaflet directive
 
   drawOptions = {
-    position: 'topleft',
+    position: 'topright',
     draw: {
       polyline: true,
       circle: false,

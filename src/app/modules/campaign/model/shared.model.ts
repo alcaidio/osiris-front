@@ -44,6 +44,7 @@ export interface MapSmall {
   config: Config
   overlayIds: string[]
   baseLayerIds: string[]
+  calqueIds?: string[]
 }
 
 export interface Map {
@@ -51,6 +52,7 @@ export interface Map {
   config: Config
   overlays: Overlay[]
   baseLayers: BaseLayer[]
+  calqueIds?: string[]
 }
 
 export interface Config {
@@ -83,4 +85,31 @@ export interface BaseLayer {
   name?: string
   token?: string
   options?: TileLayerOptions
+}
+
+export type GeometryType = 'point' | 'line' | 'structure'
+
+export interface Calque {
+  id: string
+  name: string
+  geomType: GeometryType
+  checked: boolean
+  indeterminate: boolean
+  toggled: boolean
+  properties: CalqueProperty[]
+}
+
+export interface CalqueProperty {
+  id: string
+  name: string
+  checked: boolean
+  indeterminate: boolean
+  toggled: boolean
+  values: PropertyValue[]
+}
+
+export interface PropertyValue {
+  id: string
+  name: string
+  checked: boolean
 }
