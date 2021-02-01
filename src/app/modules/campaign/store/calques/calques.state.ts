@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import {
-  Add,
+  CreateOrReplace,
   defaultEntityState,
   EntityState,
   EntityStateModel,
@@ -9,11 +9,13 @@ import {
   SetLoading,
   Update,
 } from '@ngxs-labs/entity-state'
-import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { Calque } from '../../model/shared.model'
 import { ApiService } from '../../services/api.service'
+import { OverlayState } from '../overlays/overlays.state'
+import { CreateFilters } from './../filters/filters.actions'
 import { CheckCalque, CheckProperty, CheckValue, GetCalques, ToggleCalque, ToggleProperty } from './calques.actions'
 
 const checkTheCheckboxState = (arr: Array<any>) => {
@@ -39,7 +41,7 @@ const checkTheCheckboxState = (arr: Array<any>) => {
 })
 @Injectable()
 export class CalqueState extends EntityState<Calque> {
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private store: Store) {
     super(CalqueState, 'id', IdStrategy.EntityIdGenerator)
   }
 
@@ -54,17 +56,14 @@ export class CalqueState extends EntityState<Calque> {
 
     return this.api.getCalques(action.calqueIds).pipe(
       map((calques: Calque[]) => {
-        const state = ctx.getState()
-        if (state['ids'] && state['ids'].length > 0) {
-          const newCalques = calques.filter((item) => state['ids'].includes(item))
-          if (newCalques.length > 0) {
-            ctx.dispatch(new Add(CalqueState, calques))
-          }
-        } else {
-          ctx.dispatch(new Add(CalqueState, calques))
-        }
+        ctx.dispatch(new CreateOrReplace(CalqueState, calques))
 
-        // REMOVE: Simulation latence
+        // create filters
+        calques.map((calque) => {
+          this.store.dispatch(new CreateFilters(calque))
+        })
+
+        // TODO: REMOVE simulation latence
         setTimeout(() => {
           ctx.dispatch(new SetLoading(CalqueState, false))
         }, 200)
@@ -111,11 +110,22 @@ export class CalqueState extends EntityState<Calque> {
       }
     })
 
+    const nothing = action.calque.properties.every((p) => p.values.every((v) => v.checked === true))
+
+    if (nothing) {
+      this.store.dispatch(new Update(OverlayState, action.calque.name as string, { visible: !nothing }))
+    } else {
+      this.store.dispatch(new Update(OverlayState, action.calque.name as string, { visible: !nothing }))
+    }
+
     ctx.dispatch(
       new Update(
         CalqueState,
         (e) => e.id === action.calque.id,
         (e) => {
+          this.store.dispatch(
+            new CreateFilters({ ...e, checked: !e.checked, indeterminate: false, properties: newProperties })
+          )
           return { ...e, checked: !e.checked, indeterminate: false, properties: newProperties }
         }
       )
@@ -176,7 +186,14 @@ export class CalqueState extends EntityState<Calque> {
   checkValue(ctx: StateContext<EntityStateModel<Calque>>, action: CheckValue) {
     // update the state of checked value
     const valueFiltered = action.payload.property.values.filter((v) => v.id !== action.payload.value.id)
-    const newValues = [...valueFiltered, { ...action.payload.value, checked: !action.payload.value.checked }]
+    let newValues = [...valueFiltered, { ...action.payload.value, checked: !action.payload.value.checked }]
+
+    // check all if all properties is unchecked
+    if (newValues.every((v) => v.checked === false)) {
+      newValues = action.payload.property.values.map((v) => {
+        return { ...v, checked: true }
+      })
+    }
 
     // check the state of all values to adapt property state
     const checkboxValuesState = checkTheCheckboxState(newValues)
@@ -194,6 +211,8 @@ export class CalqueState extends EntityState<Calque> {
         CalqueState,
         (e) => e.id === action.payload.calque.id,
         (e) => {
+          this.store.dispatch(new Update(OverlayState, action.payload.calque.name as string, { visible: true }))
+          this.store.dispatch(new CreateFilters({ ...e, ...checkboxPropertiesState, properties: newProperties }))
           return { ...e, ...checkboxPropertiesState, properties: newProperties }
         }
       )

@@ -17,7 +17,7 @@
   <app-map
     class="map"
     [config]="mapConfig$ | async"
-    [overlays]="overlaysVisible$ | async"
+    [overlays]="filteredOverlays$ | async"
     [mode]="MODE"
     (selected)="featureSelected($event)"
     (creating)="layerCreation($event)"

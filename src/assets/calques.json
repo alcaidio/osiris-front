@@ -5,7 +5,8 @@
     "geomType": "line",
     "checked": true,
     "indeterminate": false,
-    "toggled": false,
+    "toggled": true,
+    "legend": "etat_de_la_voirie",
     "properties": [
       {
         "id": "1",
@@ -26,7 +27,7 @@
         "indeterminate": false,
         "toggled": true,
         "values": [
-          { "id": "1", "name": "Artérielle", "checked": true },
+          { "id": "1", "name": "Arterielle", "checked": true },
           { "id": "2", "name": "Distribution", "checked": true },
           { "id": "3", "name": "Desserte", "checked": true }
         ]
@@ -40,6 +41,7 @@
     "checked": true,
     "indeterminate": false,
     "toggled": true,
+    "legend": "actions",
     "properties": [
       {
         "id": "1",
@@ -50,8 +52,7 @@
         "values": [
           { "id": "1", "name": "A élaguer", "checked": true },
           { "id": "2", "name": "A abattre", "checked": true },
-          { "id": "3", "name": "A traiter", "checked": true },
-          { "id": "4", "name": "RAS", "checked": true }
+          { "id": "3", "name": "A traiter", "checked": true }
         ]
       },
       {
@@ -61,16 +62,9 @@
         "indeterminate": false,
         "toggled": true,
         "values": [
-          { "id": "1", "name": "Erable", "checked": true },
-          { "id": "2", "name": "Hêtre", "checked": true },
-          { "id": "3", "name": "Chêne", "checked": true },
-          { "id": "4", "name": "Châtaigner", "checked": true },
-          { "id": "5", "name": "Tilleul", "checked": true },
-          { "id": "6", "name": "Peuplier", "checked": true },
-          { "id": "7", "name": "Noyer", "checked": true },
-          { "id": "8", "name": "Olivier", "checked": true },
-          { "id": "9", "name": "Pins", "checked": true },
-          { "id": "10", "name": "Platane", "checked": true }
+          { "id": "1", "name": "Peuplier", "checked": true },
+          { "id": "2", "name": "Pins", "checked": true },
+          { "id": "3", "name": "Platane", "checked": true }
         ]
       }
     ]

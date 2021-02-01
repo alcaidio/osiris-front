@@ -96,6 +96,7 @@ export interface Calque {
   checked: boolean
   indeterminate: boolean
   toggled: boolean
+  legend: string
   properties: CalqueProperty[]
 }
 
@@ -112,4 +113,9 @@ export interface PropertyValue {
   id: string
   name: string
   checked: boolean
+}
+
+export interface FiltersProp {
+  calqueId: string
+  filters: string[]
 }

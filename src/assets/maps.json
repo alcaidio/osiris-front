@@ -21,7 +21,7 @@
       "zoomSnap": 0.5,
       "zoomControl": false
     },
-    "overlayIds": ["3", "2", "1"],
+    "overlayIds": ["3", "2"],
     "baseLayerIds": ["1", "2", "5", "7"],
     "calqueIds": ["1", "2"]
   },

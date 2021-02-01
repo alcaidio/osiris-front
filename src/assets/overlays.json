@@ -44,8 +44,8 @@
   },
   "2": {
     "id": 2,
-    "name": "Lignes",
-    "visible": false,
+    "name": "Voirie",
+    "visible": true,
     "type": "FeatureCollection",
     "features": [
       {
@@ -60,6 +60,10 @@
           "revetement": "bitume",
           "stateNote": 39,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "moyen",
+            "hierarchie_fonctionnelle_des_voies": "arterielle"
+          },
           "style": {
             "color": "#FFA500",
             "weight": 5,
@@ -101,7 +105,7 @@
           "coordinates": [
             [
               [3.88154536485672, 43.61445583618059],
-              [3.8829991221427917, 43.614770425352745],
+              [3.8820952281221427917, 43.614770425352745],
               [3.8828247785568233, 43.614883055643936],
               [3.882771134376526, 43.61495878968664],
               [3.8824492692947388, 43.6149918019318],
@@ -116,7 +120,7 @@
             ]
           ]
         },
-        "bbox": [3.8813012838363647, 43.61445583618059, 3.8829991221427917, 43.6149918019318]
+        "bbox": [3.8813012838363647, 43.61445583618059, 3.8820952281221427917, 43.6149918019318]
       },
       {
         "type": "Feature",
@@ -130,6 +134,10 @@
           "revetement": "bitume",
           "stateNote": 35,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "desserte"
+          },
           "style": {
             "color": "#FFFF00",
             "weight": 5,
@@ -159,6 +167,10 @@
           "revetement": "bitume",
           "stateNote": 20,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "arterielle"
+          },
           "style": {
             "color": "#00FF00",
             "weight": 5,
@@ -188,6 +200,10 @@
           "revetement": "bitume",
           "stateNote": 90,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "arterielle"
+          },
           "style": {
             "color": "#000000",
             "weight": 5,
@@ -217,6 +233,10 @@
           "revetement": "bitume",
           "stateNote": 16,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "arterielle"
+          },
           "style": {
             "color": "#00FF00",
             "weight": 5,
@@ -247,6 +267,10 @@
           "revetement": "bitume",
           "stateNote": 70,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "mauvais",
+            "hierarchie_fonctionnelle_des_voies": "desserte"
+          },
           "style": {
             "color": "#FFA500",
             "weight": 5,
@@ -278,6 +302,10 @@
           "revetement": "bitume",
           "stateNote": 92,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "desserte"
+          },
           "style": {
             "color": "#FF0000",
             "weight": 5,
@@ -307,6 +335,10 @@
           "revetement": "bitume",
           "stateNote": 44,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "desserte"
+          },
           "style": {
             "color": "#FFFF00",
             "weight": 5,
@@ -338,6 +370,10 @@
           "revetement": "bitume",
           "stateNote": 12,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "desserte"
+          },
           "style": {
             "color": "#FFA500",
             "weight": 5,
@@ -376,7 +412,7 @@
               [3.8724070787429805, 43.62316468775167],
               [3.872578740119934, 43.623195753860465],
               [3.8729006052017207, 43.62342098266908],
-              [3.873034715652466, 43.62371999202509],
+              [3.873034715652466, 43.62371095228202509],
               [3.872627019882202, 43.624119963253946],
               [3.8717526197433476, 43.62470244086646],
               [3.8714253902435307, 43.6245354645279]
@@ -397,6 +433,10 @@
           "revetement": "bitume",
           "stateNote": 70,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "desserte"
+          },
           "style": {
             "color": "#FFFF00",
             "weight": 5,
@@ -429,6 +469,10 @@
           "revetement": "bitume",
           "stateNote": 72,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "desserte"
+          },
           "style": {
             "color": "#00FF00",
             "weight": 5,
@@ -463,6 +507,10 @@
           "revetement": "bitume",
           "stateNote": 88,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "desserte"
+          },
           "style": {
             "color": "#FFFF00",
             "weight": 5,
@@ -494,6 +542,10 @@
           "revetement": "bitume",
           "stateNote": 35,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
+          "valid": {
+            "etat_de_la_voirie": "bon",
+            "hierarchie_fonctionnelle_des_voies": "arterielle"
+          },
           "style": {
             "color": "#FFFF00",
             "weight": 5,
@@ -517,7 +569,7 @@
   },
   "3": {
     "id": 3,
-    "name": "Points",
+    "name": "Arbres",
     "type": "FeatureCollection",
     "visible": true,
     "features": [
@@ -526,11 +578,15 @@
         "id": 17,
         "properties": {
           "style": {
-            "color": "#8B0000",
+            "color": "#096A09",
             "weight": 5,
             "radius": 5,
-            "fillColor": "#999",
+            "fillColor": "#095228",
             "opacity": 0.8
+          },
+          "valid": {
+            "actions": "a abattre",
+            "especes": "pins"
           }
         },
         "geometry": {
@@ -544,11 +600,15 @@
         "id": 18,
         "properties": {
           "style": {
-            "color": "#8B0000",
+            "color": "#096A09",
             "weight": 5,
             "radius": 5,
-            "fillColor": "#999",
+            "fillColor": "#095228",
             "opacity": 0.8
+          },
+          "valid": {
+            "actions": "a elaguer",
+            "especes": "peuplier"
           }
         },
         "geometry": {
@@ -562,11 +622,15 @@
         "id": 19,
         "properties": {
           "style": {
-            "color": "#8B0000",
+            "color": "#096A09",
             "weight": 5,
             "radius": 5,
-            "fillColor": "#999",
+            "fillColor": "#095228",
             "opacity": 0.8
+          },
+          "valid": {
+            "actions": "a abattre",
+            "especes": "platane"
           }
         },
         "geometry": {
@@ -580,11 +644,15 @@
         "id": 20,
         "properties": {
           "style": {
-            "color": "#8B0000",
+            "color": "#096A09",
             "weight": 5,
             "radius": 5,
-            "fillColor": "#999",
+            "fillColor": "#095228",
             "opacity": 0.8
+          },
+          "valid": {
+            "actions": "a elaguer",
+            "especes": "platane"
           }
         },
         "geometry": {
@@ -598,11 +666,15 @@
         "id": 21,
         "properties": {
           "style": {
-            "color": "#8B0000",
+            "color": "#096A09",
             "weight": 5,
             "radius": 5,
-            "fillColor": "#999",
+            "fillColor": "#095228",
             "opacity": 0.8
+          },
+          "valid": {
+            "actions": "a elaguer",
+            "especes": "peuplier"
           }
         },
         "geometry": {
@@ -616,11 +688,15 @@
         "id": 22,
         "properties": {
           "style": {
-            "color": "#8B0000",
+            "color": "#096A09",
             "weight": 5,
             "radius": 5,
-            "fillColor": "#999",
+            "fillColor": "#095228",
             "opacity": 0.8
+          },
+          "valid": {
+            "actions": "a abattre",
+            "especes": "peuplier"
           }
         },
         "geometry": {
@@ -634,11 +710,15 @@
         "id": 23,
         "properties": {
           "style": {
-            "color": "#8B0000",
+            "color": "#096A09",
             "weight": 5,
             "radius": 5,
-            "fillColor": "#999",
+            "fillColor": "#095228",
             "opacity": 0.8
+          },
+          "valid": {
+            "actions": "a traiter",
+            "especes": "pins"
           }
         },
         "geometry": {
@@ -649,104 +729,18 @@
       },
       {
         "type": "Feature",
-        "id": 24,
-        "properties": {
-          "style": {
-            "color": "#8B0000",
-            "weight": 5,
-            "radius": 5,
-            "fillColor": "#999",
-            "opacity": 0.8
-          }
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-107.25420174268089, 45.122094018912854]
-        },
-        "bbox": [-107.25420174268089, 45.122094018912854, -107.25420174268089, 45.122094018912854]
-      },
-      {
-        "type": "Feature",
-        "id": 25,
-        "properties": {
-          "style": {
-            "color": "#8B0000",
-            "weight": 5,
-            "radius": 5,
-            "fillColor": "#999",
-            "opacity": 0.8
-          }
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [127.56809924156967, -12.19063023301118]
-        },
-        "bbox": [127.56809924156967, -12.19063023301118, 127.56809924156967, -12.19063023301118]
-      },
-      {
-        "type": "Feature",
-        "id": 26,
-        "properties": {
-          "style": {
-            "color": "#8B0000",
-            "weight": 5,
-            "radius": 5,
-            "fillColor": "#999",
-            "opacity": 0.8
-          }
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [25.057460447594018, -24.587045405546885]
-        },
-        "bbox": [25.057460447594018, -24.587045405546885, 25.057460447594018, -24.587045405546885]
-      },
-      {
-        "type": "Feature",
-        "id": 27,
-        "properties": {
-          "style": {
-            "color": "#8B0000",
-            "weight": 5,
-            "radius": 5,
-            "fillColor": "#999",
-            "opacity": 0.8
-          }
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [74.84214918540417, -70.69777357046073]
-        },
-        "bbox": [74.84214918540417, -70.69777357046073, 74.84214918540417, -70.69777357046073]
-      },
-      {
-        "type": "Feature",
-        "id": 28,
-        "properties": {
-          "style": {
-            "color": "#8B0000",
-            "weight": 5,
-            "radius": 5,
-            "fillColor": "#999",
-            "opacity": 0.8
-          }
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-137.03132527070073, -50.382265645698965]
-        },
-        "bbox": [-137.03132527070073, -50.382265645698965, -137.03132527070073, -50.382265645698965]
-      },
-      {
-        "type": "Feature",
         "id": 29,
         "properties": {
           "style": {
-            "color": "#8B0000",
+            "color": "#096A09",
             "weight": 5,
             "radius": 5,
-            "fillColor": "#999",
+            "fillColor": "#095228",
             "opacity": 0.8
+          },
+          "valid": {
+            "actions": "a elaguer",
+            "especes": "platane"
           }
         },
         "geometry": {
@@ -754,187 +748,6 @@
           "coordinates": [3.8771438598632812, 43.621537577864906]
         },
         "bbox": [3.8771438598632812, 43.621537577864906, 3.8771438598632812, 43.621537577864906]
-      }
-    ]
-  },
-  "4": {
-    "id": 4,
-    "name": "Arbres",
-    "type": "FeatureCollection",
-    "visible": true,
-    "features": [
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "A élaguer"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.8342607021331783, 43.63444645427367]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "ok"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.8343800604343414, 43.63439404001767]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "A élaguer"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.8345101475715633, 43.6343358019018]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "A élaguer"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.834650963544845, 43.63427562245612]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "A élaguer"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.834787756204605, 43.634215442950186]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "A élaguer"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.8349245488643646, 43.63416594040818]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "A élaguer"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.835062682628631, 43.63410867271069]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "A élaguer"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.835196793079376, 43.63404849303756]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "A élaguer"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.836127519607544, 43.63362140975491]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Pins",
-          "etat": "ok"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.8366156816482544, 43.63332244965111]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Pins",
-          "etat": "ok"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.835298717021942, 43.633741769896254]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "ok"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.8344109058380127, 43.634114496546815]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "ok"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.8340675830841064, 43.63428338754929]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Pins",
-          "etat": "A abattre"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.835652768611908, 43.63387183622963]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          "essence": "Platane",
-          "etat": "A abattre"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.8359370827674866, 43.63347192988889]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {},
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.8364654779434204, 43.63318073427712]
-        }
       }
     ]
   }

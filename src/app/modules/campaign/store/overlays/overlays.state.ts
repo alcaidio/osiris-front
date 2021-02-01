@@ -23,7 +23,7 @@ import { GetOverlays, ToggleOverlay } from './overlays.actions'
 @Injectable()
 export class OverlayState extends EntityState<Overlay> {
   constructor(private api: ApiService) {
-    super(OverlayState, 'id', IdStrategy.EntityIdGenerator)
+    super(OverlayState, 'name', IdStrategy.EntityIdGenerator)
   }
 
   @Selector()

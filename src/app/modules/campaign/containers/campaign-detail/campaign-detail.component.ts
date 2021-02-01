@@ -10,6 +10,7 @@ import {
   GetCalques,
   GetOverlays,
   MapState,
+  OverlaySelectors,
   OverlayState,
 } from '../../store'
 import { Baselayer } from './../../../../shared/models/maps.model'
@@ -24,9 +25,9 @@ export class CampaignDetailComponent implements OnInit {
   @Select(OverlayState.entities) overlays$: Observable<Overlay[]>
   @Select(BaselayerState.entities) baselayers$: Observable<Baselayer[]>
   @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
-  @Select(OverlayState.getVisibleOverlays) overlaysVisible$: Observable<Overlay[]>
   @Select(BaselayerState.activeId) activeBaselayerId$: Observable<string>
   @Select(CalqueState.entities) calques$: Observable<Calque[]>
+  @Select(OverlaySelectors.getFilteredOverlays) filteredOverlays$: Observable<any>
 
   selectedFeature: GeoJSON.Feature
   config: Config

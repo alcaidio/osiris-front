@@ -9,7 +9,6 @@ import { BaselayerListComponent } from './components/baselayer-list/baselayer-li
 import { CalqueListComponent } from './components/calque-list/calque-list.component'
 import { CalqueComponent } from './components/calque/calque.component'
 import { MapComponent } from './components/map/map.component'
-import { MenuComponent } from './components/menu/menu.component'
 import { OverlayListComponent } from './components/overlay-list/overlay-list.component'
 import { PopupContentComponent } from './components/popup-content/popup-content.component'
 import { PropertyTypeComponent } from './components/property-type/property-type.component'
@@ -29,7 +28,6 @@ import { CampaignModuleStates } from './store'
     CustomDirective,
     BaselayerListComponent,
     OverlayListComponent,
-    MenuComponent,
     CalqueComponent,
     TruncatePipe,
     TitlePipe,

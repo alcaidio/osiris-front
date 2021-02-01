@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 import { Store } from '@ngxs/store'
 import { CheckCalque, ToggleCalque } from '../../store'
 import { Calque, GeometryType } from './../../model/shared.model'
@@ -13,7 +14,7 @@ export class CalqueComponent implements OnInit {
 
   truncateTo: number
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.truncateTo = 18
