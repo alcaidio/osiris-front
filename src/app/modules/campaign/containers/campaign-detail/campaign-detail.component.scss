@@ -1,30 +1,51 @@
-@import 'treo';
-
-.wrapper {
-  display: flex;
+.container {
+  height: 100vh;
+  max-height: calc(100vh - 64px);
   width: 100vw;
-  height: calc(100vh - 64px);
+  position: relative;
+  overflow: hidden;
 }
 
 .map {
+  z-index: 10 !important;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  overflow-y: hidden;
 }
 
-.aside {
-  width: 25%;
-  min-width: 300px;
+.calques {
+  z-index: 20 !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px;
+  width: 300px;
   max-width: 300px;
-  height: 100%;
-  border-left: 2px solid #dcdcdc;
+  max-height: calc(100% - 20px);
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 10px 8px -5px rgba(0, 0, 0, 0.35);
   overflow-y: scroll;
+}
 
-  // TODO : add toggle button and put 100% below
-  @include treo-breakpoint('xs') {
-    min-width: 80% !important;
-    max-width: 80% !important;
-    width: 80% !important;
-    border-left: 0;
+.table {
+  z-index: 20 !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  width: 30%;
+  min-width: 300px;
+  max-width: 600px;
+  max-height: calc(100% - 20px);
+  background-color: white;
+  overflow: hidden;
+  border-radius: 6px;
+
+  table {
+    width: 100%;
+    box-shadow: 0 10px 8px -5px rgba(0, 0, 0, 0.35);
   }
 }

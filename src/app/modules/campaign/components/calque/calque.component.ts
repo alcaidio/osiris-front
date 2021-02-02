@@ -27,6 +27,8 @@ export class CalqueComponent implements OnInit {
       return 'timeline'
     } else if (type === 'structure') {
       return 'extension'
+    } else if (type === 'image') {
+      return 'panorama'
     } else {
       throw new Error('Cant load icon layer !')
     }

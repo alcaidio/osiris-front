@@ -7,14 +7,16 @@
 }
 
 .calque {
+  z-index: 100;
   display: flex;
   width: 100%;
   height: 50px;
   align-items: center;
   justify-content: space-between;
   padding: 5px;
-  border-top: 1px solid #dcdcdc;
-  background-color: #475569;
+  margin-top: 5px;
+  background-color: #364152;
+  border-radius: 6px;
 }
 
 .flex {
@@ -39,11 +41,15 @@
 }
 
 ::ng-deep .menu {
-  margin-left: 58px !important;
+  margin-left: 68px !important;
   margin-top: -45px !important;
 }
 
 .properties {
-  padding: 0 0 12px 0;
+  z-index: 10;
+  margin-top: -5px;
+  padding: 15px 10px 15px 25px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
   background-color: #475569;
 }

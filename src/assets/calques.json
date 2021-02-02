@@ -5,7 +5,7 @@
     "geomType": "line",
     "checked": true,
     "indeterminate": false,
-    "toggled": true,
+    "toggled": false,
     "legend": "etat_de_la_voirie",
     "properties": [
       {
@@ -13,7 +13,7 @@
         "name": "Etat de la voirie",
         "checked": true,
         "indeterminate": false,
-        "toggled": true,
+        "toggled": false,
         "values": [
           { "id": "1", "name": "Bon", "checked": true },
           { "id": "2", "name": "Moyen", "checked": true },
@@ -25,7 +25,7 @@
         "name": "Hiérarchie fonctionnelle des voies",
         "checked": true,
         "indeterminate": false,
-        "toggled": true,
+        "toggled": false,
         "values": [
           { "id": "1", "name": "Arterielle", "checked": true },
           { "id": "2", "name": "Distribution", "checked": true },
@@ -40,7 +40,7 @@
     "geomType": "point",
     "checked": true,
     "indeterminate": false,
-    "toggled": true,
+    "toggled": false,
     "legend": "actions",
     "properties": [
       {
@@ -48,7 +48,7 @@
         "name": "Actions",
         "checked": true,
         "indeterminate": false,
-        "toggled": true,
+        "toggled": false,
         "values": [
           { "id": "1", "name": "A élaguer", "checked": true },
           { "id": "2", "name": "A abattre", "checked": true },
@@ -60,7 +60,7 @@
         "name": "Espèces",
         "checked": true,
         "indeterminate": false,
-        "toggled": true,
+        "toggled": false,
         "values": [
           { "id": "1", "name": "Peuplier", "checked": true },
           { "id": "2", "name": "Pins", "checked": true },

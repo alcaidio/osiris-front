@@ -1,0 +1,64 @@
+<section class="card">
+  <div class="header">
+    <div class="text-2xl font-semibold text-cool-gray-700 antialiased tracking-tight" *ngIf="campaign$ | async as c">
+      {{ c.name }}
+    </div>
+    <div>
+      <button mat-icon-button color="primary" [matMenuTriggerFor]="menu" aria-label="More actions on the layer">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu" [class]="'menu'">
+        <button mat-menu-item>
+          <mat-icon>preview</mat-icon>
+          <span>Définir la vue par défaut</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>layers</mat-icon>
+          <span>Ajouter un calque</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>query_stats</mat-icon>
+          <span>Visualiser dans le dashboard</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>copy_all</mat-icon>
+          <span>Dupliquer la carte</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>print</mat-icon>
+          <span>Imprimer la carte</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>share</mat-icon>
+          <span>Partager la carte</span>
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="export">
+          <mat-icon>download</mat-icon>
+          <span>Exporter la carte</span>
+        </button>
+        <mat-menu #export="matMenu">
+          <button mat-menu-item>En CSV</button>
+          <button mat-menu-item>En KML</button>
+          <button mat-menu-item>En Geojson</button>
+          <button mat-menu-item>En Shape</button>
+        </mat-menu>
+        <button mat-menu-item>
+          <mat-icon>delete_outline</mat-icon>
+          <span>Placer dans la corbeille</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div class="calques">
+    <div class="text-lg font-medium text-cool-gray-700 mb-2">Calques</div>
+    <app-calque-list [calques]="calques$ | async"></app-calque-list>
+  </div>
+  <div class="footer">
+    <div class="text-lg font-medium text-cool-gray-700 mb-2">Baselayers</div>
+    <app-baselayer-list
+      [baselayers]="baselayers$ | async"
+      [activeBaselayerId]="activeBaselayerId$ | async"
+    ></app-baselayer-list>
+  </div>
+</section>

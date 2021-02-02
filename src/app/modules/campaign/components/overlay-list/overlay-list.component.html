@@ -1,9 +1,0 @@
-<div *ngFor="let overlay of overlays; let i = index">
-  <mat-checkbox
-    [name]="overlay.name"
-    [checked]="overlay.visible"
-    (click)="onToggleOverlay(overlay.id, overlay.visible)"
-  >
-    {{ overlay.name }}
-  </mat-checkbox>
-</div>

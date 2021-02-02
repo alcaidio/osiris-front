@@ -1,0 +1,24 @@
+.card {
+  overflow: hidden;
+  background: linear-gradient(white, #bfc2c5);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px 14px 18px;
+}
+
+.calques {
+  padding: 10px 15px;
+}
+
+.footer {
+  padding: 10px 15px;
+}
+
+::ng-deep .menu {
+  margin-left: 45px !important;
+  margin-top: -50px !important;
+}

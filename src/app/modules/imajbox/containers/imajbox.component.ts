@@ -242,7 +242,7 @@ AutoUnsubscribe()
         max-width: 400px;
         min-height: 250px;
         max-height: 250px;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        box-shadow: 8px 8px 20px 0px rgba(0, 0, 0, 0.5);
         border-radius: 8px;
         border: 1px solid #bdc2d1;
         overflow: hidden;
