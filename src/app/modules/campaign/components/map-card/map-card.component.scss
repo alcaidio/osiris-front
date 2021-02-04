@@ -1,20 +1,59 @@
 .card {
+  z-index: 20 !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 15px;
+  width: 300px;
+  max-width: 300px;
+  height: 50;
+  max-height: calc(100% - 35px);
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 10px 8px -5px rgba(0, 0, 0, 0.35);
   overflow: hidden;
-  background: linear-gradient(white, #bfc2c5);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
+// TODO : sticky the header
 .header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: 14px 18px 14px 18px;
+  padding: 20px 15px 10px 15px;
+}
+
+.body {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
 }
 
 .calques {
-  padding: 10px 15px;
+  background: #f1f5f9;
+  height: 100%;
+  overflow: auto;
+
+  .title {
+    position: sticky;
+    top: 0;
+    padding: 10px 15px;
+    z-index: 40 !important;
+    background-color: #f1f5f9;
+  }
+
+  .list {
+    height: auto;
+    padding: 0px 15px 15px 15px;
+    z-index: 50 !important;
+  }
 }
 
-.footer {
+.baselayers {
   padding: 10px 15px;
 }
 

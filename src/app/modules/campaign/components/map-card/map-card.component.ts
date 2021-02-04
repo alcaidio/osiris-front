@@ -7,8 +7,8 @@ import { BaselayerState, CalqueState, CampaignsState } from '../../store'
 
 @Component({
   selector: 'app-map-card',
-  templateUrl: './map-card.component.html',
-  styleUrls: ['./map-card.component.scss'],
+  templateUrl: 'map-card.component.html',
+  styleUrls: ['map-card.component.scss'],
 })
 export class MapCardComponent implements OnInit {
   @Select(CalqueState.entities) calques$: Observable<Calque[]>
@@ -16,7 +16,13 @@ export class MapCardComponent implements OnInit {
   @Select(BaselayerState.entities) baselayers$: Observable<Baselayer[]>
   @Select(BaselayerState.activeId) activeBaselayerId$: Observable<string>
 
+  isToggled = false
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  onToggled(): void {
+    this.isToggled = !this.isToggled
+  }
 }

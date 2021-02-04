@@ -13,39 +13,25 @@
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
 
-.calques {
-  z-index: 20 !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 10px;
-  width: 300px;
-  max-width: 300px;
-  max-height: calc(100% - 20px);
-  background-color: white;
-  border-radius: 6px;
-  box-shadow: 0 10px 8px -5px rgba(0, 0, 0, 0.35);
-  overflow-y: scroll;
-}
-
-.table {
+.right {
   z-index: 20 !important;
   position: absolute;
   top: 0;
   right: 0;
   margin: 10px;
-  width: 30%;
+  width: 45%;
   min-width: 300px;
-  max-width: 600px;
   max-height: calc(100% - 20px);
   background-color: white;
-  overflow: hidden;
   border-radius: 6px;
+  box-shadow: 0 10px 8px -5px rgba(0, 0, 0, 0.35);
+}
 
-  table {
-    width: 100%;
-    box-shadow: 0 10px 8px -5px rgba(0, 0, 0, 0.35);
-  }
+.table-container {
+  height: calc(100% - 20px);
+  max-height: 600px;
+  overflow: auto;
 }

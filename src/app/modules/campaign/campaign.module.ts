@@ -17,7 +17,8 @@ import { CampaignDetailComponent } from './containers/campaign-detail/campaign-d
 import { CampaignListComponent } from './containers/campaign-list/campaign-list.component'
 import { CustomDirective } from './directives/custom.directive'
 import { TitlePipe, TruncatePipe } from './pipe'
-import { CampaignModuleStates } from './store'
+import { CampaignModuleStates } from './store';
+import { TableCalqueComponent } from './components/table-calque/table-calque.component'
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CampaignModuleStates } from './store'
     PropertyTypeComponent,
     PropertyValueComponent,
     MapCardComponent,
+    TableCalqueComponent,
   ],
   imports: [
     CommonModule,
