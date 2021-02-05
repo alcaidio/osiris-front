@@ -8,6 +8,10 @@
     (creating)="layerCreation($event)"
   ></app-map>
 
-  <app-map-card></app-map-card>
-  <app-table-calque></app-table-calque>
+  <div class="top-left">
+    <app-map-card></app-map-card>
+  </div>
+  <div class="bottom-right">
+    <app-table-calque *ngIf="data$ | async as data" [data]="data"></app-table-calque>
+  </div>
 </div>

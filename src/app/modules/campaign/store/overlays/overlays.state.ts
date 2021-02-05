@@ -31,6 +31,24 @@ export class OverlayState extends EntityState<Overlay> {
     return Object.values(state.entities).filter((o) => o.visible === true)
   }
 
+  @Selector()
+  static getColumnProperties(state: EntityStateModel<Overlay>) {
+    const feature = state.entities[state.active].features[0]
+    const prop = feature.properties
+    return ['id', ...Object.keys(prop.valid), ...Object.keys(prop)].filter(
+      (a) => a !== 'valid' && a !== 'style' && a !== 'popupContent'
+    )
+  }
+
+  @Selector()
+  static getProperties(state: EntityStateModel<Overlay>) {
+    return state.entities[state.active].features.map((feature) => {
+      return {
+        ...feature.properties,
+      }
+    })
+  }
+
   @Action(GetOverlays)
   getOverlays(ctx: StateContext<OverlayState>, action: GetOverlays) {
     ctx.dispatch(new SetLoading(OverlayState, true))

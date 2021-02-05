@@ -60,10 +60,9 @@
           "revetement": "bitume",
           "stateNote": 39,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "moyen",
-            "hierarchie_fonctionnelle_des_voies": "arterielle"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "arterielle",
+          "etat_de_la_voirie": "moyen",
           "style": {
             "color": "#FFA500",
             "weight": 5,
@@ -98,32 +97,6 @@
       },
       {
         "type": "Feature",
-        "id": 3,
-        "properties": { "note": "Mettre en place une zone de recouvrement" },
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [3.88154536485672, 43.61445583618059],
-              [3.8820952281221427917, 43.614770425352745],
-              [3.8828247785568233, 43.614883055643936],
-              [3.882771134376526, 43.61495878968664],
-              [3.8824492692947388, 43.6149918019318],
-              [3.882358074188233, 43.61496073158389],
-              [3.882004022598266, 43.6149413126083],
-              [3.881405889987945, 43.61483645003177],
-              [3.8813012838363647, 43.614745180603364],
-              [3.8813254237174983, 43.61465196912924],
-              [3.8813790678977966, 43.61453351267238],
-              [3.8814380764961243, 43.614488848701875],
-              [3.88154536485672, 43.61445583618059]
-            ]
-          ]
-        },
-        "bbox": [3.8813012838363647, 43.61445583618059, 3.8820952281221427917, 43.6149918019318]
-      },
-      {
-        "type": "Feature",
         "id": 4,
         "properties": {
           "type": "SECTION",
@@ -134,10 +107,9 @@
           "revetement": "bitume",
           "stateNote": 35,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "desserte"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "desserte",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#FFFF00",
             "weight": 5,
@@ -167,10 +139,9 @@
           "revetement": "bitume",
           "stateNote": 20,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "arterielle"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "arterielle",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#00FF00",
             "weight": 5,
@@ -200,10 +171,9 @@
           "revetement": "bitume",
           "stateNote": 90,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "arterielle"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "arterielle",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#000000",
             "weight": 5,
@@ -233,10 +203,9 @@
           "revetement": "bitume",
           "stateNote": 16,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "arterielle"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "arterielle",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#00FF00",
             "weight": 5,
@@ -267,10 +236,9 @@
           "revetement": "bitume",
           "stateNote": 70,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "mauvais",
-            "hierarchie_fonctionnelle_des_voies": "desserte"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "desserte",
+          "etat_de_la_voirie": "mauvais",
           "style": {
             "color": "#FFA500",
             "weight": 5,
@@ -302,10 +270,9 @@
           "revetement": "bitume",
           "stateNote": 92,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "desserte"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "desserte",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#FF0000",
             "weight": 5,
@@ -335,10 +302,9 @@
           "revetement": "bitume",
           "stateNote": 44,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "desserte"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "desserte",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#FFFF00",
             "weight": 5,
@@ -370,10 +336,9 @@
           "revetement": "bitume",
           "stateNote": 12,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "desserte"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "desserte",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#FFA500",
             "weight": 5,
@@ -400,29 +365,6 @@
       },
       {
         "type": "Feature",
-        "id": 12,
-        "properties": {
-          "note": "Mettre en place une zone de recouvrement"
-        },
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [3.8714253902435307, 43.6245354645279],
-              [3.8724070787429805, 43.62316468775167],
-              [3.872578740119934, 43.623195753860465],
-              [3.8729006052017207, 43.62342098266908],
-              [3.873034715652466, 43.62371095228202509],
-              [3.872627019882202, 43.624119963253946],
-              [3.8717526197433476, 43.62470244086646],
-              [3.8714253902435307, 43.6245354645279]
-            ]
-          ]
-        },
-        "bbox": [3.8714253902435307, 43.62316468775167, 3.873034715652466, 43.62470244086646]
-      },
-      {
-        "type": "Feature",
         "id": 13,
         "properties": {
           "type": "SECTION",
@@ -433,10 +375,9 @@
           "revetement": "bitume",
           "stateNote": 70,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "desserte"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "desserte",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#FFFF00",
             "weight": 5,
@@ -469,10 +410,9 @@
           "revetement": "bitume",
           "stateNote": 72,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "desserte"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "desserte",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#00FF00",
             "weight": 5,
@@ -507,10 +447,9 @@
           "revetement": "bitume",
           "stateNote": 88,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "desserte"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "desserte",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#FFFF00",
             "weight": 5,
@@ -542,10 +481,9 @@
           "revetement": "bitume",
           "stateNote": 35,
           "popupContent": ["longueur", "largeur", "revetement", "stateNote"],
-          "valid": {
-            "etat_de_la_voirie": "bon",
-            "hierarchie_fonctionnelle_des_voies": "arterielle"
-          },
+          "valid": ["etat_de_la_voirie", "hierarchie_fonctionnelle_des_voies"],
+          "hierarchie_fonctionnelle_des_voies": "arterielle",
+          "etat_de_la_voirie": "bon",
           "style": {
             "color": "#FFFF00",
             "weight": 5,
@@ -584,10 +522,9 @@
             "fillColor": "#095228",
             "opacity": 0.8
           },
-          "valid": {
-            "actions": "a abattre",
-            "especes": "pins"
-          }
+          "valid": ["actions", "especes"],
+          "actions": "a abattre",
+          "especes": "pins"
         },
         "geometry": {
           "type": "Point",
@@ -606,10 +543,9 @@
             "fillColor": "#095228",
             "opacity": 0.8
           },
-          "valid": {
-            "actions": "a elaguer",
-            "especes": "peuplier"
-          }
+          "valid": ["actions", "especes"],
+          "actions": "a elaguer",
+          "especes": "peuplier"
         },
         "geometry": {
           "type": "Point",
@@ -628,10 +564,9 @@
             "fillColor": "#095228",
             "opacity": 0.8
           },
-          "valid": {
-            "actions": "a abattre",
-            "especes": "platane"
-          }
+          "valid": ["actions", "especes"],
+          "actions": "a abattre",
+          "especes": "platane"
         },
         "geometry": {
           "type": "Point",
@@ -650,10 +585,9 @@
             "fillColor": "#095228",
             "opacity": 0.8
           },
-          "valid": {
-            "actions": "a elaguer",
-            "especes": "platane"
-          }
+          "valid": ["actions", "especes"],
+          "actions": "a elaguer",
+          "especes": "platane"
         },
         "geometry": {
           "type": "Point",
@@ -672,10 +606,9 @@
             "fillColor": "#095228",
             "opacity": 0.8
           },
-          "valid": {
-            "actions": "a elaguer",
-            "especes": "peuplier"
-          }
+          "valid": ["actions", "especes"],
+          "actions": "a elaguer",
+          "especes": "peuplier"
         },
         "geometry": {
           "type": "Point",
@@ -694,10 +627,9 @@
             "fillColor": "#095228",
             "opacity": 0.8
           },
-          "valid": {
-            "actions": "a abattre",
-            "especes": "peuplier"
-          }
+          "valid": ["actions", "especes"],
+          "actions": "a abattre",
+          "especes": "peuplier"
         },
         "geometry": {
           "type": "Point",
@@ -716,10 +648,9 @@
             "fillColor": "#095228",
             "opacity": 0.8
           },
-          "valid": {
-            "actions": "a traiter",
-            "especes": "pins"
-          }
+          "valid": ["actions", "especes"],
+          "actions": "a traiter",
+          "especes": "pins"
         },
         "geometry": {
           "type": "Point",
@@ -738,15 +669,15 @@
             "fillColor": "#095228",
             "opacity": 0.8
           },
-          "valid": {
-            "actions": "a elaguer",
-            "especes": "platane"
-          }
+          "valid": ["actions", "especes"],
+          "actions": "a elaguer",
+          "especes": "platane"
         },
         "geometry": {
           "type": "Point",
           "coordinates": [3.8771438598632812, 43.621537577864906]
         },
+
         "bbox": [3.8771438598632812, 43.621537577864906, 3.8771438598632812, 43.621537577864906]
       }
     ]

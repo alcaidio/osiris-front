@@ -21,7 +21,7 @@ export class OverlaySelectors {
 
             if (item['properties'] && item['properties']['valid']) {
               return filters[key].find((property) => {
-                return cleanString(property) === cleanString(item['properties']['valid'][key])
+                return cleanString(property) === cleanString(item['properties'][key])
               })
             }
           })

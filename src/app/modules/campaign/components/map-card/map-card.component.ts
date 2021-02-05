@@ -16,9 +16,7 @@ export class MapCardComponent implements OnInit {
   @Select(BaselayerState.entities) baselayers$: Observable<Baselayer[]>
   @Select(BaselayerState.activeId) activeBaselayerId$: Observable<string>
 
-  isToggled = false
-
-  constructor() {}
+  isToggled = true
 
   ngOnInit(): void {}
 
