@@ -1,23 +1,21 @@
 .card {
-  z-index: 20 !important;
+  z-index: 25 !important;
   position: absolute;
   top: 0;
   left: 0;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1), 0 0 10px 0 rgba(0, 0, 0, 0.04);
+  overflow: hidden;
   margin: 15px;
   width: 300px;
   max-width: 300px;
-  height: 50;
   max-height: calc(100% - 35px);
-  background: white;
-  border-radius: 6px;
-  box-shadow: 0 10px 8px -5px rgba(0, 0, 0, 0.35);
-  overflow: hidden;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
 
-// TODO : sticky the header
 .header {
   display: flex;
   align-items: flex-start;

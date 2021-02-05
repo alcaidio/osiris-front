@@ -7,24 +7,7 @@
     (selected)="featureSelected($event)"
     (creating)="layerCreation($event)"
   ></app-map>
-  <div class="wrapper">
-    <app-map-card></app-map-card>
 
-    <!-- <div class="right">
-      <div class="flex justify-content">
-        <div class="">
-          <mat-form-field>
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="(true)" placeholder="Ex. ium" #input />
-          </mat-form-field>
-        </div>
-        <div class="">
-          mode edition | fermer
-        </div>
-      </div>
-      <div class="table-container">
-        <app-table-calque></app-table-calque>
-      </div>
-    </div> -->
-  </div>
+  <app-map-card></app-map-card>
+  <app-table-calque></app-table-calque>
 </div>

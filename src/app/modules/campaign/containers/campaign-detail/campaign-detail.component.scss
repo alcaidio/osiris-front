@@ -15,23 +15,3 @@
   height: 100%;
   overflow: auto;
 }
-
-.right {
-  z-index: 20 !important;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 10px;
-  width: 45%;
-  min-width: 300px;
-  max-height: calc(100% - 20px);
-  background-color: white;
-  border-radius: 6px;
-  box-shadow: 0 10px 8px -5px rgba(0, 0, 0, 0.35);
-}
-
-.table-container {
-  height: calc(100% - 20px);
-  max-height: 600px;
-  overflow: auto;
-}
