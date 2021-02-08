@@ -8,6 +8,7 @@ import { CampaignRoutingModule } from './campaign.routing'
 import { BaselayerListComponent } from './components/baselayer-list/baselayer-list.component'
 import { CalqueListComponent } from './components/calque-list/calque-list.component'
 import { CalqueComponent } from './components/calque/calque.component'
+import { DialogComponent } from './components/dialog/dialog.component'
 import { MapCardComponent } from './components/map-card/map-card.component'
 import { MapComponent } from './components/map/map.component'
 import { PopupContentComponent } from './components/popup-content/popup-content.component'
@@ -36,6 +37,7 @@ import { CampaignModuleStates } from './store'
     PropertyValueComponent,
     MapCardComponent,
     TableCalqueComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,

@@ -7,11 +7,6 @@
     (selected)="featureSelected($event)"
     (creating)="layerCreation($event)"
   ></app-map>
-
-  <div class="top-left">
-    <app-map-card></app-map-card>
-  </div>
-  <div class="bottom-right">
-    <app-table-calque *ngIf="data$ | async as data" [data]="data"></app-table-calque>
-  </div>
+  <app-map-card></app-map-card>
+  <app-table-calque *ngIf="data$ | async as data" [data]="data"></app-table-calque>
 </div>

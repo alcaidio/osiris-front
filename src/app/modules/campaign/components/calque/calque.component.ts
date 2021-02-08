@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { SetActive } from '@ngxs-labs/entity-state'
 import { Store } from '@ngxs/store'
 import { CheckCalque, OverlayState, ToggleCalque } from '../../store'
+import { DialogComponent } from '../dialog/dialog.component'
 import { Calque, GeometryType } from './../../model/shared.model'
 
 @Component({
@@ -49,5 +50,14 @@ export class CalqueComponent implements OnInit {
 
   onActive(id: string) {
     this.store.dispatch(new SetActive(OverlayState, id))
+  }
+
+  openDialog() {
+    this.dialog.open(DialogComponent, {
+      minWidth: '300px',
+      data: {
+        calque: this.calque,
+      },
+    })
   }
 }

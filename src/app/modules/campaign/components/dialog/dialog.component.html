@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Légende</h1>
+<div mat-dialog-content>
+  <mat-form-field class="w-full">
+    <mat-label>Style actif</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="onChange($event.value)">
+      <mat-option *ngFor="let prop of data.calque.properties" [value]="cleanStr(prop.name)">
+        {{ prop.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="w-full flex justify-center">
+    <div class="p-8" *ngIf="isLoadingResults">
+      <mat-spinner [diameter]="60"></mat-spinner>
+    </div>
+    <div *ngIf="!isLoadingResults">
+      <p>Tableau avec les propriétés de style</p>
+    </div>
+  </div>
+</div>
