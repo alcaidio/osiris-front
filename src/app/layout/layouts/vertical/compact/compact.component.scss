@@ -21,6 +21,11 @@ compact-layout {
 
         img {
           max-width: 48px;
+          transition: all 200ms ease-out;
+        }
+
+        img:hover {
+          transform: scale(1.2);
         }
       }
     }

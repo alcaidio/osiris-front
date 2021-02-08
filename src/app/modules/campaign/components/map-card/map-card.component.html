@@ -16,9 +16,9 @@
           <mat-icon>{{ isToggled ? 'fullscreen_exit' : 'fullscreen' }}</mat-icon>
           <span>{{ isToggled ? 'Réduire' : 'Agrandir' }}</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="onClick('vue')">
           <mat-icon>preview</mat-icon>
-          <span>Définir la vue par défaut</span>
+          <span>Définir cette vue par défaut</span>
         </button>
         <!-- <button mat-menu-item>
           <mat-icon>layers</mat-icon>

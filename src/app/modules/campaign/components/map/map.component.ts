@@ -5,9 +5,12 @@ import {
   Injector,
   Input,
   OnChanges,
+  OnDestroy,
   Output,
   SimpleChanges,
 } from '@angular/core'
+import { UpdateActive } from '@ngxs-labs/entity-state'
+import { Select, Store } from '@ngxs/store'
 import {
   circle,
   DrawEvents,
@@ -21,7 +24,9 @@ import {
   tileLayer,
 } from 'leaflet'
 import 'leaflet.smoothwheelzoom'
+import { Observable } from 'rxjs'
 import { Overlay } from '../../model/shared.model'
+import { MapState } from '../../store'
 import { setDefaultStyleOfFeature } from '../../utils'
 import { PopupContentComponent } from '../popup-content/popup-content.component'
 import { Config, Mode } from './../../model/shared.model'
@@ -31,12 +36,17 @@ import { Config, Mode } from './../../model/shared.model'
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnChanges {
+export class MapComponent implements OnChanges, OnDestroy {
+  @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
+
   @Input() overlays: Overlay[]
   @Input() config: Config
   @Input() mode: Mode
   @Output() selected = new EventEmitter<GeoJSON.Feature>()
   @Output() creating = new EventEmitter<any>()
+
+  currentMapConfig: Config
+
   featureSelected: GeoJSON.Feature
   map: Map
   drawItems: FeatureGroup = featureGroup()
@@ -65,7 +75,7 @@ export class MapComponent implements OnChanges {
     },
   }
 
-  constructor(private resolver: ComponentFactoryResolver, private injector: Injector) {}
+  constructor(private resolver: ComponentFactoryResolver, private injector: Injector, private store: Store) {}
 
   onMapReady(map: Map): void {
     this.map = map
@@ -106,11 +116,13 @@ export class MapComponent implements OnChanges {
     }
   }
 
-  // TODO Add it to the store and merge with initial config to get that config after navigation
-  onUpdateConfigMap(): Partial<Config> {
+  updateConfigMap(): void {
     const center = this.map.getCenter()
     const zoom = this.map.getZoom()
-    return { zoom, center }
+
+    this.mapConfig$.subscribe((config) => {
+      this.currentMapConfig = { ...config, center, zoom }
+    })
   }
 
   onDrawCreated(e: DrawEvents.Created): void {
@@ -259,5 +271,9 @@ export class MapComponent implements OnChanges {
     })
 
     return geojson
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(new UpdateActive(MapState, { config: this.currentMapConfig }))
   }
 }

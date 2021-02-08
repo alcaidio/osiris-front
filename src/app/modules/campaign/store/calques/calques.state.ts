@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import {
-  CreateOrReplace,
+  Add,
   defaultEntityState,
   EntityState,
   EntityStateModel,
@@ -51,22 +51,21 @@ export class CalqueState extends EntityState<Calque> {
   }
 
   @Action(GetCalques)
-  getCalques(ctx: StateContext<CalqueState>, action: GetCalques) {
+  getCalques(ctx: StateContext<EntityStateModel<Calque>>, action: GetCalques) {
     ctx.dispatch(new SetLoading(CalqueState, true))
+    const calqueIds = ctx.getState().ids
 
     return this.api.getCalques(action.calqueIds).pipe(
       map((calques: Calque[]) => {
-        ctx.dispatch(new CreateOrReplace(CalqueState, calques))
-
-        // create filters
         calques.map((calque) => {
-          this.store.dispatch(new CreateFilters(calque))
+          const isCalqueInStore = calqueIds.length > 0 && calqueIds.includes(calque.id)
+          if (!isCalqueInStore) {
+            ctx.dispatch(new Add(CalqueState, calque))
+            ctx.dispatch(new CreateFilters(calque))
+          }
         })
 
-        // TODO: REMOVE simulation latence
-        setTimeout(() => {
-          ctx.dispatch(new SetLoading(CalqueState, false))
-        }, 200)
+        ctx.dispatch(new SetLoading(CalqueState, false))
       }),
       catchError((err) => {
         ctx.dispatch(new SetError(CalqueState, err))

@@ -61,7 +61,8 @@
       "zoomControl": false
     },
     "overlayIds": ["4"],
-    "baseLayerIds": ["1", "2"]
+    "baseLayerIds": ["1", "2"],
+    "calqueIds": []
   },
   "4": {
     "id": 4,
@@ -86,6 +87,7 @@
       "zoomControl": false
     },
     "overlayIds": ["4"],
-    "baseLayerIds": []
+    "baseLayerIds": [],
+    "calqueIds": []
   }
 }

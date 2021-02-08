@@ -13,7 +13,6 @@ import { Action, Selector, State, StateContext } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { ApiService } from '../../services/api.service'
-import { convertConfigToLeaflet } from '../../utils'
 import { BaselayerState } from '../baselayers/baselayers.state'
 import { Config, MapSmall } from './../../model/shared.model'
 import { GetMap } from './maps.actions'
@@ -30,35 +29,28 @@ export class MapState extends EntityState<MapSmall> {
 
   @Selector()
   static getMapConfig(state: EntityStateModel<MapSmall>) {
-    return convertConfigToLeaflet(state.entities[state.active].config) as Config
+    return state.entities[state.active].config as Config
   }
 
   @Action(GetMap)
-  getMaps(ctx: StateContext<MapState>, action: GetMap) {
+  getMaps(ctx: StateContext<EntityStateModel<MapSmall>>, action: GetMap) {
     ctx.dispatch(new SetLoading(MapState, true))
-
-    return this.api.getMapSmall(action.mapId).pipe(
-      map((mapSmall: MapSmall) => {
-        const mapIds = ctx.getState()['ids']
-        const isMapInStore = mapIds.find((id) => mapSmall.id === id)
-
-        if (!isMapInStore) {
+    const mapIds = ctx.getState().ids
+    const isMapInStore = mapIds.length > 0 && mapIds.includes(action.mapId)
+    if (!isMapInStore) {
+      return this.api.getMapSmall(action.mapId).pipe(
+        map((mapSmall: MapSmall) => {
           ctx.dispatch(new Add(MapState, mapSmall))
-        }
-
-        ctx.dispatch(new SetActive(MapState, mapSmall.id as string))
-        ctx.dispatch(new SetActive(BaselayerState, mapSmall.config.layers.id as string))
-
-        // REMOVE: Simulation latence
-        setTimeout(() => {
+          ctx.dispatch(new SetActive(MapState, mapSmall.id as string))
+          ctx.dispatch(new SetActive(BaselayerState, mapSmall.config.layers.id as string))
           ctx.dispatch(new SetLoading(MapState, false))
-        }, 200)
-      }),
-      catchError((err) => {
-        ctx.dispatch(new SetError(MapState, err))
-        ctx.dispatch(new SetLoading(MapState, false))
-        return of(err)
-      })
-    )
+        }),
+        catchError((err) => {
+          ctx.dispatch(new SetError(MapState, err))
+          ctx.dispatch(new SetLoading(MapState, false))
+          return of(err)
+        })
+      )
+    }
   }
 }

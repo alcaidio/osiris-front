@@ -9,7 +9,7 @@
 >
   <div treoVerticalNavigationContentHeader>
     <div class="logo">
-      <img src="assets/images/logo/logo.svg" />
+      <img src="assets/images/logo/logo.svg" (click)="goHome()" class="cursor-pointer" />
     </div>
   </div>
 </treo-vertical-navigation>
@@ -18,14 +18,18 @@
 <div class="wrapper">
   <!-- Header -->
   <div class="header">
-
     <div class="flex flex-row items-center justify-start">
       <!-- Navigation toggle button -->
       <button class="navigation-toggle-button" mat-icon-button (click)="toggleNavigation('mainNavigation')">
         <mat-icon [svgIcon]="'menu'"></mat-icon>
       </button>
       <!-- Logo text -->
-      <img *ngIf="!isScreenSmall" src="assets/images/logo/logo-text.svg" class="h-12 w-auto -ml-12"/>
+      <img
+        *ngIf="!isScreenSmall"
+        src="assets/images/logo/logo-text.svg"
+        (click)="goHome()"
+        class="h-12 w-auto -ml-12 cursor-pointer"
+      />
     </div>
 
     <!-- Spacer -->

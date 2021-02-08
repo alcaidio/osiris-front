@@ -1,9 +1,14 @@
 <div class="calque-list" cdkDropList [cdkDropListData]="calques" (cdkDropListDropped)="drop($event)">
-  <app-calque
-    class="calque-box"
-    *ngFor="let calque of calques"
-    [calque]="calque"
-    cdkDrag
-    cdkDragBoundary=".calque-list"
-  ></app-calque>
+  <ng-container *ngIf="calques.length > 0; else empty">
+    <app-calque
+      *ngFor="let calque of calques"
+      [calque]="calque"
+      class="calque-box"
+      cdkDrag
+      cdkDragBoundary=".calque-list"
+    ></app-calque>
+  </ng-container>
+  <ng-template #empty>
+    <p class="text-sm font-light">Aucun calques présent sur cette carte.</p>
+  </ng-template>
 </div>

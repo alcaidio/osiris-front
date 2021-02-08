@@ -4,6 +4,7 @@ import { Select, Store } from '@ngxs/store'
 import { Observable } from 'rxjs'
 import { Config, Mode } from '../../model/shared.model'
 import { GetBaselayers, GetCalques, GetOverlays, MapState, OverlaySelectors, OverlayState } from '../../store'
+import { convertConfigToLeaflet } from '../../utils'
 import { MapSmall, Overlay } from './../../model/shared.model'
 
 @Component({
@@ -15,11 +16,10 @@ export class CampaignDetailComponent implements OnInit {
   @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
   @Select(OverlaySelectors.getFilteredOverlays) filteredOverlays$: Observable<Overlay[]>
   @Select(OverlayState.getProperties) data$: Observable<any>
-
   selectedFeature: GeoJSON.Feature
-  config: Config
 
-  /////
+  leafletMapConfig: Config
+
   featureList: any[]
   canAddFeature = true
   MODE = Mode.Edit
@@ -36,7 +36,10 @@ export class CampaignDetailComponent implements OnInit {
     this.store.dispatch(new GetBaselayers(mapSmall.baseLayerIds))
     this.store.dispatch(new GetCalques(mapSmall.calqueIds))
 
-    // this.data$.subscribe((p) => console.log(p))
+    this.mapConfig$.subscribe((config) => {
+      this.leafletMapConfig = convertConfigToLeaflet(config)
+    })
+
   }
 
   featureSelected(feature: GeoJSON.Feature): void {
