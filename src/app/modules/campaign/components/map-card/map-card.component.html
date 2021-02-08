@@ -1,6 +1,9 @@
 <section class="card">
   <div class="header">
-    <div class="text-2xl font-semibold text-cool-gray-700 antialiased tracking-tight" *ngIf="campaign$ | async as c">
+    <div
+      class="text-2xl font-semibold text-cool-gray-700 antialiased tracking-tight mr-2"
+      *ngIf="campaign$ | async as c"
+    >
       {{ c.name }}
     </div>
     <div>
@@ -9,6 +12,10 @@
       </button>
 
       <mat-menu #menu="matMenu" [class]="'menu'">
+        <button mat-menu-item (click)="onToggled()">
+          <mat-icon>{{ isToggled ? 'fullscreen_exit' : 'fullscreen' }}</mat-icon>
+          <span>{{ isToggled ? 'Réduire' : 'Agrandir' }}</span>
+        </button>
         <button mat-menu-item>
           <mat-icon>preview</mat-icon>
           <span>Définir la vue par défaut</span>
@@ -50,15 +57,19 @@
       </mat-menu>
     </div>
   </div>
-  <div class="calques">
-    <div class="text-lg font-medium text-cool-gray-700 mb-2">Calques</div>
-    <app-calque-list [calques]="calques$ | async"></app-calque-list>
-  </div>
-  <div class="footer">
-    <div class="text-lg font-medium text-cool-gray-700 mb-2">Baselayers</div>
-    <app-baselayer-list
-      [baselayers]="baselayers$ | async"
-      [activeBaselayerId]="activeBaselayerId$ | async"
-    ></app-baselayer-list>
+  <div class="body" *ngIf="isToggled">
+    <div class="calques">
+      <div class="title text-lg font-medium text-cool-gray-700 mb-0 py-3">Calques</div>
+      <div class="list">
+        <app-calque-list [calques]="calques$ | async"></app-calque-list>
+      </div>
+    </div>
+    <div class="baselayers">
+      <div class="text-lg font-medium text-cool-gray-700 mb-1 py-2">Baselayers</div>
+      <app-baselayer-list
+        [baselayers]="baselayers$ | async"
+        [activeBaselayerId]="activeBaselayerId$ | async"
+      ></app-baselayer-list>
+    </div>
   </div>
 </section>

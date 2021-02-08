@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { SetActive } from '@ngxs-labs/entity-state'
 import { Store } from '@ngxs/store'
-import { CheckCalque, ToggleCalque } from '../../store'
+import { CheckCalque, OverlayState, ToggleCalque } from '../../store'
 import { Calque, GeometryType } from './../../model/shared.model'
 
 @Component({
@@ -44,5 +45,9 @@ export class CalqueComponent implements OnInit {
 
   get propertiesSortByName() {
     return this.calque.properties.slice().sort((a, b) => a.name.localeCompare(b.name))
+  }
+
+  onActive(id: string) {
+    this.store.dispatch(new SetActive(OverlayState, id))
   }
 }

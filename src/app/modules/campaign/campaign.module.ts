@@ -13,6 +13,7 @@ import { MapComponent } from './components/map/map.component'
 import { PopupContentComponent } from './components/popup-content/popup-content.component'
 import { PropertyTypeComponent } from './components/property-type/property-type.component'
 import { PropertyValueComponent } from './components/property-value/property-value.component'
+import { TableCalqueComponent } from './components/table-calque/table-calque.component'
 import { CampaignDetailComponent } from './containers/campaign-detail/campaign-detail.component'
 import { CampaignListComponent } from './containers/campaign-list/campaign-list.component'
 import { CustomDirective } from './directives/custom.directive'
@@ -34,6 +35,7 @@ import { CampaignModuleStates } from './store'
     PropertyTypeComponent,
     PropertyValueComponent,
     MapCardComponent,
+    TableCalqueComponent,
   ],
   imports: [
     CommonModule,
