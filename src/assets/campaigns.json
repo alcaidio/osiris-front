@@ -1,22 +1,23 @@
 {
   "1": {
     "id": 1,
-    "name": "Diagnostic routier année 2020",
+    "title": "Diagnostic routier",
+    "subtitle": "Année 2020",
     "mapId": 1
   },
   "2": {
     "id": 2,
-    "name": "Arbres",
+    "title": "Arbres",
     "mapId": 4
   },
   "3": {
     "id": 3,
-    "name": "Une grande ligne",
+    "title": "Une grande ligne",
     "mapId": 3
   },
   "4": {
     "id": 4,
-    "name": "example",
+    "title": "example",
     "mapId": 2
   }
 }

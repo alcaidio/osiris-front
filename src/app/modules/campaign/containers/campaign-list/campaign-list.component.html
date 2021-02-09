@@ -2,6 +2,6 @@
 
 <ul *ngIf="!(loading$ | async)">
   <li *ngFor="let campaign of campaigns$ | async">
-    <a [routerLink]="campaign.id">{{ campaign.name }}</a>
+    <a [routerLink]="campaign.id">{{ campaign.title }}</a>
   </li>
 </ul>

@@ -12,6 +12,7 @@ export class TableCalqueComponent implements AfterViewInit, OnChanges {
   @Input() data: any
   displayedColumns: string[]
   dataSource: MatTableDataSource<any>
+  opened: boolean
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
@@ -19,13 +20,14 @@ export class TableCalqueComponent implements AfterViewInit, OnChanges {
   constructor() {}
 
   ngOnChanges() {
+    this.opened = true
     this.dataSource = new MatTableDataSource(this.data)
     this.displayedColumns = Object.keys(this.data[0])
+    this.sortAndPagine()
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
-    this.dataSource.sort = this.sort
+    this.sortAndPagine()
   }
 
   applyFilter(event: Event) {
@@ -35,5 +37,14 @@ export class TableCalqueComponent implements AfterViewInit, OnChanges {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage()
     }
+  }
+
+  onToggled() {
+    this.opened = !this.opened
+  }
+
+  private sortAndPagine() {
+    this.dataSource.paginator = this.paginator
+    this.dataSource.sort = this.sort
   }
 }

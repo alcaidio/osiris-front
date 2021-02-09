@@ -81,6 +81,7 @@ export class MapComponent implements OnChanges, OnDestroy {
     this.map = map
     if (this.map && this.overlays) {
       this.leafletLayers = this.convertOverlaysForLeaflet(this.overlays)
+      this.updateConfigMap()
     }
 
     // this.map.on('boxzoomend', (e) => {

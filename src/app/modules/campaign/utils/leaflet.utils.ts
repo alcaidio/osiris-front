@@ -2,9 +2,6 @@ import { tileLayer } from 'leaflet'
 import { BaseLayer, Config } from '../model/shared.model'
 
 export const convertConfigToLeaflet = (config: Config) => {
-  const { layers } = config
-  const tile = convertBaselayersForLeaflet(layers)
-
   // add params for smooth zoom
   const smoothZoomParams = {
     scrollWheelZoom: false,
@@ -12,7 +9,12 @@ export const convertConfigToLeaflet = (config: Config) => {
     smoothSensitivity: 2,
   }
 
-  return { ...config, ...smoothZoomParams, layers: tile as any }
+  if (config.layers) {
+    const tile = convertBaselayersForLeaflet(config.layers)
+    return { ...config, ...smoothZoomParams, layers: tile as any }
+  } else {
+    return { ...config, ...smoothZoomParams }
+  }
 }
 
 export const convertBaselayersForLeaflet = (baselayer: BaseLayer) => {

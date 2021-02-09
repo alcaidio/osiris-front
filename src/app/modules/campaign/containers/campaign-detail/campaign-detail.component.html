@@ -1,12 +1,16 @@
 <div class="container">
   <app-map
-    class="map"
     [config]="leafletMapConfig"
     [overlays]="filteredOverlays$ | async"
     [mode]="MODE"
     (selected)="featureSelected($event)"
     (creating)="layerCreation($event)"
   ></app-map>
-  <app-map-card></app-map-card>
-  <app-table-calque *ngIf="data$ | async as data" [data]="data"></app-table-calque>
+
+  <div class="above">
+    <div class="cards">
+      <app-map-card></app-map-card>
+      <app-table-calque [data]="data$ | async"></app-table-calque>
+    </div>
+  </div>
 </div>

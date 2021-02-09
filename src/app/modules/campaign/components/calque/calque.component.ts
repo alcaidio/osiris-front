@@ -55,6 +55,7 @@ export class CalqueComponent implements OnInit {
   openDialog() {
     this.dialog.open(DialogComponent, {
       minWidth: '300px',
+      minHeight: '350px',
       data: {
         calque: this.calque,
       },

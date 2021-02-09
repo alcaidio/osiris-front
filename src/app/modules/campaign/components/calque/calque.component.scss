@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 5px;
-  margin-top: 5px;
+  margin-top: 8px;
   background-color: #364152;
   border-radius: 6px;
 }
@@ -36,6 +36,10 @@
 ::ng-deep .menu {
   margin-left: 68px !important;
   margin-top: -45px !important;
+}
+
+::ng-deep .mat-button-wrapper {
+  z-index: inherit !important;
 }
 
 .properties {
