@@ -5,10 +5,11 @@ export type ID = string | number
 export interface Campaign {
   id: ID
   title: string
-  subtitle: string
-  dateStart?: Date
-  dateEnd?: Date
+  subtitle?: string
   mapId?: string
+  thumbnail?: string
+  creationDate?: number
+  editionDate?: number
   interventions?: Intervention[]
 }
 

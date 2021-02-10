@@ -1,7 +1,123 @@
-<p *ngIf="loading$ | async">Loading...</p>
+<div class="content-layout fullwidth-standard-inner-scroll">
+  <!-- Main -->
+  <div class="main">
+    <!-- Header -->
+    <div class="header">
+      <!-- Title -->
+      <div class="title">
+        <h1>
+          Campagnes
+        </h1>
+      </div>
 
-<ul *ngIf="!(loading$ | async)">
-  <li *ngFor="let campaign of campaigns$ | async">
-    <a [routerLink]="campaign.id">{{ campaign.title }}</a>
-  </li>
-</ul>
+      <!-- Main actions -->
+      <div class="main-actions">
+        <!-- Search -->
+        <div class="search">
+          <mat-form-field class="treo-mat-dense treo-mat-no-subscript">
+            <mat-icon matPrefix [svgIcon]="'search'"></mat-icon>
+            <input
+              #searchInput
+              matInput
+              (keyup)="applyFilter($event)"
+              [autocomplete]="'off'"
+              [placeholder]="'Rechercher'"
+            />
+          </mat-form-field>
+        </div>
+
+        <!-- TODO:  Add campaign button -->
+        <button class="add-campaign" mat-flat-button [color]="'primary'" (click)="(true)">
+          <mat-icon [svgIcon]="'add'"></mat-icon>
+          Ajouter
+        </button>
+
+        <!-- TODO:  Switch template -->
+        <!-- <button class="switch-template" mat-stroked-button (click)="(true)">
+          <mat-icon *ngIf="true">view_list</mat-icon>
+          <mat-icon *ngIf="false">view_module</mat-icon>
+        </button> -->
+      </div>
+
+      <div class="loader" *ngIf="isLoading$ | async">
+        <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+      </div>
+    </div>
+
+    <!-- campaigns list -->
+    <div class="campaigns-list" *ngIf="campaigns$ | async as campaigns">
+      <ng-container *ngIf="campaigns.length > 0; else noCampaigns">
+        <div class="table-wrapper">
+          <!-- Table -->
+          <table
+            [ngClass]="{ loading: isLoading$ | async }"
+            mat-table
+            [dataSource]="dataSource"
+            matSort
+            [matSortActive]="'editionDate'"
+            [matSortDirection]="'desc'"
+          >
+            <!-- Title -->
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Titre
+              </th>
+              <td mat-cell *matCellDef="let campaign">
+                <div class="title-content">
+                  <span class="thumbnail">
+                    <img *ngIf="campaign.thumbnail" [src]="campaign.thumbnail" />
+                    <span *ngIf="!campaign.thumbnail">
+                      No Image
+                    </span>
+                  </span>
+                  <span class="title">{{ campaign.title }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Créee le -->
+            <ng-container matColumnDef="creationDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Créée le
+              </th>
+              <td mat-cell *matCellDef="let campaign">
+                {{ getDate(campaign.creationDate) }}
+              </td>
+            </ng-container>
+
+            <!-- Editée le -->
+            <ng-container matColumnDef="editionDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Editée
+              </th>
+              <td mat-cell *matCellDef="let campaign">
+                {{ fromNow(campaign.editionDate) }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="campaignsTableColumns; sticky: true"></tr>
+            <tr
+              class="campaign-row"
+              mat-row
+              *matRowDef="let campaign; columns: campaignsTableColumns"
+              [routerLink]="campaign.id"
+            ></tr>
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">Aucune donnée correspondante au filtre "{{ searchInput.value }}"</td>
+            </tr>
+          </table>
+        </div>
+
+        <mat-paginator
+          [ngClass]="{ loading: isLoading$ | async }"
+          [pageSizeOptions]="[10, 25, 100]"
+          [showFirstLastButtons]="true"
+        ></mat-paginator>
+      </ng-container>
+
+      <ng-template #noCampaigns>
+        <div class="no-campaigns">Ils n'y a pas de campagne disponible !</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

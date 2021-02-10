@@ -38,7 +38,7 @@ export class CampaignsState extends EntityState<Campaign> implements NgxsOnInit 
         if (state['ids'] && state['ids'].length > 0) {
           const newCampaigns = campaigns.filter((item) => state['ids'].includes(item))
           if (newCampaigns.length > 0) {
-            ctx.dispatch(new Add(CampaignsState, campaigns))
+            ctx.dispatch(new Add(CampaignsState, newCampaigns))
           }
         } else {
           ctx.dispatch(new Add(CampaignsState, campaigns))
