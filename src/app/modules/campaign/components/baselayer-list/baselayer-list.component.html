@@ -1,8 +1,13 @@
 <mat-form-field class="w-full">
-  <!-- <mat-label>Base layers</mat-label> -->
   <mat-select (selectionChange)="onBaselayerChange($event)" name="baselayer" [(value)]="activeBaselayerId">
     <mat-option *ngFor="let baselayer of baselayers" [value]="baselayer.id">
-      {{ baselayer.name }}
+      <div class="thumbnail">
+        <img *ngIf="baselayer.thumbnail" [src]="baselayer.thumbnail" />
+        <span *ngIf="!baselayer.thumbnail"></span>
+      </div>
+      <div>
+        {{ baselayer.name }}
+      </div>
     </mat-option>
   </mat-select>
 </mat-form-field>

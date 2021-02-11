@@ -22,7 +22,7 @@
       "zoomControl": false
     },
     "overlayIds": ["3", "2"],
-    "baseLayerIds": ["1", "2", "5", "7"],
+    "baseLayerIds": ["1", "2", "4", "7", "11"],
     "calqueIds": ["1", "2"]
   },
   "2": {

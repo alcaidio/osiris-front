@@ -86,6 +86,7 @@ export interface BaseLayer {
   id?: string
   name?: string
   token?: string
+  thumbnail?: string
   options?: TileLayerOptions
 }
 
