@@ -1,6 +1,7 @@
 <div
   id="map"
   leaflet
+  class="map"
   appCustomLeafletDirective
   [leafletOptions]="config"
   (leafletMapReady)="onMapReady($event)"
@@ -13,3 +14,4 @@
   </ng-container>
   <div *ngFor="let layer of leafletLayers" [leafletLayer]="layer"></div>
 </div>
+<app-map-tools *ngIf="mapReady" [map]="mapReady" [tool]="'default'"></app-map-tools>

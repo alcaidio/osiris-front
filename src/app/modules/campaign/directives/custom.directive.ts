@@ -1,17 +1,25 @@
-import { Directive, OnInit } from '@angular/core'
+import { Directive, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core'
 import { LeafletDirective } from '@asymmetrik/ngx-leaflet'
-import { control, Control, DomUtil, Map } from 'leaflet'
+import { control, Control, DomUtil, LatLngBounds, Map } from 'leaflet'
 
 @Directive({
   selector: '[appCustomLeafletDirective]',
 })
 export class CustomDirective implements OnInit {
+  constructor(leafletDirective: LeafletDirective, private el: ElementRef) {
+    this.leafletDirective = leafletDirective
+  }
   leafletDirective: LeafletDirective
   map: Map
 
-  constructor(leafletDirective: LeafletDirective) {
-    this.leafletDirective = leafletDirective
-  }
+  firstPoint: any
+  secondPoint: any
+  isDrawing = false
+  x = 0
+  y = 0
+
+  @ViewChild('canvas', { static: true })
+  canvas: ElementRef<HTMLCanvasElement>
 
   ngOnInit(): void {
     this.map = this.leafletDirective.getMap()
@@ -42,4 +50,6 @@ export class CustomDirective implements OnInit {
   }
 
   // TODO add multiple selection https://stackoverflow.com/questions/17611596/multiple-marker-selection-within-a-box-in-leaflet
+
+  
 }

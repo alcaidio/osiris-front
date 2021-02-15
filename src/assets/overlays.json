@@ -66,7 +66,7 @@
           "style": {
             "color": "#FFA500",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -113,7 +113,7 @@
           "style": {
             "color": "#FFFF00",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -145,7 +145,7 @@
           "style": {
             "color": "#00FF00",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -177,7 +177,7 @@
           "style": {
             "color": "#000000",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -209,7 +209,7 @@
           "style": {
             "color": "#00FF00",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -242,7 +242,7 @@
           "style": {
             "color": "#FFA500",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -276,7 +276,7 @@
           "style": {
             "color": "#FF0000",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -308,7 +308,7 @@
           "style": {
             "color": "#FFFF00",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -342,7 +342,7 @@
           "style": {
             "color": "#FFA500",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -381,7 +381,7 @@
           "style": {
             "color": "#FFFF00",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -416,7 +416,7 @@
           "style": {
             "color": "#00FF00",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -453,7 +453,7 @@
           "style": {
             "color": "#FFFF00",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }
@@ -487,7 +487,7 @@
           "style": {
             "color": "#FFFF00",
             "weight": 5,
-            "opacity": 0.65,
+            "opacity": 0.8,
             "lineCap": "round",
             "lineJoin": "round"
           }

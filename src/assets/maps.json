@@ -11,7 +11,7 @@
           "id": "mapbox/streets-v11",
           "tileSize": 512,
           "zoomOffset": -1,
-          "maxZoom": 20
+          "maxZoom": 22
         }
       },
       "zoom": 14,

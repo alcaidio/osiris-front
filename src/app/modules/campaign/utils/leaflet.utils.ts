@@ -1,4 +1,4 @@
-import { tileLayer } from 'leaflet'
+import { LatLngBounds, tileLayer } from 'leaflet'
 import { BaseLayer, Config } from '../model/shared.model'
 
 export const convertConfigToLeaflet = (config: Config) => {
@@ -51,7 +51,7 @@ export const setDefaultStyleOfFeature = (type): any => {
       return {
         color: '#ff7800',
         weight: 5,
-        opacity: 0.65,
+        opacity: 0.8,
         lineCap: 'round',
         lineJoin: 'round',
       }
@@ -61,10 +61,18 @@ export const setDefaultStyleOfFeature = (type): any => {
         color: '#ff7800',
         fillCollor: '#555',
         weight: 5,
-        opacity: 0.65,
+        opacity: 0.8,
         lineCap: 'round',
         lineJoin: 'round',
       }
       break
   }
+}
+
+export const createPolygonFromBounds = (bounds: LatLngBounds): any => {
+  const a = [bounds.getSouthWest().lng, bounds.getSouthWest().lat]
+  const b = [bounds.getSouthWest().lng, bounds.getNorthEast().lat]
+  const c = [bounds.getNorthEast().lng, bounds.getNorthEast().lat]
+  const d = [bounds.getNorthEast().lng, bounds.getSouthWest().lat]
+  return [a, b, c, d, a]
 }

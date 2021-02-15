@@ -10,6 +10,7 @@ import { CalqueListComponent } from './components/calque-list/calque-list.compon
 import { CalqueComponent } from './components/calque/calque.component'
 import { DialogComponent } from './components/dialog/dialog.component'
 import { MapCardComponent } from './components/map-card/map-card.component'
+import { MapSelectionComponent } from './components/map-tools/map-tools.component'
 import { MapComponent } from './components/map/map.component'
 import { PopupContentComponent } from './components/popup-content/popup-content.component'
 import { PropertyTypeComponent } from './components/property-type/property-type.component'
@@ -38,6 +39,7 @@ import { CampaignModuleStates } from './store'
     MapCardComponent,
     TableCalqueComponent,
     DialogComponent,
+    MapSelectionComponent,
   ],
   imports: [
     CommonModule,

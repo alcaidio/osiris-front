@@ -39,17 +39,17 @@ import { Config, Mode } from './../../model/shared.model'
 export class MapComponent implements OnChanges, OnDestroy {
   @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
 
-  @Input() overlays: Overlay[]
   @Input() config: Config
   @Input() mode: Mode
-  @Output() selected = new EventEmitter<GeoJSON.Feature>()
+  @Input() overlays: Overlay[]
   @Output() creating = new EventEmitter<any>()
+  @Output() map = new EventEmitter<Map>()
+  @Output() selected = new EventEmitter<GeoJSON.Feature>()
 
   currentMapConfig: Config
-
-  featureSelected: GeoJSON.Feature
-  map: Map
   drawItems: FeatureGroup = featureGroup()
+  featureSelected: GeoJSON.Feature
+  mapReady: Map
   leafletLayers: Layer[] // value to bind leaflet directive
 
   drawOptions = {
@@ -78,13 +78,14 @@ export class MapComponent implements OnChanges, OnDestroy {
   constructor(private resolver: ComponentFactoryResolver, private injector: Injector, private store: Store) {}
 
   onMapReady(map: Map): void {
-    this.map = map
-    if (this.map && this.overlays) {
+    this.mapReady = map
+    this.map.emit(map)
+    if (this.mapReady && this.overlays) {
       this.leafletLayers = this.convertOverlaysForLeaflet(this.overlays)
       this.updateConfigMap()
     }
 
-    // this.map.on('boxzoomend', (e) => {
+    // this.mapReady.on('boxzoomend', (e) => {
     //   if (e.boxZoomBounds.contains(markers[i])) {
     //     console.log(markers[i])
     //   }
@@ -96,7 +97,7 @@ export class MapComponent implements OnChanges, OnDestroy {
       if (changes.hasOwnProperty(propName)) {
         switch (propName) {
           case 'overlays':
-            if (this.map && this.overlays) {
+            if (this.mapReady && this.overlays) {
               this.leafletLayers = this.convertOverlaysForLeaflet(this.overlays)
             }
             break
@@ -105,10 +106,10 @@ export class MapComponent implements OnChanges, OnDestroy {
             if (!change.firstChange) {
               const prev = change.previousValue
               const curr = change.currentValue
-              if (this.map && this.config) {
+              if (this.mapReady && this.config) {
                 // TODO voir util leaflet pour token
-                this.map.removeLayer(tileLayer(prev.layers._url, prev.layers.options))
-                this.map.addLayer(tileLayer(curr.layers._url, curr.layers.options))
+                this.mapReady.removeLayer(tileLayer(prev.layers._url, prev.layers.options))
+                this.mapReady.addLayer(tileLayer(curr.layers._url, curr.layers.options))
               }
             }
             break
@@ -118,8 +119,8 @@ export class MapComponent implements OnChanges, OnDestroy {
   }
 
   updateConfigMap(): void {
-    const center = this.map.getCenter()
-    const zoom = this.map.getZoom()
+    const center = this.mapReady.getCenter()
+    const zoom = this.mapReady.getZoom()
 
     this.mapConfig$.subscribe((config) => {
       this.currentMapConfig = { ...config, center, zoom }
@@ -155,7 +156,7 @@ export class MapComponent implements OnChanges, OnDestroy {
 
     // TODO: change baselayer to not null
     // This line add Controls
-    // control.layers(null, overlays).addTo(this.map);
+    // control.layers(null, overlays).addTo(this.mapReady);
 
     return Object.values(overlays)
   }
@@ -166,10 +167,10 @@ export class MapComponent implements OnChanges, OnDestroy {
     const onSelectFeature = (e: any) => {
       const { lat, lng } = e.latlng
       this.featureSelected = e.sourceTarget.feature
-      console.log(this.featureSelected.id)
+      console.log('feature selected id', this.featureSelected.id)
 
       if (e.sourceTarget.feature.id !== this.featureSelected.id) {
-        this.map.panTo([lat, lng])
+        this.mapReady.panTo([lat, lng])
         this.selected.emit(e.sourceTarget.feature)
       }
     }

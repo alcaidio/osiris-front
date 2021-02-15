@@ -1,0 +1,105 @@
+@import 'treo';
+
+.wrapper {
+  z-index: 20 !important;
+  position: absolute;
+  overflow: hidden;
+
+  &.default {
+    top: 190px;
+    right: 0;
+  }
+
+  &.top-right {
+    top: 0;
+    right: 0;
+  }
+
+  &.top-left {
+    top: 0;
+    left: 0;
+  }
+
+  &.bottom-right {
+    bottom: 0;
+    right: 0;
+  }
+
+  &.bottom-left {
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.tools {
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &.default {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  &.top-right {
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+
+  &.top-left {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  &.bottom-right {
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+
+  &.bottom-left {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.button {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #464646;
+  cursor: pointer;
+  transition: background-color 200ms ease-in;
+
+  &:hover {
+    background-color: #ebebeb;
+    .icon {
+      transform: scale(1.15);
+    }
+  }
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.active {
+    background-color: #f4f4f4;
+    color: #11afb6;
+    .icon {
+      transform: scale(1.15);
+    }
+  }
+
+  .icon {
+    height: 16px;
+    width: 16px;
+    transition: all 100ms ease-in;
+  }
+}

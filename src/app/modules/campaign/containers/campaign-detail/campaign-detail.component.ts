@@ -17,9 +17,7 @@ export class CampaignDetailComponent implements OnInit {
   @Select(OverlaySelectors.getFilteredOverlays) filteredOverlays$: Observable<Overlay[]>
   @Select(OverlayState.getProperties) data$: Observable<any>
   selectedFeature: GeoJSON.Feature
-
   leafletMapConfig: Config
-
   featureList: any[]
   canAddFeature = true
   MODE = Mode.Edit
@@ -39,7 +37,6 @@ export class CampaignDetailComponent implements OnInit {
     this.mapConfig$.subscribe((config) => {
       this.leafletMapConfig = convertConfigToLeaflet(config)
     })
-
   }
 
   featureSelected(feature: GeoJSON.Feature): void {
