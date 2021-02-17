@@ -14,4 +14,4 @@
   </ng-container>
   <div *ngFor="let layer of leafletLayers" [leafletLayer]="layer"></div>
 </div>
-<app-map-tools *ngIf="mapReady" [map]="mapReady" [tool]="'default'"></app-map-tools>
+<app-map-tools *ngIf="mapReady" [map]="mapReady" [tool]="'default'" [position]="'default'"></app-map-tools>
