@@ -11,17 +11,17 @@
 
 $treo-elevations: (
   'xs': '0 0 0 1px rgba(0, 0, 0, 0.05)',
-  'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-  'default': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-  'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-  'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-  'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-  '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-  'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
-  'outline': '0 0 0 3px rgba(66, 153, 225, 0.5)',
-  'none': 'none',
-  'solid': '0 0 0 2px currentColor',
-) !default;
+ 'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+ 'default': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+ 'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+ 'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+ 'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+ '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+ 'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+ 'outline': '0 0 0 3px rgba(66, 153, 225, 0.5)',
+ 'none': 'none',
+ 'solid': '0 0 0 2px currentColor',
+ ) !default;
 
 $treo-colors: (
   'white': (
@@ -350,23 +350,22 @@ $treo-colors: (
   ),
 ) !default;
 
-$treo-font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
+$treo-font-sans: Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !default;
 
-$treo-font-serif: Georgia, Cambria, 'Times New Roman', Times, serif !default;
+$treo-font-serif: Georgia,Cambria,"Times New Roman",Times,serif !default;
 
-$treo-font-mono: 'IBM Plex Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+$treo-font-mono: "IBM Plex Mono",Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace !default;
 
 $treo-breakpoints: (
   xs: '(min-width: 0) and (max-width: 599px)',
-  sm: '(min-width: 600px) and (max-width: 959px)',
-  md: '(min-width: 960px) and (max-width: 1279px)',
-  lg: '(min-width: 1280px) and (max-width: 1439px)',
-  xl: '(min-width: 1440px)',
-  lt-md: '(max-width: 959px)',
-  lt-lg: '(max-width: 1279px)',
-  lt-xl: '(max-width: 1439px)',
-  gt-xs: '(min-width: 600px)',
-  gt-sm: '(min-width: 960px)',
-  gt-md: '(min-width: 1280px)',
-) !default;
+ sm: '(min-width: 600px) and (max-width: 959px)',
+ md: '(min-width: 960px) and (max-width: 1279px)',
+ lg: '(min-width: 1280px) and (max-width: 1439px)',
+ xl: '(min-width: 1440px)',
+ lt-md: '(max-width: 959px)',
+ lt-lg: '(max-width: 1279px)',
+ lt-xl: '(max-width: 1439px)',
+ gt-xs: '(min-width: 600px)',
+ gt-sm: '(min-width: 960px)',
+ gt-md: '(min-width: 1280px)',
+ ) !default
