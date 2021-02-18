@@ -4,7 +4,7 @@ const { colors } = require('tailwindcss/defaultTheme')
 
 module.exports = {
   // PurgeCSS
-  purge: false,
+  purge: true,
 
   // Options
   important: true,
@@ -406,16 +406,17 @@ module.exports = {
 
   // Variants
   variants: {
-    backgroundColor: ['dark-light'],
-    borderColor: ['dark-light'],
-    borderWidth: ['responsive', 'first', 'last'],
+    borderColor: ['focus', 'hover', 'active'],
+    backgroundColor: ['dark-light', 'hover', 'focus', 'active'],
+    borderColor: ['dark-light', 'hover', 'focus', 'active'],
+    borderWidth: ['responsive', 'first', 'last', 'hover', 'focus', 'active'],
     cursor: [],
     fontFamily: [],
     fontSmoothing: [],
     fontWeight: ['responsive'],
     iconSize: ['responsive'],
     resize: [],
-    textColor: ['dark-light'],
+    textColor: ['dark-light', 'hover', 'focus', 'active'],
     scale: [],
     rotate: [],
     translate: [],
