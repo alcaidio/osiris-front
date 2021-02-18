@@ -327,44 +327,44 @@ export const polylineMeasureOption = {
   },
   tempLine: {
     // Styling settings for the temporary dashed line
-    color: '#00f', // Dashed line color
+    color: '#11afb6', // Dashed line color
     weight: 2, // Dashed line weight
   },
   fixedLine: {
     // Styling for the solid line
-    color: '#006', // Solid line color
+    color: '#233564', // Solid line color
     weight: 2, // Solid line weight
   },
   startCircle: {
     // Style settings for circle marker indicating the starting point of the polyline
-    color: '#000', // Color of the border of the circle
-    weight: 1, // Weight of the circle
+    color: '#0e9f6e', // Color of the border of the circle
+    weight: 2, // Weight of the circle
     fillColor: '#0f0', // Fill color of the circle
     fillOpacity: 1, // Fill opacity of the circle
-    radius: 3, // Radius of the circle
+    radius: 4, // Radius of the circle
   },
   intermedCircle: {
     // Style settings for all circle markers between startCircle and endCircle
-    color: '#000', // Color of the border of the circle
-    weight: 1, // Weight of the circle
-    fillColor: '#ff0', // Fill color of the circle
+    color: '#e3a008', // Color of the border of the circle
+    weight: 2, // Weight of the circle
+    fillColor: '#fce96a', // Fill color of the circle
     fillOpacity: 1, // Fill opacity of the circle
-    radius: 3, // Radius of the circle
+    radius: 4, // Radius of the circle
   },
   currentCircle: {
     // Style settings for circle marker indicating the latest point of the polyline during drawing a line
-    color: '#000', // Color of the border of the circle
-    weight: 1, // Weight of the circle
-    fillColor: '#f0f', // Fill color of the circle
+    color: '#e02424', // Color of the border of the circle
+    weight: 2, // Weight of the circle
+    fillColor: '#f05252', // Fill color of the circle
     fillOpacity: 1, // Fill opacity of the circle
-    radius: 3, // Radius of the circle
+    radius: 4, // Radius of the circle
   },
   endCircle: {
     // Style settings for circle marker indicating the last point of the polyline
     color: '#000', // Color of the border of the circle
-    weight: 1, // Weight of the circle
-    fillColor: '#f00', // Fill color of the circle
+    weight: 2, // Weight of the circle
+    fillColor: '#e02424', // Fill color of the circle
     fillOpacity: 1, // Fill opacity of the circle
-    radius: 3, // Radius of the circle
+    radius: 4, // Radius of the circle
   },
 }
