@@ -1,6 +1,24 @@
-<table>
-  <tr *ngFor="let item of properties">
-    <td>{{ item[0] | titlecase }}</td>
-    <td>{{ item[1] }}</td>
-  </tr>
-</table>
+<ng-container *ngFor="let item of properties">
+  <div *ngIf="item[0] === 'image'; else tab" class="flex flex-col">
+    <div class="container h-40 w-56 overflow-hidden rounded-md">
+      <img [src]="item[1]" class="w-full h-full object-cover image" />
+      <div class="middle">
+        <button
+          (click)="onClickNavigate()"
+          class="px-4 py-2 rounded font-semibold bg-white text-gray-900 hover:bg-gray-200 shadow"
+        >
+          Naviguer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #tab>
+    <table>
+      <tr>
+        <td>{{ item[0] | titlecase }}</td>
+        <td>{{ item[1] }}</td>
+      </tr>
+    </table>
+  </ng-template>
+</ng-container>

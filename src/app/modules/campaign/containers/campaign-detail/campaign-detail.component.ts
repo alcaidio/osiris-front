@@ -3,19 +3,22 @@ import { ActivatedRoute } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
 import { Observable } from 'rxjs'
 import { Config, Mode } from '../../model/shared.model'
-import { GetBaselayers, GetCalques, GetOverlays, MapState, OverlaySelectors, OverlayState } from '../../store'
+import { GetBaselayers, GetCalques, GetOverlays, MapState, OverlaySelectors, OverlayState, UIState } from '../../store'
 import { convertConfigToLeaflet } from '../../utils'
 import { MapSmall, Overlay } from './../../model/shared.model'
+import { OsirisAnimations } from './../../utils/animation.utils'
 
 @Component({
   selector: 'app-campaign-detail',
   templateUrl: './campaign-detail.component.html',
   styleUrls: ['./campaign-detail.component.scss'],
+  animations: OsirisAnimations,
 })
 export class CampaignDetailComponent implements OnInit {
   @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
   @Select(OverlaySelectors.getFilteredOverlays) filteredOverlays$: Observable<Overlay[]>
   @Select(OverlayState.getProperties) data$: Observable<any>
+  @Select(UIState.getViewer) viewer$: Observable<boolean>
   selectedFeature: GeoJSON.Feature
   leafletMapConfig: Config
   featureList: any[]
@@ -66,4 +69,5 @@ export class CampaignDetailComponent implements OnInit {
   onChangeMode(mode: Mode): void {
     this.MODE = mode
   }
+
 }

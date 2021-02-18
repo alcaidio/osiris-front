@@ -12,8 +12,8 @@
   .header {
     .title {
       display: inline-block;
-      cursor: pointer;
       transition: color 300ms ease;
+      cursor: ns-resize;
 
       &:hover {
         color: #64748b !important;

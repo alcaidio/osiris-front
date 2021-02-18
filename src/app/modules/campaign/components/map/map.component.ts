@@ -170,14 +170,15 @@ export class MapComponent implements OnChanges, OnDestroy {
     let geojson: any
 
     const onSelectFeature = (e: any) => {
-      const { lat, lng } = e.latlng
+      // const { lat, lng } = e.latlng
       this.featureSelected = e.sourceTarget.feature
       console.log('feature selected id', this.featureSelected.id)
 
-      if (e.sourceTarget.feature.id !== this.featureSelected.id) {
-        this.mapReady.panTo([lat, lng])
-        this.selected.emit(e.sourceTarget.feature)
-      }
+      // this.mapReady.flyTo([lat, lng])
+      // if (e.sourceTarget.feature.id !== this.featureSelected.id) {
+      //   this.mapReady.panTo([lat, lng])
+      //   this.selected.emit(e.sourceTarget.feature)
+      // }
     }
 
     const highlightFeature = (e) => {
@@ -240,12 +241,17 @@ export class MapComponent implements OnChanges, OnDestroy {
         const factory = this.resolver.resolveComponentFactory(PopupContentComponent)
         const component = factory.create(this.injector)
         component.instance.feature = feature
+        component.instance.map = this.mapReady
         component.changeDetectorRef.detectChanges()
         const popupContent = component.location.nativeElement
+
         l.bindPopup(popupContent, {
           offset: [0, -10],
-          maxHeight: 200,
+          minWidth: 150,
           autoPan: true,
+          closeButton: false,
+          closeOnClick: true,
+          closeOnEscapeKey: true,
         })
       }
     }

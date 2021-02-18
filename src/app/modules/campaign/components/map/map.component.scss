@@ -3,3 +3,13 @@
   width: 100%;
   z-index: 1;
 }
+
+::ng-deep .leaflet-popup-content-wrap {
+  width: auto !important;
+  margin: 0 !important;
+}
+
+::ng-deep .leaflet-popup-content {
+  padding: 0 !important;
+  overflow: hidden !important;
+}

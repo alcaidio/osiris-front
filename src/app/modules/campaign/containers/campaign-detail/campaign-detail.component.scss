@@ -1,28 +1,31 @@
 .container {
   height: 100vh;
   max-height: calc(100vh - 64px);
-  width: 100vw;
-  position: relative;
-}
-
-app-map {
-  z-index: 15 !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.above {
-  z-index: 20 !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: transparent;
-}
-
-.cards {
+  width: calc(100vw - 100px);
   display: flex;
-  z-index: 10 !important;
+  background: transparent;
+  overflow: hidden;
+
+  .map {
+    position: absolute;
+    min-width: 600px;
+    position: relative;
+
+    app-map {
+      z-index: 15 !important;
+    }
+
+    .above {
+      z-index: 20 !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: transparent;
+
+      .cards {
+        display: flex;
+        z-index: 10 !important;
+      }
+    }
+  }
 }

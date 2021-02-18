@@ -662,20 +662,22 @@
         "type": "Feature",
         "id": 29,
         "properties": {
+          "popupContent": ["image"],
           "style": {
-            "color": "#096A09",
+            "color": "red",
             "weight": 5,
-            "radius": 5,
+            "radius": 8,
             "fillColor": "#095228",
             "opacity": 0.8
           },
           "valid": ["actions", "especes"],
           "actions": "a elaguer",
-          "especes": "platane"
+          "especes": "platane",
+          "image": "https://d500.epimg.net/cincodias/imagenes/2020/06/19/lifestyle/1592554496_568289_1592554543_rrss_normal.jpg"
         },
         "geometry": {
           "type": "Point",
-          "coordinates": [3.8771438598632812, 43.621537577864906]
+          "coordinates": [3.8630502433771855, 43.62382085384619]
         },
 
         "bbox": [3.8771438598632812, 43.621537577864906, 3.8771438598632812, 43.621537577864906]

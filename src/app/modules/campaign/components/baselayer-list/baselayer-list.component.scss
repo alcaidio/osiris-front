@@ -1,3 +1,9 @@
+mat-option,
+mat-select,
+mat-form-field {
+  overflow: hidden !important;
+}
+
 ::ng-deep .mat-option-text {
   display: flex !important;
   align-items: center;
@@ -10,10 +16,10 @@
   height: 35px;
   min-height: 35px;
   margin-right: 12px;
-  overflow: hidden;
+  overflow: hidden !important;
   border-width: 1px;
   border-radius: 5px;
-  background-color: #6b7280 !important;
+  background-color: #9fa6b2 !important;
 
   > img {
     width: 100%;
