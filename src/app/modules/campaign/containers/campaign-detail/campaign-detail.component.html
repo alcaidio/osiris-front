@@ -15,5 +15,18 @@
       </div>
     </div>
   </div>
-  <div class="flex-none bg-gray-800" [@slide]="viewer$ | async"></div>
+  <div class="viewer flex-initial bg-gray-200" [@slide]="viewer$ | async">
+    <app-flat-image [picture]="selectedPicture" [zoom]="true"></app-flat-image>
+    <app-navigation-perspective
+      [picturePoint]="picturePoint"
+      [picture]="selectedPicture"
+      (direction)="onChangeNeighboursDirection($event)"
+    ></app-navigation-perspective>
+    <app-car-compass
+      [pictures]="picturePoint.pictures"
+      [selected]="selectedPicture.camera"
+      (camera)="onChangeCameraPosition($event)"
+    ></app-car-compass>
+    <app-viewer-infos [point]="picturePoint" [picture]="selectedPicture"></app-viewer-infos>
+  </div>
 </div>

@@ -1,0 +1,6 @@
+<div
+  class="block px-4 p-2 text-sm font leading-5 text-white bg-gray-800 opacity-75 rounded text-center"
+  *ngIf="point && picture"
+>
+  {{ 'Camera ' + (picture?.camera | titlecase) + ' &bull; ' + getDate(this.point?.timestamp, 'fr') }}
+</div>

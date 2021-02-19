@@ -1,0 +1,26 @@
+<ng-container *ngIf="zoom">
+  <img
+    appMouseWheel
+    *ngIf="!error && picture"
+    class="image object-cover object-bottom-bis h-full w-full"
+    [src]="picture.path"
+    (error)="onError()"
+    (load)="onLoaded()"
+  />
+</ng-container>
+<ng-container *ngIf="!zoom">
+  <img
+    *ngIf="!error && picture"
+    class="image object-cover object-bottom-bis h-full w-full"
+    [src]="picture.path"
+    (error)="onError()"
+    (load)="onLoaded()"
+  />
+</ng-container>
+
+<img *ngIf="error" class="image object-cover h-full w-full" src="assets/images/pages/maps/broken-image.png" />
+<!-- <img
+    *ngIf="!picture && !error"
+    class="image object-cover h-full w-full"
+    src="assets/images/pages/maps/image-unvailable.png"
+  /> -->

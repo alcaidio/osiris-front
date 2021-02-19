@@ -1,0 +1,24 @@
+.compass {
+  // remove cursor selection
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.active {
+  fill: #58c7cc !important;
+  cursor: not-allowed;
+}
+
+.inactive {
+  fill: #ffffff !important;
+  cursor: pointer;
+}
+
+.car {
+  fill: #ffffff !important;
+  cursor: help;
+}

@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { Select } from '@ngxs/store'
-import { TreoAnimations } from '@treo/animations'
 import moment from 'moment'
 import { Observable } from 'rxjs'
 import { Campaign } from '../../model/shared.model'
@@ -15,7 +14,6 @@ import { CampaignsState } from '../../store/campaigns/campaigns.state'
   styleUrls: ['./campaign-list.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: TreoAnimations,
 })
 export class CampaignListComponent implements OnInit, AfterViewInit {
   @Select(CampaignsState.entities) campaigns$: Observable<Campaign[]>

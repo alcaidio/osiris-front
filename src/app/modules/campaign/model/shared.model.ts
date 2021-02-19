@@ -122,3 +122,32 @@ export interface FiltersProp {
   calqueId: string
   filters: string[]
 }
+
+export type CameraPositionType =
+  | 'front'
+  | 'back'
+  | 'right'
+  | 'left'
+  | 'front-right'
+  | 'front-left'
+  | 'back-right'
+  | 'back-left'
+
+export interface Picture {
+  name: string
+  path: string
+  camera: CameraPositionType
+  direction: number | null
+}
+
+// TEMP : because it's just a feature with properties
+export interface PicturePoint {
+  id: number
+  geom: GeoJSON.Point
+  pictures: Picture[]
+  timestamp: number
+  neighbours: { [id: string]: ID }
+  // neighbours.id is type NeighboursDirectionType
+}
+
+export type NeighboursDirectionType = 'front' | 'back' | 'front_right' | 'front_left' | 'back_right' | 'back_left'

@@ -1,0 +1,36 @@
+<div class="wrapper-direction relative">
+  <button
+    *ngIf="isFrontLeft"
+    class="direction absolute direction-top-5 direction-left-5"
+    (click)="onClick('front_left')"
+  >
+    <img [src]="'/assets/icons/direction-turn.svg'" class="front-left" />
+  </button>
+  <button
+    *ngIf="isFrontRight"
+    class="direction absolute direction-top-5 direction-right-5"
+    (click)="onClick('front_right')"
+  >
+    <img [src]="'/assets/icons/direction-turn.svg'" class="front-right" />
+  </button>
+  <button
+    *ngIf="isBackLeft"
+    class="direction absolute direction-bottom-5 direction-left-5"
+    (click)="onClick('back_left')"
+  >
+    <img [src]="'/assets/icons/direction-turn-back.svg'" class="back-left" />
+  </button>
+  <button
+    *ngIf="isBackRight"
+    class="direction absolute direction-bottom-5 direction-right-5"
+    (click)="onClick('back_right')"
+  >
+    <img [src]="'/assets/icons/direction-turn-back.svg'" class="back-right" />
+  </button>
+  <button *ngIf="isFront" class="direction absolute top-0 direction-left-50" (click)="onClick('front')">
+    <img [src]="'/assets/icons/direction.svg'" class="front" />
+  </button>
+  <button *ngIf="isBack" class="direction absolute bottom-0 direction-left-50" (click)="onClick('back')">
+    <img [src]="'/assets/icons/direction.svg'" class="back" />
+  </button>
+</div>
