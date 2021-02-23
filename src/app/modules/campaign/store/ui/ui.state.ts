@@ -1,15 +1,29 @@
 import { Injectable } from '@angular/core'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
-import { CloseMapCard, CloseViewer, OpenMapCard, OpenViewer, ToggleMapCard } from './ui.actions'
+import {
+  CloseData,
+  CloseMapCard,
+  CloseViewer,
+  OpenData,
+  OpenMapCard,
+  OpenViewer,
+  ToggleData,
+  ToggleMapCard,
+  ToggleViewerFullscreen
+} from './ui.actions'
 
 interface UI {
   viewer: boolean
   mapCard: boolean
+  data: boolean
+  viewerFullscreen: boolean
 }
 
 const defaultUIState = {
   viewer: false,
   mapCard: true,
+  data: false,
+  viewerFullscreen: false,
 }
 
 @State<UI>({
@@ -19,13 +33,23 @@ const defaultUIState = {
 @Injectable()
 export class UIState {
   @Selector()
-  static getViewer(state: UI) {
+  static getIsViewer(state: UI) {
     return state.viewer
   }
 
   @Selector()
-  static getMapCard(state: UI) {
+  static getIsMapCard(state: UI) {
     return state.mapCard
+  }
+
+  @Selector()
+  static getIsData(state: UI) {
+    return state.data
+  }
+
+  @Selector()
+  static getIsViewerFullscreen(state: UI) {
+    return state.viewerFullscreen
   }
 
   constructor() {}
@@ -43,7 +67,11 @@ export class UIState {
   @Action(ToggleMapCard)
   toggleMapCard(ctx: StateContext<UI>) {
     const state = ctx.getState()
-    ctx.patchState({ mapCard: !state.mapCard })
+    if (state.data) {
+      ctx.patchState({ mapCard: !state.mapCard, data: false })
+    } else {
+      ctx.patchState({ mapCard: !state.mapCard })
+    }
   }
 
   @Action(OpenViewer)
@@ -59,5 +87,45 @@ export class UIState {
   @Action(CloseViewer)
   closeViewer(ctx: StateContext<UI>) {
     ctx.patchState({ viewer: false })
+  }
+
+  @Action(OpenData)
+  opendata(ctx: StateContext<UI>) {
+    const state = ctx.getState()
+    if (state.mapCard && state.data) {
+      ctx.patchState({ data: true })
+    } else {
+      ctx.patchState({ data: true, mapCard: false })
+    }
+  }
+
+  @Action(CloseData)
+  closedata(ctx: StateContext<UI>) {
+    const state = ctx.getState()
+    if (!state.mapCard) {
+      ctx.patchState({ data: false, mapCard: true })
+    } else {
+      ctx.patchState({ data: false })
+    }
+  }
+
+  @Action(ToggleData)
+  toggleData(ctx: StateContext<UI>) {
+    const state = ctx.getState()
+    if (state.mapCard) {
+      ctx.patchState({ data: !state.data, mapCard: false })
+    } else {
+      ctx.patchState({ data: !state.data })
+    }
+  }
+
+  @Action(ToggleViewerFullscreen)
+  toggleViewerFullscreen(ctx: StateContext<UI>) {
+    const state = ctx.getState()
+    if (state.mapCard) {
+      ctx.patchState({ viewerFullscreen: !state.viewerFullscreen, mapCard: false })
+    } else {
+      ctx.patchState({ viewerFullscreen: !state.viewerFullscreen })
+    }
   }
 }

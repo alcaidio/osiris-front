@@ -17,7 +17,7 @@ export class MapCardComponent {
   @Select(CampaignsState.active) campaign$: Observable<Campaign>
   @Select(BaselayerState.entities) baselayers$: Observable<Baselayer[]>
   @Select(BaselayerState.activeId) activeBaselayerId$: Observable<string>
-  @Select(UIState.getMapCard) opened$: Observable<boolean>
+  @Select(UIState.getIsMapCard) isOpen$: Observable<boolean>
 
   constructor(private store: Store) {}
 

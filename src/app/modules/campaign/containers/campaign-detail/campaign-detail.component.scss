@@ -2,13 +2,21 @@
   height: 100vh;
   max-height: calc(100vh - 64px);
   width: calc(100vw - 100px);
-  display: flex;
   background: transparent;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .mapAndViewer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 60%;
+  }
 
   .map {
-    position: absolute;
-    min-width: 550px;
+    height: 100%;
+    width: 50%;
     position: relative;
 
     app-map {
@@ -30,16 +38,22 @@
     }
   }
 
-  .viewer {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  .minWidth {
+    min-width: 50% !important;
+    width: 50% !important;
+  }
 
-    border-left: 3px solid #6b7280;
+  .viewer {
+    height: 100%;
+    width: 100%;
+    border-left: 3px solid #d2d6dc;
     position: relative;
+
+    &.fullscreen {
+      height: 100%;
+      width: calc(100vw - 100px) !important;
+      border-left: none;
+    }
 
     app-navigation-perspective {
       position: absolute;
@@ -54,11 +68,64 @@
       margin: 0 10px 30px 0;
     }
 
-    app-viewer-infos {
+    #buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       position: absolute;
       top: 0;
       right: 0;
       margin: 10px;
+      border-radius: 4px;
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+
+      .item {
+        overflow: hidden;
+        background-color: white;
+        width: 30px;
+        height: 30px;
+        color: #464646;
+        cursor: pointer;
+        transition: background-color 200ms ease-in;
+        border-bottom: 1px solid #e2e8f0;
+
+        &.infos {
+          cursor: help !important;
+        }
+
+        &:hover {
+          background-color: #ebebeb;
+          .icon {
+            transform: scale(1.15);
+            fill: #464646;
+          }
+        }
+
+        .icon {
+          height: 16px;
+          width: 16px;
+          transition: all 100ms ease-in;
+        }
+
+        &:last-of-type {
+          border-bottom: none;
+        }
+      }
     }
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  }
+
+  .data {
+    // height: see minHeight of
+    width: 100%;
+    overflow: scroll;
   }
 }

@@ -1,13 +1,17 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
+import { Map } from 'leaflet'
+import moment from 'moment'
 import { Observable } from 'rxjs'
 import { Config, Mode } from '../../model/shared.model'
 import { GetBaselayers, GetCalques, GetOverlays, MapState, OverlaySelectors, OverlayState, UIState } from '../../store'
 import { convertConfigToLeaflet } from '../../utils'
 import { CameraPositionType, NeighboursDirectionType, PicturePoint } from './../../../../shared/models/maps.model'
 import { MapSmall, Overlay, Picture } from './../../model/shared.model'
+import { CloseData, CloseViewer, ToggleViewerFullscreen } from './../../store/ui/ui.actions'
 import { OsirisAnimations } from './../../utils/animation.utils'
+type LangType = 'fr' | 'en'
 
 @Component({
   selector: 'app-campaign-detail',
@@ -18,8 +22,15 @@ import { OsirisAnimations } from './../../utils/animation.utils'
 export class CampaignDetailComponent implements OnInit {
   @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
   @Select(OverlaySelectors.getFilteredOverlays) filteredOverlays$: Observable<Overlay[]>
-  @Select(OverlayState.getProperties) data$: Observable<any>
-  @Select(UIState.getViewer) viewer$: Observable<boolean>
+  @Select(UIState.getIsViewer) isViewer$: Observable<boolean>
+  @Select(UIState.getIsData) isData$: Observable<boolean>
+  @Select(UIState.getIsViewerFullscreen) isViewerFullscreen$: Observable<boolean>
+  @Select(OverlayState.getActiveOverlayProperties) activeProperties$: Observable<any[]>
+
+  getPropertiesOfActiveOverlay
+
+  mapReady: Map
+
   selectedFeature: GeoJSON.Feature
   leafletMapConfig: Config
   featureList: any[]
@@ -114,5 +125,31 @@ export class CampaignDetailComponent implements OnInit {
 
   onChangeNeighboursDirection(evt: NeighboursDirectionType) {
     console.log('onChangeNeighboursDirection', evt)
+  }
+
+  onCloseNavigation() {
+    const center = this.mapReady.getCenter()
+    this.store.dispatch(new CloseViewer())
+    setTimeout(() => {
+      this.mapReady.invalidateSize()
+      setTimeout(() => this.mapReady.panTo(center), 150)
+    }, 450)
+  }
+
+  onFullscreenNavigation() {
+    this.store.dispatch(new CloseData())
+    this.store.dispatch(new ToggleViewerFullscreen())
+  }
+
+  // TODO other lang
+  private getDate(time: number, lang: LangType) {
+    if (lang === 'fr') {
+      const duration = new Date(time)
+      return moment(duration).locale('fr').format('Do MMMM YYYY à hh:mm:ss')
+    }
+  }
+
+  get viewerImageInfos(): string {
+    return 'Caméra "' + this.selectedPicture?.camera + '" - ' + this.getDate(this.picturePoint?.timestamp, 'fr')
   }
 }

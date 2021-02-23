@@ -23,3 +23,22 @@ export class CloseViewer {
   constructor() {}
 }
 
+export class OpenData {
+  static readonly type = '[ui] open data'
+  constructor() {}
+}
+
+export class CloseData {
+  static readonly type = '[ui] close data'
+  constructor() {}
+}
+
+export class ToggleData {
+  static readonly type = '[ui] toggle data'
+  constructor() {}
+}
+
+export class ToggleViewerFullscreen {
+  static readonly type = '[ui] toggle viewer fullscreen'
+  constructor() {}
+}

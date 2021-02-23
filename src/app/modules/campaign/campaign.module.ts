@@ -10,6 +10,7 @@ import { CalqueListComponent } from './components/calque-list/calque-list.compon
 import { CalqueComponent } from './components/calque/calque.component'
 import { CarCompassComponent } from './components/car-compass/car-compass.component'
 import { DialogComponent } from './components/dialog/dialog.component'
+import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component'
 import { FlatImageComponent } from './components/flat-image/flat-image.component'
 import { MapCardComponent } from './components/map-card/map-card.component'
 import { MapSelectionComponent } from './components/map-tools/map-tools.component'
@@ -18,8 +19,6 @@ import { NavigationPerspectiveComponent } from './components/navigation-perspect
 import { PopupContentComponent } from './components/popup-content/popup-content.component'
 import { PropertyTypeComponent } from './components/property-type/property-type.component'
 import { PropertyValueComponent } from './components/property-value/property-value.component'
-import { TableCalqueComponent } from './components/table-calque/table-calque.component'
-import { ViewerInfosComponent } from './components/viewer-infos/viewer-infos.component'
 import { CampaignDetailComponent } from './containers/campaign-detail/campaign-detail.component'
 import { CampaignListComponent } from './containers/campaign-list/campaign-list.component'
 import { CustomDirective } from './directives/custom.directive'
@@ -41,13 +40,12 @@ import { CampaignModuleStates } from './store'
     PropertyTypeComponent,
     PropertyValueComponent,
     MapCardComponent,
-    TableCalqueComponent,
     DialogComponent,
     MapSelectionComponent,
     FlatImageComponent,
     NavigationPerspectiveComponent,
     CarCompassComponent,
-    ViewerInfosComponent,
+    DynamicTableComponent,
   ],
   imports: [
     CommonModule,

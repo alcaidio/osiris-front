@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { SetActive } from '@ngxs-labs/entity-state'
 import { Store } from '@ngxs/store'
-import { CheckCalque, OverlayState, ToggleCalque } from '../../store'
+import { CheckCalque, OverlayState, ToggleCalque, ToggleData } from '../../store'
 import { DialogComponent } from '../dialog/dialog.component'
 import { Calque, GeometryType } from './../../model/shared.model'
 
@@ -60,5 +60,12 @@ export class CalqueComponent implements OnInit {
         calque: this.calque,
       },
     })
+  }
+
+  openOverlayData(name: string) {
+    // the name of the 'calque' is the same as the name of the corresponding 'overlay'
+    console.log(name)
+    this.store.dispatch(new SetActive(OverlayState, name))
+    setTimeout(() => this.store.dispatch(new ToggleData()))
   }
 }

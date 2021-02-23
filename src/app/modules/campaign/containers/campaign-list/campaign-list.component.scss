@@ -113,11 +113,24 @@ app-campaign-list {
 
         table {
           width: 100%;
-          min-width: 1200px;
           table-layout: fixed;
 
           &.loading {
             pointer-events: none;
+            tbody {
+              background: red;
+              tr {
+                width: 128px;
+              }
+              td {
+                width: 128px;
+              }
+            }
+            thead {
+              th {
+                width: 128px;
+              }
+            }
           }
 
           thead {
@@ -141,20 +154,11 @@ app-campaign-list {
             tr.campaign-row {
               height: 72px;
 
-              &:last-child {
-                td {
-                  border-bottom-width: 0;
-                }
-              }
-
               td {
                 line-height: 1;
                 border-bottom-width: 1px;
 
                 &.mat-column-title {
-                  padding-left: 32px;
-                  padding-right: 32px;
-
                   .title-content {
                     display: flex;
                     align-items: center;
@@ -202,36 +206,13 @@ app-campaign-list {
                   }
                 }
 
-                // &.mat-column-name {
-                //   padding-right: 32px;
-                //   overflow: hidden;
-                //   white-space: nowrap;
-                //   text-overflow: ellipsis;
-                // }
-
                 &.mat-column-creationDate {
-                  padding-right: 16px;
+                  padding-right: 0px;
                 }
 
                 &.mat-column-editionDate {
-                  padding-right: 16px;
+                  padding-right: 0px;
                 }
-
-                // &.mat-column-details {
-                //   padding-right: 32px;
-
-                //   .mat-stroked-button {
-                //     min-width: 40px;
-                //     min-height: 28px;
-                //     height: 28px;
-                //     padding: 0 8px;
-                //     line-height: 24px !important;
-
-                //     .mat-icon {
-                //       @include treo-icon-size(20);
-                //     }
-                //   }
-                // }
               }
             }
           }

@@ -1,0 +1,102 @@
+@import 'treo';
+
+app-dynamic-table {
+  table {
+    width: 100%;
+    white-space: nowrap;
+
+    th {
+      padding: 0 20px 0 20px !important;
+    }
+
+    td {
+      padding: 0 20px 0 20px !important;
+    }
+  }
+
+  .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-top-width: 1px;
+    z-index: 10;
+    width: 100%;
+    padding: 10px;
+
+    @include treo-breakpoint('xs') {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      left: auto;
+    }
+  }
+  
+  .footer {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    .search {
+      border: 1px solid #cfd8e3;
+
+      &:focus {
+        border-color: #11afb6;
+      }
+
+      &:hover {
+        background-color: #fbfdfe;
+      }
+    }
+
+    .btn {
+      border: 1px solid #fbfdfe;
+    }
+  }
+}
+
+@include treo-theme {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $primary: map-get($theme, primary);
+  $is-dark: map-get($theme, is-dark);
+
+  app-dynamic-table {
+    table {
+      background: transparent;
+
+      thead {
+        background: treo-color('cool-gray', 100) !important;
+
+        th {
+          box-shadow: 0 1px 0 0 map-get($foreground, divider);
+
+          @if ($is-dark) {
+            background: rgba(0, 0, 0, 0.05);
+          } @else {
+            background: treo-color('cool-gray', 100) !important;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          cursor: pointer;
+          &:hover {
+            @if ($is-dark) {
+              background: rgba(0, 0, 0, 0.05);
+            } @else {
+              background: treo-color('teal', 50);
+            }
+          }
+        }
+      }
+    }
+    .footer {
+      @if ($is-dark) {
+        background: rgba(0, 0, 0, 0.05);
+      } @else {
+        background: treo-color('cool-gray', 50) !important;
+      }
+    }
+  }
+}

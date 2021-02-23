@@ -84,19 +84,6 @@
       },
       {
         "type": "Feature",
-        "id": 2,
-        "properties": {
-          "type": "ALERT",
-          "note": "Attention nie de poule"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [3.8831251859664917, 43.61488111374414]
-        },
-        "bbox": [3.8831251859664917, 43.61488111374414, 3.8831251859664917, 43.61488111374414]
-      },
-      {
-        "type": "Feature",
         "id": 4,
         "properties": {
           "type": "SECTION",

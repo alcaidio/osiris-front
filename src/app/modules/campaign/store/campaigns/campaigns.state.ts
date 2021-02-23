@@ -35,19 +35,19 @@ export class CampaignsState extends EntityState<Campaign> implements NgxsOnInit 
     return this.api.getCampaignList().pipe(
       map((campaigns: Campaign[]) => {
         const state = ctx.getState()
-        if (state['ids'] && state['ids'].length > 0) {
-          const newCampaigns = campaigns.filter((item) => state['ids'].includes(item))
-          if (newCampaigns.length > 0) {
-            ctx.dispatch(new Add(CampaignsState, newCampaigns))
-          }
-        } else {
-          ctx.dispatch(new Add(CampaignsState, campaigns))
-        }
 
         // REMOVE: Simulation latence
         setTimeout(() => {
+          if (state['ids'] && state['ids'].length > 0) {
+            const newCampaigns = campaigns.filter((item) => state['ids'].includes(item))
+            if (newCampaigns.length > 0) {
+              ctx.dispatch(new Add(CampaignsState, newCampaigns))
+            }
+          } else {
+            ctx.dispatch(new Add(CampaignsState, campaigns))
+          }
           ctx.dispatch(new SetLoading(CampaignsState, false))
-        }, 2000)
+        }, 1000)
       }),
       catchError((err) => {
         ctx.dispatch(new SetLoading(CampaignsState, false))

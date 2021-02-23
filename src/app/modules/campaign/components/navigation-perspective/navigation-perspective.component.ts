@@ -21,10 +21,7 @@ export class NavigationPerspectiveComponent implements OnChanges {
   isBackRight = false
   isBackLeft = false
 
-  // constructor(private store: Store) {}
-
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.picturePoint)
     for (const propName in changes) {
       if (changes.hasOwnProperty(propName)) {
         switch (propName) {

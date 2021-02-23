@@ -1,7 +1,14 @@
-.wrapper-direction {
-  background: transparent;
-  height: 200px;
+:host {
   width: 300px;
+  height: 30%;
+  max-height: 250px;
+  min-height: 150px;
+}
+
+.wrapper-direction {
+  width: 100%;
+  height: 100%;
+  background: transparent;
   transform: perspective(500px) rotateX(50deg);
 
   // remove cursor selection
@@ -13,9 +20,19 @@
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .direction {
-  height: 70px;
-  width: 70px;
+  height: 22%;
+  width: 22%;
+  min-height: 40px;
+  min-width: 40px;
+  max-height: 70px;
+  max-width: 70px;
   background: transparent;
   border-radius: 50%;
   cursor: pointer;

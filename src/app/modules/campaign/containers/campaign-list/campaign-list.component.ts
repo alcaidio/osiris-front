@@ -23,7 +23,6 @@ export class CampaignListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort
 
   dataSource: MatTableDataSource<Campaign>
-
   campaignsTableColumns = ['title', 'creationDate', 'editionDate']
 
   ngOnInit(): void {

@@ -1,32 +1,71 @@
 <div class="container">
-  <div class="map flex-auto">
-    <app-map
-      [config]="leafletMapConfig"
-      [overlays]="filteredOverlays$ | async"
-      [mode]="MODE"
-      (selected)="featureSelected($event)"
-      (creating)="layerCreation($event)"
-    ></app-map>
+  <div class="mapAndViewer">
+    <div class="map flex-auto" [ngClass]="{ minWidth: isData$ | async }">
+      <ng-container *ngIf="filteredOverlays$ | async">
+        <app-map
+          [config]="leafletMapConfig"
+          [overlays]="filteredOverlays$ | async"
+          [mode]="MODE"
+          (selected)="featureSelected($event)"
+          (creating)="layerCreation($event)"
+          (map)="mapReady = $event"
+        ></app-map>
 
-    <div class="above">
-      <div class="cards">
-        <app-map-card></app-map-card>
-        <!-- <app-table-calque [data]="data$ | async"></app-table-calque> -->
+        <div class="above">
+          <div class="cards">
+            <app-map-card></app-map-card>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="flex-initial bg-gray-200" [@slide]="isViewer$ | async">
+      <div class="viewer" *ngIf="isViewer$ | async" [ngClass]="{ fullscreen: isViewerFullscreen$ | async }">
+        <app-flat-image [picture]="selectedPicture" [zoom]="false"></app-flat-image>
+        <app-navigation-perspective
+          [picturePoint]="picturePoint"
+          [picture]="selectedPicture"
+          (direction)="onChangeNeighboursDirection($event)"
+        ></app-navigation-perspective>
+        <app-car-compass
+          [pictures]="picturePoint.pictures"
+          [selected]="selectedPicture.camera"
+          (camera)="onChangeCameraPosition($event)"
+        ></app-car-compass>
+        <div id="buttons">
+          <button
+            class="item"
+            matTooltip="Fermer la navigation"
+            matTooltipPosition="left"
+            (click)="onCloseNavigation()"
+          >
+            <mat-icon class="icon icon-size-18" svgIcon="mat_outline:clear"></mat-icon>
+          </button>
+          <button
+            class="item"
+            matTooltip="Plein écran"
+            matTooltipPosition="left"
+            (click)="onFullscreenNavigation()"
+            *ngIf="!(isViewerFullscreen$ | async)"
+          >
+            <mat-icon class="icon icon-size-18" svgIcon="mat_outline:fullscreen"></mat-icon>
+          </button>
+          <button
+            class="item"
+            matTooltip="Réduire l'écran"
+            matTooltipPosition="left"
+            (click)="onFullscreenNavigation()"
+            *ngIf="isViewerFullscreen$ | async"
+          >
+            <mat-icon class="icon icon-size-18" svgIcon="mat_outline:fullscreen_exit"></mat-icon>
+          </button>
+          <button class="item infos" matTooltipPosition="left" [matTooltip]="viewerImageInfos">
+            <mat-icon class="icon icon-size-18" svgIcon="mat_outline:info"></mat-icon>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="viewer flex-initial bg-gray-200" [@slide]="viewer$ | async">
-    <app-flat-image [picture]="selectedPicture" [zoom]="true"></app-flat-image>
-    <app-navigation-perspective
-      [picturePoint]="picturePoint"
-      [picture]="selectedPicture"
-      (direction)="onChangeNeighboursDirection($event)"
-    ></app-navigation-perspective>
-    <app-car-compass
-      [pictures]="picturePoint.pictures"
-      [selected]="selectedPicture.camera"
-      (camera)="onChangeCameraPosition($event)"
-    ></app-car-compass>
-    <app-viewer-infos [point]="picturePoint" [picture]="selectedPicture"></app-viewer-infos>
+  <div class="data flex-auto" [@slideHeight]="isData$ | async">
+    <app-dynamic-table *ngIf="(activeProperties$ | async) && (isData$ | async)" [data]="activeProperties$ | async"></app-dynamic-table>
   </div>
 </div>

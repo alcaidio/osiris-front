@@ -9,9 +9,16 @@ export const slide = trigger('slide', [
 
 export const slideHeight = trigger('slideHeight', [
   state('0', style({ opacity: 0.2, height: '0' })),
+  state('1', style({ opacity: 1, height: '100%' })),
+  transition('0 => 1', animate('400ms ease')),
+  transition('1 => 0', animate('300ms ease')),
+])
+
+export const slideHeightCard = trigger('slideHeightCard', [
+  state('0', style({ opacity: 0.2, height: '0' })),
   state('1', style({ opacity: 1, height: '*' })),
   transition('0 => 1', animate('400ms ease')),
   transition('1 => 0', animate('300ms ease')),
 ])
 
-export const OsirisAnimations = [slide, slideHeight]
+export const OsirisAnimations = [slide, slideHeight, slideHeightCard]
