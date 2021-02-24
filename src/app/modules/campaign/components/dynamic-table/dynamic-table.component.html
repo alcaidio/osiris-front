@@ -16,17 +16,31 @@
     </tr>
   </table>
   <div class="footer">
-    <button (click)="onClose()" class="btn bg-cool-gray-400 hover:bg-cool-gray-500 text-white py-2 px-4 rounded">
-      Fermer
-    </button>
-    <input
-      type="text"
-      matInput
-      (keyup)="applyFilter($event)"
-      placeholder="Recherche"
-      #input
-      [autocomplete]="'off'"
-      class="search w-40 ml-2 bg-white py-2 px-4 rounded"
-    />
+    <div class="left">
+      <input
+        type="text"
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Recherche"
+        #input
+        [autocomplete]="'off'"
+        class="search w-40 bg-white py-2 px-4 rounded"
+      />
+    </div>
+    <div class="right">
+      <mat-form-field class="w-60">
+        <mat-select (selectionChange)="onChangeActiveCalque($event)" name="calque" [(value)]="selectedCalqueName">
+          <mat-option *ngFor="let calque of calques$ | async" [value]="calque.name">
+            {{ calque.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        (click)="onClose()"
+        class="btn ml-2 bg-cool-gray-400 hover:bg-cool-gray-500 text-white py-2 px-4 rounded font-semibold"
+      >
+        Fermer
+      </button>
+    </div>
   </div>
 </div>

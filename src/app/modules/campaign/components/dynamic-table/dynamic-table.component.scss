@@ -4,6 +4,7 @@ app-dynamic-table {
   table {
     width: 100%;
     white-space: nowrap;
+    margin-bottom: 10px;
 
     th {
       padding: 0 20px 0 20px !important;
@@ -20,9 +21,11 @@ app-dynamic-table {
     bottom: 0;
     left: 0;
     border-top-width: 1px;
-    z-index: 10;
     width: 100%;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     @include treo-breakpoint('xs') {
       position: relative;
@@ -30,26 +33,53 @@ app-dynamic-table {
       bottom: auto;
       left: auto;
     }
-  }
 
-  .footer {
-    display: flex;
-    align-items: baseline;
-    justify-content: flex-end;
-    .search {
-      border: 1px solid #cfd8e3;
+    .left {
+      .search {
+        border: 1px solid #cfd8e3;
 
-      &:focus {
-        border-color: #11afb6;
-      }
+        &:focus {
+          border-color: #11afb6;
+        }
 
-      &:hover {
-        background-color: #fbfdfe;
+        &:hover {
+          background-color: #fbfdfe;
+        }
       }
     }
 
-    .btn {
-      border: 1px solid #fbfdfe;
+    .right {
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+
+      .mat-form-field.mat-form-field-appearance-fill .mat-form-field-wrapper .mat-form-field-flex {
+        align-items: inherit;
+        min-height: 39px;
+        padding: 0;
+      }
+
+      .mat-form-field-appearance-fill .mat-select-arrow-wrapper {
+        padding: 0 12px 0 0;
+      }
+
+      .mat-form-field.mat-form-field-appearance-fill
+        .mat-form-field-wrapper
+        .mat-form-field-flex
+        .mat-form-field-infix
+        .mat-select
+        .mat-select-trigger
+        .mat-select-value {
+        padding: 0 0 0 16px;
+      }
+
+      .mat-form-field.mat-form-field-appearance-fill .mat-form-field-wrapper {
+        margin-bottom: 0 !important;
+      }
+
+      .btn {
+        border: 1px solid #fbfdfe;
+      }
     }
   }
 }
@@ -65,14 +95,16 @@ app-dynamic-table {
       background: transparent;
 
       thead {
-        background: treo-color('cool-gray', 100) !important;
-
         th {
           box-shadow: 0 1px 0 0 map-get($foreground, divider);
+          font-weight: 700 !important;
+          font-size: 0.85rem;
 
           @if ($is-dark) {
             background: rgba(0, 0, 0, 0.05);
+            color: white !important;
           } @else {
+            color: treo-color('cool-gray', 500) !important;
             background: treo-color('cool-gray', 100) !important;
           }
         }
@@ -93,7 +125,7 @@ app-dynamic-table {
             @if ($is-dark) {
               background: rgba(0, 0, 0, 0.1) !important;
             } @else {
-              background: treo-color('cool-gray', 200) !important;
+              background: treo-color('blue', 50) !important;
             }
           }
         }
@@ -102,8 +134,10 @@ app-dynamic-table {
     .footer {
       @if ($is-dark) {
         background: rgba(0, 0, 0, 0.05);
+        color: white !important;
       } @else {
-        background: treo-color('cool-gray', 50) !important;
+        color: treo-color('cool-gray', 500) !important;
+        background: treo-color('cool-gray', 100) !important;
       }
     }
   }
