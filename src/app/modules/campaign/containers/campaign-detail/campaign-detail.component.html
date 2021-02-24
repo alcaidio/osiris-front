@@ -6,8 +6,6 @@
           [config]="leafletMapConfig"
           [overlays]="filteredOverlays$ | async"
           [mode]="MODE"
-          (selected)="featureSelected($event)"
-          (creating)="layerCreation($event)"
           (map)="mapReady = $event"
         ></app-map>
 
@@ -66,6 +64,10 @@
     </div>
   </div>
   <div class="data flex-auto" [@slideHeight]="isData$ | async">
-    <app-dynamic-table *ngIf="(activeProperties$ | async) && (isData$ | async)" [data]="activeProperties$ | async"></app-dynamic-table>
+    <app-dynamic-table
+      *ngIf="(activeProperties$ | async) && (isData$ | async)"
+      [data]="activeProperties$ | async"
+      (activeRow)="onFlyToTheFeature($event)"
+    ></app-dynamic-table>
   </div>
 </div>

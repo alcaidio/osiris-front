@@ -64,8 +64,7 @@ export class CalqueComponent implements OnInit {
 
   openOverlayData(name: string) {
     // the name of the 'calque' is the same as the name of the corresponding 'overlay'
-    console.log(name)
     this.store.dispatch(new SetActive(OverlayState, name))
-    setTimeout(() => this.store.dispatch(new ToggleData()))
+    this.store.dispatch(new ToggleData())
   }
 }

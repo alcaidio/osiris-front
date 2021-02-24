@@ -43,8 +43,13 @@ export class OverlayState extends EntityState<Overlay> {
   @Selector()
   static getActiveOverlayProperties(state: EntityStateModel<Overlay>) {
     return state.entities[state.active].features.map((feature) => {
-      return feature.properties
+      return { id: feature.id, ...feature.properties }
     })
+  }
+
+  @Selector()
+  static getActiveOverlayFeatures(state: EntityStateModel<Overlay>) {
+    return state.entities[state.active].features
   }
 
   @Action(GetOverlays)

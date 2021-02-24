@@ -11,10 +11,10 @@
           "id": "mapbox/streets-v11",
           "tileSize": 512,
           "zoomOffset": -1,
-          "maxZoom": 22
+          "maxZoom": 20
         }
       },
-      "zoom": 14,
+      "zoom": 15,
       "center": { "lat": 43.621537577864906, "lng": 3.8771438598632812 },
       "boxZoom": true,
       "zoomDelta": 0.25,

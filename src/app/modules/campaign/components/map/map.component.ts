@@ -44,6 +44,7 @@ export class MapComponent implements OnChanges, OnDestroy {
   @Input() config: Config
   @Input() mode: Mode
   @Input() overlays: Overlay[]
+  @Input() activeFeature: GeoJSON.Feature
   @Output() creating = new EventEmitter<any>()
   @Output() map = new EventEmitter<Map>()
   @Output() selected = new EventEmitter<GeoJSON.Feature>()

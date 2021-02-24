@@ -29,9 +29,9 @@ export class PopupContentComponent implements OnInit, OnDestroy {
     this.store.dispatch(new OpenViewer())
     const [lng, lat] = this.feature.geometry['coordinates']
     // setTimeout To 420 because viewer appears completely after 400ms
-    setTimeout(() => this.map.invalidateSize({ animate: true, duration: 1000 }), 420)
+    setTimeout(() => this.map.invalidateSize({ animate: true, duration: 1000 }), 450)
     this.map.flyTo([lat, lng])
-    setTimeout(() => this.map.closePopup(), 1200)
+    setTimeout(() => this.map.closePopup(), 1500)
   }
 
   ngOnDestroy(): void {

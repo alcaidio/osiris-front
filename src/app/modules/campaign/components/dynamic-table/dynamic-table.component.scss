@@ -31,7 +31,7 @@ app-dynamic-table {
       left: auto;
     }
   }
-  
+
   .footer {
     display: flex;
     align-items: baseline;
@@ -86,6 +86,14 @@ app-dynamic-table {
               background: rgba(0, 0, 0, 0.05);
             } @else {
               background: treo-color('teal', 50);
+            }
+          }
+
+          .active {
+            @if ($is-dark) {
+              background: rgba(0, 0, 0, 0.1) !important;
+            } @else {
+              background: treo-color('cool-gray', 200) !important;
             }
           }
         }

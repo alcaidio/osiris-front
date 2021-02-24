@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
-import { Map } from 'leaflet'
+import { circle, geoJSON, layerGroup, Map } from 'leaflet'
 import moment from 'moment'
 import { Observable } from 'rxjs'
 import { Config, Mode } from '../../model/shared.model'
@@ -26,17 +26,17 @@ export class CampaignDetailComponent implements OnInit {
   @Select(UIState.getIsData) isData$: Observable<boolean>
   @Select(UIState.getIsViewerFullscreen) isViewerFullscreen$: Observable<boolean>
   @Select(OverlayState.getActiveOverlayProperties) activeProperties$: Observable<any[]>
-
-  getPropertiesOfActiveOverlay
+  @Select(OverlayState.getActiveOverlayFeatures) activeFeatures$: Observable<GeoJSON.Feature[]>
 
   mapReady: Map
 
   selectedFeature: GeoJSON.Feature
   leafletMapConfig: Config
-  featureList: any[]
-  canAddFeature = true
   MODE = Mode.Edit
-  overlayInCreation: Overlay
+
+  activeLayerGroup = layerGroup()
+  activeLayer: any
+  geoJsonFeature: any
 
   // TODO : CHANGE TEMP MOCK
   selectedPicture: Picture = {
@@ -78,8 +78,6 @@ export class CampaignDetailComponent implements OnInit {
   constructor(private store: Store, private cdr: ChangeDetectorRef, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.featureList = []
-
     // data from resolvers
     const mapSmall = this.route.snapshot.data.mapSmall as MapSmall
     this.store.dispatch(new GetOverlays(mapSmall.overlayIds))
@@ -89,34 +87,13 @@ export class CampaignDetailComponent implements OnInit {
     this.mapConfig$.subscribe((config) => {
       this.leafletMapConfig = convertConfigToLeaflet(config)
     })
-  }
 
-  featureSelected(feature: GeoJSON.Feature): void {
-    this.selectedFeature = feature
-    this.canAddFeature = true
-    this.cdr.detectChanges()
-  }
-
-  layerCreation(overlay: Overlay): void {
-    this.overlayInCreation = overlay
-    this.cdr.detectChanges()
-  }
-
-  onAddFeature(feature: GeoJSON.Feature): void {
-    if (this.canAddFeature) {
-      this.featureList.push(feature)
-      this.canAddFeature = false
-      this.cdr.detectChanges()
-    }
-  }
-
-  onClearFeatureList(): void {
-    this.featureList = []
-    this.cdr.detectChanges()
-  }
-
-  onChangeMode(mode: Mode): void {
-    this.MODE = mode
+    this.isData$.subscribe((data) => {
+      if (!data && this.geoJsonFeature) {
+        this.activeLayerGroup.removeLayer(this.geoJsonFeature)
+      }
+      setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 450)
+    })
   }
 
   onChangeCameraPosition(evt: CameraPositionType) {
@@ -128,17 +105,62 @@ export class CampaignDetailComponent implements OnInit {
   }
 
   onCloseNavigation() {
-    const center = this.mapReady.getCenter()
     this.store.dispatch(new CloseViewer())
-    setTimeout(() => {
-      this.mapReady.invalidateSize()
-      setTimeout(() => this.mapReady.panTo(center), 150)
-    }, 450)
+    setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 450)
   }
 
   onFullscreenNavigation() {
     this.store.dispatch(new CloseData())
     this.store.dispatch(new ToggleViewerFullscreen())
+  }
+
+  onFlyToTheFeature(featureId: number) {
+    this.activeFeatures$.subscribe((features) => {
+      const feature = features.find((f) => f.id === featureId)
+
+      if (this.geoJsonFeature) {
+        this.activeLayerGroup.removeLayer(this.geoJsonFeature)
+      }
+
+      if (feature.geometry['type'] === 'Point') {
+        this.mapReady.panTo([feature.geometry['coordinates'][1], feature.geometry['coordinates'][0]])
+        this.geoJsonFeature = circle(
+          { lat: feature.geometry['coordinates'][1], lng: feature.geometry['coordinates'][0] } as any,
+          {
+            radius: 15,
+            fillColor: 'black',
+            weight: 4,
+            color: '#11afb6',
+            fillOpacity: 0.2,
+          }
+        )
+      } else {
+        if (feature.bbox) {
+          this.mapReady.fitBounds(
+            [
+              [feature.bbox[1], feature.bbox[0]],
+              [feature.bbox[3], feature.bbox[2]],
+            ],
+            { animate: true, duration: 2000 }
+          )
+
+          this.geoJsonFeature = geoJSON(feature as any, {
+            style: {
+              fillColor: 'transparent',
+              weight: 15,
+              color: '#11afb6',
+              opacity: 0.3,
+              stroke: true,
+            },
+          })
+        } else {
+          console.warn('Pas de point ni de bbox')
+        }
+      }
+
+      this.activeLayerGroup.addLayer(this.geoJsonFeature)
+      this.activeLayerGroup.addTo(this.mapReady)
+    })
   }
 
   // TODO other lang

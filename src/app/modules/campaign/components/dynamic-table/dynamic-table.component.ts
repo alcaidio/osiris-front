@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { Store } from '@ngxs/store'
@@ -12,9 +22,11 @@ import { CloseData } from './../../store/ui/ui.actions'
 })
 export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() data: any[]
+  @Output() activeRow = new EventEmitter<number>()
+  @ViewChild(MatSort) sort: MatSort
   dataSource: MatTableDataSource<any>
   displayedColumns: string[]
-  @ViewChild(MatSort) sort: MatSort
+  active: number
 
   constructor(private store: Store) {}
 
@@ -38,6 +50,11 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
 
   onClose(): void {
     this.store.dispatch(new CloseData())
+  }
+
+  onClickRow(id: number) {
+    this.active = id
+    this.activeRow.emit(id)
   }
 
   private createTable() {
