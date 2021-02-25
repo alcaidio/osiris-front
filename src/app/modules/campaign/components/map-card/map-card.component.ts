@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, EventEmitter, Output } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { Baselayer } from 'app/shared/models'
 import { Observable } from 'rxjs'
@@ -18,6 +18,7 @@ export class MapCardComponent {
   @Select(BaselayerState.entities) baselayers$: Observable<Baselayer[]>
   @Select(BaselayerState.activeId) activeBaselayerId$: Observable<string>
   @Select(UIState.getIsMapCard) isOpen$: Observable<boolean>
+  @Output() action = new EventEmitter<string>()
 
   constructor(private store: Store) {}
 
@@ -27,7 +28,7 @@ export class MapCardComponent {
 
   onClick(type: string) {
     if (type === 'vue') {
-      console.log('ACTION: POST enregistrer config par défaut')
+      this.action.emit(type)
     }
   }
 }

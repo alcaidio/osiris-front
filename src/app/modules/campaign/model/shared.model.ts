@@ -60,7 +60,6 @@ export interface Map {
 export interface Config {
   zoom: number
   center: LatLng // use latLng() from leaflet to convert [number, number]
-  fitBounds: LatLngBounds
   maxBounds: LatLngBounds
   options: MapOptions
   layers: BaseLayer // "s" of layers because of leaflet

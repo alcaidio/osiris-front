@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core'
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core'
 import booleanIntersects from '@turf/boolean-intersects/dist/js'
 import * as turfHelper from '@turf/helpers'
 import { geoJSON, LatLng, LatLngBounds, Layer, layerGroup, Map, Rectangle, rectangle } from 'leaflet'
@@ -13,36 +13,10 @@ type toolsType = 'default' | 'selection' | 'measure'
   styleUrls: ['./map-tools.component.scss'],
 })
 export class MapSelectionComponent implements AfterViewInit {
-  get positionClass() {
-    switch (this.position) {
-      case 'topleft':
-        return 'top-left'
-      case 'topright':
-        return 'top-right'
-      case 'bottomright':
-        return 'bottom-right'
-      case 'bottomleft':
-        return 'bottom-left'
-      default:
-        return 'default'
-    }
-  }
-
-  get tooltipPosition() {
-    switch (this.position) {
-      case 'topleft':
-      case 'bottomleft':
-        return 'right'
-      case 'topright':
-      case 'bottomright':
-        return 'left'
-      default:
-        return 'left'
-    }
-  }
   @Input() map: Map
   @Input() position: absolutePosition
   @Input() tool: toolsType = 'default'
+  @Output() defaultView = new EventEmitter<void>()
 
   mapDiv: HTMLElement
   isDrawing = false
@@ -70,6 +44,9 @@ export class MapSelectionComponent implements AfterViewInit {
         this.mapDiv.addEventListener('mousemove', (event) => setTimeout(() => this.onMouseMoveSelection(event), 60))
         this.mapDiv.addEventListener('mouseup', (event) => this.onMouseUpSelection(event))
         this.mapDiv.style.cursor = 'crosshair'
+        break
+      case 'view':
+        this.defaultView.emit()
         break
       default:
         this.tool = 'default'
@@ -213,6 +190,34 @@ export class MapSelectionComponent implements AfterViewInit {
     }
     if (this.rectangleSelectionLayer) {
       this.selectionLayerGroup.removeLayer(this.rectangleSelectionLayer)
+    }
+  }
+
+  get positionClass() {
+    switch (this.position) {
+      case 'topleft':
+        return 'top-left'
+      case 'topright':
+        return 'top-right'
+      case 'bottomright':
+        return 'bottom-right'
+      case 'bottomleft':
+        return 'bottom-left'
+      default:
+        return 'default'
+    }
+  }
+
+  get tooltipPosition() {
+    switch (this.position) {
+      case 'topleft':
+      case 'bottomleft':
+        return 'right'
+      case 'topright':
+      case 'bottomright':
+        return 'left'
+      default:
+        return 'left'
     }
   }
 }

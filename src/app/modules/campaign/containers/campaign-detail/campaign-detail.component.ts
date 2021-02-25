@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { UpdateActive } from '@ngxs-labs/entity-state'
 import { Select, Store } from '@ngxs/store'
 import { circle, geoJSON, layerGroup, Map } from 'leaflet'
 import moment from 'moment'
@@ -161,6 +162,25 @@ export class CampaignDetailComponent implements OnInit {
       this.activeLayerGroup.addLayer(this.geoJsonFeature)
       this.activeLayerGroup.addTo(this.mapReady)
     })
+  }
+
+  onMapCardAction(type: string) {
+    if (type === 'vue') {
+      // TODO :
+      console.log('ACTION: POST enregistrer nouvelle config par défaut')
+      const center = this.mapReady.getCenter()
+      const zoom = this.mapReady.getZoom()
+      this.store.dispatch(
+        new UpdateActive(MapState, (e) => ({
+          ...e,
+          config: {
+            ...e.config,
+            center,
+            zoom,
+          },
+        }))
+      )
+    }
   }
 
   // TODO other lang

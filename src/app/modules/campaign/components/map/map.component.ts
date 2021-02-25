@@ -5,11 +5,9 @@ import {
   Injector,
   Input,
   OnChanges,
-  OnDestroy,
   Output,
   SimpleChanges,
 } from '@angular/core'
-import { UpdateActive } from '@ngxs-labs/entity-state'
 import { Select, Store } from '@ngxs/store'
 import {
   circle,
@@ -38,7 +36,7 @@ import { Config, Mode } from './../../model/shared.model'
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnChanges, OnDestroy {
+export class MapComponent implements OnChanges {
   @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
 
   @Input() config: Config
@@ -49,7 +47,6 @@ export class MapComponent implements OnChanges, OnDestroy {
   @Output() map = new EventEmitter<Map>()
   @Output() selected = new EventEmitter<GeoJSON.Feature>()
 
-  currentMapConfig: Config
   drawItems: FeatureGroup = featureGroup()
   featureSelected: GeoJSON.Feature
   mapReady: Map
@@ -88,7 +85,6 @@ export class MapComponent implements OnChanges, OnDestroy {
 
       control.polylineMeasure(polylineMeasureOption).addTo(map)
       control.zoom({ position: 'bottomright' }).addTo(map)
-      this.updateConfigMap()
     }
 
     // this.mapReady.on('boxzoomend', (e) => {
@@ -124,15 +120,6 @@ export class MapComponent implements OnChanges, OnDestroy {
     }
   }
 
-  updateConfigMap(): void {
-    const center = this.mapReady.getCenter()
-    const zoom = this.mapReady.getZoom()
-
-    this.mapConfig$.subscribe((config) => {
-      this.currentMapConfig = { ...config, center, zoom }
-    })
-  }
-
   onDrawCreated(e: DrawEvents.Created): void {
     this.drawItems.addLayer(e.layer)
 
@@ -149,7 +136,11 @@ export class MapComponent implements OnChanges, OnDestroy {
     this.creating.emit(geojson)
   }
 
-  /// private method
+  setDefaultView(): void {
+    this.mapConfig$.subscribe((config) => {
+      this.mapReady.flyTo(config.center, config.zoom)
+    })
+  }
 
   private convertOverlaysForLeaflet(os: Overlay[]): Layer[] {
     let overlays = {}
@@ -285,10 +276,6 @@ export class MapComponent implements OnChanges, OnDestroy {
     })
 
     return geojson
-  }
-
-  ngOnDestroy(): void {
-    this.store.dispatch(new UpdateActive(MapState, { config: this.currentMapConfig }))
   }
 }
 
