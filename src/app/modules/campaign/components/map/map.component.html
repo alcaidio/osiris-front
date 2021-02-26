@@ -5,6 +5,8 @@
   appCustomLeafletDirective
   [leafletOptions]="config"
   (leafletMapReady)="onMapReady($event)"
+  (leafletMapZoomEnd)="updateConfigMapInUrl()"
+  (leafletMapMoveEnd)="updateConfigMapInUrl()"
 >
   <ng-container *ngIf="mode === 'edit'">
     <div leafletDraw [leafletDrawOptions]="drawOptions" (leafletDrawCreated)="onDrawCreated($event)"></div>

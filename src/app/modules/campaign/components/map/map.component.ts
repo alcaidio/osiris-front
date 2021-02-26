@@ -8,6 +8,8 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { Navigate } from '@ngxs/router-plugin'
 import { Select, Store } from '@ngxs/store'
 import {
   circle,
@@ -75,7 +77,12 @@ export class MapComponent implements OnChanges {
     },
   }
 
-  constructor(private resolver: ComponentFactoryResolver, private injector: Injector, private store: Store) {}
+  constructor(
+    private resolver: ComponentFactoryResolver,
+    private injector: Injector,
+    private store: Store,
+    private route: ActivatedRoute
+  ) {}
 
   onMapReady(map: Map): void {
     this.mapReady = map
@@ -140,6 +147,13 @@ export class MapComponent implements OnChanges {
     this.mapConfig$.subscribe((config) => {
       this.mapReady.flyTo(config.center, config.zoom)
     })
+  }
+
+  updateConfigMapInUrl() {
+    const center = this.mapReady.getCenter()
+    const zoom = this.mapReady.getZoom()
+    const config = `${center.lat.toFixed(7)},${center.lng.toFixed(7)},${zoom}z`
+    this.store.dispatch(new Navigate([], { config }, { queryParamsHandling: 'merge', relativeTo: this.route }))
   }
 
   private convertOverlaysForLeaflet(os: Overlay[]): Layer[] {

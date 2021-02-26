@@ -45,8 +45,8 @@
     </div>
 
     <!-- campaigns list -->
-    <div class="campaigns-list" *ngIf="campaigns$ | async as campaigns">
-      <ng-container *ngIf="campaigns.length > 0; else noCampaigns">
+    <div class="campaigns-list" *ngIf="!(isLoading$ | async); else loading">
+      <ng-container *ngIf="(campaigns$ | async)?.length > 0; else empty">
         <div class="table-wrapper">
           <!-- Table -->
           <table
@@ -107,17 +107,38 @@
             </tr>
           </table>
         </div>
-
         <mat-paginator
           [ngClass]="{ loading: isLoading$ | async }"
           [pageSizeOptions]="[10, 25, 100]"
           [showFirstLastButtons]="true"
         ></mat-paginator>
       </ng-container>
-
-      <ng-template #noCampaigns>
-        <div class="no-campaigns">Ils n'y a pas de campagne disponible !</div>
+      <ng-template #empty>
+        <div class="h-full w-full flex justify-center items-center">
+          <div class="flex flex-col justify-center items-center">
+            <h2 class="text-center mb-12">Aucunes campagnes disponibles.</h2>
+            <img class="w-80" src="assets/images/empty.svg" />
+          </div>
+        </div>
       </ng-template>
     </div>
+    <ng-template #loading>
+      <div class="campaigns-list">
+        <table>
+          <td class="ssc-square skeleton bg-gray-100"></td>
+          <td class="ssc-square skeleton"></td>
+          <td class="ssc-square skeleton"></td>
+          <td class="ssc-square skeleton"></td>
+          <td class="ssc-square skeleton"></td>
+          <td class="ssc-square skeleton"></td>
+          <td class="ssc-square skeleton"></td>
+          <td class="ssc-square skeleton"></td>
+          <td class="ssc-square skeleton"></td>
+          <td class="ssc-square skeleton"></td>
+          <td class="ssc-square skeleton"></td>
+          <td class="paginator ssc-square skeleton bg-gray-100"></td>
+        </table>
+      </div>
+    </ng-template>
   </div>
 </div>

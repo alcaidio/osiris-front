@@ -1,10 +1,12 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Params } from '@angular/router'
 import { UpdateActive } from '@ngxs-labs/entity-state'
 import { Select, Store } from '@ngxs/store'
+import { RouterSelectors } from 'app/core/store/states/router.state.selector'
 import { circle, geoJSON, layerGroup, Map } from 'leaflet'
 import moment from 'moment'
 import { Observable } from 'rxjs'
+import { take } from 'rxjs/operators'
 import { Config, Mode } from '../../model/shared.model'
 import { GetBaselayers, GetCalques, GetOverlays, MapState, OverlaySelectors, OverlayState, UIState } from '../../store'
 import { convertConfigToLeaflet } from '../../utils'
@@ -12,7 +14,19 @@ import { CameraPositionType, NeighboursDirectionType, PicturePoint } from './../
 import { MapSmall, Overlay, Picture } from './../../model/shared.model'
 import { CloseData, CloseViewer, ToggleViewerFullscreen } from './../../store/ui/ui.actions'
 import { OsirisAnimations } from './../../utils/animation.utils'
+
 type LangType = 'fr' | 'en'
+
+enum QueryParamsFromCampaignDetail {
+  mapConfig = 'config', // 43.6596748, 3.8262439,15z
+  // add some
+}
+
+export const convertMapConfigFromUrl = (mapConfig: string): any => {
+  const config = mapConfig.split(',')
+  const res = { center: { lng: config[1], lat: config[0] }, zoom: config[2].slice(0, -1) }
+  return res
+}
 
 @Component({
   selector: 'app-campaign-detail',
@@ -28,6 +42,7 @@ export class CampaignDetailComponent implements OnInit {
   @Select(UIState.getIsViewerFullscreen) isViewerFullscreen$: Observable<boolean>
   @Select(OverlayState.getActiveOverlayProperties) activeProperties$: Observable<any[]>
   @Select(OverlayState.getActiveOverlayFeatures) activeFeatures$: Observable<GeoJSON.Feature[]>
+  @Select(RouterSelectors.queryParams) queryParams$: Observable<Params>
 
   mapReady: Map
 
@@ -79,14 +94,8 @@ export class CampaignDetailComponent implements OnInit {
   constructor(private store: Store, private cdr: ChangeDetectorRef, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // data from resolvers
-    const mapSmall = this.route.snapshot.data.mapSmall as MapSmall
-    this.store.dispatch(new GetOverlays(mapSmall.overlayIds))
-    this.store.dispatch(new GetBaselayers(mapSmall.baseLayerIds))
-    this.store.dispatch(new GetCalques(mapSmall.calqueIds))
-
-    this.mapConfig$.subscribe((config) => {
-      this.leafletMapConfig = convertConfigToLeaflet(config)
+    this.queryParams$.pipe(take(1)).subscribe((queryParams) => {
+      this.initState(queryParams)
     })
 
     this.isData$.subscribe((data) => {
@@ -94,6 +103,25 @@ export class CampaignDetailComponent implements OnInit {
         this.activeLayerGroup.removeLayer(this.geoJsonFeature)
       }
       setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 450)
+    })
+  }
+
+  private initState(params: Params) {
+    // data from resolvers
+    const mapSmall = this.route.snapshot.data.mapSmall as MapSmall
+    this.store.dispatch(new GetOverlays(mapSmall.overlayIds))
+    this.store.dispatch(new GetBaselayers(mapSmall.baseLayerIds))
+    this.store.dispatch(new GetCalques(mapSmall.calqueIds))
+
+    const mapConfig = params[QueryParamsFromCampaignDetail.mapConfig]
+
+    this.mapConfig$.subscribe((config) => {
+      if (mapConfig) {
+        const configFromUrl = convertMapConfigFromUrl(mapConfig)
+        this.leafletMapConfig = convertConfigToLeaflet({ ...config, ...configFromUrl })
+      } else {
+        this.leafletMapConfig = convertConfigToLeaflet(config)
+      }
     })
   }
 
