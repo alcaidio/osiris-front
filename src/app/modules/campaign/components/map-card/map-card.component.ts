@@ -14,6 +14,7 @@ import { OsirisAnimations } from '../../utils/animation.utils'
 })
 export class MapCardComponent {
   @Select(CalqueState.entities) calques$: Observable<Calque[]>
+  @Select(CalqueState.loading) calqueLoading$: Observable<boolean>
   @Select(CampaignsState.active) campaign$: Observable<Campaign>
   @Select(BaselayerState.entities) baselayers$: Observable<Baselayer[]>
   @Select(BaselayerState.activeId) activeBaselayerId$: Observable<string>

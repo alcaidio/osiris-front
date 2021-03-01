@@ -7,6 +7,7 @@
   (leafletMapReady)="onMapReady($event)"
   (leafletMapZoomEnd)="updateConfigMapInUrl()"
   (leafletMapMoveEnd)="updateConfigMapInUrl()"
+  [leafletMaxBounds]="config.maxBounds"
 >
   <ng-container *ngIf="mode === 'edit'">
     <div leafletDraw [leafletDrawOptions]="drawOptions" (leafletDrawCreated)="onDrawCreated($event)"></div>

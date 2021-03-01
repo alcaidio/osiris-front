@@ -50,6 +50,11 @@ export class CalqueState extends EntityState<Calque> {
     return state.entities
   }
 
+  @Selector()
+  static getLoading(state: EntityStateModel<Calque>) {
+    return state.loading
+  }
+
   @Action(GetCalques)
   getCalques(ctx: StateContext<EntityStateModel<Calque>>, action: GetCalques) {
     ctx.dispatch(new SetLoading(CalqueState, true))
@@ -64,7 +69,6 @@ export class CalqueState extends EntityState<Calque> {
             ctx.dispatch(new CreateFilters(calque))
           }
         })
-
         ctx.dispatch(new SetLoading(CalqueState, false))
       }),
       catchError((err) => {
