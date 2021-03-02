@@ -6,6 +6,7 @@
           [config]="leafletMapConfig"
           [overlays]="filteredOverlays$ | async"
           [mode]="MODE"
+          [cameraConfig]="cameraConfig"
           (map)="mapReady = $event"
         ></app-map>
 
@@ -18,17 +19,37 @@
     </div>
     <div class="flex-initial bg-gray-200" [@slide]="isViewer$ | async">
       <div class="viewer" *ngIf="isViewer$ | async" [ngClass]="{ fullscreen: isViewerFullscreen$ | async }">
-        <app-flat-image [picture]="selectedPicture" [zoom]="false"></app-flat-image>
-        <app-navigation-perspective
-          [picturePoint]="picturePoint"
-          [picture]="selectedPicture"
-          (direction)="onChangeNeighboursDirection($event)"
-        ></app-navigation-perspective>
-        <app-car-compass
-          [pictures]="picturePoint.pictures"
-          [selected]="selectedPicture.camera"
-          (camera)="onChangeCameraPosition($event)"
-        ></app-car-compass>
+        <!-- TODO : Add config  -->
+        <ng-container *ngIf="selectedPicture.type === '360'">
+          <app-panorama
+            [image]="selectedPicture"
+            [config]="config"
+            (params)="onChangeViewParams($event)"
+          ></app-panorama>
+          <!-- <app-navigation-perspective
+            [picturePoint]="picturePoint"
+            [picture]="selectedPicture"
+            (direction)="onChangeNeighboursDirection($event)"
+          ></app-navigation-perspective> -->
+        </ng-container>
+        <ng-container *ngIf="selectedPicture.type === 'flat'">
+          <app-flat-image
+            *ngIf="selectedPicture.type === 'flat'"
+            [picture]="selectedPicture"
+            [zoom]="false"
+          ></app-flat-image>
+          <app-navigation-perspective
+            [picturePoint]="picturePoint"
+            [picture]="selectedPicture"
+            (direction)="onChangeNeighboursDirection($event)"
+          ></app-navigation-perspective>
+          <app-car-compass
+            [pictures]="picturePoint.pictures"
+            [selected]="selectedPicture.camera"
+            (camera)="onChangeCameraPosition($event)"
+          ></app-car-compass>
+        </ng-container>
+
         <div id="buttons">
           <button
             class="item"

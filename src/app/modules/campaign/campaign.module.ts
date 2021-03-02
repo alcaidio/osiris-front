@@ -16,6 +16,7 @@ import { MapCardComponent } from './components/map-card/map-card.component'
 import { MapSelectionComponent } from './components/map-tools/map-tools.component'
 import { MapComponent } from './components/map/map.component'
 import { NavigationPerspectiveComponent } from './components/navigation-perspective/navigation-perspective.component'
+import { PanoramaComponent } from './components/panorama/panorama.component'
 import { PopupContentComponent } from './components/popup-content/popup-content.component'
 import { PropertyTypeComponent } from './components/property-type/property-type.component'
 import { PropertyValueComponent } from './components/property-value/property-value.component'
@@ -46,6 +47,7 @@ import { CampaignModuleStates } from './store'
     NavigationPerspectiveComponent,
     CarCompassComponent,
     DynamicTableComponent,
+    PanoramaComponent,
   ],
   imports: [
     CommonModule,

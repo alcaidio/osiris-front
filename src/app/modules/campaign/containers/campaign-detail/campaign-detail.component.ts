@@ -2,16 +2,17 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { UpdateActive } from '@ngxs-labs/entity-state'
 import { Select, Store } from '@ngxs/store'
+import { radiansToDegrees } from '@turf/helpers'
 import { RouterSelectors } from 'app/core/store/states/router.state.selector'
 import { circle, geoJSON, layerGroup, Map } from 'leaflet'
 import moment from 'moment'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
-import { Config, Mode } from '../../model/shared.model'
+import { Config, Mode, ViewParams } from '../../model/shared.model'
 import { GetBaselayers, GetCalques, GetOverlays, MapState, OverlaySelectors, OverlayState, UIState } from '../../store'
-import { convertConfigToLeaflet } from '../../utils'
+import { convertConfigToLeaflet, convertDegreesToRadians } from '../../utils'
 import { CameraPositionType, NeighboursDirectionType, PicturePoint } from './../../../../shared/models/maps.model'
-import { MapSmall, Overlay, Picture } from './../../model/shared.model'
+import { MapSmall, Overlay } from './../../model/shared.model'
 import { CloseData, CloseViewer, ToggleViewerFullscreen } from './../../store/ui/ui.actions'
 import { OsirisAnimations } from './../../utils/animation.utils'
 
@@ -54,13 +55,27 @@ export class CampaignDetailComponent implements OnInit {
   activeLayer: any
   geoJsonFeature: any
 
+  cameraConfig: { position: any; rotation: number }
+
   // TODO : CHANGE TEMP MOCK
-  selectedPicture: Picture = {
-    camera: 'front',
-    direction: -116,
-    name: 'IMJ_SEQ__A60016-2020-07-30-N007-55_00209.jpg',
-    path: 'http://192.168.0.187/imajbox/viewer_imajbox/images-avant/AVT/IMJ_SEQ__A60016-2020-07-30-N007-55_00209.jpg',
-  }
+  images = [
+    // {
+    //   type: 'flat',
+    //   camera: 'front',
+    //   direction: -116,
+    //   name: 'IMJ_SEQ__A60016-2020-07-30-N007-55_00209.jpg',
+    //   path: 'http://192.168.0.187/imajbox/viewer_imajbox/images-avant/AVT/IMJ_SEQ__A60016-2020-07-30-N007-55_00209.jpg',
+    // },
+    {
+      type: '360',
+      path: 'http://192.168.0.147/pcrs/MdL/Photos_360/2019-12-31/stream_00007-000000_10851_0053305.jpg',
+      direction: 90,
+    },
+  ]
+
+  selectedPicture: any = this.random(this.images)
+
+  config = { yaw: 0, pitch: 0, fov: convertDegreesToRadians(65) }
 
   picturePoint: PicturePoint = {
     id: 9197,
@@ -80,13 +95,6 @@ export class CampaignDetailComponent implements OnInit {
           'http://192.168.0.187/imajbox/viewer_imajbox/images-avant/AVT/IMJ_SEQ__A60016-2020-07-29-N004-29_01876.jpg',
         camera: 'front',
         direction: 0,
-      },
-      {
-        name: 'IMJ_SEQ__Slave-A60016-2020-07-29-N004-33_02128.jpg',
-        path:
-          'http://192.168.0.187/imajbox/viewer_imajbox/images-arriere/ARR/IMJ_SEQ__Slave-A60016-2020-07-29-N004-33_02128.jpg',
-        camera: 'back',
-        direction: 178,
       },
     ],
   }
@@ -211,6 +219,12 @@ export class CampaignDetailComponent implements OnInit {
     }
   }
 
+  onChangeViewParams(params: ViewParams) {
+    const rotation = this.selectedPicture.direction + radiansToDegrees(params.yaw)
+    this.cameraConfig = { position: [3.8762640953063965, 43.62055896073537], rotation }
+    console.log(this.cameraConfig)
+  }
+
   // TODO other lang
   private getDate(time: number, lang: LangType) {
     if (lang === 'fr') {
@@ -221,5 +235,10 @@ export class CampaignDetailComponent implements OnInit {
 
   get viewerImageInfos(): string {
     return 'Caméra "' + this.selectedPicture?.camera + '" - ' + this.getDate(this.picturePoint?.timestamp, 'fr')
+  }
+
+  // REMOVE when remove image mock
+  private random(images: any) {
+    return images[Math.floor(Math.random() * images.length)]
   }
 }

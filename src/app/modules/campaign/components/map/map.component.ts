@@ -18,12 +18,15 @@ import {
   featureGroup,
   FeatureGroup,
   geoJSON,
+  icon,
   LatLng,
   Layer,
   layerGroup,
   Map,
+  marker,
   tileLayer,
 } from 'leaflet'
+import 'leaflet-rotatedmarker'
 import 'leaflet.polylinemeasure'
 import 'leaflet.smoothwheelzoom'
 import { Observable } from 'rxjs'
@@ -45,6 +48,8 @@ export class MapComponent implements OnChanges {
   @Input() mode: Mode
   @Input() overlays: Overlay[]
   @Input() activeFeature: GeoJSON.Feature
+  // TODO : le type changera
+  @Input() cameraConfig: { position: any; rotation: number }
   @Output() creating = new EventEmitter<any>()
   @Output() map = new EventEmitter<Map>()
   @Output() selected = new EventEmitter<GeoJSON.Feature>()
@@ -53,6 +58,8 @@ export class MapComponent implements OnChanges {
   featureSelected: GeoJSON.Feature
   mapReady: Map
   leafletLayers: Layer[] // value to bind leaflet directive
+
+  cameraMarker: any
 
   drawOptions = {
     position: 'topright',
@@ -122,9 +129,35 @@ export class MapComponent implements OnChanges {
               }
             }
             break
+          case 'cameraConfig':
+            if (this.cameraConfig && this.cameraConfig.position) {
+              this.displayCamera()
+            }
+            break
         }
       }
     }
+  }
+
+  private displayCamera() {
+    let markerOptions: any
+
+    markerOptions = {
+      icon: icon({
+        iconUrl: 'assets/images/camera.svg',
+        iconSize: [80, 80],
+        className: 'camera',
+      }),
+      rotationOrigin: 'center center',
+    }
+
+    if (this.cameraMarker !== undefined) {
+      this.mapReady.removeLayer(this.cameraMarker)
+    }
+
+    this.cameraMarker = marker([this.cameraConfig.position[1], this.cameraConfig.position[0]], markerOptions)
+    this.cameraMarker.setRotationAngle(this.cameraConfig.rotation)
+    this.cameraMarker.addTo(this.mapReady)
   }
 
   onDrawCreated(e: DrawEvents.Created): void {

@@ -28,8 +28,10 @@ export class PopupContentComponent implements OnInit, OnDestroy {
   onClickNavigate(): void {
     this.store.dispatch(new OpenViewer())
     const [lng, lat] = this.feature.geometry['coordinates']
-    // setTimeout To 420 because viewer appears completely after 400ms
-    setTimeout(() => this.map.invalidateSize({ animate: true, duration: 1000 }), 450)
+    console.log('load image on the point', [lng, lat])
+    // setTimeout To 450 because viewer appears completely after 400ms
+    setTimeout(() => this.map.invalidateSize({ animate: true }), 500)
+
     this.map.flyTo([lat, lng])
     setTimeout(() => this.map.closePopup(), 1500)
   }

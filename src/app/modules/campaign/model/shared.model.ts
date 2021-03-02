@@ -133,6 +133,7 @@ export type CameraPositionType =
   | 'back-left'
 
 export interface Picture {
+  type?: string
   name: string
   path: string
   camera: CameraPositionType
@@ -150,3 +151,10 @@ export interface PicturePoint {
 }
 
 export type NeighboursDirectionType = 'front' | 'back' | 'front_right' | 'front_left' | 'back_right' | 'back_left'
+
+export interface ViewParams {
+  fov: number
+  pitch: number
+  yaw: number
+  roll?: number
+}
