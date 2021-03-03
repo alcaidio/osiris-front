@@ -94,11 +94,11 @@ export type GeometryType = 'point' | 'line' | 'structure'
 export interface Calque {
   id: string
   name: string
-  geomType: GeometryType
+  geomType: GeometryType | null
   checked: boolean
   indeterminate: boolean
   toggled: boolean
-  legend: string
+  legend: string | null
   properties: CalqueProperty[]
 }
 

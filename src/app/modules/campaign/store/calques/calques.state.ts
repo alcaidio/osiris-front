@@ -7,7 +7,7 @@ import {
   IdStrategy,
   SetError,
   SetLoading,
-  Update,
+  Update
 } from '@ngxs-labs/entity-state'
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { of } from 'rxjs'
@@ -48,6 +48,17 @@ export class CalqueState extends EntityState<Calque> {
   @Selector()
   static getEntities(state: EntityStateModel<Calque>) {
     return state.entities
+  }
+
+  @Selector()
+  static getNewCalqueName(state: EntityStateModel<Calque>) {
+    let count = 1
+    Object.values(state.entities).map((calque) => {
+      if (calque.name.toLowerCase().includes('calque')) {
+        count++
+      }
+    })
+    return `Calque ${count}`
   }
 
   @Selector()

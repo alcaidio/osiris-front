@@ -50,7 +50,7 @@ export class MapComponent implements OnChanges {
   @Input() activeFeature: GeoJSON.Feature
   // TODO : le type changera
   @Input() cameraConfig: { position: any; rotation: number }
-  @Output() creating = new EventEmitter<any>()
+
   @Output() map = new EventEmitter<Map>()
   @Output() selected = new EventEmitter<GeoJSON.Feature>()
 
@@ -172,8 +172,6 @@ export class MapComponent implements OnChanges {
       maxHeight: 200,
       autoPan: false,
     })
-
-    this.creating.emit(geojson)
   }
 
   setDefaultView(): void {

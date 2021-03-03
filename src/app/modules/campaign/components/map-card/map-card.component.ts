@@ -6,6 +6,8 @@ import { Calque, Campaign } from '../../model/shared.model'
 import { BaselayerState, CalqueState, CampaignsState, ToggleMapCard, UIState } from '../../store'
 import { OsirisAnimations } from '../../utils/animation.utils'
 
+type actionType = 'vue' | 'newCalque'
+
 @Component({
   selector: 'app-map-card',
   templateUrl: 'map-card.component.html',
@@ -27,9 +29,7 @@ export class MapCardComponent {
     this.store.dispatch(new ToggleMapCard())
   }
 
-  onClick(type: string) {
-    if (type === 'vue') {
-      this.action.emit(type)
-    }
+  onClick(type: actionType) {
+    this.action.emit(type)
   }
 }

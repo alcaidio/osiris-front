@@ -31,6 +31,8 @@ export class CalqueComponent implements OnInit {
       return 'extension'
     } else if (type === 'image') {
       return 'panorama'
+    } else if (type === null) {
+      return
     } else {
       throw new Error('Cant load icon layer !')
     }
@@ -67,4 +69,5 @@ export class CalqueComponent implements OnInit {
     this.store.dispatch(new SetActive(OverlayState, name))
     this.store.dispatch(new ToggleData())
   }
+  
 }

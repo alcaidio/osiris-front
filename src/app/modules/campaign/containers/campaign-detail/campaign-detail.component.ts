@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
-import { UpdateActive } from '@ngxs-labs/entity-state'
+import { Add, UpdateActive } from '@ngxs-labs/entity-state'
 import { Select, Store } from '@ngxs/store'
 import { radiansToDegrees } from '@turf/helpers'
 import { RouterSelectors } from 'app/core/store/states/router.state.selector'
@@ -8,8 +8,18 @@ import { circle, geoJSON, layerGroup, Map } from 'leaflet'
 import moment from 'moment'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
+import { v4 as uuidv4 } from 'uuid'
 import { Config, Mode, ViewParams } from '../../model/shared.model'
-import { GetBaselayers, GetCalques, GetOverlays, MapState, OverlaySelectors, OverlayState, UIState } from '../../store'
+import {
+  CalqueState,
+  GetBaselayers,
+  GetCalques,
+  GetOverlays,
+  MapState,
+  OverlaySelectors,
+  OverlayState,
+  UIState,
+} from '../../store'
 import { convertConfigToLeaflet, convertDegreesToRadians } from '../../utils'
 import { CameraPositionType, NeighboursDirectionType, PicturePoint } from './../../../../shared/models/maps.model'
 import { MapSmall, Overlay } from './../../model/shared.model'
@@ -44,12 +54,15 @@ export class CampaignDetailComponent implements OnInit {
   @Select(OverlayState.getActiveOverlayProperties) activeProperties$: Observable<any[]>
   @Select(OverlayState.getActiveOverlayFeatures) activeFeatures$: Observable<GeoJSON.Feature[]>
   @Select(RouterSelectors.queryParams) queryParams$: Observable<Params>
+  @Select(CalqueState.getNewCalqueName) newCalqueName$: Observable<string>
 
   mapReady: Map
 
   selectedFeature: GeoJSON.Feature
   leafletMapConfig: Config
   MODE = Mode.Edit
+
+  newCalqueName: string
 
   activeLayerGroup = layerGroup()
   activeLayer: any
@@ -112,6 +125,8 @@ export class CampaignDetailComponent implements OnInit {
       }
       setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 450)
     })
+
+    this.newCalqueName$.subscribe((name) => (this.newCalqueName = name))
   }
 
   private initState(params: Params) {
@@ -216,6 +231,20 @@ export class CampaignDetailComponent implements OnInit {
           },
         }))
       )
+    } else if (type === 'newCalque') {
+      // TODO
+      console.log('ACTION: POST add a new calque in active map')
+      const defaultCalque = {
+        id: uuidv4(),
+        name: this.newCalqueName,
+        geomType: 'line',
+        checked: true,
+        indeterminate: false,
+        toggled: false,
+        legend: null,
+        properties: [],
+      }
+      this.store.dispatch(new Add(CalqueState, defaultCalque))
     }
   }
 
