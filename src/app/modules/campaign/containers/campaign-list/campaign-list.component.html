@@ -26,8 +26,7 @@
           </mat-form-field>
         </div>
 
-        <!-- TODO:  Add campaign button -->
-        <button class="add-campaign" mat-flat-button [color]="'primary'" (click)="(true)">
+        <button class="add-campaign" mat-flat-button [color]="'primary'" (click)="onAddCampaign()">
           <mat-icon [svgIcon]="'add'"></mat-icon>
           Ajouter
         </button>
@@ -118,6 +117,9 @@
           <div class="flex flex-col justify-center items-center">
             <h2 class="text-center mb-12">Aucunes campagnes disponibles.</h2>
             <img class="w-80" src="assets/images/empty.svg" />
+            <div class="mt-12">
+              <button mat-stroked-button (click)="onAddCampaign()">Ajouter une campagne</button>
+            </div>
           </div>
         </div>
       </ng-template>

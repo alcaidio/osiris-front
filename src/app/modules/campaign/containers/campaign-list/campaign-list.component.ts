@@ -55,6 +55,11 @@ export class CampaignListComponent implements OnInit, AfterViewInit {
     return moment(duration).locale('fr').format('Do MMMM, YYYY')
   }
 
+  onAddCampaign() {
+    // TODO add campaign action workflow
+    console.log('add campaign')
+  }
+
   private sortAndPagine() {
     this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
