@@ -2,7 +2,7 @@
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>{{ column | title }}</th>
-      <td mat-cell *matCellDef="let row" (click)="onClickRow(row.id)" [ngClass]="{ active: row.id === active }">
+      <td mat-cell *matCellDef="let row" (click)="onClickRow(row)" [ngClass]="{ active: row.id === active }">
         {{ row[column] }}
       </td>
     </ng-container>
@@ -29,8 +29,8 @@
     </div>
     <div class="right">
       <mat-form-field class="w-60">
-        <mat-select (selectionChange)="onChangeActiveCalque($event)" name="calque" [(value)]="selectedCalqueName">
-          <mat-option *ngFor="let calque of calques$ | async" [value]="calque.name">
+        <mat-select (selectionChange)="onChangeActiveCalque($event)" name="calque" [(value)]="selectedCalqueId">
+          <mat-option *ngFor="let calque of calques$ | async" [value]="calque.id">
             {{ calque.name }}
           </mat-option>
         </mat-select>

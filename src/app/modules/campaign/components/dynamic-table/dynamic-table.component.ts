@@ -27,7 +27,7 @@ import { CloseData } from './../../store/ui/ui.actions'
 })
 export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() data: any[]
-  @Output() activeRow = new EventEmitter<number>()
+  @Output() activeRow = new EventEmitter<string>()
   @ViewChild(MatSort) sort: MatSort
   dataSource: MatTableDataSource<any>
   displayedColumns: string[]
@@ -37,13 +37,13 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
   @Select(CalqueState.getActive) calque$: Observable<Calque>
   @Select(OverlayState.activeId) activeCalque$: Observable<string>
 
-  selectedCalqueName: string
+  selectedCalqueId: string
 
   constructor(private store: Store) {}
 
   ngOnInit() {
     this.createTable()
-    this.activeCalque$.subscribe((activeCalque) => (this.selectedCalqueName = activeCalque))
+    this.activeCalque$.subscribe((activeCalque) => (this.selectedCalqueId = activeCalque))
   }
 
   ngOnChanges() {
@@ -64,9 +64,9 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
     this.store.dispatch(new CloseData())
   }
 
-  onClickRow(id: number) {
-    this.active = id
-    this.activeRow.emit(id)
+  onClickRow(row: any) {
+    this.active = row.id
+    this.activeRow.emit(row.featureId)
   }
 
   onChangeActiveCalque(evt: MatSelectChange) {
@@ -77,7 +77,7 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
 
   private createTable() {
     if (this.data && this.data.length > 0) {
-      this.displayedColumns = Object.keys(this.data[0])
+      this.displayedColumns = Object.keys(this.data[0]).filter((i) => i !== 'featureId') // remove featureId it's just for find feature for fitbound
       this.dataSource = new MatTableDataSource(this.data)
     }
   }

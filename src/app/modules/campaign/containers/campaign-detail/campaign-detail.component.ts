@@ -123,7 +123,7 @@ export class CampaignDetailComponent implements OnInit {
       if (!data && this.geoJsonFeature) {
         this.activeLayerGroup.removeLayer(this.geoJsonFeature)
       }
-      setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 450)
+      setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 1000)
     })
 
     this.newCalqueName$.subscribe((name) => (this.newCalqueName = name))
@@ -158,7 +158,7 @@ export class CampaignDetailComponent implements OnInit {
 
   onCloseNavigation() {
     this.store.dispatch(new CloseViewer())
-    setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 450)
+    setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 1000)
   }
 
   onFullscreenNavigation() {
@@ -166,18 +166,19 @@ export class CampaignDetailComponent implements OnInit {
     this.store.dispatch(new ToggleViewerFullscreen())
   }
 
-  onFlyToTheFeature(featureId: number) {
+  onFlyToTheFeature(featureId: string) {
     this.activeFeatures$.subscribe((features) => {
       const feature = features.find((f) => f.id === featureId)
+      console.log(feature)
 
       if (this.geoJsonFeature) {
         this.activeLayerGroup.removeLayer(this.geoJsonFeature)
       }
 
       if (feature.geometry['type'] === 'Point') {
-        this.mapReady.panTo([feature.geometry['coordinates'][1], feature.geometry['coordinates'][0]])
+        this.mapReady.panTo([feature.geometry['coordinates'][0][1], feature.geometry['coordinates'][0][0]])
         this.geoJsonFeature = circle(
-          { lat: feature.geometry['coordinates'][1], lng: feature.geometry['coordinates'][0] } as any,
+          { lat: feature.geometry['coordinates'][0][1], lng: feature.geometry['coordinates'][0][0] } as any,
           {
             radius: 15,
             fillColor: 'black',
@@ -187,27 +188,26 @@ export class CampaignDetailComponent implements OnInit {
           }
         )
       } else {
-        if (feature.bbox) {
-          this.mapReady.fitBounds(
-            [
-              [feature.bbox[1], feature.bbox[0]],
-              [feature.bbox[3], feature.bbox[2]],
-            ],
-            { animate: true, duration: 2000 }
-          )
+        const line = feature.geometry['coordinates'][0]
+        const firstPoint = line[0]
+        const lastPoint = line[line.length - 1]
+        this.mapReady.fitBounds(
+          [
+            [firstPoint[1], firstPoint[0]],
+            [lastPoint[1], lastPoint[0]],
+          ],
+          { animate: true, duration: 1000 }
+        )
 
-          this.geoJsonFeature = geoJSON(feature as any, {
-            style: {
-              fillColor: 'transparent',
-              weight: 15,
-              color: '#11afb6',
-              opacity: 0.3,
-              stroke: true,
-            },
-          })
-        } else {
-          console.warn('Pas de point ni de bbox')
-        }
+        this.geoJsonFeature = geoJSON(feature as any, {
+          style: {
+            fillColor: 'transparent',
+            weight: 15,
+            color: '#11afb6',
+            opacity: 0.3,
+            stroke: true,
+          },
+        })
       }
 
       this.activeLayerGroup.addLayer(this.geoJsonFeature)
