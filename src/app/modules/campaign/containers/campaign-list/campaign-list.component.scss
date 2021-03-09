@@ -145,7 +145,7 @@ app-campaign-list {
                 width: 64px;
               }
 
-              &.mat-column-editionDate {
+              &.mat-column-lastUpdate {
                 width: 64px;
               }
             }
@@ -211,7 +211,7 @@ app-campaign-list {
                   padding-right: 0px;
                 }
 
-                &.mat-column-editionDate {
+                &.mat-column-lastUpdate {
                   padding-right: 0px;
                 }
               }
@@ -295,7 +295,7 @@ app-campaign-list {
               box-shadow: 0 1px 0 0 map-get($foreground, divider);
 
               @if ($is-dark) {
-                background: rgba(0, 0, 0, 0.05);
+                background: treo-color('cool-gray', 800);
               } @else {
                 background: treo-color('cool-gray', 50);
               }

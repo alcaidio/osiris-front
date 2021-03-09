@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { Add, UpdateActive } from '@ngxs-labs/entity-state'
 import { Select, Store } from '@ngxs/store'
@@ -22,7 +22,7 @@ import {
 } from '../../store'
 import { convertConfigToLeaflet, convertDegreesToRadians } from '../../utils'
 import { CameraPositionType, NeighboursDirectionType, PicturePoint } from './../../../../shared/models/maps.model'
-import { MapSmall, Overlay } from './../../model/shared.model'
+import { Overlay } from './../../model/shared.model'
 import { CloseData, CloseViewer, ToggleViewerFullscreen } from './../../store/ui/ui.actions'
 import { OsirisAnimations } from './../../utils/animation.utils'
 
@@ -112,7 +112,7 @@ export class CampaignDetailComponent implements OnInit {
     ],
   }
 
-  constructor(private store: Store, private cdr: ChangeDetectorRef, private route: ActivatedRoute) {}
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.queryParams$.pipe(take(1)).subscribe((queryParams) => {
@@ -131,16 +131,16 @@ export class CampaignDetailComponent implements OnInit {
 
   private initState(params: Params) {
     // data from resolvers
-    const mapSmall = this.route.snapshot.data.mapSmall as MapSmall
-    this.store.dispatch(new GetOverlays(mapSmall.overlayIds))
-    this.store.dispatch(new GetBaselayers(mapSmall.baseLayerIds))
-    this.store.dispatch(new GetCalques(mapSmall.calqueIds))
+    const id = this.route.snapshot.data.mapSmall.id as string
+    this.store.dispatch(new GetCalques(id))
+    this.store.dispatch(new GetOverlays(id))
+    this.store.dispatch(new GetBaselayers(id))
 
-    const mapConfig = params[QueryParamsFromCampaignDetail.mapConfig]
-
+    // format map config for leaflet
     this.mapConfig$.subscribe((config) => {
-      if (mapConfig) {
-        const configFromUrl = convertMapConfigFromUrl(mapConfig)
+      const mapConfigFromUrl = params[QueryParamsFromCampaignDetail.mapConfig]
+      if (mapConfigFromUrl) {
+        const configFromUrl = convertMapConfigFromUrl(mapConfigFromUrl)
         this.leafletMapConfig = convertConfigToLeaflet({ ...config, ...configFromUrl })
       } else {
         this.leafletMapConfig = convertConfigToLeaflet(config)
@@ -241,7 +241,6 @@ export class CampaignDetailComponent implements OnInit {
         checked: true,
         indeterminate: false,
         toggled: false,
-        legend: null,
         properties: [],
       }
       this.store.dispatch(new Add(CalqueState, defaultCalque))

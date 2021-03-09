@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import {
-  Add,
+  CreateOrReplace,
   defaultEntityState,
   EntityState,
   EntityStateModel,
@@ -23,7 +23,7 @@ import { GetOverlays, ToggleOverlay } from './overlays.actions'
 @Injectable()
 export class OverlayState extends EntityState<Overlay> {
   constructor(private api: ApiService) {
-    super(OverlayState, 'name', IdStrategy.EntityIdGenerator)
+    super(OverlayState, 'id', IdStrategy.EntityIdGenerator)
   }
 
   @Selector()
@@ -56,22 +56,10 @@ export class OverlayState extends EntityState<Overlay> {
   getOverlays(ctx: StateContext<OverlayState>, action: GetOverlays) {
     ctx.dispatch(new SetLoading(OverlayState, true))
 
-    return this.api.getOverlays(action.overlayIds).pipe(
+    return this.api.getOverlaysByMapId(action.mapId).pipe(
       map((overlays: Overlay[]) => {
-        const state = ctx.getState()
-        if (state['ids'] && state['ids'].length > 0) {
-          const newOverlays = overlays.filter((item) => state['ids'].includes(item))
-          if (newOverlays.length > 0) {
-            ctx.dispatch(new Add(OverlayState, overlays))
-          }
-        } else {
-          ctx.dispatch(new Add(OverlayState, overlays))
-        }
-
-        // REMOVE: Simulation latence
-        setTimeout(() => {
-          ctx.dispatch(new SetLoading(OverlayState, false))
-        }, 200)
+        ctx.dispatch(new CreateOrReplace(OverlayState, overlays))
+        ctx.dispatch(new SetLoading(OverlayState, false))
       }),
       catchError((err) => {
         ctx.dispatch(new SetError(OverlayState, err))

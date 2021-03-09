@@ -10,7 +10,7 @@ export class OverlaySelectors {
   static getFilteredOverlays(overlayState: EntityStateModel<Overlay>, filterState: EntityStateModel<FiltersProp>) {
     return Object.values(overlayState.entities)
       .map((overlay) => {
-        const filters = filterState.entities[overlay.name].filters
+        const filters = filterState.entities[overlay.id].filters
         const filterKeys = Object.keys(filters)
 
         const filteredFeatures = overlay.features.filter((item) => {

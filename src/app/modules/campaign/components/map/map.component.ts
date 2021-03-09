@@ -32,9 +32,9 @@ import 'leaflet.smoothwheelzoom'
 import { Observable } from 'rxjs'
 import { Overlay } from '../../model/shared.model'
 import { MapState } from '../../store'
-import { setDefaultStyleOfFeature } from '../../utils'
 import { PopupContentComponent } from '../popup-content/popup-content.component'
 import { Config, Mode } from './../../model/shared.model'
+import { setDefaultStyleOfFeature } from './../../utils/leaflet.utils'
 
 @Component({
   selector: 'app-map',
@@ -190,7 +190,7 @@ export class MapComponent implements OnChanges {
   private convertOverlaysForLeaflet(os: Overlay[]): Layer[] {
     let overlays = {}
 
-    os.map((layer) => {
+    os.map((layer: Overlay) => {
       const group = layerGroup()
       overlays = { ...overlays, [layer.name]: group }
       return group.addLayer(this.generateLayerGroup(layer))
@@ -203,8 +203,10 @@ export class MapComponent implements OnChanges {
     return Object.values(overlays)
   }
 
-  private generateLayerGroup(layer: any): any {
+  private generateLayerGroup(layer: Overlay): any {
     let geojson: any
+    const activeStyleName = layer.activeStyle.name.toLocaleLowerCase()
+    const ruleDTOs = layer.activeStyle.ruleDTOs
 
     const onSelectFeature = (e: any) => {
       // const { lat, lng } = e.latlng
@@ -219,7 +221,7 @@ export class MapComponent implements OnChanges {
     }
 
     const highlightFeature = (e) => {
-      const featureSyle = e.target.feature.properties.style
+      const featureSyle = ruleDTOs.find((rule) => rule.name === e.target.feature.properties[activeStyleName])
       if (featureSyle && Object.keys(featureSyle).includes('radius')) {
         e.target.setStyle({
           radius: featureSyle.radius * 1.2,
@@ -294,8 +296,8 @@ export class MapComponent implements OnChanges {
     }
 
     const style = (feature: GeoJSON.Feature) => {
-      if (feature.properties.style) {
-        return feature.properties.style
+      if (ruleDTOs && activeStyleName) {
+        return ruleDTOs.find((rule) => rule.name === feature.properties[activeStyleName])
       } else {
         // Load default style
         const type = feature.geometry.type

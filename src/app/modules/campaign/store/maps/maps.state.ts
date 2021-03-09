@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import {
-  Add,
+  CreateOrReplace,
   defaultEntityState,
   EntityState,
   EntityStateModel,
@@ -9,6 +9,7 @@ import {
   SetError,
   SetLoading,
 } from '@ngxs-labs/entity-state'
+import { Navigate } from '@ngxs/router-plugin'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
@@ -33,24 +34,21 @@ export class MapState extends EntityState<MapSmall> {
   }
 
   @Action(GetMap)
-  getMaps(ctx: StateContext<EntityStateModel<MapSmall>>, action: GetMap) {
+  getMap(ctx: StateContext<EntityStateModel<MapSmall>>, action: GetMap) {
     ctx.dispatch(new SetLoading(MapState, true))
-    const mapIds = ctx.getState().ids
-    const isMapInStore = mapIds.length > 0 && mapIds.includes(action.mapId)
-    if (!isMapInStore) {
-      return this.api.getMapSmall(action.mapId).pipe(
-        map((mapSmall: MapSmall) => {
-          ctx.dispatch(new Add(MapState, mapSmall))
-          ctx.dispatch(new SetActive(MapState, mapSmall.id as string))
-          ctx.dispatch(new SetActive(BaselayerState, mapSmall.config.layers.id as string))
-          ctx.dispatch(new SetLoading(MapState, false))
-        }),
-        catchError((err) => {
-          ctx.dispatch(new SetError(MapState, err))
-          ctx.dispatch(new SetLoading(MapState, false))
-          return of(err)
-        })
-      )
-    }
+    return this.api.getMap(action.mapId).pipe(
+      map((mapSmall: MapSmall) => {
+        ctx.dispatch(new CreateOrReplace(MapState, mapSmall))
+        ctx.dispatch(new SetActive(MapState, mapSmall.id as string))
+        ctx.dispatch(new SetActive(BaselayerState, mapSmall.config.layers.id as string))
+        ctx.dispatch(new SetLoading(MapState, false))
+      }),
+      catchError((err) => {
+        ctx.dispatch(new SetError(MapState, err))
+        ctx.dispatch(new SetLoading(MapState, false))
+        ctx.dispatch(new Navigate(['/']))
+        return of(err)
+      })
+    )
   }
 }

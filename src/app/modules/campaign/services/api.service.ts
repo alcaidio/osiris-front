@@ -1,81 +1,67 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
-import { BaseLayer, Calque, Campaign, ID, MapSmall, Overlay } from '../model/shared.model'
-import { filteredObjectByKeys } from '../utils/shared.utils'
-import { LoggerService } from './logger.service'
+import { combineAll, map, switchMap } from 'rxjs/operators'
+import { BaseLayer, Calque, Campaign, LeafletStyle, MapSmall, OverlayDTO } from '../model/shared.model'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient, private log: LoggerService) {}
+  // Lunch json-server with "json-server --watch db.json --delay 2000"
 
+  constructor(private http: HttpClient) {}
+
+  // mapabstract or campaign ?
   getCampaignList(): Observable<Campaign[]> {
-    const res = this.http.get<Campaign[]>('assets/campaigns.json').pipe(map((campaigns) => Object.values(campaigns)))
-    res.subscribe((p) => this.log.message('Campaign list loaded', p))
+    return this.http.get<Campaign[]>('http://localhost:3000/mapabstracts')
+  }
+
+  getMap(id: string): Observable<MapSmall> {
+    return this.http.get<MapSmall>(`http://localhost:3000/maps/${id}`)
+  }
+
+  getOverlaysByMapId(id: string): any {
+    const res = this.http.get<OverlayDTO[]>(`http://localhost:3000/maps/${id}/overlays`).pipe(
+      switchMap((overlayDTOs) => {
+        return overlayDTOs.map((DTO) => {
+          const overlayWithoutFeatures = {
+            id: DTO.id,
+            name: DTO.layerName,
+            visible: true,
+            mapId: DTO.mapId,
+            geomType: DTO.geomType,
+            activeStyle: DTO.activeStyle,
+          }
+          const httpOptions = {
+            headers: new HttpHeaders({
+              Authorization: 'Basic ' + btoa(`${DTO.username}:${DTO.password}`),
+              skip: 'true',
+            }),
+          }
+          return this.http.get<any>(DTO.url, httpOptions).pipe(
+            map((featureCollection) => {
+              return { ...overlayWithoutFeatures, type: featureCollection.type, features: featureCollection.features }
+            })
+          )
+        })
+      }),
+      combineAll()
+    )
+    res.subscribe((p) => console.log(p))
     return res
   }
 
-  getCampaign(id: string): Observable<Campaign> {
-    const res = this.http.get<Campaign[]>('assets/campaigns.json').pipe(map((campaigns) => campaigns[id]))
-    res.subscribe((p) => this.log.message('Campaign is loaded by id', p))
-    return res
+  getOverlayConfigsByMapId(id: string): Observable<Calque[]> {
+    return this.http.get<Calque[]>(`http://localhost:3000/maps/${id}/overlayconfigs`)
   }
 
-  getMapSmall(id: string): Observable<MapSmall> {
-    const res = this.http.get<MapSmall[]>('assets/maps.json').pipe(map((maps) => maps[id]))
-    res.subscribe((p) => this.log.message('Map is loaded by Id', p))
-    return res
+  getBaselayersByMapId(id: string): Observable<BaseLayer[]> {
+    return this.http.get<BaseLayer[]>(`http://localhost:3000/maps/${id}/baselayers`)
   }
 
-  getOverlays(ids: ID[]): Observable<Overlay[]> {
-    const res = this.http
-      .get<Overlay[]>('assets/overlays.json')
-      .pipe(map((overlays) => Object.values(filteredObjectByKeys(overlays, ids)) as Overlay[]))
-    res.subscribe((p) => this.log.message('Overlays is loaded by Ids', p))
-    return res
+  // (prop id or overlayconfigs) === style id
+  getStyleById(id: string): Observable<LeafletStyle> {
+    return this.http.get<LeafletStyle>(`http://localhost:3000/style/${id}`)
   }
-
-  getBaselayers(ids: ID[]): Observable<BaseLayer[]> {
-    if (ids.length > 0) {
-      const res = this.http
-        .get<BaseLayer[]>('assets/base-layers.json')
-        .pipe(map((layers) => Object.values(filteredObjectByKeys(layers, ids)) as BaseLayer[]))
-      res.subscribe((p) => this.log.message('Baselayer is loaded by Ids', p))
-      return res
-    } else {
-      const res = this.http.get<BaseLayer[]>('assets/base-layers.json').pipe(map((layers) => Object.values(layers)))
-      res.subscribe((p) => this.log.message('All baselayer is loaded', p))
-      return res
-    }
-  }
-
-  getCalques(ids: string[]): Observable<Calque[]> {
-    const res = this.http
-      .get<Calque[]>('assets/calques.json')
-      .pipe(map((calque) => Object.values(filteredObjectByKeys(calque, ids)) as Calque[]))
-    res.subscribe((p) => this.log.message('All Calque is loaded', p))
-    return res
-  }
-
-  // getMap(mapId: ID): Observable<Map> {
-  //   const res = this.http.get<MapSmall[]>('assets/maps.json').pipe(
-  //     map((maps) => maps.find((m) => m.id === mapId)),
-  //     mergeMap((currentMap: MapSmall) => {
-  //       const { id, baseLayerIds, overlayIds, config } = currentMap;
-  //       const baselayers = this.getBaselayers(baseLayerIds);
-  //       const overlays = this.getOverlays(overlayIds);
-  //       return {
-  //         id,
-  //         config,
-  //         baselayers,
-  //         overlays,
-  //       };
-  //     })
-  //   );
-  //   res.subscribe((p) => this.log.message('Map is loaded by Id', p));
-  //   return res;
-  // }
 }

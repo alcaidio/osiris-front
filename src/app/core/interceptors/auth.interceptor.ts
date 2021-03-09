@@ -16,9 +16,11 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.store.selectSnapshot(AuthStatusState.getJWT)
 
     if (token && token !== null && !AuthUtils.isTokenExpired(token)) {
-      newReq = req.clone({
-        headers: req.headers.set('Authorization', 'Bearer ' + token),
-      })
+      if (!req.headers.get('skip')) {
+        newReq = req.clone({
+          headers: req.headers.set('Authorization', 'Bearer ' + token),
+        })
+      }
     } else {
       this.store.dispatch(new Logout())
     }

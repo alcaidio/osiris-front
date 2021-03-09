@@ -39,7 +39,13 @@
     </div>
 
     <div>
-      <button mat-icon-button color="primary" [matMenuTriggerFor]="menu" aria-label="More actions on the layer">
+      <button
+        mat-icon-button
+        color="primary"
+        [matMenuTriggerFor]="menu"
+        aria-label="More actions on the layer"
+        (click)="onActive(calque.id)"
+      >
         <mat-icon>more_vert</mat-icon>
       </button>
 

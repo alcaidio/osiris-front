@@ -1,4 +1,4 @@
 export class GetBaselayers {
-  static readonly type = '[baselayers] get'
-  constructor(public baselayerIds: string[]) {}
+  static readonly type = '[baselayers] get by map id'
+  constructor(public mapId: string) {}
 }

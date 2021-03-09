@@ -4,12 +4,13 @@ import { getBrowserLang, TranslocoService } from '@ngneat/transloco'
 import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store'
 import { Language } from 'app/core/config/app.config'
 import { LayoutTheme, Theme } from '../../../shared/models/shared.model'
-import { ChangeLanguage, ChangeTheme } from '../actions/config.actions'
+import { ChangeLanguage, ChangeNavigationLoad, ChangeTheme } from '../actions/config.actions'
 
 export interface ConfigStateModel {
   language: Language
   theme: Theme
   layout?: LayoutTheme
+  navigationLoad: boolean
 }
 
 @State<ConfigStateModel>({
@@ -18,6 +19,7 @@ export interface ConfigStateModel {
     language: 'fr',
     theme: 'light',
     layout: 'compact',
+    navigationLoad: true, // use when data load into resolvers
   },
 })
 @Injectable()
@@ -35,6 +37,11 @@ export class ConfigState implements NgxsOnInit {
   @Selector()
   static getActiveLayoutTheme(state: ConfigStateModel): LayoutTheme {
     return state.layout
+  }
+
+  @Selector()
+  static getNavigationLoad(state: ConfigStateModel): boolean {
+    return state.navigationLoad
   }
 
   constructor(@Inject(DOCUMENT) private document: any, private translocoService: TranslocoService) {}
@@ -74,6 +81,13 @@ export class ConfigState implements NgxsOnInit {
     } else {
       console.warn('Language problem')
     }
+  }
+
+  @Action(ChangeNavigationLoad)
+  changeNavigationLoad({ patchState }: StateContext<ConfigStateModel>, action: ChangeNavigationLoad) {
+    patchState({
+      navigationLoad: action.payload,
+    })
   }
 
   private updateTheme(theme: Theme): void {

@@ -1,0 +1,423 @@
+{
+  "mapabstracts": [
+    {
+      "id": 3,
+      "title": "Test Plaine Commune",
+      "subtitle": "Année 2019",
+      "thumbnail": "https://picsum.photos/id/221/200/300",
+      "creationDate": 1592965812000,
+      "lastUpdate": 1612965712000,
+      "mapId": 3
+    },
+    {
+      "id": 4,
+      "title": "Test de Map",
+      "subtitle": "Pour voir",
+      "thumbnail": "https://picsum.photos/id/256/200/300",
+      "creationDate": 1612965712000,
+      "lastUpdate": 1612565813000,
+      "mapId": 4
+    }
+  ],
+  "maps": [
+    {
+      "id": 3,
+      "config": {
+        "layers": {
+          "id": 3,
+          "name": "Mapbox Streets",
+          "urlTemplate": "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}",
+          "token": "pk.eyJ1IjoidGltb3RoeTM0IiwiYSI6ImNraWVkcTdyaTB5MjAyc3JzOTRyYWx0cHMifQ.ta2cN4vcYUu8TOlI0fAc2Q",
+          "style": "LIGHT",
+          "thumbnail": null,
+          "options": { "zoomOffset": -1, "maxZoom": 20, "tileSize": 512, "id": "mapbox/streets-v11" }
+        },
+        "minZoom": 10,
+        "maxBounds": [
+          { "lat": 49.04777053691127, "lng": 2.1553438668917035 },
+          { "lat": 48.827113559136386, "lng": 2.5556357498684483 }
+        ],
+        "center": { "lat": 48.937550428422895, "lng": 2.3554898083800757 },
+        "zoom": 15,
+        "boxZoom": true,
+        "zoomDelta": 0.25,
+        "zoomSnap": 0.5,
+        "zoomControl": false
+      }
+    }
+  ],
+  "baselayers": [
+    {
+      "id": 1,
+      "name": "Mapbox Light",
+      "urlTemplate": "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}",
+      "token": "pk.eyJ1IjoidGltb3RoeTM0IiwiYSI6ImNraWVkcTdyaTB5MjAyc3JzOTRyYWx0cHMifQ.ta2cN4vcYUu8TOlI0fAc2Q",
+      "style": "LIGHT",
+      "thumbnail": null,
+      "options": { "zoomOffset": -1, "maxZoom": 19, "tileSize": 512, "id": "mapbox/light-v10" },
+      "mapId": "3"
+    },
+    {
+      "id": 2,
+      "name": "Mapbox Dark",
+      "urlTemplate": "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}",
+      "token": "pk.eyJ1IjoidGltb3RoeTM0IiwiYSI6ImNraWVkcTdyaTB5MjAyc3JzOTRyYWx0cHMifQ.ta2cN4vcYUu8TOlI0fAc2Q",
+      "style": "DARK",
+      "thumbnail": null,
+      "options": { "zoomOffset": -1, "maxZoom": 19, "tileSize": 512, "id": "mapbox/dark-v10" },
+      "mapId": "4"
+    },
+    {
+      "id": 3,
+      "name": "Mapbox Streets",
+      "urlTemplate": "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}",
+      "token": "pk.eyJ1IjoidGltb3RoeTM0IiwiYSI6ImNraWVkcTdyaTB5MjAyc3JzOTRyYWx0cHMifQ.ta2cN4vcYUu8TOlI0fAc2Q",
+      "style": "LIGHT",
+      "thumbnail": null,
+      "options": { "zoomOffset": -1, "maxZoom": 20, "tileSize": 512, "id": "mapbox/outdoors-v11" },
+      "mapId": "3"
+    },
+    {
+      "id": 4,
+      "name": "Mapbox Outdoors",
+      "urlTemplate": "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}",
+      "token": "pk.eyJ1IjoidGltb3RoeTM0IiwiYSI6ImNraWVkcTdyaTB5MjAyc3JzOTRyYWx0cHMifQ.ta2cN4vcYUu8TOlI0fAc2Q",
+      "style": "LIGHT",
+      "thumbnail": null,
+      "options": { "zoomOffset": -1, "maxZoom": 19, "tileSize": 512, "id": "mapbox/outdoors-v11" },
+      "mapId": "3"
+    },
+    {
+      "id": 4,
+      "name": "Mapbox Satellite",
+      "urlTemplate": "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}",
+      "token": "pk.eyJ1IjoidGltb3RoeTM0IiwiYSI6ImNraWVkcTdyaTB5MjAyc3JzOTRyYWx0cHMifQ.ta2cN4vcYUu8TOlI0fAc2Q",
+      "style": "LIGHT",
+      "thumbnail": null,
+      "options": { "zoomOffset": -1, "maxZoom": 19, "tileSize": 512, "id": "mapbox/satellite-v9" },
+      "mapId": "3"
+    }
+  ],
+  "overlays": [
+    {
+      "id": 9,
+      "layerName": "xy_picture_position",
+      "displayName": "Images",
+      "url": "http://192.168.0.187:8080/geoserver/immergis-roads/ows?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=immergis-roads%3Axy_picture_position&OUTPUTFORMAT=application/json&srsName=EPSG:4326",
+      "username": "admin",
+      "password": "pR2xOZO@pob8",
+      "geomType": "Point",
+      "activeStyle": {
+        "id": 9,
+        "name": "POSITIONS",
+        "ruleDTOs": [
+          {
+            "name": "positions",
+            "color": "#0A969E",
+            "weight": 0.5,
+            "opacity": 1.0,
+            "fillColor": "#11AFB6",
+            "fillOpacity": 0.75,
+            "radius": 3.5
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "layerName": "areas",
+      "displayName": "Aires administratives",
+      "url": "http://192.168.0.187:8080/geoserver/immergis-roads/ows?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=immergis-roads%3Aareas&OUTPUTFORMAT=application/json&srsName=EPSG:4326",
+      "username": "admin",
+      "password": "pR2xOZO@pob8",
+      "geomType": "MultiPolygon",
+      "activeStyle": {
+        "id": 8,
+        "name": "TYPE",
+        "ruleDTOs": [
+          {
+            "name": "commune",
+            "color": "#000000",
+            "weight": 1.0,
+            "opacity": 0.5,
+            "dashOffset": "0",
+            "fillColor": "#AAAAAA",
+            "fillOpacity": 0.0,
+            "lineCap": "butt",
+            "lineJoin": "miter"
+          },
+          {
+            "name": "departement",
+            "color": "#D7191C",
+            "weight": 1.0,
+            "opacity": 0.5,
+            "dashOffset": "0",
+            "fillColor": "#AAAAAA",
+            "fillOpacity": 0.0,
+            "lineCap": "butt",
+            "lineJoin": "miter"
+          },
+          {
+            "name": "epci",
+            "color": "#3BAEFF",
+            "weight": 1.0,
+            "opacity": 0.5,
+            "dashOffset": "0",
+            "fillColor": "#AAAAAA",
+            "fillOpacity": 0.0,
+            "lineCap": "butt",
+            "lineJoin": "miter"
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "mapId": "3",
+      "layerName": "li_section_view",
+      "displayName": "Voirie",
+      "url": "http://192.168.0.187:8080/geoserver/immergis-roads/ows?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=immergis-roads%3Ali_section_view&OUTPUTFORMAT=application/json&srsName=EPSG:4326",
+      "username": "admin",
+      "password": "pR2xOZO@pob8",
+      "geomType": "MultiLineString",
+      "activeStyle": {
+        "id": 10,
+        "name": "STATE",
+        "ruleDTOs": [
+          {
+            "name": "good",
+            "color": "#33A02C",
+            "weight": 4.0,
+            "opacity": 0.75,
+            "dashOffset": "0",
+            "lineCap": "square",
+            "lineJoin": "bevel"
+          },
+          {
+            "name": "new",
+            "color": "#3BAEFF",
+            "weight": 4.0,
+            "opacity": 0.75,
+            "dashOffset": "0",
+            "lineCap": "square",
+            "lineJoin": "bevel"
+          },
+          {
+            "name": "bad",
+            "color": "#D7191C",
+            "weight": 4.0,
+            "opacity": 0.75,
+            "dashOffset": "0",
+            "lineCap": "square",
+            "lineJoin": "bevel"
+          },
+          {
+            "name": "medium_high",
+            "color": "#FFD101",
+            "weight": 4.0,
+            "opacity": 0.75,
+            "dashOffset": "0",
+            "lineCap": "square",
+            "lineJoin": "bevel"
+          },
+          {
+            "name": "medium_low",
+            "color": "#EB6525",
+            "weight": 4.0,
+            "opacity": 0.75,
+            "dashOffset": "0",
+            "lineCap": "square",
+            "lineJoin": "bevel"
+          }
+        ]
+      }
+    }
+  ],
+  "overlayconfigs": [
+    {
+      "id": 10,
+      "mapId": "3",
+      "overlayId": 10,
+      "styleId": 10,
+      "name": "Voirie",
+      "geomType": "line",
+      "checked": true,
+      "indeterminate": false,
+      "toggled": false,
+      "properties": [
+        {
+          "id": 10,
+          "name": "Etat",
+          "activeStyle": true,
+          "checked": true,
+          "indeterminate": false,
+          "toggled": false,
+          "values": [
+            { "id": 5, "name": "Bon", "order": 2, "checked": true },
+            { "id": 6, "name": "Neuf", "order": 1, "checked": true },
+            { "id": 7, "name": "Mauvais", "order": 5, "checked": true },
+            { "id": 8, "name": "Moyen +", "order": 3, "checked": true },
+            { "id": 9, "name": "Moyen -", "order": 4, "checked": true }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "overlayId": 9,
+      "styleId": 9,
+      "name": "Images",
+      "geomType": "point",
+      "checked": true,
+      "indeterminate": false,
+      "toggled": false,
+      "properties": [
+        {
+          "id": 9,
+          "name": "Position",
+          "activeStyle": true,
+          "checked": true,
+          "indeterminate": false,
+          "toggled": false,
+          "values": [{ "id": 4, "name": "Position", "order": 1, "checked": true }]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "mapId": "3",
+      "overlayId": 8,
+      "styleId": 8,
+      "name": "Aires admin",
+      "geomType": "structure",
+      "checked": true,
+      "indeterminate": false,
+      "toggled": false,
+      "properties": [
+        {
+          "id": 8,
+          "name": "TYPE",
+          "activeStyle": true,
+          "checked": true,
+          "indeterminate": false,
+          "toggled": false,
+          "values": [
+            { "id": 1, "name": "Commune", "order": 1, "checked": true },
+            { "id": 2, "name": "Département", "order": 3, "checked": true },
+            { "id": 3, "name": "Epci", "order": 2, "checked": true }
+          ]
+        }
+      ]
+    }
+  ],
+  "styles": [
+    {
+      "id": 8,
+      "name": "TYPE",
+      "mapId": "3",
+      "ruleDTOs": [
+        {
+          "name": "commune",
+          "color": "#000000",
+          "weight": 1.0,
+          "opacity": 0.5,
+          "dashOffset": "0",
+          "fillColor": "#AAAAAA",
+          "fillOpacity": 0.0,
+          "lineCap": "butt",
+          "lineJoin": "miter"
+        },
+        {
+          "name": "departement",
+          "color": "#D7191C",
+          "weight": 1.0,
+          "opacity": 0.5,
+          "dashOffset": "0",
+          "fillColor": "#AAAAAA",
+          "fillOpacity": 0.0,
+          "lineCap": "butt",
+          "lineJoin": "miter"
+        },
+        {
+          "name": "epci",
+          "color": "#3BAEFF",
+          "weight": 1.0,
+          "opacity": 0.5,
+          "dashOffset": "0",
+          "fillColor": "#AAAAAA",
+          "fillOpacity": 0.0,
+          "lineCap": "butt",
+          "lineJoin": "miter"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "POSITIONS",
+      "mapId": "3",
+      "ruleDTOs": [
+        {
+          "name": "positions",
+          "color": "#0a969e",
+          "weight": 0.5,
+          "opacity": 1.0,
+          "fillColor": "#11afb6",
+          "fillOpacity": 0.75,
+          "radius": 3.5
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "STATE",
+      "mapId": "3",
+      "ruleDTOs": [
+        {
+          "name": "good",
+          "color": "#33a02c",
+          "weight": 4.0,
+          "opacity": 0.75,
+          "dashOffset": "0",
+          "lineCap": "square",
+          "lineJoin": "bevel"
+        },
+        {
+          "name": "new",
+          "color": "#3baeff",
+          "weight": 4.0,
+          "opacity": 0.75,
+          "dashOffset": "0",
+          "lineCap": "square",
+          "lineJoin": "bevel"
+        },
+        {
+          "name": "bad",
+          "color": "#d7191c",
+          "weight": 4.0,
+          "opacity": 0.75,
+          "dashOffset": "0",
+          "lineCap": "square",
+          "lineJoin": "bevel"
+        },
+        {
+          "name": "medium_high",
+          "color": "#ffd101",
+          "weight": 4.0,
+          "opacity": 0.75,
+          "dashOffset": "0",
+          "lineCap": "square",
+          "lineJoin": "bevel"
+        },
+        {
+          "name": "medium_low",
+          "color": "#eb6525",
+          "weight": 4.0,
+          "opacity": 0.75,
+          "dashOffset": "0",
+          "lineCap": "square",
+          "lineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

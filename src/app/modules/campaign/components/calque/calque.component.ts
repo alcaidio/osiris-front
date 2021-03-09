@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { SetActive } from '@ngxs-labs/entity-state'
 import { Store } from '@ngxs/store'
-import { CheckCalque, OverlayState, ToggleCalque, ToggleData } from '../../store'
+import { CalqueState, CheckCalque, OverlayState, ToggleCalque, ToggleData } from '../../store'
 import { DialogComponent } from '../dialog/dialog.component'
-import { Calque, GeometryType } from './../../model/shared.model'
+import { Calque, GeomType } from './../../model/shared.model'
 
 @Component({
   selector: 'app-calque',
@@ -22,7 +22,7 @@ export class CalqueComponent implements OnInit {
     this.truncateTo = 18
   }
 
-  generateIcon(type: GeometryType) {
+  generateIcon(type: GeomType) {
     if (type === 'point') {
       return 'room'
     } else if (type === 'line') {
@@ -52,22 +52,19 @@ export class CalqueComponent implements OnInit {
 
   onActive(id: string) {
     this.store.dispatch(new SetActive(OverlayState, id))
+    this.store.dispatch(new SetActive(CalqueState, id))
   }
 
   openDialog() {
     this.dialog.open(DialogComponent, {
       minWidth: '300px',
       minHeight: '350px',
-      data: {
-        calque: this.calque,
-      },
+      data: this.calque.properties,
     })
   }
 
   openOverlayData(name: string) {
     // the name of the 'calque' is the same as the name of the corresponding 'overlay'
-    this.store.dispatch(new SetActive(OverlayState, name))
     this.store.dispatch(new ToggleData())
   }
-  
 }

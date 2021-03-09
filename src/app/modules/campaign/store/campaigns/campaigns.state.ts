@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import {
-  Add,
+  CreateOrReplace,
   defaultEntityState,
   EntityState,
   EntityStateModel,
@@ -34,20 +34,8 @@ export class CampaignsState extends EntityState<Campaign> implements NgxsOnInit 
 
     return this.api.getCampaignList().pipe(
       map((campaigns: Campaign[]) => {
-        const state = ctx.getState()
-
-        // REMOVE: Simulation latence
-        setTimeout(() => {
-          if (state['ids'] && state['ids'].length > 0) {
-            const newCampaigns = campaigns.filter((item) => state['ids'].includes(item))
-            if (newCampaigns.length > 0) {
-              ctx.dispatch(new Add(CampaignsState, newCampaigns))
-            }
-          } else {
-            ctx.dispatch(new Add(CampaignsState, campaigns))
-          }
-          ctx.dispatch(new SetLoading(CampaignsState, false))
-        }, 1000)
+        ctx.dispatch(new CreateOrReplace(CampaignsState, campaigns))
+        ctx.dispatch(new SetLoading(CampaignsState, false))
       }),
       catchError((err) => {
         ctx.dispatch(new SetLoading(CampaignsState, false))

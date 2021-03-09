@@ -7,7 +7,7 @@
         [checked]="value.checked"
         (change)="onCheck(value, property, calque)"
       >
-        {{ value.name | title }}
+        {{ name | title }}
       </mat-checkbox>
       <mat-checkbox
         *ngIf="value.name.length >= truncateTo"
@@ -18,7 +18,7 @@
         [matTooltipClass]="'tooltipPropertyValue'"
         (change)="onCheck(value, property, calque)"
       >
-        {{ value.name | truncate: [truncateTo] | title }}
+        {{ name | truncate: [truncateTo] | title }}
       </mat-checkbox>
     </div>
   </div>

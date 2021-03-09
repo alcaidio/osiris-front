@@ -2,7 +2,7 @@ import { Injectable, isDevMode } from '@angular/core'
 
 type messageType = 'log' | 'warn'
 
-const ACTIVE = false // <---- Toggle logger in the console
+const ACTIVE = true // <---- Toggle logger in the console
 
 @Injectable({
   providedIn: 'root',

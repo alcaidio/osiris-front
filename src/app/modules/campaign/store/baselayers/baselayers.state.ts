@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import {
-  Add,
+  CreateOrReplace,
   defaultEntityState,
   EntityState,
   EntityStateModel,
@@ -29,22 +29,10 @@ export class BaselayerState extends EntityState<BaseLayer> {
   getBaselayers(ctx: StateContext<BaselayerState>, action: GetBaselayers) {
     ctx.dispatch(new SetLoading(BaselayerState, true))
 
-    return this.api.getBaselayers(action.baselayerIds).pipe(
+    return this.api.getBaselayersByMapId(action.mapId).pipe(
       map((baselayers: BaseLayer[]) => {
-        const state = ctx.getState()
-        if (state['ids'] && state['ids'].length > 0) {
-          const newBaselayers = baselayers.filter((item) => state['ids'].includes(item))
-          if (newBaselayers.length > 0) {
-            ctx.dispatch(new Add(BaselayerState, baselayers))
-          }
-        } else {
-          ctx.dispatch(new Add(BaselayerState, baselayers))
-        }
-
-        // REMOVE: Simulation latence
-        setTimeout(() => {
-          ctx.dispatch(new SetLoading(BaselayerState, false))
-        }, 300)
+        ctx.dispatch(new CreateOrReplace(BaselayerState, baselayers))
+        ctx.dispatch(new SetLoading(BaselayerState, false))
       }),
       catchError((err) => {
         ctx.dispatch(new SetError(BaselayerState, err))

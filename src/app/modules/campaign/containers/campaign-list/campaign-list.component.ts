@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { Select } from '@ngxs/store'
+import { ConfigState } from 'app/core/store'
 import moment from 'moment'
 import { Observable } from 'rxjs'
 import { Campaign } from '../../model/shared.model'
@@ -18,12 +19,13 @@ import { CampaignsState } from '../../store/campaigns/campaigns.state'
 export class CampaignListComponent implements OnInit, AfterViewInit {
   @Select(CampaignsState.entities) campaigns$: Observable<Campaign[]>
   @Select(CampaignsState.loading) isLoading$: Observable<boolean>
+  @Select(ConfigState.getNavigationLoad) navigationLoad$: Observable<boolean>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
   dataSource: MatTableDataSource<Campaign>
-  campaignsTableColumns = ['title', 'creationDate', 'editionDate']
+  campaignsTableColumns = ['title', 'creationDate', 'lastUpdate']
 
   ngOnInit(): void {
     this.campaigns$.subscribe((campaigns) => {

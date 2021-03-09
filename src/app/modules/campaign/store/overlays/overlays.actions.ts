@@ -1,8 +1,8 @@
 import { Overlay } from '../../model/shared.model'
 
 export class GetOverlays {
-  static readonly type = '[overlays] get'
-  constructor(public overlayIds: string[]) {}
+  static readonly type = '[overlays] get by map id'
+  constructor(public mapId: string) {}
 }
 
 export class ToggleOverlay {

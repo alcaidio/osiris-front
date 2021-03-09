@@ -17,3 +17,8 @@ export class ChangeLanguage {
   static readonly type = '[Config] Change Language'
   constructor(public payload: Language) {}
 }
+
+export class ChangeNavigationLoad {
+  static readonly type = '[Config] change navigation load'
+  constructor(public payload: boolean) {}
+}

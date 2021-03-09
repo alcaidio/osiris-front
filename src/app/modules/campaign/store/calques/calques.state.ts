@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core'
 import {
-  Add,
+  CreateOrReplace,
   defaultEntityState,
   EntityState,
   EntityStateModel,
   IdStrategy,
   SetError,
   SetLoading,
-  Update
+  Update,
 } from '@ngxs-labs/entity-state'
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { of } from 'rxjs'
@@ -51,6 +51,11 @@ export class CalqueState extends EntityState<Calque> {
   }
 
   @Selector()
+  static getActive(state: EntityStateModel<Calque>) {
+    return state.entities[state.active]
+  }
+
+  @Selector()
   static getNewCalqueName(state: EntityStateModel<Calque>) {
     let count = 1
     Object.values(state.entities).map((calque) => {
@@ -69,16 +74,12 @@ export class CalqueState extends EntityState<Calque> {
   @Action(GetCalques)
   getCalques(ctx: StateContext<EntityStateModel<Calque>>, action: GetCalques) {
     ctx.dispatch(new SetLoading(CalqueState, true))
-    const calqueIds = ctx.getState().ids
 
-    return this.api.getCalques(action.calqueIds).pipe(
+    return this.api.getOverlayConfigsByMapId(action.mapId).pipe(
       map((calques: Calque[]) => {
         calques.map((calque) => {
-          const isCalqueInStore = calqueIds.length > 0 && calqueIds.includes(calque.id)
-          if (!isCalqueInStore) {
-            ctx.dispatch(new Add(CalqueState, calque))
-            ctx.dispatch(new CreateFilters(calque))
-          }
+          ctx.dispatch(new CreateOrReplace(CalqueState, calque))
+          ctx.dispatch(new CreateFilters(calque))
         })
         ctx.dispatch(new SetLoading(CalqueState, false))
       }),

@@ -86,7 +86,7 @@
   </div>
   <div class="data flex-auto" [@slideHeight]="isData$ | async">
     <app-dynamic-table
-      *ngIf="(activeProperties$ | async) && (isData$ | async)"
+      *ngIf="isData$ | async"
       [data]="activeProperties$ | async"
       (activeRow)="onFlyToTheFeature($event)"
     ></app-dynamic-table>

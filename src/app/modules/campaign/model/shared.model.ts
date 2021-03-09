@@ -1,4 +1,4 @@
-import { LatLng, LatLngBounds, MapOptions, TileLayerOptions } from 'leaflet'
+import { CircleMarkerOptions, LatLng, LatLngBounds, MapOptions, PolylineOptions, TileLayerOptions } from 'leaflet'
 
 export type ID = string | number
 
@@ -6,10 +6,10 @@ export interface Campaign {
   id: ID
   title: string
   subtitle?: string
-  mapId?: string
   thumbnail?: string
   creationDate?: number
-  editionDate?: number
+  lastUpdate?: number
+  mapId?: string
   interventions?: Intervention[]
 }
 
@@ -44,9 +44,9 @@ export enum FeatureProperties {
 export interface MapSmall {
   id: ID
   config: Config
-  overlayIds: string[]
-  baseLayerIds: string[]
-  calqueIds?: string[]
+  // overlayIds?: string[]
+  // baseLayerIds?: string[]
+  // calqueIds?: string[]
 }
 
 export interface Map {
@@ -77,7 +77,27 @@ export interface Overlay extends GeoJSON.FeatureCollection {
   name: string
   visible?: boolean
   mapId?: ID
-  // STYLE ????
+  geomType?: GeomType
+  activeStyle?: LeafletStyle
+}
+
+export type leafletStyleOptions = CircleMarkerOptions | PolylineOptions
+
+export interface LeafletStyle {
+  id: number
+  name: string
+  ruleDTOs: any[] // TODO create leafletStyleOptions + name
+}
+
+export interface OverlayDTO {
+  id: number
+  mapId: string
+  layerName: string
+  url: string
+  username: string
+  password: string
+  geomType: GeomType
+  activeStyle: LeafletStyle
 }
 
 export interface BaseLayer {
@@ -89,22 +109,22 @@ export interface BaseLayer {
   options?: TileLayerOptions
 }
 
-export type GeometryType = 'point' | 'line' | 'structure'
+export type GeomType = 'point' | 'line' | 'structure'
 
 export interface Calque {
   id: string
   name: string
-  geomType: GeometryType | null
+  geomType: GeomType | null
   checked: boolean
   indeterminate: boolean
   toggled: boolean
-  legend: string | null
-  properties: CalqueProperty[]
+  properties: PropertyType[]
 }
 
-export interface CalqueProperty {
+export interface PropertyType {
   id: string
   name: string
+  activeStyle: boolean
   checked: boolean
   indeterminate: boolean
   toggled: boolean
@@ -115,6 +135,7 @@ export interface PropertyValue {
   id: string
   name: string
   checked: boolean
+  order: number
 }
 
 export interface FiltersProp {

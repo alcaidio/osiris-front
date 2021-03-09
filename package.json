@@ -23,7 +23,8 @@
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
     "cypress:open": "cypress open",
-    "cypress": "run-p start cypress:open"
+    "cypress": "run-p start cypress:open",
+    "server": "json-server --watch db.json"
   },
   "private": true,
   "dependencies": {
@@ -67,6 +68,7 @@
     "apexcharts": "3.19.3",
     "crypto-js": "3.3.0",
     "highlight.js": "10.1.1",
+    "json-server": "^0.16.3",
     "leaflet": "^1.7.1",
     "leaflet-draw": "^1.0.4",
     "leaflet-rotatedmarker": "^0.2.0",

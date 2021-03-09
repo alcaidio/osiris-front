@@ -2,6 +2,7 @@ import { LatLngBounds, tileLayer } from 'leaflet'
 import { BaseLayer, Config } from '../model/shared.model'
 
 export const convertConfigToLeaflet = (config: Config) => {
+  let tile
   // add params for smooth zoom
   const smoothZoomParams = {
     scrollWheelZoom: false,
@@ -10,7 +11,7 @@ export const convertConfigToLeaflet = (config: Config) => {
   }
 
   if (config.layers) {
-    const tile = convertBaselayersForLeaflet(config.layers)
+    tile = convertBaselayersForLeaflet(config.layers)
     return { ...config, ...smoothZoomParams, layers: tile as any }
   } else {
     return { ...config, ...smoothZoomParams }
@@ -19,7 +20,10 @@ export const convertConfigToLeaflet = (config: Config) => {
 
 export const convertBaselayersForLeaflet = (baselayer: BaseLayer) => {
   if (!!baselayer.token) {
-    return tileLayer(`${baselayer.urlTemplate}${baselayer.token}`, baselayer.options ? baselayer.options : null)
+    return tileLayer(
+      `${baselayer.urlTemplate}?access_token=${baselayer.token}`,
+      baselayer.options ? baselayer.options : null
+    )
   } else {
     return tileLayer(baselayer.urlTemplate, baselayer.options ? baselayer.options : null)
   }

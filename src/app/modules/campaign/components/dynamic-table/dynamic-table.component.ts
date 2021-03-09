@@ -34,6 +34,7 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
   active: number
 
   @Select(CalqueState.entities) calques$: Observable<Calque[]>
+  @Select(CalqueState.getActive) calque$: Observable<Calque>
   @Select(OverlayState.activeId) activeCalque$: Observable<string>
 
   selectedCalqueName: string
@@ -75,11 +76,15 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   private createTable() {
-    this.displayedColumns = Object.keys(this.data[0])
-    this.dataSource = new MatTableDataSource(this.data)
+    if (this.data && this.data.length > 0) {
+      this.displayedColumns = Object.keys(this.data[0])
+      this.dataSource = new MatTableDataSource(this.data)
+    }
   }
 
   private sortTable() {
-    this.dataSource.sort = this.sort
+    if (this.dataSource) {
+      this.dataSource.sort = this.sort
+    }
   }
 }
