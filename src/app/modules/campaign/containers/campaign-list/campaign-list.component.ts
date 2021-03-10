@@ -1,14 +1,24 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { Select } from '@ngxs/store'
 import { ConfigState } from 'app/core/store'
 import moment from 'moment'
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { Campaign } from '../../model/shared.model'
 import { CampaignsState } from '../../store/campaigns/campaigns.state'
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-campaign-list',
   templateUrl: './campaign-list.component.html',
@@ -16,7 +26,7 @@ import { CampaignsState } from '../../store/campaigns/campaigns.state'
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CampaignListComponent implements OnInit, AfterViewInit {
+export class CampaignListComponent implements OnInit, AfterViewInit, OnDestroy {
   @Select(CampaignsState.entities) campaigns$: Observable<Campaign[]>
   @Select(CampaignsState.loading) isLoading$: Observable<boolean>
   @Select(ConfigState.getNavigationLoad) navigationLoad$: Observable<boolean>
@@ -65,5 +75,10 @@ export class CampaignListComponent implements OnInit, AfterViewInit {
   private sortAndPagine() {
     this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
+  }
+
+  ngOnDestroy(): void {
+    // Don't remove !
+    // here because of AutoUnsubscrive() above the component decorator.
   }
 }

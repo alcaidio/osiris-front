@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { Add, UpdateActive } from '@ngxs-labs/entity-state'
 import { Select, Store } from '@ngxs/store'
@@ -8,6 +8,7 @@ import { radiansToDegrees } from '@turf/helpers'
 import { RouterSelectors } from 'app/core/store/states/router.state.selector'
 import { circle, geoJSON, layerGroup, Map } from 'leaflet'
 import moment from 'moment'
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
 import { v4 as uuidv4 } from 'uuid'
@@ -41,13 +42,14 @@ export const convertMapConfigFromUrl = (mapConfig: string): any => {
   return res
 }
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-campaign-detail',
   templateUrl: './campaign-detail.component.html',
   styleUrls: ['./campaign-detail.component.scss'],
   animations: OsirisAnimations,
 })
-export class CampaignDetailComponent implements OnInit {
+export class CampaignDetailComponent implements OnInit, OnDestroy {
   @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
   @Select(OverlaySelectors.getFilteredOverlays) filteredOverlays$: Observable<Overlay[]>
   @Select(UIState.getIsViewer) isViewer$: Observable<boolean>
@@ -290,5 +292,10 @@ export class CampaignDetailComponent implements OnInit {
   // REMOVE when remove image mock
   private random(images: any) {
     return images[Math.floor(Math.random() * images.length)]
+  }
+
+  ngOnDestroy(): void {
+    // Don't remove !
+    // here because of AutoUnsubscrive() above the component decorator.
   }
 }

@@ -5,6 +5,7 @@ import {
   Injector,
   Input,
   OnChanges,
+  OnDestroy,
   Output,
   SimpleChanges,
 } from '@angular/core'
@@ -29,6 +30,7 @@ import {
 import 'leaflet-rotatedmarker'
 import 'leaflet.polylinemeasure'
 import 'leaflet.smoothwheelzoom'
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { Overlay } from '../../model/shared.model'
 import { MapState } from '../../store'
@@ -36,14 +38,13 @@ import { PopupContentComponent } from '../popup-content/popup-content.component'
 import { Config, Mode } from './../../model/shared.model'
 import { setDefaultStyleOfFeature } from './../../utils/leaflet.utils'
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnChanges {
-  @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
-
+export class MapComponent implements OnChanges, OnDestroy {
   @Input() config: Config
   @Input() mode: Mode
   @Input() overlays: Overlay[]
@@ -53,6 +54,9 @@ export class MapComponent implements OnChanges {
 
   @Output() map = new EventEmitter<Map>()
   @Output() selected = new EventEmitter<GeoJSON.Feature>()
+
+  // normally the component has no direct data via the store. Thereafter the data must only pass through the inputs
+  @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
 
   drawItems: FeatureGroup = featureGroup()
   featureSelected: GeoJSON.Feature
@@ -323,6 +327,11 @@ export class MapComponent implements OnChanges {
     })
 
     return geojson
+  }
+
+  ngOnDestroy(): void {
+    // Don't remove !
+    // here because of AutoUnsubscrive() above the component decorator.
   }
 }
 

@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core'
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
 import { Baselayer } from 'app/shared/models'
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { Calque, Campaign } from '../../model/shared.model'
 import { BaselayerState, CalqueState, CampaignsState, ToggleMapCard, UIState } from '../../store'
@@ -8,13 +9,15 @@ import { OsirisAnimations } from '../../utils/animation.utils'
 
 type actionType = 'vue' | 'newCalque'
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-map-card',
   templateUrl: 'map-card.component.html',
   styleUrls: ['map-card.component.scss'],
   animations: OsirisAnimations,
 })
-export class MapCardComponent {
+export class MapCardComponent implements OnDestroy {
+  // normally the component has no direct data via the store. Thereafter the data must only pass through the inputs
   @Select(CalqueState.entities) calques$: Observable<Calque[]>
   @Select(CalqueState.loading) calqueLoading$: Observable<boolean>
   @Select(CampaignsState.active) campaign$: Observable<Campaign>
@@ -31,5 +34,10 @@ export class MapCardComponent {
 
   onClick(type: actionType) {
     this.action.emit(type)
+  }
+
+  ngOnDestroy(): void {
+    // Don't remove !
+    // here because of AutoUnsubscrive() above the component decorator.
   }
 }
