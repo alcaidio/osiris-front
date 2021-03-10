@@ -53,7 +53,7 @@ export class CampaignDetailComponent implements OnInit {
   @Select(UIState.getIsViewer) isViewer$: Observable<boolean>
   @Select(UIState.getIsData) isData$: Observable<boolean>
   @Select(UIState.getIsViewerFullscreen) isViewerFullscreen$: Observable<boolean>
-  @Select(OverlayState.getActiveOverlayProperties) activeProperties$: Observable<any[]>
+  @Select(OverlaySelectors.getActiveFilteredOverlayProperties) activeProperties$: Observable<any[]>
   @Select(OverlayState.getActiveOverlayFeatures) activeFeatures$: Observable<GeoJSON.Feature[]>
   @Select(RouterSelectors.queryParams) queryParams$: Observable<Params>
   @Select(CalqueState.getNewCalqueName) newCalqueName$: Observable<string>
@@ -129,7 +129,6 @@ export class CampaignDetailComponent implements OnInit {
     })
 
     this.newCalqueName$.subscribe((name) => (this.newCalqueName = name))
-    this.filteredOverlays$.subscribe((p) => console.log(p))
   }
 
   private initState(params: Params) {

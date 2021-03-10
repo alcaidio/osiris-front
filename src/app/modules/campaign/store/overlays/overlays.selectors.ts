@@ -31,4 +31,13 @@ export class OverlaySelectors {
       })
       .filter((o) => o.visible === true)
   }
+
+  @Selector([OverlayState, OverlaySelectors.getFilteredOverlays])
+  static getActiveFilteredOverlayProperties(state: EntityStateModel<Overlay>, filtered: Overlay[]) {
+    return filtered
+      .find((f) => f.id === state.active)
+      .features.map((feature) => {
+        return { featureId: feature.id, ...feature.properties }
+      })
+  }
 }

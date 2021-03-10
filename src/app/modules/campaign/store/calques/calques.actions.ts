@@ -16,6 +16,10 @@ export class CheckCalque {
   constructor(public calque: Calque) {}
 }
 
+export class CheckCalqueTrue {
+  static readonly type = '[calques] check calque true'
+}
+
 export class ToggleProperty {
   static readonly type = '[calques] toggle property'
   constructor(public payload: { property: PropertyType; calque: Calque }) {}

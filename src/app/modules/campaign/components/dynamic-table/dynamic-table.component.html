@@ -47,11 +47,30 @@
 <ng-template #empty>
   <div class="h-full w-full bg-cool-gray-100 flex flex-col justify-between items-center">
     <h3 class="text-center text-gray-700 font-normal">
-      Le calque <span class="underline">{{ (calque$ | async)?.name | title }}</span> est vide.
+      Le calque
+      <span class="underline"
+        >{{ (calque$ | async)?.name | title }}
+        <span class="font-light" *ngIf="(notFilteredFeatures$ | async)?.length > 0"> filtré</span></span
+      >
+      est vide.
     </h3>
     <img class="w-32" src="assets/images/no-data.svg" />
     <div class="p-4">
-      <button mat-stroked-button disabled class="mr-2">Ajouter des géométries</button>
+      <ng-container *ngIf="(notFilteredFeatures$ | async)?.length > 0; else noFeatures">
+        <button
+          *ngIf="calque$ | async as calque"
+          mat-flat-button
+          color="primary"
+          class="mr-2"
+          (click)="onRemoveFilters(calque)"
+        >
+          Supprimer les filtres
+        </button>
+      </ng-container>
+      <ng-template #noFeatures>
+        <button mat-stroked-button disabled class="mr-2">Ajouter des géométries</button>
+      </ng-template>
+
       <button mat-stroked-button (click)="onClose()">Fermer</button>
     </div>
   </div>

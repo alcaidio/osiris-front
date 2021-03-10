@@ -17,6 +17,7 @@ import { Select, Store } from '@ngxs/store'
 import { Observable } from 'rxjs'
 import { Calque } from '../../model/shared.model'
 import { CalqueState, OverlayState } from '../../store'
+import { CheckCalque } from './../../store/calques/calques.actions'
 import { CloseData } from './../../store/ui/ui.actions'
 
 @Component({
@@ -35,6 +36,7 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Select(CalqueState.entities) calques$: Observable<Calque[]>
   @Select(CalqueState.getActive) calque$: Observable<Calque>
+  @Select(OverlayState.getActiveOverlayFeatures) notFilteredFeatures$: Observable<any>
   @Select(OverlayState.activeId) activeCalque$: Observable<string>
 
   selectedCalqueId: string
@@ -73,6 +75,10 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
     const calqueName = evt.value
     // the name of the 'calque' is the same as the name of the corresponding 'overlay'
     this.store.dispatch(new SetActive(OverlayState, calqueName))
+  }
+
+  onRemoveFilters(calque: Calque): void {
+    this.store.dispatch(new CheckCalque(calque))
   }
 
   private createTable() {

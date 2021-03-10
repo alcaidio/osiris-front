@@ -18,7 +18,6 @@ export class FilterState extends EntityState<FiltersProp> {
   @Action(CreateFilters)
   createFilters(ctx: StateContext<FilterState>, action: CreateFilters) {
     const filters = createFilters(action.calque.properties)
-    console.log(filters)
     ctx.dispatch(new CreateOrReplace(FilterState, { calqueId: action.calque.id, filters }))
   }
 }
