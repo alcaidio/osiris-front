@@ -76,9 +76,10 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit, 
   }
 
   onChangeActiveCalque(evt: MatSelectChange) {
-    const calqueName = evt.value
+    const calqueId = evt.value
     // the name of the 'calque' is the same as the name of the corresponding 'overlay'
-    this.store.dispatch(new SetActive(OverlayState, calqueName))
+    this.store.dispatch(new SetActive(OverlayState, calqueId))
+    this.store.dispatch(new SetActive(CalqueState, calqueId))
   }
 
   onRemoveFilters(calque: Calque): void {
