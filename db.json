@@ -247,7 +247,8 @@
       "properties": [
         {
           "id": 10,
-          "name": "Etat",
+          "displayName": "Etat",
+          "name": "state",
           "activeStyle": true,
           "checked": true,
           "indeterminate": false,
@@ -275,6 +276,7 @@
         {
           "id": 9,
           "name": "Position",
+          "displayName": "position",
           "activeStyle": true,
           "checked": true,
           "indeterminate": false,
@@ -296,7 +298,8 @@
       "properties": [
         {
           "id": 8,
-          "name": "TYPE",
+          "displayName": "Type",
+          "name": "type",
           "activeStyle": true,
           "checked": true,
           "indeterminate": false,

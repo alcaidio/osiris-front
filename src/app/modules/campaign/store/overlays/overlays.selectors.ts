@@ -15,11 +15,11 @@ export class OverlaySelectors {
 
         const filteredFeatures = overlay.features.filter((item) => {
           return filterKeys.every((key) => {
-            if (filters[key].length === 0 || !item['properties']['valid']) {
+            if (filters[key].length === 0 || !item['properties']) {
               return true
             }
 
-            if (item['properties'] && item['properties']['valid']) {
+            if (item['properties']) {
               return filters[key].find((property) => {
                 return cleanString(property) === cleanString(item['properties'][key])
               })

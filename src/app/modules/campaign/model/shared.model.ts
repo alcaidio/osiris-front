@@ -123,6 +123,7 @@ export interface Calque {
 
 export interface PropertyType {
   id: string
+  displayName: string
   name: string
   activeStyle: boolean
   checked: boolean

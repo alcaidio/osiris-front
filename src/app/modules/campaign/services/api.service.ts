@@ -22,7 +22,7 @@ export class ApiService {
   }
 
   getOverlaysByMapId(id: string): any {
-    const res = this.http.get<OverlayDTO[]>(`http://localhost:3000/maps/${id}/overlays`).pipe(
+    return this.http.get<OverlayDTO[]>(`http://localhost:3000/maps/${id}/overlays`).pipe(
       switchMap((overlayDTOs) => {
         return overlayDTOs.map((DTO) => {
           const overlayWithoutFeatures = {
@@ -48,8 +48,6 @@ export class ApiService {
       }),
       combineAll()
     )
-    res.subscribe((p) => console.log(p))
-    return res
   }
 
   getOverlayConfigsByMapId(id: string): Observable<Calque[]> {

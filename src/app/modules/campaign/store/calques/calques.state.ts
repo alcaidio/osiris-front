@@ -128,9 +128,9 @@ export class CalqueState extends EntityState<Calque> {
     const nothing = action.calque.properties.every((p) => p.values.every((v) => v.checked === true))
 
     if (nothing) {
-      this.store.dispatch(new Update(OverlayState, action.calque.name as string, { visible: !nothing }))
+      this.store.dispatch(new Update(OverlayState, action.calque.id as string, { visible: false }))
     } else {
-      this.store.dispatch(new Update(OverlayState, action.calque.name as string, { visible: !nothing }))
+      this.store.dispatch(new Update(OverlayState, action.calque.id as string, { visible: true }))
     }
 
     ctx.dispatch(
@@ -226,7 +226,7 @@ export class CalqueState extends EntityState<Calque> {
         CalqueState,
         (e) => e.id === action.payload.calque.id,
         (e) => {
-          this.store.dispatch(new Update(OverlayState, action.payload.calque.name as string, { visible: true }))
+          this.store.dispatch(new Update(OverlayState, action.payload.calque.id as string, { visible: true }))
           this.store.dispatch(new CreateFilters({ ...e, ...checkboxPropertiesState, properties: newProperties }))
           return { ...e, ...checkboxPropertiesState, properties: newProperties }
         }

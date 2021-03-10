@@ -35,7 +35,7 @@ export class PropertyTypeComponent {
   }
 
   get name() {
-    return this.property.name.toLowerCase()
+    return this.property.displayName.toLowerCase()
   }
 
   onToggle(property: PropertyType, calque: Calque) {
