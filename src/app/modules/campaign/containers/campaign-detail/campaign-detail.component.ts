@@ -127,6 +127,7 @@ export class CampaignDetailComponent implements OnInit {
     })
 
     this.newCalqueName$.subscribe((name) => (this.newCalqueName = name))
+    this.filteredOverlays$.subscribe((p) => console.log(p))
   }
 
   private initState(params: Params) {
@@ -169,7 +170,6 @@ export class CampaignDetailComponent implements OnInit {
   onFlyToTheFeature(featureId: string) {
     this.activeFeatures$.subscribe((features) => {
       const feature = features.find((f) => f.id === featureId)
-      console.log(feature)
 
       if (this.geoJsonFeature) {
         this.activeLayerGroup.removeLayer(this.geoJsonFeature)

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
-import { combineAll, map, switchMap } from 'rxjs/operators'
+import { Observable, of } from 'rxjs'
+import { catchError, combineAll, map, switchMap } from 'rxjs/operators'
 import { BaseLayer, Calque, Campaign, LeafletStyle, MapSmall, OverlayDTO } from '../model/shared.model'
 
 @Injectable({
@@ -41,7 +41,15 @@ export class ApiService {
           }
           return this.http.get<any>(DTO.url, httpOptions).pipe(
             map((featureCollection) => {
-              return { ...overlayWithoutFeatures, type: featureCollection.type, features: featureCollection.features }
+              if (featureCollection) {
+                return { ...overlayWithoutFeatures, type: featureCollection.type, features: featureCollection.features }
+              }
+            }),
+            catchError((err) => {
+              console.warn(
+                `La couche "${overlayWithoutFeatures.name}" (id n°${overlayWithoutFeatures.id}) n'a pas pu être chargée via geoserver. Error: ${err}`
+              )
+              return of({ ...overlayWithoutFeatures, features: [] })
             })
           )
         })
