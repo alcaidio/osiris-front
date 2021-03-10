@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { Add, UpdateActive } from '@ngxs-labs/entity-state'
 import { Select, Store } from '@ngxs/store'
+import * as turfBbox from '@turf/bbox'
+import * as turfHelper from '@turf/helpers'
 import { radiansToDegrees } from '@turf/helpers'
 import { RouterSelectors } from 'app/core/store/states/router.state.selector'
 import { circle, geoJSON, layerGroup, Map } from 'leaflet'
@@ -187,6 +189,27 @@ export class CampaignDetailComponent implements OnInit {
             fillOpacity: 0.2,
           }
         )
+      } else if (feature.geometry['type'] === 'MultiPolygon' || feature.geometry['type'] === 'Polygon') {
+        const polygon = turfHelper.polygon(feature.geometry['coordinates'][0] as any)
+        const bbox = turfBbox.default(polygon)
+
+        this.mapReady.fitBounds(
+          [
+            [bbox[1], bbox[0]],
+            [bbox[3], bbox[2]],
+          ],
+          { animate: true, duration: 1000 }
+        )
+
+        this.geoJsonFeature = geoJSON(feature as any, {
+          style: {
+            fillColor: 'transparent',
+            weight: 15,
+            color: '#11afb6',
+            opacity: 0.3,
+            stroke: true,
+          },
+        })
       } else {
         const line = feature.geometry['coordinates'][0]
         const firstPoint = line[0]
