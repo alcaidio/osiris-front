@@ -146,14 +146,16 @@ export class MapSelectionComponent implements AfterViewInit {
       if (l['feature']) {
         // id: l['_leaflet_id']
         const featureModified = { ...l['feature'] }
-
-        if (l['feature']['geometry']['type'] === 'Point') {
-          const pt = new LatLng(l['feature']['geometry']['coordinates'][1], l['feature']['geometry']['coordinates'][0])
+        const type = l['feature']['geometry']['type']
+        const coord = l['feature']['geometry']['coordinates'][0]
+        if (type === 'Point') {
+          const pt = new LatLng(coord[1], coord[0])
           if (bbox.contains(pt)) {
             featuresSelected.push(featureModified)
           }
+        } else if (type === 'MultiPolygon' || type === 'Polygon') {
+          console.log('TODO: polygon')
         } else {
-          const coord = l['feature']['geometry']['coordinates']
           if (bbox.contains(coord)) {
             featuresSelected.push(featureModified)
           } else {

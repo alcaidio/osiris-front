@@ -253,11 +253,11 @@
           "indeterminate": false,
           "toggled": false,
           "values": [
-            { "id": 5, "name": "Bon", "order": 2, "checked": true },
-            { "id": 6, "name": "Neuf", "order": 1, "checked": true },
-            { "id": 7, "name": "Mauvais", "order": 5, "checked": true },
-            { "id": 8, "name": "Moyen +", "order": 3, "checked": true },
-            { "id": 9, "name": "Moyen -", "order": 4, "checked": true }
+            { "id": 6, "name": "new", "displayName": "Neuf", "order": 1, "checked": true },
+            { "id": 5, "name": "good", "displayName": "Bon", "order": 2, "checked": true },
+            { "id": 8, "name": "medium_high", "displayName": "Moyen +", "order": 3, "checked": true },
+            { "id": 9, "name": "medium_low", "displayName": "Moyen -", "order": 4, "checked": true },
+            { "id": 7, "name": "bad", "displayName": "Mauvais", "order": 5, "checked": true }
           ]
         }
       ]
@@ -279,7 +279,7 @@
           "checked": true,
           "indeterminate": false,
           "toggled": false,
-          "values": [{ "id": 4, "name": "Position", "order": 1, "checked": true }]
+          "values": [{ "id": 4, "name": "position", "displayName": "Position", "order": 1, "checked": true }]
         }
       ]
     },
@@ -302,9 +302,9 @@
           "indeterminate": false,
           "toggled": false,
           "values": [
-            { "id": 1, "name": "Commune", "order": 1, "checked": true },
-            { "id": 2, "name": "Département", "order": 3, "checked": true },
-            { "id": 3, "name": "Epci", "order": 2, "checked": true }
+            { "id": 1, "displayName": "commune", "name": "Commune", "order": 1, "checked": true },
+            { "id": 2, "displayName": "departement", "name": "Département", "order": 3, "checked": true },
+            { "id": 3, "displayName": "epci", "name": "Epci", "order": 2, "checked": true }
           ]
         }
       ]

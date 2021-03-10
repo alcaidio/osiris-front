@@ -22,7 +22,7 @@ export class PropertyValueComponent {
     this.store.dispatch(new CheckValue({ value, property, calque }))
   }
 
-  get name() {
-    return this.value.name.toLowerCase()
+  get displayName() {
+    return this.value.displayName.toLowerCase()
   }
 }

@@ -134,6 +134,7 @@ export interface PropertyType {
 export interface PropertyValue {
   id: string
   name: string
+  displayName: string
   checked: boolean
   order: number
 }

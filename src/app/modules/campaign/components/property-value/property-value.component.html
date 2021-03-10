@@ -2,23 +2,23 @@
   <div class="property">
     <div class="flex">
       <mat-checkbox
-        *ngIf="truncateTo > value.name.length"
+        *ngIf="truncateTo > value.displayName.length"
         color="primary"
         [checked]="value.checked"
         (change)="onCheck(value, property, calque)"
       >
-        {{ name | title }}
+        {{ displayName | title }}
       </mat-checkbox>
       <mat-checkbox
-        *ngIf="value.name.length >= truncateTo"
+        *ngIf="value.displayName.length >= truncateTo"
         color="primary"
         [checked]="value.checked"
-        [matTooltip]="value.name"
+        [matTooltip]="value.displayName"
         [matTooltipPosition]="'right'"
         [matTooltipClass]="'tooltipPropertyValue'"
         (change)="onCheck(value, property, calque)"
       >
-        {{ name | truncate: [truncateTo] | title }}
+        {{ displayName | truncate: [truncateTo] | title }}
       </mat-checkbox>
     </div>
   </div>
