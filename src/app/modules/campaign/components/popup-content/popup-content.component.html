@@ -1,5 +1,13 @@
-<ng-container *ngFor="let item of properties">
-  <div *ngIf="item[0] === 'image'; else tab" class="flex flex-col">
+<table>
+  <ng-container *ngFor="let item of properties">
+    <tr>
+      <td>{{ item[0] | title }}</td>
+      <td>{{ item[1] }}</td>
+    </tr>
+  </ng-container>
+</table>
+
+<!-- <div *ngIf="item[0] === 'image'; else tab" class="flex flex-col">
     <div class="container h-40 w-56 overflow-hidden rounded-md">
       <img [src]="item[1]" class="w-full h-full object-cover image" />
       <div class="middle">
@@ -20,5 +28,4 @@
         <td>{{ item[1] }}</td>
       </tr>
     </table>
-  </ng-template>
-</ng-container>
+  </ng-template> -->

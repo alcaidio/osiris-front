@@ -213,15 +213,10 @@ export class MapComponent implements OnChanges, OnDestroy {
     const ruleDTOs = layer.activeStyle.ruleDTOs
 
     const onSelectFeature = (e: any) => {
+      // this.featureSelected = e.sourceTarget.feature
+      // console.log('feature selected id', this.featureSelected.id)
       // const { lat, lng } = e.latlng
-      this.featureSelected = e.sourceTarget.feature
-      console.log('feature selected id', this.featureSelected.id)
-
       // this.mapReady.flyTo([lat, lng])
-      // if (e.sourceTarget.feature.id !== this.featureSelected.id) {
-      //   this.mapReady.panTo([lat, lng])
-      //   this.selected.emit(e.sourceTarget.feature)
-      // }
     }
 
     const highlightFeature = (e) => {
@@ -277,10 +272,10 @@ export class MapComponent implements OnChanges, OnDestroy {
       l.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: onSelectFeature,
+        // click: onSelectFeature,
       })
 
-      if (feature.properties.popupContent) {
+      if (feature.properties) {
         const factory = this.resolver.resolveComponentFactory(PopupContentComponent)
         const component = factory.create(this.injector)
         component.instance.feature = feature
@@ -292,7 +287,7 @@ export class MapComponent implements OnChanges, OnDestroy {
           offset: [0, -10],
           minWidth: 150,
           autoPan: true,
-          closeButton: false,
+          closeButton: true,
           closeOnClick: true,
           closeOnEscapeKey: true,
         })

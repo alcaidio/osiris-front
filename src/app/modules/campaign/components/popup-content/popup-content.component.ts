@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsul
 import { Store } from '@ngxs/store'
 import { Map } from 'leaflet'
 import { OpenViewer } from '../../store'
-import { filteredObjectByKeys } from './../../utils/shared.utils'
 
 @Component({
   selector: 'app-popup-content',
@@ -20,9 +19,10 @@ export class PopupContentComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.properties = Object.entries(
-      filteredObjectByKeys(this.feature.properties, this.feature.properties.popupContent)
-    )
+    this.properties = Object.entries(this.feature.properties)
+    // Object.entries(
+    //   filteredObjectByKeys(this.feature.properties, this.feature.properties.popupContent)
+    // )
   }
 
   onClickNavigate(): void {

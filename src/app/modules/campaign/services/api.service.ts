@@ -33,17 +33,17 @@ export class ApiService {
             geomType: DTO.geomType,
             activeStyle: DTO.activeStyle,
           }
+
           const httpOptions = {
             headers: new HttpHeaders({
               Authorization: 'Basic ' + btoa(`${DTO.username}:${DTO.password}`),
-              skip: 'true',
+              skip: 'true', // to not inject the token in the the core interceptor
             }),
           }
+
           return this.http.get<any>(DTO.url, httpOptions).pipe(
-            map((featureCollection) => {
-              if (featureCollection) {
-                return { ...overlayWithoutFeatures, type: featureCollection.type, features: featureCollection.features }
-              }
+            map((data) => {
+              return { ...overlayWithoutFeatures, type: data.type, features: data.features }
             }),
             catchError((err) => {
               console.warn(
