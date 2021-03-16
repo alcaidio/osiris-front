@@ -32,8 +32,8 @@ import 'leaflet.polylinemeasure'
 import 'leaflet.smoothwheelzoom'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
-import { Overlay } from '../../model/shared.model'
-import { MapState } from '../../store'
+import { CameraConfig, Overlay } from '../../model/shared.model'
+import { MapState, ToggleIsHoverTrace } from '../../store'
 import { PopupContentComponent } from '../popup-content/popup-content.component'
 import { Config, Mode } from './../../model/shared.model'
 import { setDefaultStyleOfFeature } from './../../utils/leaflet.utils'
@@ -49,11 +49,11 @@ export class MapComponent implements OnChanges, OnDestroy {
   @Input() mode: Mode
   @Input() overlays: Overlay[]
   @Input() activeFeature: GeoJSON.Feature
-  // TODO : le type changera
-  @Input() cameraConfig: { position: any; rotation: number }
+  @Input() cameraConfig: CameraConfig
 
   @Output() map = new EventEmitter<Map>()
   @Output() selected = new EventEmitter<GeoJSON.Feature>()
+  @Output() guyDragEnd = new EventEmitter<LatLng>()
 
   // normally the component has no direct data via the store. Thereafter the data must only pass through the inputs
   @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
@@ -123,7 +123,7 @@ export class MapComponent implements OnChanges, OnDestroy {
             break
           case 'config':
             const change = changes['config']
-            if (!change.firstChange) {
+            if (change && !change.firstChange) {
               const prev = change.previousValue
               const curr = change.currentValue
               if (this.mapReady && this.config) {
@@ -134,7 +134,7 @@ export class MapComponent implements OnChanges, OnDestroy {
             }
             break
           case 'cameraConfig':
-            if (this.cameraConfig && this.cameraConfig.position) {
+            if (this.cameraConfig && this.cameraConfig.position && this.cameraConfig.rotation) {
               this.displayCamera()
             }
             break
@@ -149,7 +149,7 @@ export class MapComponent implements OnChanges, OnDestroy {
     markerOptions = {
       icon: icon({
         iconUrl: 'assets/images/camera.svg',
-        iconSize: [80, 80],
+        iconSize: [60, 60],
         className: 'camera',
       }),
       rotationOrigin: 'center center',
@@ -160,8 +160,8 @@ export class MapComponent implements OnChanges, OnDestroy {
     }
 
     this.cameraMarker = marker([this.cameraConfig.position[1], this.cameraConfig.position[0]], markerOptions)
-    this.cameraMarker.setRotationAngle(this.cameraConfig.rotation)
-    this.cameraMarker.addTo(this.mapReady)
+    this.cameraMarker.setRotationAngle(-this.cameraConfig.rotation)
+    this.cameraMarker.addTo(this.mapReady).on('click', (e) => this.mapReady.panTo(e.latlng))
   }
 
   onDrawCreated(e: DrawEvents.Created): void {
@@ -220,6 +220,9 @@ export class MapComponent implements OnChanges, OnDestroy {
     }
 
     const highlightFeature = (e) => {
+      if (layer.name.includes('trace')) {
+        this.store.dispatch(new ToggleIsHoverTrace())
+      }
       const featureSyle = ruleDTOs.find((rule) => rule.name === e.target.feature.properties[activeStyleName])
       if (featureSyle && Object.keys(featureSyle).includes('radius')) {
         e.target.setStyle({
@@ -243,6 +246,9 @@ export class MapComponent implements OnChanges, OnDestroy {
 
     const resetHighlight = (e) => {
       geojson.resetStyle(e.target)
+      if (layer.name.includes('trace')) {
+        this.store.dispatch(new ToggleIsHoverTrace())
+      }
     }
 
     const pointToLayer = (feature: GeoJSON.Feature, latlng: LatLng) => {
@@ -322,6 +328,10 @@ export class MapComponent implements OnChanges, OnDestroy {
     })
 
     return geojson
+  }
+
+  navigate(evt: LatLng) {
+    this.guyDragEnd.emit(evt)
   }
 
   ngOnDestroy(): void {

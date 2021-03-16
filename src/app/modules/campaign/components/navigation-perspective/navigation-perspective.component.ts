@@ -28,7 +28,7 @@ export class NavigationPerspectiveComponent implements OnChanges {
           case 'picturePoint':
           case 'picture':
             if (this.picturePoint) {
-              this.addDirectionIcon(this.picturePoint.neighbours)
+              this.addDirectionIcons(this.picturePoint.neighbours)
             }
             break
         }
@@ -37,23 +37,12 @@ export class NavigationPerspectiveComponent implements OnChanges {
   }
 
   onClick(direction: NeighboursDirectionType) {
-    this.goToNeighbour(direction)
+    this.picture.camera === 'back' || this.picture.camera === 'back-right' || this.picture.camera === 'back-left'
+      ? this.direction.emit(this.adaptDirection(direction))
+      : this.direction.emit(direction)
   }
 
-  private goToNeighbour(direction: NeighboursDirectionType) {
-    if (this.picture) {
-      console.log('Go to neightboor image')
-
-      // this.store.dispatch(
-      //   new GoToNeighbour(
-      //     this.picture.camera === 'back' || this.picture.camera === 'back-right' || this.picture.camera === 'back-left'
-      //       ? this.adaptDirection(direction)
-      //       : direction
-      //   )
-      // )
-    }
-  }
-
+  // Permet d'adapter les flèches de navigation en fonction de la position de caméra active
   private adaptDirection(direction: NeighboursDirectionType): NeighboursDirectionType {
     switch (direction) {
       case 'back':
@@ -71,7 +60,7 @@ export class NavigationPerspectiveComponent implements OnChanges {
     }
   }
 
-  private addDirectionIcon(neighbours: { [id: string]: string | number }) {
+  private addDirectionIcons(neighbours: { [id: string]: string | number }) {
     if (this.picture && this.picture.camera === 'back') {
       if (neighbours['back']) {
         this.isFront = true
@@ -139,21 +128,21 @@ export class NavigationPerspectiveComponent implements OnChanges {
 
   @HostListener('document:keydown.arrowup')
   arrowUp() {
-    this.goToNeighbour('front')
+    this.direction.emit('front')
   }
 
   @HostListener('document:keydown.arrowdown')
   arrowDown() {
-    this.goToNeighbour('back')
+    this.direction.emit('back')
   }
 
   @HostListener('document:keydown.arrowright')
   arrowRight() {
     if (this.isFrontRight) {
-      this.goToNeighbour('front_right')
+      this.direction.emit('front_right')
     } else {
       if (this.isBackRight) {
-        this.goToNeighbour('back_right')
+        this.direction.emit('back_right')
       }
     }
   }
@@ -161,10 +150,10 @@ export class NavigationPerspectiveComponent implements OnChanges {
   @HostListener('document:keydown.arrowleft')
   arrowLeft() {
     if (this.isFrontLeft) {
-      this.goToNeighbour('front_left')
+      this.direction.emit('front_left')
     } else {
       if (this.isBackLeft) {
-        this.goToNeighbour('back_left')
+        this.direction.emit('back_left')
       }
     }
   }

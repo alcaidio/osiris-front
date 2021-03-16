@@ -20,8 +20,6 @@ export class CarCompassComponent implements OnChanges {
   isBackRight = false
   isBackLeft = false
 
-  constructor() {}
-
   ngOnChanges(changes: SimpleChanges) {
     for (const propName in changes) {
       if (changes.hasOwnProperty(propName)) {

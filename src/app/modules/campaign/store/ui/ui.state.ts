@@ -8,8 +8,9 @@ import {
   OpenMapCard,
   OpenViewer,
   ToggleData,
+  ToggleIsHoverTrace,
   ToggleMapCard,
-  ToggleViewerFullscreen
+  ToggleViewerFullscreen,
 } from './ui.actions'
 
 interface UI {
@@ -17,6 +18,7 @@ interface UI {
   mapCard: boolean
   data: boolean
   viewerFullscreen: boolean
+  isHoverTrace: boolean
 }
 
 const defaultUIState = {
@@ -24,6 +26,7 @@ const defaultUIState = {
   mapCard: true,
   data: false,
   viewerFullscreen: false,
+  isHoverTrace: false,
 }
 
 @State<UI>({
@@ -50,6 +53,11 @@ export class UIState {
   @Selector()
   static getIsViewerFullscreen(state: UI) {
     return state.viewerFullscreen
+  }
+
+  @Selector()
+  static getIsHoverTrace(state: UI) {
+    return state.isHoverTrace
   }
 
   constructor() {}
@@ -120,12 +128,27 @@ export class UIState {
   }
 
   @Action(ToggleViewerFullscreen)
-  toggleViewerFullscreen(ctx: StateContext<UI>) {
+  toggleViewerFullscreen(ctx: StateContext<UI>, action: ToggleViewerFullscreen) {
     const state = ctx.getState()
-    if (state.mapCard) {
-      ctx.patchState({ viewerFullscreen: !state.viewerFullscreen, mapCard: false })
+    const fullscreen = action.payload
+    if (fullscreen) {
+      if (state.mapCard) {
+        ctx.patchState({ viewerFullscreen: fullscreen, mapCard: false })
+      } else {
+        ctx.patchState({ viewerFullscreen: fullscreen })
+      }
     } else {
-      ctx.patchState({ viewerFullscreen: !state.viewerFullscreen })
+      if (state.mapCard) {
+        ctx.patchState({ viewerFullscreen: !state.viewerFullscreen, mapCard: false })
+      } else {
+        ctx.patchState({ viewerFullscreen: !state.viewerFullscreen })
+      }
     }
+  }
+
+  @Action(ToggleIsHoverTrace)
+  toggleIsHoverTrace(ctx: StateContext<UI>) {
+    const state = ctx.getState()
+    ctx.patchState({ isHoverTrace: !state.isHoverTrace })
   }
 }

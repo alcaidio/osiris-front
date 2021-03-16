@@ -247,7 +247,7 @@
           {
             "name": "2020",
             "color": "blue",
-            "weight": 1,
+            "weight": 2,
             "opacity": 0.5,
             "dashOffset": "0",
             "lineCap": "butt",
@@ -477,7 +477,7 @@
         {
           "name": "2020",
           "color": "blue",
-          "weight": 1,
+          "weight": 2,
           "opacity": 0.5,
           "dashOffset": "0",
           "lineCap": "butt",

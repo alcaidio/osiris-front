@@ -1,14 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { ID } from 'app/shared/models'
+import { environment } from 'environments/environment'
+import { LatLng } from 'leaflet'
 import { Observable, of } from 'rxjs'
 import { catchError, combineAll, map, switchMap } from 'rxjs/operators'
-import { BaseLayer, Calque, Campaign, LeafletStyle, MapSmall, OverlayDTO } from '../model/shared.model'
+import { BaseLayer, Calque, Campaign, LeafletStyle, MapSmall, OverlayDTO, PicturePoint } from '../model/shared.model'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   // Lunch json-server with "json-server --watch db.json --delay 2000"
+  private api = environment.osiris.api
 
   constructor(private http: HttpClient) {}
 
@@ -69,5 +73,17 @@ export class ApiService {
   // (prop id or overlayconfigs) === style id
   getStyleById(id: string): Observable<LeafletStyle> {
     return this.http.get<LeafletStyle>(`http://localhost:3000/style/${id}`)
+  }
+
+  getImageByLngLat(point: LatLng, distance?: string): Observable<PicturePoint> {
+    return this.http.get<PicturePoint>(
+      `${this.api}/pictures/position/findNearestBySensorAndLngLat?lng=${point.lng}&lat=${
+        point.lat
+      }&sensorTypeName=ImajBox&distance=${distance ? distance : '150'}`
+    )
+  }
+
+  getImageById(id: ID): Observable<PicturePoint> {
+    return this.http.get<PicturePoint>(`${this.api}/pictures/position/${id}?sensorTypeName=ImajBox`)
   }
 }

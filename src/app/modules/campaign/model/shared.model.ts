@@ -181,3 +181,10 @@ export interface ViewParams {
   yaw: number
   roll?: number
 }
+
+export type LangType = 'fr' | 'en'
+
+export interface CameraConfig {
+  position: number[] | LatLng
+  rotation: number
+}

@@ -20,6 +20,7 @@ import { PanoramaComponent } from './components/panorama/panorama.component'
 import { PopupContentComponent } from './components/popup-content/popup-content.component'
 import { PropertyTypeComponent } from './components/property-type/property-type.component'
 import { PropertyValueComponent } from './components/property-value/property-value.component'
+import { ViewerComponent } from './components/viewer/viewer.component'
 import { CampaignDetailComponent } from './containers/campaign-detail/campaign-detail.component'
 import { CampaignListComponent } from './containers/campaign-list/campaign-list.component'
 import { CustomDirective } from './directives/custom.directive'
@@ -48,6 +49,7 @@ import { CampaignModuleStates } from './store'
     CarCompassComponent,
     DynamicTableComponent,
     PanoramaComponent,
+    ViewerComponent,
   ],
   imports: [
     CommonModule,

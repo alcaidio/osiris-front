@@ -5,6 +5,7 @@ import { CampaignsState } from './campaigns/campaigns.state'
 import { FilterState } from './filters/filters.state'
 import { MapState } from './maps/maps.state'
 import { OverlayState } from './overlays/overlays.state'
+import { PicturesState } from './pictures/pictures.state'
 import { UIState } from './ui/ui.state'
 
 export const CampaignModuleStates = [
@@ -16,6 +17,7 @@ export const CampaignModuleStates = [
   CalqueState,
   FilterState,
   UIState,
+  PicturesState,
 ]
 
 export * from './baselayers/baselayers.actions'
@@ -33,5 +35,7 @@ export * from './maps/maps.state'
 export * from './overlays/overlays.actions'
 export * from './overlays/overlays.selectors'
 export * from './overlays/overlays.state'
+export * from './pictures/pictures.actions'
+export * from './pictures/pictures.state'
 export * from './ui/ui.actions'
 export * from './ui/ui.state'

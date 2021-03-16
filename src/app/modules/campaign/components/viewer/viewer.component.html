@@ -1,0 +1,55 @@
+<div class="viewer" *ngIf="isOpen" [ngClass]="{ fullscreen: isFullscreen }">
+  <ng-container *ngIf="picture">
+    <!-- TODO : change viewer component *ngIf="picture.type === 'flat'" OR 360  -->
+    <!-- <app-panorama
+      [image]="picture"
+      [config]="config"
+      (params)="onChangeViewParams($event)"
+    ></app-panorama>
+    <app-navigation-perspective
+      [picturePoint]="point"
+      [picture]="picture"
+      (direction)="onChangeNeighboursDirection($event)"
+    ></app-navigation-perspective> -->
+    <app-flat-image [picture]="picture" [zoom]="false"></app-flat-image>
+    <ng-container *ngIf="point">
+      <app-navigation-perspective
+        [picturePoint]="point"
+        [picture]="picture"
+        (direction)="onChangeNeighboursDirection($event)"
+      ></app-navigation-perspective>
+      <app-car-compass
+        [pictures]="point.pictures"
+        [selected]="picture.camera"
+        (camera)="onChangeCameraPosition($event)"
+      ></app-car-compass>
+    </ng-container>
+  </ng-container>
+
+  <div id="buttons">
+    <button class="item" matTooltip="Fermer la navigation" matTooltipPosition="left" (click)="onCloseViewer()">
+      <mat-icon class="icon icon-size-18" svgIcon="mat_outline:clear"></mat-icon>
+    </button>
+    <button
+      class="item"
+      matTooltip="Plein écran"
+      matTooltipPosition="left"
+      (click)="onToggleFullscreen()"
+      *ngIf="!isFullscreen"
+    >
+      <mat-icon class="icon icon-size-18" svgIcon="mat_outline:fullscreen"></mat-icon>
+    </button>
+    <button
+      class="item"
+      matTooltip="Réduire l'écran"
+      matTooltipPosition="left"
+      (click)="onToggleFullscreen()"
+      *ngIf="isFullscreen"
+    >
+      <mat-icon class="icon icon-size-18" svgIcon="mat_outline:fullscreen_exit"></mat-icon>
+    </button>
+    <button class="item infos" matTooltipPosition="left" [matTooltip]="viewerImageInfos">
+      <mat-icon class="icon icon-size-18" svgIcon="mat_outline:info"></mat-icon>
+    </button>
+  </div>
+</div>

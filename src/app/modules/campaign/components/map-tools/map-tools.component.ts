@@ -1,7 +1,11 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core'
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core'
+import { Select } from '@ngxs/store'
 import booleanIntersects from '@turf/boolean-intersects/dist/js'
 import * as turfHelper from '@turf/helpers'
+import { NotificationService } from 'app/shared/services/notification.service'
 import { geoJSON, LatLng, LatLngBounds, Layer, layerGroup, Map, Rectangle, rectangle } from 'leaflet'
+import { Observable, Subscription } from 'rxjs'
+import { OverlayState, PicturesState, UIState } from '../../store'
 import { createPolygonFromBounds } from '../../utils'
 
 type absolutePosition = 'topright' | 'topleft' | 'bottomright' | 'bottomleft'
@@ -12,11 +16,20 @@ type toolsType = 'default' | 'selection' | 'measure'
   templateUrl: './map-tools.component.html',
   styleUrls: ['./map-tools.component.scss'],
 })
-export class MapSelectionComponent implements AfterViewInit {
+export class MapSelectionComponent implements AfterViewInit, OnDestroy {
   @Input() map: Map
   @Input() position: absolutePosition
   @Input() tool: toolsType = 'default'
   @Output() defaultView = new EventEmitter<void>()
+  @Output() guyDragEnd = new EventEmitter<LatLng>()
+
+  @Select(OverlayState.getIsTraceImageExist) isTraceOverlayExist$: Observable<boolean>
+  @Select(PicturesState.getLoading) pictureIsLoading$: Observable<boolean>
+  @Select(UIState.getIsHoverTrace) isHoverTrace$: Observable<boolean>
+  isHoverTrace = false
+  isHoverSub: Subscription
+
+  onGuyDrag = false
 
   mapDiv: HTMLElement
   isDrawing = false
@@ -26,6 +39,8 @@ export class MapSelectionComponent implements AfterViewInit {
   onMouseDownPoint: any
   featuresSelectedLayer: any
   rectangleSelectionLayer: Rectangle
+
+  constructor(private notification: NotificationService) {}
 
   ngAfterViewInit(): void {
     this.mapDiv = document.getElementById('map')
@@ -50,6 +65,29 @@ export class MapSelectionComponent implements AfterViewInit {
         break
       default:
         this.tool = 'default'
+    }
+  }
+
+  onGuyDragStart() {
+    this.isHoverSub = this.isHoverTrace$.subscribe((isHover) => (this.isHoverTrace = isHover))
+    this.mapDiv.addEventListener('mouseup', (event) => this.onGuyDragEnd(event))
+    this.onGuyDrag = true
+  }
+
+  onGuyDragEnd(evt: MouseEvent) {
+    if (this.onGuyDrag) {
+      // If a layer of type trace image is onHover
+      if (this.isHoverTrace) {
+        const position = this.map.mouseEventToLayerPoint(evt)
+        const point = this.map.layerPointToLatLng(position)
+        this.guyDragEnd.emit(point)
+      } else {
+        this.notification.openSnackBar('Vous devez lâcher le personnage sur une trace image')
+      }
+      this.isHoverSub.unsubscribe()
+      // FIX : removeEventListener doesn't work. That the reson why onGuyDrag exist but the mousup event still exist
+      this.mapDiv.removeEventListener('mouseup', (event) => this.onGuyDragEnd(event))
+      this.onGuyDrag = false
     }
   }
 
@@ -178,6 +216,7 @@ export class MapSelectionComponent implements AfterViewInit {
     this.mapDiv.removeEventListener('mousedown', (event) => this.onMouseDownSelection(event))
     this.mapDiv.removeEventListener('mousemove', (event) => this.onMouseMoveSelection(event))
     this.mapDiv.removeEventListener('mouseup', (event) => this.onMouseUpSelection(event))
+    this.mapDiv.removeEventListener('mouseup', (event) => this.onGuyDragEnd(event))
   }
 
   private clearAll() {
@@ -221,5 +260,9 @@ export class MapSelectionComponent implements AfterViewInit {
       default:
         return 'left'
     }
+  }
+  ngOnDestroy() {
+    this.removeAllEventListener()
+    this.clearAll()
   }
 }

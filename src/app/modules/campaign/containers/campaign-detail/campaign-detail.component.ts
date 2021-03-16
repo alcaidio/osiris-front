@@ -4,35 +4,48 @@ import { Add, UpdateActive } from '@ngxs-labs/entity-state'
 import { Select, Store } from '@ngxs/store'
 import * as turfBbox from '@turf/bbox'
 import * as turfHelper from '@turf/helpers'
-import { radiansToDegrees } from '@turf/helpers'
 import { RouterSelectors } from 'app/core/store/states/router.state.selector'
-import { circle, geoJSON, layerGroup, Map } from 'leaflet'
-import moment from 'moment'
+import { circle, geoJSON, LatLng, layerGroup, Map } from 'leaflet'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
 import { v4 as uuidv4 } from 'uuid'
-import { Config, Mode, ViewParams } from '../../model/shared.model'
+import {
+  CameraConfig,
+  CameraPositionType,
+  Config,
+  Mode,
+  NeighboursDirectionType,
+  Overlay,
+  Picture,
+  PicturePoint,
+} from '../../model/shared.model'
 import {
   CalqueState,
+  ChangeCameraPosition,
+  CloseData,
+  CloseViewer,
   GetBaselayers,
   GetCalques,
   GetOverlays,
+  GoToNeighbour,
+  LoadPicturesPointById,
+  LoadPicturesPointByLngLat,
   MapState,
   OverlaySelectors,
   OverlayState,
+  PicturesState,
+  ToggleViewerFullscreen,
   UIState,
 } from '../../store'
-import { convertConfigToLeaflet, convertDegreesToRadians } from '../../utils'
-import { CameraPositionType, NeighboursDirectionType, PicturePoint } from './../../../../shared/models/maps.model'
-import { Overlay } from './../../model/shared.model'
-import { CloseData, CloseViewer, ToggleViewerFullscreen } from './../../store/ui/ui.actions'
-import { OsirisAnimations } from './../../utils/animation.utils'
-
-type LangType = 'fr' | 'en'
+import { convertConfigToLeaflet } from '../../utils'
+import { OsirisAnimations } from '../../utils/animation.utils'
 
 enum QueryParamsFromCampaignDetail {
-  mapConfig = 'config', // 43.6596748, 3.8262439,15z
+  CONFIG = 'config', // 43.6596748, 3.8262439,15z
+  POINT = 'point',
+  CAMERA = 'camera',
+  FULLSCREEN = 'fullscreen',
   // add some
 }
 
@@ -59,6 +72,9 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
   @Select(OverlayState.getActiveOverlayFeatures) activeFeatures$: Observable<GeoJSON.Feature[]>
   @Select(RouterSelectors.queryParams) queryParams$: Observable<Params>
   @Select(CalqueState.getNewCalqueName) newCalqueName$: Observable<string>
+  @Select(PicturesState.getSelectedPicture) selectedPicture$: Observable<Picture>
+  @Select(PicturesState.getSelectedPicturesPoint) selectedPicturePoint$: Observable<PicturePoint>
+  @Select(PicturesState.getCameraConfig) cameraConfig$: Observable<CameraConfig>
 
   mapReady: Map
 
@@ -71,50 +87,6 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
   activeLayerGroup = layerGroup()
   activeLayer: any
   geoJsonFeature: any
-
-  cameraConfig: { position: any; rotation: number }
-
-  // TODO : CHANGE TEMP MOCK
-  images = [
-    // {
-    //   type: 'flat',
-    //   camera: 'front',
-    //   direction: -116,
-    //   name: 'IMJ_SEQ__A60016-2020-07-30-N007-55_00209.jpg',
-    //   path: 'http://192.168.0.187/imajbox/viewer_imajbox/images-avant/AVT/IMJ_SEQ__A60016-2020-07-30-N007-55_00209.jpg',
-    // },
-    {
-      type: '360',
-      path: 'http://192.168.0.147/pcrs/MdL/Photos_360/2019-12-31/stream_00007-000000_10851_0053305.jpg',
-      direction: 90,
-    },
-  ]
-
-  selectedPicture: any = this.random(this.images)
-
-  config = { yaw: 0, pitch: 0, fov: convertDegreesToRadians(65) }
-
-  picturePoint: PicturePoint = {
-    id: 9197,
-    geom: {
-      type: 'Point',
-      coordinates: [2.356859548457931, 48.942378340696145],
-    },
-    neighbours: {
-      back: 9196,
-      front: 9198,
-    },
-    timestamp: Date.now(),
-    pictures: [
-      {
-        name: 'IMJ_SEQ__A60016-2020-07-29-N004-29_01876.jpg',
-        path:
-          'http://192.168.0.187/imajbox/viewer_imajbox/images-avant/AVT/IMJ_SEQ__A60016-2020-07-29-N004-29_01876.jpg',
-        camera: 'front',
-        direction: 0,
-      },
-    ],
-  }
 
   constructor(private store: Store, private route: ActivatedRoute) {}
 
@@ -131,6 +103,13 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
     })
 
     this.newCalqueName$.subscribe((name) => (this.newCalqueName = name))
+
+    this.selectedPicturePoint$.subscribe((point) => {
+      if (point) {
+        const latlng = { lng: point.geom.coordinates[0], lat: point.geom.coordinates[1] }
+        this.mapReady.panTo(latlng)
+      }
+    })
   }
 
   private initState(params: Params) {
@@ -141,8 +120,12 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
     this.store.dispatch(new GetBaselayers(id))
 
     // format map config for leaflet
+    const mapConfigFromUrl = params[QueryParamsFromCampaignDetail.CONFIG]
+    const point = params[QueryParamsFromCampaignDetail.POINT]
+    const camera = params[QueryParamsFromCampaignDetail.CAMERA]
+    const fullscreen = params[QueryParamsFromCampaignDetail.FULLSCREEN]
+
     this.mapConfig$.subscribe((config) => {
-      const mapConfigFromUrl = params[QueryParamsFromCampaignDetail.mapConfig]
       if (mapConfigFromUrl) {
         const configFromUrl = convertMapConfigFromUrl(mapConfigFromUrl)
         this.leafletMapConfig = convertConfigToLeaflet({ ...config, ...configFromUrl })
@@ -150,27 +133,51 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
         this.leafletMapConfig = convertConfigToLeaflet(config)
       }
     })
+
+    if (point) {
+      this.store
+        .dispatch(new LoadPicturesPointById(point))
+        .toPromise()
+        .then(() => {
+          setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 500)
+        })
+    }
+    if (camera) {
+      this.store.dispatch(new ChangeCameraPosition(camera))
+    }
+    if (fullscreen) {
+      this.store.dispatch(new ToggleViewerFullscreen(fullscreen))
+    }
   }
 
-  onChangeCameraPosition(evt: CameraPositionType) {
-    console.log('onChangeCameraPosition', evt)
+  onNavigate(position: LatLng): void {
+    this.store
+      .dispatch(new LoadPicturesPointByLngLat({ position, distance: 120 }))
+      .toPromise()
+      .then(() => {
+        setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 500)
+      })
   }
 
-  onChangeNeighboursDirection(evt: NeighboursDirectionType) {
-    console.log('onChangeNeighboursDirection', evt)
-  }
-
-  onCloseNavigation() {
+  onCloseViewer(): void {
     this.store.dispatch(new CloseViewer())
     setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 1000)
   }
 
-  onFullscreenNavigation() {
+  onToggleFullscreen(): void {
     this.store.dispatch(new CloseData())
     this.store.dispatch(new ToggleViewerFullscreen())
   }
 
-  onFlyToTheFeature(featureId: string) {
+  onChangeCamera(position: CameraPositionType): void {
+    this.store.dispatch(new ChangeCameraPosition(position))
+  }
+
+  onGoToNeighbours(direction: NeighboursDirectionType): void {
+    this.store.dispatch(new GoToNeighbour(direction))
+  }
+
+  onFlyToTheFeature(featureId: string): void {
     this.activeFeatures$.subscribe((features) => {
       const feature = features.find((f) => f.id === featureId)
 
@@ -271,28 +278,12 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  onChangeViewParams(params: ViewParams) {
-    const rotation = this.selectedPicture.direction + radiansToDegrees(params.yaw)
-    this.cameraConfig = { position: [3.8762640953063965, 43.62055896073537], rotation }
-    console.log(this.cameraConfig)
-  }
-
-  // TODO other lang
-  private getDate(time: number, lang: LangType) {
-    if (lang === 'fr') {
-      const duration = new Date(time)
-      return moment(duration).locale('fr').format('Do MMMM YYYY à hh:mm:ss')
-    }
-  }
-
-  get viewerImageInfos(): string {
-    return 'Caméra "' + this.selectedPicture?.camera + '" - ' + this.getDate(this.picturePoint?.timestamp, 'fr')
-  }
-
-  // REMOVE when remove image mock
-  private random(images: any) {
-    return images[Math.floor(Math.random() * images.length)]
-  }
+  // TODO: for viewer 360
+  // onChangeViewParams(params: ViewParams) {
+  //   const rotation = this.selectedPicture.direction + radiansToDegrees(params.yaw)
+  //   this.cameraConfig = { position: [3.8762640953063965, 43.62055896073537], rotation }
+  //   console.log(this.cameraConfig)
+  // }
 
   ngOnDestroy(): void {
     // Don't remove !
