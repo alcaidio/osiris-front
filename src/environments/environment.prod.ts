@@ -6,6 +6,6 @@ export const environment = {
     },
   },
   osiris: {
-    api: 'http://plco.immergis.fr:10002/api',
+    api: 'http://192.168.0.187:10002/api', // Change !
   },
 }

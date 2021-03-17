@@ -26,7 +26,6 @@ import { MatSortModule } from '@angular/material/sort'
 import { MatTableModule } from '@angular/material/table'
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatTooltipModule } from '@angular/material/tooltip'
-import { BrowserModule } from '@angular/platform-browser'
 import { TranslocoModule } from '@ngneat/transloco'
 import { TreoCardModule } from '@treo/components/card'
 import { MouseWheelDirective } from './directives/mouse-wheel.directive'
@@ -61,15 +60,7 @@ const MATERIAL = [
 
 @NgModule({
   declarations: [MouseWheelDirective],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslocoModule,
-    TreoCardModule,
-    ...MATERIAL,
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, ...MATERIAL],
   exports: [
     CommonModule,
     FormsModule,
