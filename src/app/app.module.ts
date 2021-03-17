@@ -13,7 +13,6 @@ import { CoreModule } from 'app/core/core.module'
 import { mockDataServices } from 'app/data/mock'
 import { LayoutModule } from 'app/layout/layout.module'
 import { environment } from 'environments/environment'
-import { MarkdownModule } from 'ngx-markdown'
 import { AppRoutingModule } from './app.routing'
 import { httpLoader } from './core/i18n/transloco.loader'
 import { CustomRouterStateSerializer } from './core/store/states/router.state.serializer'
@@ -32,26 +31,9 @@ import { SharedModule } from './shared/shared.module'
     LayoutModule,
     CoreModule,
     SharedModule,
-    MarkdownModule.forRoot({}),
   ],
   providers: [
     httpLoader,
-    // {
-    //   provide: ErrorHandler,
-    //   useValue: Sentry.createErrorHandler({
-    //     showDialog: false,
-    //   }),
-    // },
-    // {
-    //   provide: Sentry.TraceService,
-    //   deps: [Router],
-    // },
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: () => () => {},
-    //   deps: [Sentry.TraceService],
-    //   multi: true,
-    // },
     {
       provide: TRANSLOCO_CONFIG,
       useValue: {

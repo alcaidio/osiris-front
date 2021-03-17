@@ -28,12 +28,6 @@ import { MatTabsModule } from '@angular/material/tabs'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { TranslocoModule } from '@ngneat/transloco'
 import { TreoCardModule } from '@treo/components/card'
-import { NgxMapboxGLModule } from 'ngx-mapbox-gl'
-import { environment } from './../../environments/environment'
-import { BuildingsLayerComponent } from './components/buildings-layer.component'
-import { TemplateOneComponent } from './components/template-one.component'
-import { TemplateThreeComponent } from './components/template-three.component'
-import { TemplateTwoComponent } from './components/template-two.component'
 import { MouseWheelDirective } from './directives/mouse-wheel.directive'
 
 const MATERIAL = [
@@ -65,35 +59,15 @@ const MATERIAL = [
 ]
 
 @NgModule({
-  declarations: [
-    MouseWheelDirective,
-    TemplateOneComponent,
-    TemplateTwoComponent,
-    BuildingsLayerComponent,
-    TemplateThreeComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslocoModule,
-    TreoCardModule,
-    MATERIAL,
-    NgxMapboxGLModule.withConfig({
-      accessToken: environment.mapbox.api.token,
-    }),
-  ],
+  declarations: [MouseWheelDirective],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, MATERIAL],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    TemplateOneComponent,
-    TemplateTwoComponent,
     TranslocoModule,
     TreoCardModule,
     MouseWheelDirective,
-    BuildingsLayerComponent,
-    TemplateThreeComponent,
     MATERIAL,
   ],
 })

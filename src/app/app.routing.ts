@@ -15,11 +15,11 @@ const routerConfig: ExtraOptions = {
 // @formatter:off
 // tslint:disable:max-line-length
 export const routes: Route[] = [
-  // Redirect empty path to '/map'
-  { path: '', pathMatch: 'full', redirectTo: 'campaign' },
+  // Redirect empty path to '/maps'
+  { path: '', pathMatch: 'full', redirectTo: 'maps' },
 
-  // Redirect signed in user to the '/map'
-  { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'campaign' },
+  // Redirect signed in user
+  { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'maps' },
 
   // Auth routes (guest)
   {
@@ -94,26 +94,9 @@ export const routes: Route[] = [
     },
     children: [
       {
-        path: 'imajbox',
-        loadChildren: () => import('./modules/imajbox/imajbox.module').then((m) => m.ImajboxModule),
-      },
-      {
-        path: 'diagnosis',
-        loadChildren: () => import('./modules/diagnosis/diagnosis.module').then((m) => m.DiagnosisModule),
-      },
-      {
-        path: 'campaign',
+        path: 'maps',
         loadChildren: () => import('./modules/campaign/campaign.module').then((m) => m.CampaignModule),
       },
-      // {
-      //   path: 'roadview',
-      //   loadChildren: () => import('./modules/roadview/roadview.module').then((m) => m.RoadviewModule),
-      // },
-      // {
-      //   path: 'maps',
-      //   loadChildren: () => import('./modules/maps/maps.module').then((m) => m.MapsModule),
-      //   data: { title: 'Maps' },
-      // },
       {
         path: 'dashboard',
         loadChildren: () => import('./modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),

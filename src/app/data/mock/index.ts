@@ -15,8 +15,6 @@ import { CryptoMockApi } from 'app/data/mock/dashboards/crypto'
 import { FinanceMockApi } from 'app/data/mock/dashboards/finance'
 import { HelpCenterMockApi } from 'app/data/mock/pages/help-center'
 import { IconsMockApi } from 'app/data/mock/ui/icons'
-import { DiagnosticMockApi } from './map/index'
-import { MapListMockApi } from './maps/index'
 
 export const mockDataServices = [
   AnalyticsMockApi,
@@ -36,6 +34,4 @@ export const mockDataServices = [
   ShortcutsMockApi,
   TasksMockApi,
   UserMockApi,
-  DiagnosticMockApi,
-  MapListMockApi,
 ]
