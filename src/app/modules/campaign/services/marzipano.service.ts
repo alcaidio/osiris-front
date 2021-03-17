@@ -3,9 +3,7 @@ import { EquirectGeometry, ImageUrlSource, RectilinearView, Viewer } from 'marzi
 import { ViewParams } from '../model/shared.model'
 import { compose, convertDegreesToRadians } from '../utils'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MarzipanoService {
   viewer: any
   view: any

@@ -5,7 +5,7 @@ import { Control, DomUtil, Map } from 'leaflet'
 @Directive({
   selector: '[appCustomLeafletDirective]',
 })
-export class CustomDirective implements OnInit {
+export class CustomLeafletDirective implements OnInit {
   constructor(leafletDirective: LeafletDirective) {
     this.leafletDirective = leafletDirective
   }

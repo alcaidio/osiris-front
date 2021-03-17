@@ -16,7 +16,7 @@ type toolsType = 'default' | 'selection' | 'measure'
   templateUrl: './map-tools.component.html',
   styleUrls: ['./map-tools.component.scss'],
 })
-export class MapSelectionComponent implements AfterViewInit, OnDestroy {
+export class MapToolsComponent implements AfterViewInit, OnDestroy {
   @Input() map: Map
   @Input() position: absolutePosition
   @Input() tool: toolsType = 'default'

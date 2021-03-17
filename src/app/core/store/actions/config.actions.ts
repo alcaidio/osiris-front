@@ -1,4 +1,4 @@
-import { Language, Theme } from '../../../shared/models/shared.model'
+import { Language, Theme } from '../../../shared/models/core.model'
 
 export class OpenSidenav {
   static readonly type = '[Config] Open Sidenav'

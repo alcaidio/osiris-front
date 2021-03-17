@@ -7,9 +7,7 @@ import { Observable, of } from 'rxjs'
 import { catchError, combineAll, map, switchMap } from 'rxjs/operators'
 import { BaseLayer, Calque, Campaign, LeafletStyle, MapSmall, OverlayDTO, PicturePoint } from '../model/shared.model'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ApiService {
   // Lunch json-server with "json-server --watch db.json --delay 2000"
   private api = environment.osiris.api

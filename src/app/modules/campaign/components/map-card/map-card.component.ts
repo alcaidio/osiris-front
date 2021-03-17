@@ -1,9 +1,8 @@
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core'
 import { Select, Store } from '@ngxs/store'
-import { Baselayer } from 'app/shared/models'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
-import { Calque, Campaign } from '../../model/shared.model'
+import { BaseLayer, Calque, Campaign } from '../../model/shared.model'
 import { BaselayerState, CalqueState, CampaignsState, ToggleMapCard, UIState } from '../../store'
 import { OsirisAnimations } from '../../utils/animation.utils'
 
@@ -21,7 +20,7 @@ export class MapCardComponent implements OnDestroy {
   @Select(CalqueState.entities) calques$: Observable<Calque[]>
   @Select(CalqueState.loading) calqueLoading$: Observable<boolean>
   @Select(CampaignsState.active) campaign$: Observable<Campaign>
-  @Select(BaselayerState.entities) baselayers$: Observable<Baselayer[]>
+  @Select(BaselayerState.entities) baselayers$: Observable<BaseLayer[]>
   @Select(BaselayerState.activeId) activeBaselayerId$: Observable<string>
   @Select(UIState.getIsMapCard) isOpen$: Observable<boolean>
   @Output() action = new EventEmitter<string>()

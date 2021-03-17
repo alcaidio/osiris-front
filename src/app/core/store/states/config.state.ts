@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core'
 import { getBrowserLang, TranslocoService } from '@ngneat/transloco'
 import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store'
 import { Language } from 'app/core/config/app.config'
-import { LayoutTheme, Theme } from '../../../shared/models/shared.model'
+import { LayoutTheme, Theme } from '../../../shared/models/core.model'
 import { ChangeLanguage, ChangeNavigationLoad, ChangeTheme } from '../actions/config.actions'
 
 export interface ConfigStateModel {

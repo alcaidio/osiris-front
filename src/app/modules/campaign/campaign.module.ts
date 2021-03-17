@@ -5,51 +5,19 @@ import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw'
 import { NgxsModule } from '@ngxs/store'
 import { SharedModule } from 'app/shared/shared.module'
 import { CampaignRoutingModule } from './campaign.routing'
-import { BaselayerListComponent } from './components/baselayer-list/baselayer-list.component'
-import { CalqueListComponent } from './components/calque-list/calque-list.component'
-import { CalqueComponent } from './components/calque/calque.component'
-import { CarCompassComponent } from './components/car-compass/car-compass.component'
-import { DialogComponent } from './components/dialog/dialog.component'
-import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component'
-import { FlatImageComponent } from './components/flat-image/flat-image.component'
-import { MapCardComponent } from './components/map-card/map-card.component'
-import { MapSelectionComponent } from './components/map-tools/map-tools.component'
-import { MapComponent } from './components/map/map.component'
-import { NavigationPerspectiveComponent } from './components/navigation-perspective/navigation-perspective.component'
-import { PanoramaComponent } from './components/panorama/panorama.component'
-import { PopupContentComponent } from './components/popup-content/popup-content.component'
-import { PropertyTypeComponent } from './components/property-type/property-type.component'
-import { PropertyValueComponent } from './components/property-value/property-value.component'
-import { ViewerComponent } from './components/viewer/viewer.component'
-import { CampaignDetailComponent } from './containers/campaign-detail/campaign-detail.component'
-import { CampaignListComponent } from './containers/campaign-list/campaign-list.component'
-import { CustomDirective } from './directives/custom.directive'
-import { TitlePipe, TruncatePipe } from './pipe'
+import * as fromComponents from './components'
+import * as fromContainers from './containers'
+import * as fromDirectives from './directives'
+import * as fromPipes from './pipes'
+import * as fromServices from './services'
 import { CampaignModuleStates } from './store'
 
 @NgModule({
   declarations: [
-    MapComponent,
-    CampaignDetailComponent,
-    PopupContentComponent,
-    CampaignListComponent,
-    CustomDirective,
-    BaselayerListComponent,
-    CalqueComponent,
-    TruncatePipe,
-    TitlePipe,
-    CalqueListComponent,
-    PropertyTypeComponent,
-    PropertyValueComponent,
-    MapCardComponent,
-    DialogComponent,
-    MapSelectionComponent,
-    FlatImageComponent,
-    NavigationPerspectiveComponent,
-    CarCompassComponent,
-    DynamicTableComponent,
-    PanoramaComponent,
-    ViewerComponent,
+    ...fromComponents.components,
+    ...fromContainers.containers,
+    ...fromPipes.pipes,
+    ...fromDirectives.directives,
   ],
   imports: [
     CommonModule,
@@ -59,5 +27,6 @@ import { CampaignModuleStates } from './store'
     LeafletDrawModule,
     NgxsModule.forFeature(CampaignModuleStates),
   ],
+  providers: [...fromServices.services],
 })
 export class CampaignModule {}

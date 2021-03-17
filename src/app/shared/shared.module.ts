@@ -60,7 +60,7 @@ const MATERIAL = [
 
 @NgModule({
   declarations: [MouseWheelDirective],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, MATERIAL],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslocoModule, TreoCardModule, ...MATERIAL],
   exports: [
     CommonModule,
     FormsModule,
@@ -68,7 +68,7 @@ const MATERIAL = [
     TranslocoModule,
     TreoCardModule,
     MouseWheelDirective,
-    MATERIAL,
+    ...MATERIAL,
   ],
 })
 export class SharedModule {}
