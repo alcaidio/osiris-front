@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output } from '@angular/core'
 import { MarzipanoService } from '../../services/marzipano.service'
 import { convertDegreesToRadians } from '../../utils'
-import { ViewParams } from './../../model/shared.model'
+import { ViewParams } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-panorama',

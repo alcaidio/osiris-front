@@ -14,12 +14,11 @@ import {
   CameraConfig,
   CameraPositionType,
   Config,
-  Mode,
   NeighboursDirectionType,
   Overlay,
   Picture,
   PicturePoint,
-} from '../../model/shared.model'
+} from '../../model/campaign.model'
 import {
   CalqueState,
   ChangeCameraPosition,
@@ -77,10 +76,8 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
   @Select(PicturesState.getCameraConfig) cameraConfig$: Observable<CameraConfig>
 
   mapReady: Map
-
   selectedFeature: GeoJSON.Feature
   leafletMapConfig: Config
-  MODE = Mode.Edit
 
   newCalqueName: string
 

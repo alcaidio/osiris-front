@@ -22,24 +22,23 @@
             <mat-icon>preview</mat-icon>
             <span>Définir cette vue par défaut</span>
           </button>
-          <button mat-menu-item (click)="onClick('newCalque')">
+          <button mat-menu-item (click)="onClick('newCalque')" disabled>
             <mat-icon>layers</mat-icon>
             <span>Ajouter un calque</span>
           </button>
-          <!-- 
-          <button mat-menu-item>
+          <button mat-menu-item disabled>
             <mat-icon>query_stats</mat-icon>
             <span>Visualiser dans le dashboard</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item disabled>
             <mat-icon>copy_all</mat-icon>
             <span>Dupliquer la carte</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item disabled>
             <mat-icon>print</mat-icon>
             <span>Imprimer la carte</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item disabled>
             <mat-icon>share</mat-icon>
             <span>Partager la carte</span>
           </button>
@@ -48,15 +47,11 @@
             <span>Exporter la carte</span>
           </button>
           <mat-menu #export="matMenu">
-            <button mat-menu-item>En CSV</button>
-            <button mat-menu-item>En KML</button>
-            <button mat-menu-item>En Geojson</button>
-            <button mat-menu-item>En Shape</button>
+            <button mat-menu-item disabled>En CSV</button>
+            <button mat-menu-item disabled>En KML</button>
+            <button mat-menu-item disabled>En Geojson</button>
+            <button mat-menu-item disabled>En Shape</button>
           </mat-menu>
-          <button mat-menu-item>
-            <mat-icon>delete_outline</mat-icon>
-            <span>Placer dans la corbeille</span>
-          </button> -->
         </mat-menu>
       </div>
     </div>

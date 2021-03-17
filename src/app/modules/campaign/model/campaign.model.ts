@@ -29,11 +29,6 @@ export enum ColorState {
   VERY_BAD = '#000000',
 }
 
-export enum Mode {
-  Read = 'read',
-  Edit = 'edit',
-}
-
 export enum FeatureProperties {
   SECTION = 'section',
   IMAGE = 'image',

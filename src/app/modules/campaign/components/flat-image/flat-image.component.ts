@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'
-import { Picture } from '../../model/shared.model'
+import { Picture } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-flat-image',

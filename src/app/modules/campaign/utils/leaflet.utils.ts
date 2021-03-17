@@ -1,5 +1,5 @@
 import { LatLngBounds, tileLayer } from 'leaflet'
-import { BaseLayer, Config } from '../model/shared.model'
+import { BaseLayer, Config } from '../model/campaign.model'
 
 export const convertConfigToLeaflet = (config: Config) => {
   let tile

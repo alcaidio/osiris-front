@@ -1,4 +1,4 @@
-import { ColorState } from '../model/shared.model'
+import { ColorState } from '../model/campaign.model'
 
 export const setSectionColor = (note: number) => {
   if (note > 80) {

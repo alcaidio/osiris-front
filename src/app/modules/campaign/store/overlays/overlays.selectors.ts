@@ -2,7 +2,7 @@ import { EntityStateModel } from '@ngxs-labs/entity-state'
 import { Selector } from '@ngxs/store'
 import { cleanString } from '../../utils'
 import { FilterState } from '../filters/filters.state'
-import { FiltersProp, Overlay } from './../../model/shared.model'
+import { FiltersProp, Overlay } from '../../model/campaign.model'
 import { OverlayState } from './overlays.state'
 
 export class OverlaySelectors {

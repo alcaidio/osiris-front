@@ -12,30 +12,15 @@ import {
 import { ActivatedRoute } from '@angular/router'
 import { Navigate } from '@ngxs/router-plugin'
 import { Select, Store } from '@ngxs/store'
-import {
-  circle,
-  control,
-  DrawEvents,
-  featureGroup,
-  FeatureGroup,
-  geoJSON,
-  icon,
-  LatLng,
-  Layer,
-  layerGroup,
-  Map,
-  marker,
-  tileLayer,
-} from 'leaflet'
+import { circle, control, geoJSON, icon, LatLng, Layer, layerGroup, Map, marker, tileLayer } from 'leaflet'
 import 'leaflet-rotatedmarker'
 import 'leaflet.polylinemeasure'
 import 'leaflet.smoothwheelzoom'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
-import { CameraConfig, Overlay } from '../../model/shared.model'
+import { CameraConfig, Config, Overlay } from '../../model/campaign.model'
 import { MapState, ToggleIsHoverTrace } from '../../store'
 import { PopupContentComponent } from '../popup-content/popup-content.component'
-import { Config, Mode } from './../../model/shared.model'
 import { setDefaultStyleOfFeature } from './../../utils/leaflet.utils'
 
 @AutoUnsubscribe()
@@ -46,7 +31,6 @@ import { setDefaultStyleOfFeature } from './../../utils/leaflet.utils'
 })
 export class MapComponent implements OnChanges, OnDestroy {
   @Input() config: Config
-  @Input() mode: Mode
   @Input() overlays: Overlay[]
   @Input() activeFeature: GeoJSON.Feature
   @Input() cameraConfig: CameraConfig
@@ -58,35 +42,9 @@ export class MapComponent implements OnChanges, OnDestroy {
   // normally the component has no direct data via the store. Thereafter the data must only pass through the inputs
   @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
 
-  drawItems: FeatureGroup = featureGroup()
-  featureSelected: GeoJSON.Feature
   mapReady: Map
   leafletLayers: Layer[] // value to bind leaflet directive
-
   cameraMarker: any
-
-  drawOptions = {
-    position: 'topright',
-    draw: {
-      polyline: true,
-      circle: false,
-      // circle: {
-      //   shapeOptions: {
-      //     color: '#d4af37',
-      //   },
-      // },
-      polygon: {
-        shapeOptions: {
-          color: '#666',
-        },
-      },
-      rectangle: false,
-      circlemarker: false,
-      edit: {
-        featureGroup: this.drawItems,
-      },
-    },
-  }
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -102,7 +60,7 @@ export class MapComponent implements OnChanges, OnDestroy {
       this.leafletLayers = this.convertOverlaysForLeaflet(this.overlays)
 
       control.polylineMeasure(polylineMeasureOption).addTo(map)
-      control.zoom({ position: 'bottomright' }).addTo(map)
+      // control.zoom({ position: 'bottomleft' }).addTo(map)
     }
 
     // this.mapReady.on('boxzoomend', (e) => {
@@ -164,19 +122,20 @@ export class MapComponent implements OnChanges, OnDestroy {
     this.cameraMarker.addTo(this.mapReady).on('click', (e) => this.mapReady.panTo(e.latlng))
   }
 
-  onDrawCreated(e: DrawEvents.Created): void {
-    this.drawItems.addLayer(e.layer)
+  // TODO when you want to add leaflet draw features
+  // onDrawCreated(e: DrawEvents.Created): void {
+  //   this.drawItems.addLayer(e.layer)
 
-    const geojson = this.drawItems.toGeoJSON()
-    console.log(geojson)
-    console.log(e)
+  //   const geojson = this.drawItems.toGeoJSON()
+  //   console.log(geojson)
+  //   console.log(e)
 
-    e.layer.bindPopup(`<div>New item</div>`, {
-      offset: [0, -10],
-      maxHeight: 200,
-      autoPan: false,
-    })
-  }
+  //   e.layer.bindPopup(`<div>New item</div>`, {
+  //     offset: [0, -10],
+  //     maxHeight: 200,
+  //     autoPan: false,
+  //   })
+  // }
 
   setDefaultView(): void {
     this.mapConfig$.subscribe((config) => {
@@ -340,8 +299,33 @@ export class MapComponent implements OnChanges, OnDestroy {
   }
 }
 
+// Module leaflet draw if draw feature ok
+// export const drawOptions = {
+//   position: 'topright',
+//   draw: {
+//     polyline: true,
+//     circle: false,
+//     // circle: {
+//     //   shapeOptions: {
+//     //     color: '#d4af37',
+//     //   },
+//     // },
+//     polygon: {
+//       shapeOptions: {
+//         color: '#666',
+//       },
+//     },
+//     rectangle: false,
+//     circlemarker: false,
+//     // edit: {
+//     //   featureGroup: this.drawItems,
+//     // },
+//   },
+// }
+
+// Plugin leaflet measure
 export const polylineMeasureOption = {
-  position: 'topright', // Position to show the control. Values: 'topright', 'topleft', 'bottomright', 'bottomleft'
+  position: 'bottomright', // Position to show the control. Values: 'topright', 'topleft', 'bottomright', 'bottomleft'
   unit: 'metres', // Show imperial or metric distances. Values: 'metres', 'landmiles', 'nauticalmiles'
   clearMeasurementsOnStop: true, // Clear all the measurements when the control is unselected
   showBearings: false, // Whether bearings are displayed within the tooltips

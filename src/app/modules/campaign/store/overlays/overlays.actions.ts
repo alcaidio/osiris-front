@@ -1,4 +1,4 @@
-import { Overlay } from '../../model/shared.model'
+import { Overlay } from '../../model/campaign.model'
 
 export class GetOverlays {
   static readonly type = '[overlays] get by map id'

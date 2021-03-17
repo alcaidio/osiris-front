@@ -15,7 +15,7 @@ import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { ApiService } from '../../services/api.service'
 import { BaselayerState } from '../baselayers/baselayers.state'
-import { Config, MapSmall } from './../../model/shared.model'
+import { Config, MapSmall } from '../../model/campaign.model'
 import { GetMap } from './maps.actions'
 
 @State<EntityStateModel<MapSmall>>({

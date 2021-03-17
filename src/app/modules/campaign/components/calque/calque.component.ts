@@ -4,7 +4,7 @@ import { SetActive } from '@ngxs-labs/entity-state'
 import { Store } from '@ngxs/store'
 import { CalqueState, CheckCalque, OverlayState, ToggleCalque, ToggleData } from '../../store'
 import { DialogComponent } from '../dialog/dialog.component'
-import { Calque, GeomType } from './../../model/shared.model'
+import { Calque, GeomType } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-calque',

@@ -14,7 +14,7 @@
         <span class="email">{{ email }}</span>
       </span>
     </button>
-    <mat-divider class="my-2"></mat-divider>
+    <!-- <mat-divider class="my-2"></mat-divider>
     <button mat-menu-item (click)="onNavigate('settings')">
       <mat-icon [svgIcon]="'settings'"></mat-icon>
       <span>{{ t('user.settings') }}</span>
@@ -22,7 +22,7 @@
     <button mat-menu-item [matMenuTriggerFor]="userStatus">
       <mat-icon [svgIcon]="'radio_button_unchecked'"></mat-icon>
       <span>{{ t('user.status') }}</span>
-    </button>
+    </button> -->
     <mat-divider class="my-2"></mat-divider>
     <button mat-menu-item (click)="onNavigate('sign-out')">
       <mat-icon [svgIcon]="'power_settings_new'"></mat-icon>
@@ -30,7 +30,7 @@
     </button>
   </mat-menu>
 
-  <mat-menu class="user-status-menu" #userStatus="matMenu">
+  <!-- <mat-menu class="user-status-menu" #userStatus="matMenu">
     <button mat-menu-item (click)="updateUserStatus('online')">
       <span class="status online"></span>
       <span>{{ t('user.status.online') }}</span>
@@ -43,5 +43,5 @@
       <span class="status not-visible"></span>
       <span>{{ t('user.status.invisible') }}</span>
     </button>
-  </mat-menu>
+  </mat-menu> -->
 </ng-container>

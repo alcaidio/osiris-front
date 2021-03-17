@@ -12,7 +12,7 @@ import { Action, State, StateContext } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { ApiService } from '../../services/api.service'
-import { BaseLayer } from './../../model/shared.model'
+import { BaseLayer } from '../../model/campaign.model'
 import { GetBaselayers } from './baselayers.actions'
 
 @State<EntityStateModel<BaseLayer>>({

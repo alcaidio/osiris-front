@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core'
 import { MatSelectChange } from '@angular/material/select'
 import { SetActive, UpdateActive } from '@ngxs-labs/entity-state'
 import { Store } from '@ngxs/store'
-import { BaseLayer } from '../../model/shared.model'
+import { BaseLayer } from '../../model/campaign.model'
 import { BaselayerState, MapState } from '../../store'
 
 @Component({

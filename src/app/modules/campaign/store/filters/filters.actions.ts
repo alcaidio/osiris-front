@@ -1,4 +1,4 @@
-import { Calque } from '../../model/shared.model'
+import { Calque } from '../../model/campaign.model'
 
 export class CreateFilters {
   static readonly type = '[filters] create filter calque'

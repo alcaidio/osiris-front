@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { EquirectGeometry, ImageUrlSource, RectilinearView, Viewer } from 'marzipano'
-import { ViewParams } from '../model/shared.model'
+import { ViewParams } from '../model/campaign.model'
 import { compose, convertDegreesToRadians } from '../utils'
 
 @Injectable()

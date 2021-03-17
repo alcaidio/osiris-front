@@ -6,7 +6,8 @@
   overflow: hidden;
 
   &.default {
-    top: 190px;
+    // top: 84px;
+    top: 0;
     right: 0;
   }
 
@@ -41,7 +42,7 @@
 
   &.default {
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-top: 10px;
   }
 
   &.top-right {

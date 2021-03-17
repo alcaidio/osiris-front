@@ -14,7 +14,7 @@ import { ConfigState } from 'app/core/store'
 import moment from 'moment'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
-import { Campaign } from '../../model/shared.model'
+import { Campaign } from '../../model/campaign.model'
 import { CampaignsState } from '../../store/campaigns/campaigns.state'
 
 @AutoUnsubscribe()

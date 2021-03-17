@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core'
 import { Store } from '@ngxs/store'
-import { Calque, PropertyValue } from '../../model/shared.model'
+import { Calque, PropertyValue } from '../../model/campaign.model'
 import { CheckValue } from '../../store'
-import { PropertyType } from './../../model/shared.model'
+import { PropertyType } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-property-value',

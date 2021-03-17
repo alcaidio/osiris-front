@@ -10,7 +10,7 @@ import {
 } from '@ngxs-labs/entity-state'
 import { Action, NgxsOnInit, State, StateContext } from '@ngxs/store'
 import { catchError, map } from 'rxjs/operators'
-import { Campaign } from '../../model/shared.model'
+import { Campaign } from '../../model/campaign.model'
 import { ApiService } from '../../services/api.service'
 import { GetAllCampaigns } from './campaigns.actions'
 

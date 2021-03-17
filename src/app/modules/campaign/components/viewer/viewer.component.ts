@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 import moment from 'moment'
-import { CameraPositionType, LangType, NeighboursDirectionType, Picture, PicturePoint } from '../../model/shared.model'
+import { CameraPositionType, LangType, NeighboursDirectionType, Picture, PicturePoint } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-viewer',

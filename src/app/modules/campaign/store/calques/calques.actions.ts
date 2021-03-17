@@ -1,5 +1,5 @@
-import { Calque, PropertyValue } from '../../model/shared.model'
-import { PropertyType } from './../../model/shared.model'
+import { Calque, PropertyValue } from '../../model/campaign.model'
+import { PropertyType } from '../../model/campaign.model'
 
 export class GetCalques {
   static readonly type = '[calques] get'

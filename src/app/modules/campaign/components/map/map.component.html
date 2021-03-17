@@ -9,10 +9,11 @@
   (leafletMapMoveEnd)="updateConfigMapInUrl()"
   [leafletMaxBounds]="config.maxBounds"
 >
-  <ng-container *ngIf="mode === 'edit'">
+  <!-- TODO when you want to add leaflet draw features -->
+  <!-- <ng-container>
     <div leafletDraw [leafletDrawOptions]="drawOptions" (leafletDrawCreated)="onDrawCreated($event)"></div>
     <div [leafletLayer]="drawItems"></div>
-  </ng-container>
+  </ng-container> -->
   <div *ngFor="let layer of leafletLayers" [leafletLayer]="layer"></div>
 </div>
 <app-map-tools

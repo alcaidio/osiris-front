@@ -5,7 +5,7 @@ import { environment } from 'environments/environment'
 import { LatLng } from 'leaflet'
 import { Observable, of } from 'rxjs'
 import { catchError, combineAll, map, switchMap } from 'rxjs/operators'
-import { BaseLayer, Calque, Campaign, LeafletStyle, MapSmall, OverlayDTO, PicturePoint } from '../model/shared.model'
+import { BaseLayer, Calque, Campaign, LeafletStyle, MapSmall, OverlayDTO, PicturePoint } from '../model/campaign.model'
 
 @Injectable()
 export class ApiService {

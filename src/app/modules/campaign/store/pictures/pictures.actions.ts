@@ -1,6 +1,6 @@
 import { ID } from 'app/shared/models'
 import { LatLng } from 'leaflet'
-import { CameraPositionType, NeighboursDirectionType, PicturePoint } from '../../model/shared.model'
+import { CameraPositionType, NeighboursDirectionType, PicturePoint } from '../../model/campaign.model'
 
 export class LoadPicturesPointByLngLat {
   static readonly type = '[Campaign - Pictures] Load picture point by lnglat'

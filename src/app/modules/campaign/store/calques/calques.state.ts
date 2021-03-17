@@ -12,7 +12,7 @@ import {
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
-import { Calque } from '../../model/shared.model'
+import { Calque } from '../../model/campaign.model'
 import { ApiService } from '../../services/api.service'
 import { OverlayState } from '../overlays/overlays.state'
 import { CreateFilters } from './../filters/filters.actions'

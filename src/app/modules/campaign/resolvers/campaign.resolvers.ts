@@ -4,7 +4,7 @@ import { SetActive } from '@ngxs-labs/entity-state'
 import { Store } from '@ngxs/store'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { Campaign, MapSmall } from '../model/shared.model'
+import { Campaign, MapSmall } from '../model/campaign.model'
 import { CampaignsState, MapState } from '../store'
 import { GetMap } from '../store/maps/maps.actions'
 

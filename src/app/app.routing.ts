@@ -107,11 +107,11 @@ export const routes: Route[] = [
         loadChildren: () => import('./modules/pages/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
         data: { title: 'Travaux' },
       },
-      {
-        path: 'settings',
-        loadChildren: () => import('./modules/pages/settings/settings.module').then((m) => m.SettingsModule),
-        data: { title: 'Settings' },
-      },
+      // {
+      //   path: 'settings',
+      //   loadChildren: () => import('./modules/pages/settings/settings.module').then((m) => m.SettingsModule),
+      //   data: { title: 'Settings' },
+      // },
 
       // 404 & Catch all
       {

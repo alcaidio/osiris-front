@@ -2,7 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { Component, Input } from '@angular/core'
 import { CreateOrReplace, RemoveAll } from '@ngxs-labs/entity-state'
 import { Store } from '@ngxs/store'
-import { Calque } from '../../model/shared.model'
+import { Calque } from '../../model/campaign.model'
 import { CalqueState } from '../../store'
 
 @Component({

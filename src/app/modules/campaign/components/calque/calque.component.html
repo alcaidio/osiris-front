@@ -54,22 +54,22 @@
           <mat-icon>list</mat-icon>
           <span>Données</span>
         </button>
-        <button [disabled]="!(calque.properties.length > 0)" mat-menu-item (click)="openDialog()">
+        <button [disabled]="!(calque.properties.length > 0)" mat-menu-item (click)="openDialog()" disabled>
           <mat-icon>style</mat-icon>
           <span>Style</span>
         </button>
-        <!-- <button mat-menu-item>
+        <button mat-menu-item disabled>
           <mat-icon>add</mat-icon>
           <span>Ajouter des géométries</span>
-        </button> -->
-        <button disabled mat-menu-item>
+        </button>
+        <button mat-menu-item disabled>
           <mat-icon>create</mat-icon>
           <span>Renommer</span>
         </button>
-        <!-- <button mat-menu-item disabled>
+        <button mat-menu-item disabled>
           <mat-icon>delete_outline</mat-icon>
           <span>Supprimer</span>
-        </button> -->
+        </button>
       </mat-menu>
     </div>
   </div>

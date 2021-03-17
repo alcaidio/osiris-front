@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { Store } from '@ngxs/store'
-import { Calque, PropertyType } from '../../model/shared.model'
+import { Calque, PropertyType } from '../../model/campaign.model'
 import { CheckProperty, ToggleProperty } from '../../store'
 
 @Component({

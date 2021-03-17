@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
-import { NeighboursDirectionType, Picture, PicturePoint } from '../../model/shared.model'
+import { NeighboursDirectionType, Picture, PicturePoint } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-navigation-perspective',

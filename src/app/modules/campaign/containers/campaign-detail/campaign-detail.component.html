@@ -5,7 +5,6 @@
         <app-map
           [config]="leafletMapConfig"
           [overlays]="filteredOverlays$ | async"
-          [mode]="MODE"
           [cameraConfig]="cameraConfig$ | async"
           (map)="mapReady = $event"
           (guyDragEnd)="onNavigate($event)"

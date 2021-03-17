@@ -5,7 +5,7 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { NotificationService } from '../../../../shared/services/notification.service'
-import { CameraPositionType, ID, Picture, PicturePoint } from '../../model/shared.model'
+import { CameraPositionType, ID, Picture, PicturePoint } from '../../model/campaign.model'
 import { ApiService } from '../../services/api.service'
 import { OpenViewer } from './../ui/ui.actions'
 import {
