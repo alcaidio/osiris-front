@@ -1,24 +1,23 @@
-<div class="content-layout fullwidth-basic-normal-scroll" >
+<div class="content-layout fullwidth-basic-normal-scroll">
   <treo-card class="auth-card">
-      <div class="form-container">
-        <div class="form">
-          <ng-container *transloco="let t; read: 'coming-soon'">
-
-          <img src="assets/images/pages/coming-soon/soon.svg" alt="Image en construction"/>
+    <div class="form-container">
+      <div class="form">
+        <ng-container *transloco="let t; read: 'coming-soon'">
+          <img src="assets/images/pages/coming-soon/soon.svg" alt="Image en construction" />
 
           <div class="title">{{ t('title') }}</div>
           <div class="subtitle">
             {{ t('subtitle1', { module: featureName }) }}
             <ng-container *ngIf="!alreadySubscribed">
               {{ t('subtitle2') }}
-            </ng-container> 
+            </ng-container>
             <ng-container *ngIf="alreadySubscribed">
               {{ t('subtitle3') }}
-            </ng-container> 
+            </ng-container>
           </div>
 
           <form>
-            <button
+            <!-- <button
               *ngIf="!alreadySubscribed"
               class="submit-button treo-mat-button-large -mt-2"
               mat-flat-button
@@ -35,14 +34,14 @@
                 [diameter]="24"
                 [mode]="'indeterminate'"
               ></mat-progress-spinner>
-            </button>
+            </button> -->
 
             <div class="form-footer">
               {{ t('footer') }}
             </div>
           </form>
-          </ng-container>
-        </div>
+        </ng-container>
       </div>
-    </treo-card>
+    </div>
+  </treo-card>
 </div>

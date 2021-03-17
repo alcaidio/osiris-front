@@ -15,8 +15,8 @@ import { NotificationService } from './../../../shared/services/notification.ser
 })
 export class ComingSoonComponent implements OnInit, OnDestroy {
   @Select(AuthStatusState.getEmail) email$: Observable<string>
-  isLoading: boolean  // TODO: getIsLoading 
-  alreadySubscribed: boolean // TODO : getIsSubscribed
+  isLoading: boolean 
+  alreadySubscribed: boolean
   featureName: string
   
   constructor(private route: ActivatedRoute, private snack: NotificationService) {}

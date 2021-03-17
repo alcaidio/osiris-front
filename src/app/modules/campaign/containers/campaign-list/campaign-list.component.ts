@@ -7,7 +7,6 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core'
-import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { Select } from '@ngxs/store'
@@ -31,7 +30,7 @@ export class CampaignListComponent implements OnInit, AfterViewInit, OnDestroy {
   @Select(CampaignsState.loading) isLoading$: Observable<boolean>
   @Select(ConfigState.getNavigationLoad) navigationLoad$: Observable<boolean>
 
-  @ViewChild(MatPaginator) paginator: MatPaginator
+  // @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
   dataSource: MatTableDataSource<Campaign>
@@ -52,9 +51,10 @@ export class CampaignListComponent implements OnInit, AfterViewInit, OnDestroy {
     const filterValue = (event.target as HTMLInputElement).value
     this.dataSource.filter = filterValue.trim().toLowerCase()
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage()
-    }
+    // paginator pas util pour le moment
+    // if (this.dataSource.paginator) {
+    //   this.dataSource.paginator.firstPage()
+    // }
   }
 
   fromNow(time: number) {
@@ -73,7 +73,7 @@ export class CampaignListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private sortAndPagine() {
-    this.dataSource.paginator = this.paginator
+    // this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
   }
 

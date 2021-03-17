@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
-import { CameraPositionType, Picture } from './../../../../shared/models/maps.model'
+import { CameraPositionType, Picture } from '../../model/shared.model'
 
 @Component({
   selector: 'app-car-compass',

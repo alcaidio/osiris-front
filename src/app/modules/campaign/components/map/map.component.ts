@@ -126,7 +126,7 @@ export class MapComponent implements OnChanges, OnDestroy {
             if (change && !change.firstChange) {
               const prev = change.previousValue
               const curr = change.currentValue
-              if (this.mapReady && this.config) {
+              if (this.mapReady && this.config && prev && curr) {
                 // TODO voir util leaflet pour token
                 this.mapReady.removeLayer(tileLayer(prev.layers._url, prev.layers.options))
                 this.mapReady.addLayer(tileLayer(curr.layers._url, curr.layers.options))

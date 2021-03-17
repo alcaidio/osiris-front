@@ -114,12 +114,10 @@ app-campaign-list {
 
         table {
           width: 100%;
-          table-layout: fixed;
 
           &.loading {
             pointer-events: none;
             tbody {
-              background: red;
               tr {
                 width: 128px;
               }

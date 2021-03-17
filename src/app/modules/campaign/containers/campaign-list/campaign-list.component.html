@@ -6,7 +6,7 @@
       <!-- Title -->
       <div class="title">
         <h1>
-          Campagnes
+          Cartes
         </h1>
       </div>
 
@@ -26,12 +26,12 @@
           </mat-form-field>
         </div>
 
-        <button class="add-campaign" mat-flat-button [color]="'primary'" (click)="onAddCampaign()">
+        <button class="add-campaign" mat-flat-button [color]="'primary'" (click)="onAddCampaign()" disabled>
           <mat-icon [svgIcon]="'add'"></mat-icon>
           Ajouter
         </button>
 
-        <!-- TODO:  Switch template -->
+        <!-- TODO:  Switch template (list & card) -->
         <!-- <button class="switch-template" mat-stroked-button (click)="(true)">
           <mat-icon *ngIf="true">view_list</mat-icon>
           <mat-icon *ngIf="false">view_module</mat-icon>
@@ -101,16 +101,21 @@
               *matRowDef="let campaign; columns: campaignsTableColumns"
               [routerLink]="campaign.id"
             ></tr>
-            <tr class="mat-row" *matNoDataRow>
-              <td class="mat-cell" colspan="4">Aucune donnée correspondante au filtre "{{ searchInput.value }}"</td>
+            <tr class="mat-row h-80" *matNoDataRow>
+              <td class="mat-cell text-center" colspan="4">
+                <div class="flex flex-col justify-center items-center">
+                  <h4 class="text-center mb-12">Aucune donnée correspondante au filtre "{{ searchInput.value }}"</h4>
+                  <img class="w-40 pb-12" src="assets/images/no-data.svg" alt="No data" />
+                </div>
+              </td>
             </tr>
           </table>
         </div>
-        <mat-paginator
+        <!-- <mat-paginator
           [ngClass]="{ loading: isLoading$ | async }"
           [pageSizeOptions]="[10, 25, 100]"
           [showFirstLastButtons]="true"
-        ></mat-paginator>
+        ></mat-paginator> -->
       </ng-container>
       <ng-template #empty>
         <div class="h-full w-full flex justify-center items-center">
