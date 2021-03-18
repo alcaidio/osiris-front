@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  OnChanges,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -25,12 +26,11 @@ import { CampaignsState } from '../../store/campaigns/campaigns.state'
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CampaignListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CampaignListComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Select(CampaignsState.entities) campaigns$: Observable<Campaign[]>
   @Select(CampaignsState.loading) isLoading$: Observable<boolean>
   @Select(ConfigState.getNavigationLoad) navigationLoad$: Observable<boolean>
 
-  // @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
   dataSource: MatTableDataSource<Campaign>
@@ -39,22 +39,20 @@ export class CampaignListComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.campaigns$.subscribe((campaigns) => {
       this.dataSource = new MatTableDataSource(campaigns)
-      this.sortAndPagine()
     })
   }
 
   ngAfterViewInit() {
-    this.sortAndPagine()
+    setTimeout(() => this.sortTable(), 150)
+  }
+
+  ngOnChanges() {
+    this.sortTable()
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
     this.dataSource.filter = filterValue.trim().toLowerCase()
-
-    // paginator pas util pour le moment
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage()
-    // }
   }
 
   fromNow(time: number) {
@@ -72,9 +70,10 @@ export class CampaignListComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('add campaign')
   }
 
-  private sortAndPagine() {
-    // this.dataSource.paginator = this.paginator
-    this.dataSource.sort = this.sort
+  private sortTable() {
+    if (this.dataSource) {
+      this.dataSource.sort = this.sort
+    }
   }
 
   ngOnDestroy(): void {

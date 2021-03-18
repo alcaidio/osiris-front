@@ -58,7 +58,7 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit, 
   }
 
   ngAfterViewInit() {
-    this.sortTable()
+    setTimeout(() => this.sortTable(), 150)
   }
 
   applyFilter(event: Event) {
