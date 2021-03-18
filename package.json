@@ -49,6 +49,8 @@
     "@ngxs/router-plugin": "^3.6.2",
     "@ngxs/storage-plugin": "^3.6.2",
     "@ngxs/store": "^3.6.2",
+    "@sentry/angular": "^6.2.2",
+    "@sentry/tracing": "^6.2.2",
     "@turf/bbox": "^6.3.0",
     "@turf/boolean-crosses": "^6.3.0",
     "@turf/boolean-intersects": "^6.3.0",
