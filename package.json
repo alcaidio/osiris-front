@@ -24,7 +24,9 @@
     "release:major": "standard-version --release-as major",
     "cypress:open": "cypress open",
     "cypress": "run-p start cypress:open",
-    "server": "json-server --watch db.json"
+    "server": "json-server --watch db.json",
+    "osiris:start": "bash osiris-start.sh",
+    "osiris:stop": "bash osiris-stop.sh"
   },
   "private": true,
   "dependencies": {
