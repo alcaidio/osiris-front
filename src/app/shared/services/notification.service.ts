@@ -33,6 +33,7 @@ export class NotificationService {
       horizontalPosition,
       verticalPosition,
       viewContainerRef,
+      panelClass: 'custom-snackbar',
     })
   }
 

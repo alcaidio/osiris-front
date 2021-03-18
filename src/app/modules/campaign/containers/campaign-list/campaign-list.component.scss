@@ -63,6 +63,10 @@ app-campaign-list {
           .mat-form-field {
             width: 100%;
           }
+
+          input:disabled {
+            cursor: not-allowed;
+          }
         }
 
         .add-campaign {

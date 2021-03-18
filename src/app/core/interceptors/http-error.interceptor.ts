@@ -1,28 +1,19 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { NotificationService } from 'app/shared/services/notification.service'
 import { Observable, throwError } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
 
+@Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
+  constructor(private notifications: NotificationService) {}
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       retry(1),
       catchError((error: HttpErrorResponse) => {
-        let errorMessage = ''
-        let clientError = false
-
-        if (!!error['error']) {
-          // client-side error
-          errorMessage = `${error['error'].message}`
-          clientError = true
-        } else {
-          // server-side error
-          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`
-        }
-        console.log('Error: ', error)
-        console.log('Error message: ', errorMessage)
-        console.log('Client-side error: ', clientError)
-
-        return throwError(errorMessage)
+        this.notifications.openSnackBar(`Error ${error.status}:  ${error.statusText}.`)
+        return throwError(error)
       })
     )
   }

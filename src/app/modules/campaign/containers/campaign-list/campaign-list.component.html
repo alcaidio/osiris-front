@@ -22,6 +22,7 @@
               (keyup)="applyFilter($event)"
               [autocomplete]="'off'"
               [placeholder]="'Rechercher'"
+              [disabled]="!((campaigns$ | async)?.length > 0)"
             />
           </mat-form-field>
         </div>
