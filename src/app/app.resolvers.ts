@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router'
 import { forkJoin, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
@@ -77,32 +77,32 @@ export class InitialDataResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     return forkJoin([
       // Messages
-      this._loadMessages(),
+      // this._loadMessages(),
 
       // Navigation data
       this._loadNavigation(),
 
       // Notifications
-      this._loadNotifications(),
+      // this._loadNotifications(),
 
       // Shortcuts
-      this._loadShortcuts(),
+      // this._loadShortcuts(),
 
       // User
       this._loadUser(),
     ]).pipe(
       map((data) => {
         return {
-          messages: data[0].messages,
+          // messages: data[0].messages,
           navigation: {
-            compact: data[1].compact,
-            default: data[1].default,
-            futuristic: data[1].futuristic,
-            horizontal: data[1].horizontal,
+            compact: data[0].compact,
+            // default: data[1].default,
+            // futuristic: data[1].futuristic,
+            // horizontal: data[1].horizontal,
           },
-          notifications: data[2].notifications,
-          shortcuts: data[3].shortcuts,
-          user: data[4].user,
+          // notifications: data[2].notifications,
+          // shortcuts: data[3].shortcuts,
+          user: data[1].user,
         }
       })
     )
