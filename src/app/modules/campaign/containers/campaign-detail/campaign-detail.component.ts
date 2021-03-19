@@ -10,15 +10,7 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
 import { v4 as uuidv4 } from 'uuid'
-import {
-  CameraConfig,
-  CameraPositionType,
-  Config,
-  NeighboursDirectionType,
-  Overlay,
-  Picture,
-  PicturePoint,
-} from '../../model/campaign.model'
+import { CameraConfig, CameraPositionType, Config, Overlay, Picture, PicturePoint } from '../../model/campaign.model'
 import {
   CalqueState,
   ChangeCameraPosition,
@@ -39,6 +31,7 @@ import {
 } from '../../store'
 import { convertConfigToLeaflet } from '../../utils'
 import { OsirisAnimations } from '../../utils/animation.utils'
+import { NeighboursDirectionType } from './../../model/campaign.model'
 
 enum QueryParamsFromCampaignDetail {
   CONFIG = 'config', // 43.6596748, 3.8262439,15z
@@ -85,6 +78,8 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
   activeLayer: any
   geoJsonFeature: any
 
+  lastDir: number
+
   constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -106,6 +101,10 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
         const latlng = { lng: point.geom.coordinates[0], lat: point.geom.coordinates[1] }
         this.mapReady.panTo(latlng)
       }
+    })
+
+    this.selectedPicture$.subscribe((picture) => {
+      this.lastDir = picture.direction
     })
   }
 

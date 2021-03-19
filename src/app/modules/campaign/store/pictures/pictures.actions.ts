@@ -27,6 +27,11 @@ export class ChangeCameraPosition {
   constructor(public payload: CameraPositionType) {}
 }
 
+export class SwitchCameraPosition {
+  static readonly type = '[Campaign - Pictures] Switch camera position'
+  constructor(public payload: CameraPositionType) {}
+}
+
 export class GoToNeighbour {
   static readonly type = '[Campaign - Pictures] Go to neighbour'
   constructor(public payload: NeighboursDirectionType) {}

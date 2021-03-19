@@ -1,18 +1,27 @@
-import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
-import { NeighboursDirectionType, Picture, PicturePoint } from '../../model/campaign.model'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core'
+import { NotificationService } from 'app/shared/services/notification.service'
+import { CameraPositionType, NeighboursDirectionType, Picture, PicturePoint } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-navigation-perspective',
   templateUrl: './navigation-perspective.component.html',
   styleUrls: ['./navigation-perspective.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationPerspectiveComponent implements OnChanges {
   @Input() picturePoint: PicturePoint
   @Input() picture: Picture
   @Output() direction = new EventEmitter<NeighboursDirectionType>()
-
-  previousDirection: number
-  previousAction: NeighboursDirectionType
+  @Output() camera = new EventEmitter<CameraPositionType>()
 
   isFront = false
   isBack = false
@@ -20,6 +29,8 @@ export class NavigationPerspectiveComponent implements OnChanges {
   isFrontLeft = false
   isBackRight = false
   isBackLeft = false
+
+  constructor(private notification: NotificationService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     for (const propName in changes) {
@@ -128,21 +139,31 @@ export class NavigationPerspectiveComponent implements OnChanges {
 
   @HostListener('document:keydown.arrowup')
   arrowUp() {
-    this.direction.emit('front')
+    if (this.isFront) {
+      this.onClick('front')
+    } else {
+      this.notification.openSnackBar('Vous ne pouvez pas aller devant', 'X', 2000)
+    }
   }
 
   @HostListener('document:keydown.arrowdown')
   arrowDown() {
-    this.direction.emit('back')
+    if (this.isBack) {
+      this.onClick('back')
+    } else {
+      this.notification.openSnackBar('Vous ne pouvez pas aller derrière', 'X', 2000)
+    }
   }
 
   @HostListener('document:keydown.arrowright')
   arrowRight() {
     if (this.isFrontRight) {
-      this.direction.emit('front_right')
+      this.onClick('front_right')
     } else {
       if (this.isBackRight) {
-        this.direction.emit('back_right')
+        this.onClick('back_right')
+      } else {
+        this.notification.openSnackBar('Vous ne pouvez pas aller sur les côtés', 'X', 2000)
       }
     }
   }
@@ -150,10 +171,12 @@ export class NavigationPerspectiveComponent implements OnChanges {
   @HostListener('document:keydown.arrowleft')
   arrowLeft() {
     if (this.isFrontLeft) {
-      this.direction.emit('front_left')
+      this.onClick('front_left')
     } else {
       if (this.isBackLeft) {
-        this.direction.emit('back_left')
+        this.onClick('back_left')
+      } else {
+        this.notification.openSnackBar('Vous ne pouvez pas aller sur les côtés', 'X', 2000)
       }
     }
   }

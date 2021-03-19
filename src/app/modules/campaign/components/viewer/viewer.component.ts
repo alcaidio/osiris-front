@@ -1,11 +1,18 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core'
 import moment from 'moment'
-import { CameraPositionType, LangType, NeighboursDirectionType, Picture, PicturePoint } from '../../model/campaign.model'
+import {
+  CameraPositionType,
+  LangType,
+  NeighboursDirectionType,
+  Picture,
+  PicturePoint,
+} from '../../model/campaign.model'
 
 @Component({
   selector: 'app-viewer',
   templateUrl: './viewer.component.html',
   styleUrls: ['./viewer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewerComponent {
   @Input() picture: Picture

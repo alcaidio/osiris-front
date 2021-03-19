@@ -1,10 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core'
 import { Picture } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-flat-image',
   templateUrl: './flat-image.component.html',
   styleUrls: ['./flat-image.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FlatImageComponent implements OnChanges {
   @Input() picture: Picture

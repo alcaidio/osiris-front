@@ -1,10 +1,21 @@
-import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core'
+import { NotificationService } from 'app/shared/services/notification.service'
 import { CameraPositionType, Picture } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-car-compass',
   templateUrl: './car-compass.component.html',
   styleUrls: ['./car-compass.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarCompassComponent implements OnChanges {
   @Input() pictures: Picture[]
@@ -19,6 +30,8 @@ export class CarCompassComponent implements OnChanges {
   isFrontLeft = false
   isBackRight = false
   isBackLeft = false
+
+  constructor(private notification: NotificationService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     for (const propName in changes) {
@@ -39,6 +52,8 @@ export class CarCompassComponent implements OnChanges {
   onClickCamera(type: CameraPositionType) {
     if (this.selected !== type) {
       this.camera.emit(type)
+    } else {
+      this.notification.openSnackBar(`Vous êtes déjà sur la caméra ${this.selected}`, 'X', 2000)
     }
   }
 

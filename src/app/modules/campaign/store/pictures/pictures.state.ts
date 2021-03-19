@@ -15,6 +15,7 @@ import {
   LoadPicturesPointByLngLat,
   LoadPicturesPointFailure,
   LoadPicturesPointSuccess,
+  SwitchCameraPosition,
 } from './pictures.actions'
 
 export interface PicturesStateModel {
@@ -159,6 +160,33 @@ export class PicturesState {
     this.store.dispatch(
       new Navigate([], { camera: action.payload }, { queryParamsHandling: 'merge', relativeTo: this.route })
     )
+  }
+
+  @Action(SwitchCameraPosition)
+  switchCameraPosition({ patchState }: StateContext<PicturesStateModel>, action: ChangeCameraPosition) {
+    const adaptCamera = (camera: CameraPositionType): CameraPositionType => {
+      switch (camera) {
+        case 'front':
+          return 'back'
+        case 'back':
+          return 'front'
+        case 'front-right':
+          return 'back-left'
+        case 'front-left':
+          return 'back-right'
+        case 'back-right':
+          return 'front-left'
+        case 'back-left':
+          return 'front-right'
+      }
+    }
+    const newCamera = adaptCamera(action.payload)
+    patchState({
+      selectedCamera: newCamera,
+    })
+    // this.store.dispatch(
+    //   new Navigate([], { camera: newCamera }, { queryParamsHandling: 'merge', relativeTo: this.route })
+    // )
   }
 
   @Action(GoToNeighbour)
