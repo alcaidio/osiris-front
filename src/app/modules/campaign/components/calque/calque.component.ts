@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { SetActive } from '@ngxs-labs/entity-state'
 import { Store } from '@ngxs/store'
+import { Calque, GeomType } from '../../model/campaign.model'
 import { CalqueState, CheckCalque, OverlayState, ToggleCalque, ToggleData } from '../../store'
 import { DialogComponent } from '../dialog/dialog.component'
-import { Calque, GeomType } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-calque',
@@ -23,18 +23,17 @@ export class CalqueComponent implements OnInit {
   }
 
   generateIcon(type: GeomType) {
-    if (type === 'point') {
-      return 'room'
-    } else if (type === 'line') {
-      return 'timeline'
-    } else if (type === 'structure') {
-      return 'extension'
-    } else if (type === 'image') {
-      return 'panorama'
-    } else if (type === null) {
-      return
-    } else {
-      throw new Error('Cant load icon layer !')
+    switch (type.toLowerCase()) {
+      case 'linestring':
+      case 'multilinestring':
+        return 'timeline'
+      case 'point':
+        return 'room'
+      case 'polygon':
+      case 'multipolygon':
+        return 'timeline'
+      default:
+        throw new Error('Cant load icon layer !')
     }
   }
 
@@ -47,7 +46,7 @@ export class CalqueComponent implements OnInit {
   }
 
   get propertiesSortByName() {
-    return this.calque.properties.slice().sort((a, b) => a.name.localeCompare(b.name))
+    return this.calque.properties.slice().sort((a, b) => a.displayName.localeCompare(b.displayName))
   }
 
   onActive(id: string) {
@@ -63,7 +62,7 @@ export class CalqueComponent implements OnInit {
     })
   }
 
-  openOverlayData(name: string) {
+  openOverlayData() {
     // the name of the 'calque' is the same as the name of the corresponding 'overlay'
     this.store.dispatch(new ToggleData())
   }

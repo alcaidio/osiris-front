@@ -12,12 +12,12 @@ import { CreateFilters } from './filters.actions'
 @Injectable()
 export class FilterState extends EntityState<FiltersProp> {
   constructor() {
-    super(FilterState, 'calqueId', IdStrategy.EntityIdGenerator)
+    super(FilterState, 'calqueName', IdStrategy.EntityIdGenerator)
   }
 
   @Action(CreateFilters)
   createFilters(ctx: StateContext<FilterState>, action: CreateFilters) {
     const filters = createFilters(action.calque.properties)
-    ctx.dispatch(new CreateOrReplace(FilterState, { calqueId: action.calque.id, filters }))
+    ctx.dispatch(new CreateOrReplace(FilterState, { calqueName: action.calque.layerName, filters }))
   }
 }

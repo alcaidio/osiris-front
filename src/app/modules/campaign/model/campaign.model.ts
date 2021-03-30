@@ -1,49 +1,28 @@
-import { CircleMarkerOptions, LatLng, LatLngBounds, MapOptions, PolylineOptions, TileLayerOptions } from 'leaflet'
+import { CircleMarkerOptions, LatLng, LatLngBounds, PolylineOptions, TileLayerOptions } from 'leaflet'
 
 export type ID = string | number
+export type LangType = 'fr' | 'en'
+export type GeomType = 'point' | 'linestring' | 'multilinestring' | 'multipolygon' | 'polygon'
 
 export interface Campaign {
   id: ID
   title: string
   subtitle?: string
   thumbnail?: string
-  creationDate?: number
-  lastUpdate?: number
-  mapId?: string
-  interventions?: Intervention[]
+  creationDate?: Date
+  lastUpdate?: Date
+  // interventions?: Intervention[]
 }
 
-export interface Intervention {
-  id: ID
-  name: string
-  type: 'survay' | 'works' | 'maintenance' | 'comptage' | 'other'
-  dateStart: Date
-  dateEnd: Date
-}
+// export interface Intervention {
+//   id: ID
+//   name: string
+//   type: 'survay' | 'works' | 'maintenance' | 'comptage' | 'other'
+//   dateStart: Date
+//   dateEnd: Date
+// }
 
-export enum ColorState {
-  VERY_GOOD = '#00FF00',
-  GOOD = '#FFFF00',
-  MEDIUM = '#FFA500',
-  BAD = '#FF0000',
-  VERY_BAD = '#000000',
-}
-
-export enum FeatureProperties {
-  SECTION = 'section',
-  IMAGE = 'image',
-  IMAGE360 = 'image360',
-  // TODO : Complete this section
-}
-
-export interface MapSmall {
-  id: ID
-  config: Config
-  // overlayIds?: string[]
-  // baseLayerIds?: string[]
-  // calqueIds?: string[]
-}
-
+// ________________MAPS__________________________________________________________
 export interface Map {
   id: ID
   config: Config
@@ -52,11 +31,20 @@ export interface Map {
   calqueIds?: string[]
 }
 
+export interface MapSmall {
+  id: ID
+  config: Config
+  title: string
+  subtitle?: string
+  overlayIds?: string[]
+  baseLayerIds?: string[]
+  calqueIds?: string[]
+}
+
 export interface Config {
   zoom: number
   center: LatLng // use latLng() from leaflet to convert [number, number]
   maxBounds: LatLngBounds
-  options: MapOptions
   layers: BaseLayer // "s" of layers because of leaflet
   minZoom?: number
   maxZoom?: number
@@ -65,50 +53,86 @@ export interface Config {
   smoothSensitivity?: number
   tileSize?: number
   zoomOffset?: number
-}
+  boxZoom?: boolean
+  zoomDelta?: number
+  zoomSnap?: number
+  zoomControl?: boolean
+} // ____________________________________________________________________________________
 
+// ________________OVERLAYS__________________________________________________________
 export interface Overlay extends GeoJSON.FeatureCollection {
   id: ID
-  name: string
-  visible?: boolean
-  mapId?: ID
-  geomType?: GeomType
-  activeStyle?: LeafletStyle
-}
-
-export type leafletStyleOptions = CircleMarkerOptions | PolylineOptions
-
-export interface LeafletStyle {
-  id: number
-  name: string
-  ruleDTOs: any[] // TODO create leafletStyleOptions + name
-}
-
-export interface OverlayDTO {
-  id: number
-  mapId: string
   layerName: string
+  displayName: string
+  visible?: boolean
   url: string
-  username: string
-  password: string
-  geomType: GeomType
-  activeStyle: LeafletStyle
+  username?: string
+  password?: string
+  overlayType: 'WFS' | 'WMS'
+  featureType: string // ex: ROAD_SECTION
+  featureTypeModel: TypeModel[]
+  module: 'DIAG' | 'CARTO' | 'REF' | 'PICTURES' | 'AUTH'
+  geomType: GeomType // ex: MultiLineString
+  activeStyleSet: StyleSet[] // Two style set the Light and the Dark, don't forget to get one of them.
 }
 
+export interface GeoServerDTO {
+  type: 'FeatureCollection'
+  features: any
+  numberMatched: number
+  numberReturned: number
+  timeStamp: number
+  totalFeatures: number
+  crs: {
+    type: string
+    properties: any
+  }
+}
+
+export interface TypeModel {
+  keyName: string
+  displayName: string
+  propertyType: 'number' | 'string' | 'date' | 'enum'
+  propertyValues: PropertyValue[]
+}
+
+export interface PropertyValue {
+  keyName: string
+  displayName: string
+  minValue?: number | null
+  maxValue?: number | null
+}
+
+export interface StyleSet {
+  keyName: string
+  displayName: string
+  type: 'LIGHT' | 'DARK'
+  propertyType: 'number' | 'string' | 'date' | 'enum'
+  rules: Rule[]
+}
+
+export interface Rule extends PolylineOptions, CircleMarkerOptions {
+  keyName: string
+  displayName: string
+} // ____________________________________________________________________________________
+
+// ________________BASELAYERS___________________________________________________________
 export interface BaseLayer {
+  id: ID
+  name: string
   urlTemplate: string
-  id?: string
-  name?: string
-  token?: string
-  thumbnail?: string
+  style: 'LIGHT' | 'DARK'
+  token?: string | null
+  thumbnail?: string | null
   options?: TileLayerOptions
-}
+} // ____________________________________________________________________________________
 
-export type GeomType = 'point' | 'line' | 'structure'
-
+// ________________CALQUES_______________________________________________________________
 export interface Calque {
   id: string
-  name: string
+  overlayId?: ID
+  layerName?: string
+  displayName: string
   geomType: GeomType | null
   checked: boolean
   indeterminate: boolean
@@ -117,39 +141,28 @@ export interface Calque {
 }
 
 export interface PropertyType {
-  id: string
+  // activeStyle: boolean // TODO : add this properties in the api
   displayName: string
-  name: string
-  activeStyle: boolean
+  keyName: string
   checked: boolean
   indeterminate: boolean
   toggled: boolean
-  values: PropertyValue[]
+  filterValues: PropertyValue[]
 }
 
 export interface PropertyValue {
-  id: string
-  name: string
+  keyName: string
   displayName: string
   checked: boolean
   order: number
 }
 
 export interface FiltersProp {
-  calqueId: string
+  calqueName: string
   filters: string[]
-}
+} // ____________________________________________________________________________________
 
-export type CameraPositionType =
-  | 'front'
-  | 'back'
-  | 'right'
-  | 'left'
-  | 'front-right'
-  | 'front-left'
-  | 'back-right'
-  | 'back-left'
-
+// ________________VIEWER_______________________________________________________________
 export interface Picture {
   type?: string
   name: string
@@ -168,6 +181,16 @@ export interface PicturePoint {
   // neighbours.id is type NeighboursDirectionType
 }
 
+export type CameraPositionType =
+  | 'front'
+  | 'back'
+  | 'right'
+  | 'left'
+  | 'front-right'
+  | 'front-left'
+  | 'back-right'
+  | 'back-left'
+
 export type NeighboursDirectionType = 'front' | 'back' | 'front_right' | 'front_left' | 'back_right' | 'back_left'
 
 export interface ViewParams {
@@ -177,9 +200,7 @@ export interface ViewParams {
   roll?: number
 }
 
-export type LangType = 'fr' | 'en'
-
 export interface CameraConfig {
   position: number[] | LatLng
   rotation: number
-}
+} // ____________________________________________________________________________________

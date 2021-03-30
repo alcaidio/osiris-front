@@ -13,9 +13,9 @@ import { Navigate } from '@ngxs/router-plugin'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
+import { Config, MapSmall } from '../../model/campaign.model'
 import { ApiService } from '../../services/api.service'
 import { BaselayerState } from '../baselayers/baselayers.state'
-import { Config, MapSmall } from '../../model/campaign.model'
 import { GetMap } from './maps.actions'
 
 @State<EntityStateModel<MapSmall>>({

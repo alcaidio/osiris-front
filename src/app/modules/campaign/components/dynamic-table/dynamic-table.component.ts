@@ -35,7 +35,7 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit, 
   @ViewChild(MatSort) sort: MatSort
   dataSource: MatTableDataSource<any>
   displayedColumns: string[]
-  active: number
+  active: number = null
 
   // normally the component has no direct data via the store. Thereafter the data must only pass through the inputs
   @Select(CalqueState.entities) calques$: Observable<Calque[]>
@@ -70,8 +70,8 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit, 
     this.store.dispatch(new CloseData())
   }
 
-  onClickRow(row: any) {
-    this.active = row.id
+  onClickRow(row: any, id: any) {
+    this.active = id
     this.activeRow.emit(row.featureId)
   }
 

@@ -91,7 +91,7 @@
                 Editée
               </th>
               <td mat-cell *matCellDef="let campaign">
-                {{ fromNow(campaign.lastUpdate) }}
+                {{ fromNow(campaign.lastUpdate === null ? campaign.creationDate : campaign.lastUpdate) }}
               </td>
             </ng-container>
 

@@ -8,34 +8,9 @@
           <div class="title">{{ t('title') }}</div>
           <div class="subtitle">
             {{ t('subtitle1', { module: featureName }) }}
-            <ng-container *ngIf="!alreadySubscribed">
-              {{ t('subtitle2') }}
-            </ng-container>
-            <ng-container *ngIf="alreadySubscribed">
-              {{ t('subtitle3') }}
-            </ng-container>
           </div>
 
           <form>
-            <!-- <button
-              *ngIf="!alreadySubscribed"
-              class="submit-button treo-mat-button-large -mt-2"
-              mat-flat-button
-              type="button"
-              [color]="'primary'"
-              [disabled]="isLoading"
-              (click)="onclick()"
-            >
-              <span *ngIf="!isLoading">
-                {{ t('button') }}
-              </span>
-              <mat-progress-spinner
-                *ngIf="isLoading"
-                [diameter]="24"
-                [mode]="'indeterminate'"
-              ></mat-progress-spinner>
-            </button> -->
-
             <div class="form-footer">
               {{ t('footer') }}
             </div>

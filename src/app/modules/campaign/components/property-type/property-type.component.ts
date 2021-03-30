@@ -25,14 +25,15 @@ export class PropertyTypeComponent {
   }
 
   get propertiesSortByOrder() {
-    return this.property.values.slice().sort((a, b) => {
+    return this.property.filterValues.slice().sort((a, b) => {
       return a.order - b.order
     })
   }
 
-  get isActiveStyle() {
-    return this.property.activeStyle
-  }
+  // TODO : add active style in properties (api back)
+  // get isActiveStyle() {
+  //   return this.property.activeStyle
+  // }
 
   get name() {
     return this.property.displayName.toLowerCase()

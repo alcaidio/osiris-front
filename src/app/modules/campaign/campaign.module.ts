@@ -9,6 +9,7 @@ import * as fromComponents from './components'
 import * as fromContainers from './containers'
 import * as fromDirectives from './directives'
 import * as fromPipes from './pipes'
+import * as fromResolvers from './resolvers'
 import * as fromServices from './services'
 import { CampaignModuleStates } from './store'
 
@@ -27,6 +28,6 @@ import { CampaignModuleStates } from './store'
     LeafletDrawModule,
     NgxsModule.forFeature(CampaignModuleStates),
   ],
-  providers: [...fromServices.services],
+  providers: [...fromServices.services, ...fromResolvers.resolvers],
 })
 export class CampaignModule {}

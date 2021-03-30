@@ -1,13 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core'
+import { AfterViewInit, Component, OnChanges, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { Select } from '@ngxs/store'
@@ -24,7 +15,6 @@ import { CampaignsState } from '../../store/campaigns/campaigns.state'
   templateUrl: './campaign-list.component.html',
   styleUrls: ['./campaign-list.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CampaignListComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Select(CampaignsState.entities) campaigns$: Observable<Campaign[]>

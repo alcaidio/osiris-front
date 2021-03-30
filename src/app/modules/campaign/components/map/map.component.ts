@@ -20,8 +20,8 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { CameraConfig, Config, Overlay } from '../../model/campaign.model'
 import { MapState, ToggleIsHoverTrace } from '../../store'
+import { setDefaultStyleOfFeature } from '../../utils'
 import { PopupContentComponent } from '../popup-content/popup-content.component'
-import { setDefaultStyleOfFeature } from './../../utils/leaflet.utils'
 
 @AutoUnsubscribe()
 @Component({
@@ -155,7 +155,7 @@ export class MapComponent implements OnChanges, OnDestroy {
 
     os.map((layer: Overlay) => {
       const group = layerGroup()
-      overlays = { ...overlays, [layer.name]: group }
+      overlays = { ...overlays, [layer.layerName]: group }
       return group.addLayer(this.generateLayerGroup(layer))
     })
 
@@ -168,8 +168,7 @@ export class MapComponent implements OnChanges, OnDestroy {
 
   private generateLayerGroup(layer: Overlay): any {
     let geojson: any
-    const activeStyleName = layer.activeStyle.name.toLocaleLowerCase()
-    const ruleDTOs = layer.activeStyle.ruleDTOs
+    const styleSet = layer.activeStyleSet.find((s) => s.type === 'LIGHT') // TODO : get light or dark with the active theme
 
     const onSelectFeature = (e: any) => {
       // this.featureSelected = e.sourceTarget.feature
@@ -179,10 +178,13 @@ export class MapComponent implements OnChanges, OnDestroy {
     }
 
     const highlightFeature = (e) => {
-      if (layer.name.includes('trace')) {
+      if (layer.module.toUpperCase() === 'PICTURES') {
         this.store.dispatch(new ToggleIsHoverTrace())
       }
-      const featureSyle = ruleDTOs.find((rule) => rule.name === e.target.feature.properties[activeStyleName])
+      const featureSyle = styleSet.rules.find(
+        (rule) => rule.keyName === e.target.feature.properties[styleSet.keyName.toLowerCase()]
+      )
+
       if (featureSyle && Object.keys(featureSyle).includes('radius')) {
         e.target.setStyle({
           radius: featureSyle.radius * 1.2,
@@ -205,13 +207,15 @@ export class MapComponent implements OnChanges, OnDestroy {
 
     const resetHighlight = (e) => {
       geojson.resetStyle(e.target)
-      if (layer.name.includes('trace')) {
+      if (layer.module.toUpperCase() === 'PICTURES') {
         this.store.dispatch(new ToggleIsHoverTrace())
       }
     }
 
     const pointToLayer = (feature: GeoJSON.Feature, latlng: LatLng) => {
-      const featureSyle = feature.properties.style
+      const featureSyle = styleSet.rules.find(
+        (rule) => rule.keyName === feature.properties[styleSet.keyName.toLowerCase()]
+      )
       if (featureSyle) {
         return circle(latlng, {
           radius: 10,
@@ -244,6 +248,7 @@ export class MapComponent implements OnChanges, OnDestroy {
         const factory = this.resolver.resolveComponentFactory(PopupContentComponent)
         const component = factory.create(this.injector)
         component.instance.feature = feature
+        component.instance.overlay = layer
         component.instance.map = this.mapReady
         component.changeDetectorRef.detectChanges()
         const popupContent = component.location.nativeElement
@@ -260,8 +265,10 @@ export class MapComponent implements OnChanges, OnDestroy {
     }
 
     const style = (feature: GeoJSON.Feature) => {
-      if (ruleDTOs && activeStyleName) {
-        return ruleDTOs.find((rule) => rule.name === feature.properties[activeStyleName])
+      if (styleSet) {
+        const featureSyle = styleSet.rules.find((r) => r.keyName === feature.properties[styleSet.keyName.toLowerCase()])
+        const { displayName, keyName, ...other } = featureSyle
+        return other
       } else {
         // Load default style
         const type = feature.geometry.type
@@ -269,21 +276,21 @@ export class MapComponent implements OnChanges, OnDestroy {
       }
     }
 
-    const filter = (feature: GeoJSON.Feature): boolean => {
-      const showOnMap = feature.properties.visible
-      if (showOnMap === false) {
-        return false
-      } else {
-        // true and undefined
-        return true
-      }
-    }
+    // const filter = (feature: GeoJSON.Feature): boolean => {
+    //   const showOnMap = feature.properties.visible
+    //   if (showOnMap === false) {
+    //     return false
+    //   } else {
+    //     // true and undefined
+    //     return true
+    //   }
+    // }
 
     geojson = geoJSON(layer, {
       onEachFeature,
       pointToLayer,
       style,
-      filter,
+      // filter,
     })
 
     return geojson

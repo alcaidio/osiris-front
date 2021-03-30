@@ -16,6 +16,7 @@ export const cleanString = (str: string): string => {
   // OUTPUT => "mon_cafe_est_plein_de_cafeine"
   return deburr(str).trim().split(' ').join('_').toLowerCase()
 }
+
 const getValue = (value: any) => (typeof value === 'string' ? cleanString(value) : value)
 
 export const filterPlainArray = (array: Array<any>, filters: Array<string>, node?: string): Array<any> => {
@@ -43,15 +44,15 @@ export const filterPlainArray = (array: Array<any>, filters: Array<string>, node
 //   actions: ["a-elaguer"]
 // };
 
-export const createFilters = (arr) => {
+export const createFilters = (arr: Array<any>) => {
   const res = {}
-  arr.map((e) => {
-    const name = getValue(e.name)
+  arr.map((e: any) => {
+    const name = getValue(e.keyName)
     let val = []
     let count = 0
-    e.values.map((v) => {
+    e.filterValues.map((v) => {
       if (v.checked) {
-        const valueName = getValue(v.name)
+        const valueName = getValue(v.keyName)
         val = [...val, valueName]
         res[name] = val
         count++
@@ -83,3 +84,13 @@ export const convertRadiansToDegrees = (radians: number): number => {
 }
 
 export const compose = (f, g) => (x) => f(g(x))
+
+export const transformKeyAndValue = (key: string, value: string, featureTypeModels: any) => {
+  const curr = featureTypeModels.find((model) => cleanString(model.keyName) === cleanString(key))
+  if (curr.propertyType === 'enum' && curr.propertyValues.length > 0) {
+    const val = curr.propertyValues.find((v) => cleanString(v.keyName) === cleanString(value))?.displayName
+    return [curr?.displayName, val, curr?.keyName]
+  } else {
+    return [curr.displayName, value, curr?.keyName]
+  }
+}

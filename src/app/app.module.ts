@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common'
-import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core'
+import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { Router } from '@angular/router'
 import { TranslocoConfig, TranslocoModule, TRANSLOCO_CONFIG } from '@ngneat/transloco'
 import { RouterStateSerializer } from '@ngxs/router-plugin'
-import * as Sentry from '@sentry/angular'
 import { TreoModule } from '@treo'
 import { TreoMockApiModule } from '@treo/lib/mock-api'
 import { TreoConfigModule } from '@treo/services/config'
@@ -46,22 +44,22 @@ import { SharedModule } from './shared/shared.module'
     },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
 
-    {
-      provide: ErrorHandler,
-      useValue: Sentry.createErrorHandler({
-        showDialog: false,
-      }),
-    },
-    {
-      provide: Sentry.TraceService,
-      deps: [Router],
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: () => () => {},
-      deps: [Sentry.TraceService],
-      multi: true,
-    },
+    // {
+    //   provide: ErrorHandler,
+    //   useValue: Sentry.createErrorHandler({
+    //     showDialog: false,
+    //   }),
+    // },
+    // {
+    //   provide: Sentry.TraceService,
+    //   deps: [Router],
+    // },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: () => () => {},
+    //   deps: [Sentry.TraceService],
+    //   multi: true,
+    // },
   ],
   bootstrap: [AppComponent],
   exports: [TranslocoModule],

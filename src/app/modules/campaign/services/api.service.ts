@@ -5,7 +5,8 @@ import { environment } from 'environments/environment'
 import { LatLng } from 'leaflet'
 import { Observable, of } from 'rxjs'
 import { catchError, combineAll, map, switchMap } from 'rxjs/operators'
-import { BaseLayer, Calque, Campaign, LeafletStyle, MapSmall, OverlayDTO, PicturePoint } from '../model/campaign.model'
+import { BaseLayer, Calque, Campaign, GeoServerDTO, MapSmall, Overlay, PicturePoint } from '../model/campaign.model'
+import { StyleSet } from './../model/campaign.model'
 
 @Injectable()
 export class ApiService {
@@ -14,26 +15,22 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  // mapabstract or campaign ?
   getCampaignList(): Observable<Campaign[]> {
-    return this.http.get<Campaign[]>('http://localhost:3000/mapabstracts')
+    const headers = new HttpHeaders().set('organizationKeyName', 'PLCO') // TODO: get this param in the token
+    return this.http.get<Campaign[]>(`${this.api}/carto/mapabstracts`, { headers: headers })
   }
 
-  getMap(id: string): Observable<MapSmall> {
-    return this.http.get<MapSmall>(`http://localhost:3000/maps/${id}`)
+  getMap(id: ID): Observable<MapSmall> {
+    return this.http.get<MapSmall>(`${this.api}/carto/map/${id}`)
   }
 
-  getOverlaysByMapId(id: string): any {
-    return this.http.get<OverlayDTO[]>(`http://localhost:3000/maps/${id}/overlays`).pipe(
+  getOverlaysByMapId(mapId: ID): any {
+    return this.http.get<Overlay[]>(`${this.api}/carto/map/${mapId}/overlays`).pipe(
       switchMap((overlayDTOs) => {
-        return overlayDTOs.map((DTO) => {
+        return overlayDTOs.map((DTO: Partial<Overlay>) => {
           const overlayWithoutFeatures = {
-            id: DTO.id,
-            name: DTO.layerName,
+            ...DTO,
             visible: true,
-            mapId: DTO.mapId,
-            geomType: DTO.geomType,
-            activeStyle: DTO.activeStyle,
           }
 
           const httpOptions = {
@@ -43,13 +40,13 @@ export class ApiService {
             }),
           }
 
-          return this.http.get<any>(DTO.url, httpOptions).pipe(
-            map((data) => {
-              return { ...overlayWithoutFeatures, type: data.type, features: data.features }
+          return this.http.get<GeoServerDTO>(`${DTO.url}&srsName=EPSG:4326`, httpOptions).pipe(
+            map((data: GeoServerDTO) => {
+              return { ...overlayWithoutFeatures, features: data.features }
             }),
             catchError((err) => {
               console.warn(
-                `La couche "${overlayWithoutFeatures.name}" (id n°${overlayWithoutFeatures.id}) n'a pas pu être chargée via geoserver. Error: ${err}`
+                `La couche "${overlayWithoutFeatures.displayName}" (id n°${overlayWithoutFeatures.id}) n'a pas pu être chargée via geoserver. Error: ${err}`
               )
               return of({ ...overlayWithoutFeatures, features: [] })
             })
@@ -60,17 +57,16 @@ export class ApiService {
     )
   }
 
-  getOverlayConfigsByMapId(id: string): Observable<Calque[]> {
-    return this.http.get<Calque[]>(`http://localhost:3000/maps/${id}/overlayconfigs`)
+  getOverlayConfigsByMapId(mapId: ID): Observable<Calque[]> {
+    return this.http.get<Calque[]>(`${this.api}/carto/map/${mapId}/overlayconfigs`)
   }
 
-  getBaselayersByMapId(id: string): Observable<BaseLayer[]> {
-    return this.http.get<BaseLayer[]>(`http://localhost:3000/maps/${id}/baselayers`)
+  getBaselayersByMapId(mapId: ID): Observable<BaseLayer[]> {
+    return this.http.get<BaseLayer[]>(`${this.api}/carto/map/${mapId}/baselayers`)
   }
 
-  // (prop id or overlayconfigs) === style id
-  getStyleById(id: string): Observable<LeafletStyle> {
-    return this.http.get<LeafletStyle>(`http://localhost:3000/style/${id}`)
+  getStyleByKeyName(keyName: string): Observable<StyleSet> {
+    return this.http.get<StyleSet>(`${this.api}/carto/style/${keyName}`)
   }
 
   getImageByLngLat(point: LatLng, distance?: string): Observable<PicturePoint> {

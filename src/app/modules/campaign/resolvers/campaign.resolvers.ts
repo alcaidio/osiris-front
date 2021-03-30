@@ -8,9 +8,7 @@ import { Campaign, MapSmall } from '../model/campaign.model'
 import { CampaignsState, MapState } from '../store'
 import { GetMap } from '../store/maps/maps.actions'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MapSmallResolver implements Resolve<MapSmall> {
   constructor(private store: Store) {}
 
@@ -20,9 +18,7 @@ export class MapSmallResolver implements Resolve<MapSmall> {
   }
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CampaignResolver implements Resolve<Campaign> {
   constructor(private store: Store) {}
 

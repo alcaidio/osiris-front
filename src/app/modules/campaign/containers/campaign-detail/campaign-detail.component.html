@@ -1,21 +1,19 @@
 <div class="container">
   <div class="mapAndViewer">
     <div class="map flex-auto" [ngClass]="{ minWidth: isData$ | async }">
-      <ng-container *ngIf="filteredOverlays$ | async">
-        <app-map
-          [config]="leafletMapConfig"
-          [overlays]="filteredOverlays$ | async"
-          [cameraConfig]="cameraConfig$ | async"
-          (map)="mapReady = $event"
-          (guyDragEnd)="onNavigate($event)"
-        ></app-map>
+      <app-map
+        [config]="leafletMapConfig"
+        [overlays]="filteredOverlays$ | async"
+        [cameraConfig]="cameraConfig$ | async"
+        (map)="mapReady = $event"
+        (guyDragEnd)="onNavigate($event)"
+      ></app-map>
 
-        <div class="above">
-          <div class="cards">
-            <app-map-card></app-map-card>
-          </div>
+      <div class="above">
+        <div class="cards">
+          <app-map-card></app-map-card>
         </div>
-      </ng-container>
+      </div>
     </div>
     <div class="flex-initial bg-gray-200" [@slide]="isViewer$ | async">
       <app-viewer

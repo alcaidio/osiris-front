@@ -12,27 +12,27 @@
       </button>
 
       <mat-checkbox
-        *ngIf="truncateTo > calque.name.length"
+        *ngIf="truncateTo > calque.displayName.length"
         color="primary"
         [checked]="calque.checked"
         [indeterminate]="calque.indeterminate"
         (change)="onCheck(calque)"
         [disabled]="!(calque.properties.length > 0)"
       >
-        {{ calque.name | title }}
+        {{ calque.displayName | title }}
       </mat-checkbox>
       <mat-checkbox
-        *ngIf="calque.name.length >= truncateTo"
+        *ngIf="calque.displayName.length >= truncateTo"
         color="primary"
         [checked]="calque.checked"
         [indeterminate]="calque.indeterminate"
-        [matTooltip]="calque.name"
+        [matTooltip]="calque.displayName"
         [matTooltipPosition]="'right'"
         [matTooltipClass]="'tooltip-calque'"
         (change)="onCheck(calque)"
         [disabled]="!(calque.properties.length > 0)"
       >
-        {{ calque.name | truncate: [truncateTo] | title }}
+        {{ calque.displayName | truncate: [truncateTo] | title }}
       </mat-checkbox>
 
       <mat-icon class="icon" *ngIf="calque.properties.length > 0">{{ generateIcon(calque.geomType) }}</mat-icon>
@@ -50,11 +50,11 @@
       </button>
 
       <mat-menu #menu="matMenu" [class]="'menu'">
-        <button [disabled]="!(calque.properties.length > 0)" mat-menu-item (click)="openOverlayData(calque.name)">
+        <button [disabled]="!(calque.properties.length > 0)" mat-menu-item (click)="openOverlayData()">
           <mat-icon>list</mat-icon>
           <span>Données</span>
         </button>
-        <button [disabled]="!(calque.properties.length > 0)" mat-menu-item (click)="openDialog()" disabled>
+        <button mat-menu-item (click)="openDialog()" disabled>
           <mat-icon>style</mat-icon>
           <span>Style</span>
         </button>

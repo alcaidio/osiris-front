@@ -46,11 +46,6 @@ export class CalqueState extends EntityState<Calque> {
   }
 
   @Selector()
-  static getEntities(state: EntityStateModel<Calque>) {
-    return state.entities
-  }
-
-  @Selector()
   static getActive(state: EntityStateModel<Calque>) {
     return state.entities[state.active]
   }
@@ -59,7 +54,7 @@ export class CalqueState extends EntityState<Calque> {
   static getNewCalqueName(state: EntityStateModel<Calque>) {
     let count = 1
     Object.values(state.entities).map((calque) => {
-      if (calque.name.toLowerCase().includes('calque')) {
+      if (calque.displayName.toLowerCase().includes('calque')) {
         count++
       }
     })
@@ -109,7 +104,7 @@ export class CalqueState extends EntityState<Calque> {
     // update the state of all child's calque (properties and values)
     const newProperties = action.calque.properties.map((p) => {
       // values
-      const newValues = p.values.map((v) => {
+      const newValues = p.filterValues.map((v) => {
         if (action.calque.checked) {
           return { ...v, checked: false }
         } else {
@@ -119,13 +114,13 @@ export class CalqueState extends EntityState<Calque> {
 
       // properties
       if (action.calque.checked) {
-        return { ...p, checked: false, indeterminate: false, values: newValues }
+        return { ...p, checked: false, indeterminate: false, filterValues: newValues }
       } else {
-        return { ...p, checked: true, indeterminate: false, values: newValues }
+        return { ...p, checked: true, indeterminate: false, filterValues: newValues }
       }
     })
 
-    const nothing = action.calque.properties.every((p) => p.values.every((v) => v.checked === true))
+    const nothing = action.calque.properties.every((p) => p.filterValues.every((v) => v.checked === true))
 
     if (nothing) {
       this.store.dispatch(new Update(OverlayState, action.calque.id as string, { visible: false }))
@@ -150,7 +145,9 @@ export class CalqueState extends EntityState<Calque> {
   @Action(ToggleProperty)
   toggleProperty(ctx: StateContext<EntityStateModel<Calque>>, action: ToggleProperty) {
     const newProperty = { ...action.payload.property, toggled: !action.payload.property.toggled }
-    const propertieFiltered = action.payload.calque.properties.filter((p) => p.id !== action.payload.property.id)
+    const propertieFiltered = action.payload.calque.properties.filter(
+      (p) => p.keyName !== action.payload.property.keyName
+    )
     const newProperties = [...propertieFiltered, newProperty]
 
     ctx.dispatch(
@@ -167,7 +164,7 @@ export class CalqueState extends EntityState<Calque> {
   @Action(CheckProperty)
   checkProperty(ctx: StateContext<EntityStateModel<Calque>>, action: CheckProperty) {
     // update the state of all child's property (values)
-    const newValues = action.payload.property.values.map((v) => {
+    const newValues = action.payload.property.filterValues.map((v) => {
       if (action.payload.property.checked) {
         return { ...v, checked: false }
       } else {
@@ -177,10 +174,12 @@ export class CalqueState extends EntityState<Calque> {
 
     // check the state of all values to adapt property state
     const checkboxValuesState = checkTheCheckboxState(newValues)
-    const newProperty = { ...action.payload.property, ...checkboxValuesState, values: newValues }
+    const newProperty = { ...action.payload.property, ...checkboxValuesState, filterValues: newValues }
 
     // construct the new array of properties
-    const propertieFiltered = action.payload.calque.properties.filter((p) => p.id !== action.payload.property.id)
+    const propertieFiltered = action.payload.calque.properties.filter(
+      (p) => p.keyName !== action.payload.property.keyName
+    )
     const newProperties = [...propertieFiltered, newProperty]
 
     // check the state of all properties to adapt calque state and update the calque entity
@@ -200,22 +199,24 @@ export class CalqueState extends EntityState<Calque> {
   @Action(CheckValue)
   checkValue(ctx: StateContext<EntityStateModel<Calque>>, action: CheckValue) {
     // update the state of checked value
-    const valueFiltered = action.payload.property.values.filter((v) => v.id !== action.payload.value.id)
+    const valueFiltered = action.payload.property.filterValues.filter((v) => v.keyName !== action.payload.value.keyName)
     let newValues = [...valueFiltered, { ...action.payload.value, checked: !action.payload.value.checked }]
 
     // check all if all properties is unchecked
     if (newValues.every((v) => v.checked === false)) {
-      newValues = action.payload.property.values.map((v) => {
+      newValues = action.payload.property.filterValues.map((v) => {
         return { ...v, checked: true }
       })
     }
 
     // check the state of all values to adapt property state
     const checkboxValuesState = checkTheCheckboxState(newValues)
-    const newProperty = { ...action.payload.property, ...checkboxValuesState, values: newValues }
+    const newProperty = { ...action.payload.property, ...checkboxValuesState, filterValues: newValues }
 
     // construct the new array of properties
-    const propertieFiltered = action.payload.calque.properties.filter((p) => p.id !== action.payload.property.id)
+    const propertieFiltered = action.payload.calque.properties.filter(
+      (p) => p.keyName !== action.payload.property.keyName
+    )
     const newProperties = [...propertieFiltered, newProperty]
 
     // check the state of all properties to adapt calque state and update the calque entity

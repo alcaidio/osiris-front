@@ -27,28 +27,18 @@ export class OverlayState extends EntityState<Overlay> {
   }
 
   @Selector()
-  static getVisibleOverlays(state: EntityStateModel<Overlay>) {
-    return Object.values(state.entities).filter((o) => o.visible === true)
-  }
-
-  @Selector()
-  static getColumnProperties(state: EntityStateModel<Overlay>) {
-    const feature = state.entities[state.active].features[0]
-    const prop = feature.properties
-    return ['id', ...Object.keys(prop.valid), ...Object.keys(prop)].filter(
-      (a) => a !== 'valid' && a !== 'style' && a !== 'popupContent'
-    )
-  }
-
-  @Selector()
   static getActiveOverlayFeatures(state: EntityStateModel<Overlay>) {
     return state.entities[state.active].features
   }
 
-  // FIX: changer quand back aura mis un type d'overlay
+  @Selector()
+  static getActiveFeatureTypeModel(state: EntityStateModel<Overlay>) {
+    return state.entities[state.active].featureTypeModel
+  }
+
   @Selector()
   static getIsTraceImageExist(state: EntityStateModel<Overlay>) {
-    return Object.values(state.entities).some((o) => o.name.includes('trace') && o.visible)
+    return Object.values(state.entities).some((o) => o.module.toUpperCase() === 'PICTURES' && o.visible)
   }
 
   @Action(GetOverlays)

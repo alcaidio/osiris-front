@@ -6,35 +6,35 @@
       </button>
 
       <mat-checkbox
-        *ngIf="truncateTo > property.name.length"
+        *ngIf="truncateTo > property.displayName.length"
         color="primary"
         [checked]="property.checked"
         [indeterminate]="property.indeterminate"
         [disabled]="true"
         class="disabled"
       >
-        {{ name | title }}
+        {{ property.displayName | title }}
       </mat-checkbox>
       <mat-checkbox
-        *ngIf="property.name.length >= truncateTo"
+        *ngIf="property.displayName.length >= truncateTo"
         color="primary"
         [checked]="property.checked"
         [indeterminate]="property.indeterminate"
         [disabled]="true"
-        [matTooltip]="property.name"
+        [matTooltip]="property.displayName"
         [matTooltipPosition]="'right'"
         [matTooltipClass]="'tooltipProperty'"
         class="disabled"
       >
         {{ name | truncate: [truncateTo] | title }}
       </mat-checkbox>
-      <mat-icon
+      <!-- <mat-icon
         *ngIf="isActiveStyle"
         class="icon"
         [matTooltip]="'This property is used for the style'"
         [matTooltipPosition]="'right'"
         >color_lens</mat-icon
-      >
+      > -->
     </div>
   </div>
   <div *ngIf="property.toggled" class="values">

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
-import { Add, UpdateActive } from '@ngxs-labs/entity-state'
+import { UpdateActive } from '@ngxs-labs/entity-state'
 import { Select, Store } from '@ngxs/store'
 import * as turfBbox from '@turf/bbox'
 import * as turfHelper from '@turf/helpers'
@@ -9,26 +9,8 @@ import { circle, geoJSON, LatLng, layerGroup, Map } from 'leaflet'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
-import { v4 as uuidv4 } from 'uuid'
 import { CameraConfig, CameraPositionType, Config, Overlay, Picture, PicturePoint } from '../../model/campaign.model'
-import {
-  CalqueState,
-  ChangeCameraPosition,
-  CloseData,
-  CloseViewer,
-  GetBaselayers,
-  GetCalques,
-  GetOverlays,
-  GoToNeighbour,
-  LoadPicturesPointById,
-  LoadPicturesPointByLngLat,
-  MapState,
-  OverlaySelectors,
-  OverlayState,
-  PicturesState,
-  ToggleViewerFullscreen,
-  UIState,
-} from '../../store'
+import * as Actions from '../../store'
 import { convertConfigToLeaflet } from '../../utils'
 import { OsirisAnimations } from '../../utils/animation.utils'
 import { NeighboursDirectionType } from './../../model/campaign.model'
@@ -55,29 +37,26 @@ export const convertMapConfigFromUrl = (mapConfig: string): any => {
   animations: OsirisAnimations,
 })
 export class CampaignDetailComponent implements OnInit, OnDestroy {
-  @Select(MapState.getMapConfig) mapConfig$: Observable<Config>
-  @Select(OverlaySelectors.getFilteredOverlays) filteredOverlays$: Observable<Overlay[]>
-  @Select(UIState.getIsViewer) isViewer$: Observable<boolean>
-  @Select(UIState.getIsData) isData$: Observable<boolean>
-  @Select(UIState.getIsViewerFullscreen) isViewerFullscreen$: Observable<boolean>
-  @Select(OverlaySelectors.getActiveFilteredOverlayProperties) activeProperties$: Observable<any[]>
-  @Select(OverlayState.getActiveOverlayFeatures) activeFeatures$: Observable<GeoJSON.Feature[]>
+  @Select(Actions.MapState.getMapConfig) mapConfig$: Observable<Config>
+  @Select(Actions.OverlaySelectors.getFilteredOverlays) filteredOverlays$: Observable<Overlay[]>
+  @Select(Actions.UIState.getIsViewer) isViewer$: Observable<boolean>
+  @Select(Actions.UIState.getIsData) isData$: Observable<boolean>
+  @Select(Actions.UIState.getIsViewerFullscreen) isViewerFullscreen$: Observable<boolean>
+  @Select(Actions.OverlaySelectors.getActiveFilteredOverlayProperties) activeProperties$: Observable<any[]>
+  @Select(Actions.OverlayState.getActiveOverlayFeatures) activeFeatures$: Observable<GeoJSON.Feature[]>
+  @Select(Actions.CalqueState.getNewCalqueName) newCalqueName$: Observable<string>
+  @Select(Actions.PicturesState.getSelectedPicture) selectedPicture$: Observable<Picture>
+  @Select(Actions.PicturesState.getSelectedPicturesPoint) selectedPicturePoint$: Observable<PicturePoint>
+  @Select(Actions.PicturesState.getCameraConfig) cameraConfig$: Observable<CameraConfig>
   @Select(RouterSelectors.queryParams) queryParams$: Observable<Params>
-  @Select(CalqueState.getNewCalqueName) newCalqueName$: Observable<string>
-  @Select(PicturesState.getSelectedPicture) selectedPicture$: Observable<Picture>
-  @Select(PicturesState.getSelectedPicturesPoint) selectedPicturePoint$: Observable<PicturePoint>
-  @Select(PicturesState.getCameraConfig) cameraConfig$: Observable<CameraConfig>
 
   mapReady: Map
   selectedFeature: GeoJSON.Feature
   leafletMapConfig: Config
-
   newCalqueName: string
-
   activeLayerGroup = layerGroup()
   activeLayer: any
   geoJsonFeature: any
-
   lastDir: number
 
   constructor(private store: Store, private route: ActivatedRoute) {}
@@ -91,7 +70,7 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
       if (!data && this.geoJsonFeature) {
         this.activeLayerGroup.removeLayer(this.geoJsonFeature)
       }
-      setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 1000)
+      setTimeout(() => this.mapReady && this.mapReady.invalidateSize({ animate: true }), 1000)
     })
 
     this.newCalqueName$.subscribe((name) => (this.newCalqueName = name))
@@ -104,16 +83,18 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
     })
 
     this.selectedPicture$.subscribe((picture) => {
-      this.lastDir = picture.direction
+      if (picture) {
+        this.lastDir = picture.direction
+      }
     })
   }
 
   private initState(params: Params) {
     // data from resolvers
     const id = this.route.snapshot.data.mapSmall.id as string
-    this.store.dispatch(new GetCalques(id))
-    this.store.dispatch(new GetOverlays(id))
-    this.store.dispatch(new GetBaselayers(id))
+    this.store.dispatch(new Actions.GetCalques(id))
+    this.store.dispatch(new Actions.GetOverlays(id))
+    this.store.dispatch(new Actions.GetBaselayers(id))
 
     // format map config for leaflet
     const mapConfigFromUrl = params[QueryParamsFromCampaignDetail.CONFIG]
@@ -132,45 +113,45 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
 
     if (point) {
       this.store
-        .dispatch(new LoadPicturesPointById(point))
+        .dispatch(new Actions.LoadPicturesPointById(point))
         .toPromise()
         .then(() => {
-          setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 500)
+          setTimeout(() => this.mapReady && this.mapReady.invalidateSize({ animate: true }), 500)
         })
     }
     if (camera) {
-      this.store.dispatch(new ChangeCameraPosition(camera))
+      this.store.dispatch(new Actions.ChangeCameraPosition(camera))
     }
     if (fullscreen) {
-      this.store.dispatch(new ToggleViewerFullscreen(fullscreen))
+      this.store.dispatch(new Actions.ToggleViewerFullscreen(fullscreen))
     }
   }
 
   onNavigate(position: LatLng): void {
     this.store
-      .dispatch(new LoadPicturesPointByLngLat({ position, distance: 120 }))
+      .dispatch(new Actions.LoadPicturesPointByLngLat({ position, distance: 120 }))
       .toPromise()
       .then(() => {
-        setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 500)
+        setTimeout(() => this.mapReady && this.mapReady.invalidateSize({ animate: true }), 500)
       })
   }
 
   onCloseViewer(): void {
-    this.store.dispatch(new CloseViewer())
-    setTimeout(() => this.mapReady.invalidateSize({ animate: true }), 1000)
+    this.store.dispatch(new Actions.CloseViewer())
+    setTimeout(() => this.mapReady && this.mapReady.invalidateSize({ animate: true }), 1000)
   }
 
   onToggleFullscreen(): void {
-    this.store.dispatch(new CloseData())
-    this.store.dispatch(new ToggleViewerFullscreen())
+    this.store.dispatch(new Actions.CloseData())
+    this.store.dispatch(new Actions.ToggleViewerFullscreen())
   }
 
   onChangeCamera(position: CameraPositionType): void {
-    this.store.dispatch(new ChangeCameraPosition(position))
+    this.store.dispatch(new Actions.ChangeCameraPosition(position))
   }
 
   onGoToNeighbours(direction: NeighboursDirectionType): void {
-    this.store.dispatch(new GoToNeighbour(direction))
+    this.store.dispatch(new Actions.GoToNeighbour(direction))
   }
 
   onFlyToTheFeature(featureId: string): void {
@@ -249,7 +230,7 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
       const center = this.mapReady.getCenter()
       const zoom = this.mapReady.getZoom()
       this.store.dispatch(
-        new UpdateActive(MapState, (e) => ({
+        new UpdateActive(Actions.MapState, (e) => ({
           ...e,
           config: {
             ...e.config,
@@ -261,16 +242,16 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
     } else if (type === 'newCalque') {
       // TODO
       console.log('ACTION: POST add a new calque in active map')
-      const defaultCalque = {
-        id: uuidv4(),
-        name: this.newCalqueName,
-        geomType: 'line',
-        checked: true,
-        indeterminate: false,
-        toggled: false,
-        properties: [],
-      }
-      this.store.dispatch(new Add(CalqueState, defaultCalque))
+      // const defaultCalque = {
+      //   id: uuidv4(),
+      //   dis: this.newCalqueName,
+      //   geomType: 'line',
+      //   checked: true,
+      //   indeterminate: false,
+      //   toggled: false,
+      //   properties: [],
+      // }
+      // this.store.dispatch(new Add(Actions.CalqueState, defaultCalque))
     }
   }
 

@@ -1,8 +1,9 @@
 import { EntityStateModel } from '@ngxs-labs/entity-state'
 import { Selector } from '@ngxs/store'
+import { FiltersProp, Overlay } from '../../model/campaign.model'
 import { cleanString } from '../../utils'
 import { FilterState } from '../filters/filters.state'
-import { FiltersProp, Overlay } from '../../model/campaign.model'
+import { transformKeyAndValue } from './../../utils/shared.utils'
 import { OverlayState } from './overlays.state'
 
 export class OverlaySelectors {
@@ -10,19 +11,33 @@ export class OverlaySelectors {
   static getFilteredOverlays(overlayState: EntityStateModel<Overlay>, filterState: EntityStateModel<FiltersProp>) {
     return Object.values(overlayState.entities)
       .map((overlay) => {
-        const filters = filterState.entities[overlay.id].filters
+        const filters = filterState.entities[overlay.layerName].filters
         const filterKeys = Object.keys(filters)
-
         const filteredFeatures = overlay.features.filter((item) => {
           return filterKeys.every((key) => {
-            if (filters[key].length === 0 || !item['properties']) {
-              return true
-            }
-
-            if (item['properties']) {
-              return filters[key].find((property) => {
-                return cleanString(property) === cleanString(item['properties'][key])
-              })
+            const activeModel = overlay.featureTypeModel.find((e) => cleanString(e.keyName) === cleanString(key))
+            if (
+              filters[key].length === 0 ||
+              !item.properties ||
+              item.properties.length === 0 ||
+              activeModel.propertyType === 'string'
+            ) {
+              return true // ignore the filter
+            } else {
+              if (activeModel.propertyType === 'enum') {
+                return filters[key].find((property) => {
+                  return cleanString(property) === cleanString(item['properties'][key])
+                })
+              } else if (activeModel.propertyType === 'number' || activeModel.propertyType === 'date') {
+                return filters[key].find((property) => {
+                  const model = activeModel.propertyValues.find((m) => {
+                    return cleanString(m.keyName) === cleanString(property)
+                  })
+                  const { minValue, maxValue } = model
+                  const val = +item['properties'][key]
+                  return val >= minValue && val <= maxValue
+                })
+              }
             }
           })
         })
@@ -34,10 +49,20 @@ export class OverlaySelectors {
 
   @Selector([OverlayState, OverlaySelectors.getFilteredOverlays])
   static getActiveFilteredOverlayProperties(state: EntityStateModel<Overlay>, filtered: Overlay[]) {
-    return filtered
-      .find((f) => f.id === state.active)
-      .features.map((feature) => {
-        return { featureId: feature.id, ...feature.properties }
-      })
+    const activeOverlay = filtered.find((f) => f.id === state.active)
+    return activeOverlay.features.map((feature) => {
+      const { diag_id, gid, ...others } = feature.properties
+
+      const featureArrayWithCorrectDisplay = Object.entries(others).map((prop) =>
+        transformKeyAndValue(prop[0], prop[1], activeOverlay.featureTypeModel)
+      )
+
+      const featureObjesctWithCorrectDisplay = featureArrayWithCorrectDisplay.reduce(
+        (acc, [k, v]) => ({ ...acc, [k]: v }),
+        {}
+      )
+
+      return { featureId: feature.id, ...featureObjesctWithCorrectDisplay }
+    })
   }
 }

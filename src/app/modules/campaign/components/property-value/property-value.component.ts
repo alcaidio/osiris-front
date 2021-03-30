@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core'
 import { Store } from '@ngxs/store'
-import { Calque, PropertyValue } from '../../model/campaign.model'
+import { Calque, PropertyType, PropertyValue } from '../../model/campaign.model'
 import { CheckValue } from '../../store'
-import { PropertyType } from '../../model/campaign.model'
 
 @Component({
   selector: 'app-property-value',
@@ -14,7 +13,7 @@ export class PropertyValueComponent {
   @Input() property: PropertyType
   @Input() calque: Calque
 
-  truncateTo = 12
+  truncateTo = 20
 
   constructor(private store: Store) {}
 
