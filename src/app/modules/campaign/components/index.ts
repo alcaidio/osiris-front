@@ -1,3 +1,4 @@
+import { AlertComponent } from './alert/alert.component'
 import { BaselayerListComponent } from './baselayer-list/baselayer-list.component'
 import { CalqueListComponent } from './calque-list/calque-list.component'
 import { CalqueComponent } from './calque/calque.component'
@@ -32,8 +33,10 @@ export const components = [
   PropertyTypeComponent,
   PropertyValueComponent,
   ViewerComponent,
+  AlertComponent,
 ]
 
+export * from './alert/alert.component'
 export * from './baselayer-list/baselayer-list.component'
 export * from './calque-list/calque-list.component'
 export * from './calque/calque.component'

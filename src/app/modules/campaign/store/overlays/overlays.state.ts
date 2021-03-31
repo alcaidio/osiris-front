@@ -10,11 +10,12 @@ import {
   Update,
 } from '@ngxs-labs/entity-state'
 import { Action, Selector, State, StateContext } from '@ngxs/store'
+import { NotificationService } from 'app/shared/services/notification.service'
 import { of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
-import { Overlay } from '../../model/campaign.model'
+import { Overlay, TypeModel } from '../../model/campaign.model'
 import { ApiService } from '../../services/api.service'
-import { GetOverlays, ToggleOverlay } from './overlays.actions'
+import { GetOverlays, ToggleOverlay, UpdateFeature } from './overlays.actions'
 
 @State<EntityStateModel<Overlay>>({
   name: 'overlays',
@@ -22,7 +23,7 @@ import { GetOverlays, ToggleOverlay } from './overlays.actions'
 })
 @Injectable()
 export class OverlayState extends EntityState<Overlay> {
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private notifications: NotificationService) {
     super(OverlayState, 'id', IdStrategy.EntityIdGenerator)
   }
 
@@ -32,7 +33,7 @@ export class OverlayState extends EntityState<Overlay> {
   }
 
   @Selector()
-  static getActiveFeatureTypeModel(state: EntityStateModel<Overlay>) {
+  static getActiveFeatureTypeModel(state: EntityStateModel<Overlay>): TypeModel[] {
     return state.entities[state.active].featureTypeModel
   }
 
@@ -61,5 +62,22 @@ export class OverlayState extends EntityState<Overlay> {
   @Action(ToggleOverlay)
   toggle(ctx: StateContext<OverlayState>, action: ToggleOverlay) {
     ctx.dispatch(new Update(OverlayState, action.payload.id as string, { visible: !action.payload.visible }))
+  }
+
+  @Action(UpdateFeature)
+  updateFeature(ctx: StateContext<OverlayState>, action: UpdateFeature) {
+    ctx.dispatch(new SetLoading(OverlayState, true))
+
+    return this.api.updateFeature(action.payload).pipe(
+      map((message: string) => {
+        this.notifications.openSnackBar(message)
+        ctx.dispatch(new SetLoading(OverlayState, false))
+      }),
+      catchError((err) => {
+        ctx.dispatch(new SetError(OverlayState, err))
+        ctx.dispatch(new SetLoading(OverlayState, false))
+        return of(err)
+      })
+    )
   }
 }

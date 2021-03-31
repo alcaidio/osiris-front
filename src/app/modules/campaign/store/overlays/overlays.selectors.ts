@@ -57,12 +57,11 @@ export class OverlaySelectors {
         transformKeyAndValue(prop[0], prop[1], activeOverlay.featureTypeModel)
       )
 
-      const featureObjesctWithCorrectDisplay = featureArrayWithCorrectDisplay.reduce(
-        (acc, [k, v]) => ({ ...acc, [k]: v }),
-        {}
-      )
+      const featureObjesctWithCorrectDisplay = featureArrayWithCorrectDisplay.reduce((acc, [k, v]) => {
+        return { ...acc, [k]: v === null ? 'null' : v }
+      }, {})
 
-      return { featureId: feature.id, ...featureObjesctWithCorrectDisplay }
+      return { featureId: feature.id, id: feature.properties.gid, ...featureObjesctWithCorrectDisplay }
     })
   }
 }

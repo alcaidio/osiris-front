@@ -80,4 +80,15 @@ export class ApiService {
   getImageById(id: ID): Observable<PicturePoint> {
     return this.http.get<PicturePoint>(`${this.api}/pictures/position/${id}?sensorTypeName=ImajBox`)
   }
+
+  updateFeature(body: {
+    featureId: ID
+    overlayId: ID
+    organizationPropertyKeyName: string
+    value: string
+  }): Observable<string> {
+    const { featureId, ...bodyParams } = body
+    // TODO : should be a put
+    return this.http.post<string>(`${this.api}/carto/feature/${featureId}`, bodyParams)
+  }
 }
