@@ -19,22 +19,26 @@ export class OverlaySelectors {
             if (
               filters[key].length === 0 ||
               !item.properties ||
-              item.properties.length === 0 ||
-              activeModel.propertyType === 'string'
+              item.properties.length === 1 ||
+              activeModel.propertyType === 'string' // ignore string type for filters
             ) {
               return true // ignore the filter
             } else {
               if (activeModel.propertyType === 'enum') {
+                return filters[key].find((property) => cleanString(property) === cleanString(item['properties'][key]))
+              } else if (activeModel.propertyType === 'number') {
                 return filters[key].find((property) => {
-                  return cleanString(property) === cleanString(item['properties'][key])
-                })
-              } else if (activeModel.propertyType === 'number' || activeModel.propertyType === 'date') {
-                return filters[key].find((property) => {
-                  const model = activeModel.propertyValues.find((m) => {
-                    return cleanString(m.keyName) === cleanString(property)
-                  })
+                  const model = activeModel.propertyValues.find((m) => cleanString(m.keyName) === cleanString(property))
                   const { minValue, maxValue } = model
                   const val = +item['properties'][key]
+                  return val >= minValue && val <= maxValue
+                })
+              } else if (activeModel.propertyType === 'date') {
+                return filters[key].find((property) => {
+                  const model = activeModel.propertyValues.find((m) => cleanString(m.keyName) === cleanString(property))
+                  const { minValue, maxValue } = model
+                  const date = item['properties'][key]
+                  const val = new Date(date).getTime() / 1000
                   return val >= minValue && val <= maxValue
                 })
               }

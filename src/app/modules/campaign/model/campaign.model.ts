@@ -3,6 +3,7 @@ import { CircleMarkerOptions, LatLng, LatLngBounds, PolylineOptions, TileLayerOp
 export type ID = string | number
 export type LangType = 'fr' | 'en'
 export type GeomType = 'point' | 'linestring' | 'multilinestring' | 'multipolygon' | 'polygon'
+export type TypeModelPropType = 'number' | 'string' | 'date' | 'enum'
 
 export interface Campaign {
   id: ID
@@ -92,7 +93,7 @@ export interface GeoServerDTO {
 export interface TypeModel {
   keyName: string
   displayName: string
-  propertyType: 'number' | 'string' | 'date' | 'enum'
+  propertyType: TypeModelPropType
   propertyValues: PropertyValue[]
 }
 
@@ -107,13 +108,13 @@ export interface StyleSet {
   keyName: string
   displayName: string
   type: 'LIGHT' | 'DARK'
-  propertyType: 'number' | 'string' | 'date' | 'enum'
+  propertyType: TypeModelPropType
   rules: Rule[]
 }
 
 export interface Rule extends PolylineOptions, CircleMarkerOptions {
-  keyName: string
-  displayName: string
+  keyName?: string
+  displayName?: string
 } // ____________________________________________________________________________________
 
 // ________________BASELAYERS___________________________________________________________

@@ -1,4 +1,6 @@
 import { deburr } from 'lodash'
+import { StyleSet, TypeModel, TypeModelPropType } from './../model/campaign.model'
+import { setDefaultStyleOfFeature } from './leaflet.utils'
 
 export const filteredObjectByKeys = (obj: any, keys: any): any => {
   const allowed = keys
@@ -92,5 +94,37 @@ export const transformKeyAndValue = (key: string, value: string, featureTypeMode
     return [curr?.displayName, val, curr?.keyName]
   } else {
     return [curr.displayName, value, curr?.keyName]
+  }
+}
+
+export const getFeatureStyle = (styleSet: StyleSet, typeModel: TypeModel, feature: GeoJSON.Feature) => {
+  const propType = styleSet.propertyType as TypeModelPropType
+  const value = feature.properties[styleSet.keyName.toLowerCase()]
+
+  if (propType === 'enum') {
+    const styles = styleSet.rules.find(
+      (r) => cleanString(r.keyName) === cleanString(feature.properties[styleSet.keyName.toLowerCase()])
+    )
+    const { displayName, keyName, ...onlyStyle } = styles
+    return onlyStyle
+  } else if (propType === 'number') {
+    const propValue = typeModel.propertyValues.find((m) => {
+      return value >= m.minValue && value <= m.maxValue
+    }).keyName
+    const styles = styleSet.rules.find((r) => r.keyName === propValue)
+    const { displayName, keyName, ...onlyStyle } = styles
+    return onlyStyle
+  } else if (propType === 'date') {
+    const date = new Date(value).getTime() / 1000
+    const propValue = typeModel.propertyValues.find((m) => {
+      return date >= m.minValue && date <= m.maxValue
+    }).keyName
+    const styles = styleSet.rules.find((r) => r.keyName === propValue)
+    const { displayName, keyName, ...onlyStyle } = styles
+    return onlyStyle
+  } else {
+    const type = feature.geometry.type
+    console.warn('No rule for style set (map.component.ts)')
+    setDefaultStyleOfFeature(type)
   }
 }

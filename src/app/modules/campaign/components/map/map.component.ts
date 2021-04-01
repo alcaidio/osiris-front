@@ -18,11 +18,14 @@ import 'leaflet.polylinemeasure'
 import 'leaflet.smoothwheelzoom'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
-import { CameraConfig, Config, Overlay } from '../../model/campaign.model'
+import { CameraConfig, Config, Overlay, Rule } from '../../model/campaign.model'
 import { MapState, ToggleIsHoverTrace } from '../../store'
-import { setDefaultStyleOfFeature } from '../../utils'
+import { cleanString, getFeatureStyle } from '../../utils'
 import { PopupContentComponent } from '../popup-content/popup-content.component'
 
+// TODO : refacto, limit the mapping as much as possible
+// using dictionaries and store the recalculated values ​​in global variables
+// probably dont map over all feature in the same overlay keep style in cache
 @AutoUnsubscribe()
 @Component({
   selector: 'app-map',
@@ -153,6 +156,7 @@ export class MapComponent implements OnChanges, OnDestroy {
   private convertOverlaysForLeaflet(os: Overlay[]): Layer[] {
     let overlays = {}
 
+    // TODO : dont add if exist in store
     os.map((layer: Overlay) => {
       const group = layerGroup()
       overlays = { ...overlays, [layer.layerName]: group }
@@ -168,7 +172,11 @@ export class MapComponent implements OnChanges, OnDestroy {
 
   private generateLayerGroup(layer: Overlay): any {
     let geojson: any
-    const styleSet = layer.activeStyleSet.find((s) => s.type === 'LIGHT') // TODO : get light or dark with the active theme
+    const activeStyleSet = layer.activeStyleSet.find((s) => s.type === 'LIGHT') // TODO : get light or dark with the active theme
+    const activeModel = layer.featureTypeModel.find(
+      (e) => cleanString(e.keyName) === cleanString(activeStyleSet.keyName)
+    )
+    let featureSyle: Rule
 
     const onSelectFeature = (e: any) => {
       // this.featureSelected = e.sourceTarget.feature
@@ -177,14 +185,15 @@ export class MapComponent implements OnChanges, OnDestroy {
       // this.mapReady.flyTo([lat, lng])
     }
 
+    const style = (feature: GeoJSON.Feature) => {
+      featureSyle = getFeatureStyle(activeStyleSet, activeModel, feature)
+      return featureSyle
+    }
+
     const highlightFeature = (e) => {
       if (layer.module.toUpperCase() === 'PICTURES') {
         this.store.dispatch(new ToggleIsHoverTrace())
       }
-      const featureSyle = styleSet.rules.find(
-        (rule) => rule.keyName === e.target.feature.properties[styleSet.keyName.toLowerCase()]
-      )
-
       if (featureSyle && Object.keys(featureSyle).includes('radius')) {
         e.target.setStyle({
           radius: featureSyle.radius * 1.2,
@@ -213,9 +222,6 @@ export class MapComponent implements OnChanges, OnDestroy {
     }
 
     const pointToLayer = (feature: GeoJSON.Feature, latlng: LatLng) => {
-      const featureSyle = styleSet.rules.find(
-        (rule) => rule.keyName === feature.properties[styleSet.keyName.toLowerCase()]
-      )
       if (featureSyle) {
         return circle(latlng, {
           radius: 10,
@@ -261,18 +267,6 @@ export class MapComponent implements OnChanges, OnDestroy {
           closeOnClick: true,
           closeOnEscapeKey: true,
         })
-      }
-    }
-
-    const style = (feature: GeoJSON.Feature) => {
-      if (styleSet) {
-        const featureSyle = styleSet.rules.find((r) => r.keyName === feature.properties[styleSet.keyName.toLowerCase()])
-        const { displayName, keyName, ...other } = featureSyle
-        return other
-      } else {
-        // Load default style
-        const type = feature.geometry.type
-        setDefaultStyleOfFeature(type)
       }
     }
 
