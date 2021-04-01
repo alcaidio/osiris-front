@@ -22,6 +22,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   constructor(private store: Store) {}
 
+  // TODO add if token expired
   private _check(): Observable<boolean> {
     const authenticated = this.store.selectSnapshot(AuthStatusState.getLoggedIn)
 

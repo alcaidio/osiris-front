@@ -102,7 +102,6 @@ export class AuthUtils {
    * Decode token
    *
    * @param token
-   * @private
    */
   private static _decodeToken(token: string): any {
     // Return if there is no token
@@ -133,7 +132,6 @@ export class AuthUtils {
    * Get token expiration date
    *
    * @param token
-   * @private
    */
   private static _getTokenExpirationDate(token: string): Date | null {
     // Get the decoded token
@@ -178,5 +176,22 @@ export class AuthUtils {
 
     // Check if the token is expired
     return !(date.valueOf() > new Date().valueOf() + offsetSeconds * 1000)
+  }
+
+  /**
+   * getOrganizationKeyName
+   *
+   * @param token
+   */
+  static getOrganizationKeyName(token: string): string {
+    // Return if there is no token
+    if (!token || token === '') {
+      return null
+    }
+
+    // Decode Token
+    const decode = this._decodeToken(token)
+
+    return decode
   }
 }
