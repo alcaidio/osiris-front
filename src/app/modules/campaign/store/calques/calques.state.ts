@@ -42,7 +42,7 @@ const checkTheCheckboxState = (arr: Array<any>) => {
 @Injectable()
 export class CalqueState extends EntityState<Calque> {
   constructor(private api: ApiService, private store: Store) {
-    super(CalqueState, 'id', IdStrategy.EntityIdGenerator)
+    super(CalqueState, 'overlayId', IdStrategy.EntityIdGenerator)
   }
 
   @Selector()
