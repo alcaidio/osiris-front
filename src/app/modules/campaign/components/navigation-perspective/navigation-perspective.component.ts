@@ -9,7 +9,13 @@ import {
   SimpleChanges,
 } from '@angular/core'
 import { NotificationService } from 'app/shared/services/notification.service'
-import { CameraPositionType, NeighboursDirectionType, Picture, PicturePoint } from '../../model/campaign.model'
+import {
+  CameraPositionType,
+  ImageType,
+  NeighboursDirectionType,
+  Picture,
+  PicturePoint,
+} from '../../model/campaign.model'
 
 @Component({
   selector: 'app-navigation-perspective',
@@ -20,7 +26,7 @@ import { CameraPositionType, NeighboursDirectionType, Picture, PicturePoint } fr
 export class NavigationPerspectiveComponent implements OnChanges {
   @Input() picturePoint: PicturePoint
   @Input() picture: Picture
-  @Output() direction = new EventEmitter<NeighboursDirectionType>()
+  @Output() direction = new EventEmitter<{ dir: NeighboursDirectionType; imageType: ImageType }>()
   @Output() camera = new EventEmitter<CameraPositionType>()
 
   isFront = false
@@ -49,8 +55,8 @@ export class NavigationPerspectiveComponent implements OnChanges {
 
   onClick(direction: NeighboursDirectionType) {
     this.picture.camera === 'back' || this.picture.camera === 'back-right' || this.picture.camera === 'back-left'
-      ? this.direction.emit(this.adaptDirection(direction))
-      : this.direction.emit(direction)
+      ? this.direction.emit({ dir: this.adaptDirection(direction), imageType: this.picture.imageType })
+      : this.direction.emit({ dir: direction, imageType: this.picture.imageType })
   }
 
   // Permet d'adapter les flèches de navigation en fonction de la position de caméra active

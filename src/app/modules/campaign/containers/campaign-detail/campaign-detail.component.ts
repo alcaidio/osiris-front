@@ -9,7 +9,15 @@ import { circle, geoJSON, LatLng, layerGroup, Map } from 'leaflet'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
-import { CameraConfig, CameraPositionType, Config, Overlay, Picture, PicturePoint } from '../../model/campaign.model'
+import {
+  CameraConfig,
+  CameraPositionType,
+  Config,
+  ImageType,
+  Overlay,
+  Picture,
+  PicturePoint,
+} from '../../model/campaign.model'
 import * as Actions from '../../store'
 import { convertConfigToLeaflet } from '../../utils'
 import { OsirisAnimations } from '../../utils/animation.utils'
@@ -98,7 +106,7 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
 
     // format map config for leaflet
     const mapConfigFromUrl = params[QueryParamsFromCampaignDetail.CONFIG]
-    const point = params[QueryParamsFromCampaignDetail.POINT]
+    const pointId = params[QueryParamsFromCampaignDetail.POINT]
     const camera = params[QueryParamsFromCampaignDetail.CAMERA]
     const fullscreen = params[QueryParamsFromCampaignDetail.FULLSCREEN]
 
@@ -111,9 +119,9 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
       }
     })
 
-    if (point) {
+    if (pointId) {
       this.store
-        .dispatch(new Actions.LoadPicturesPointById(point))
+        .dispatch(new Actions.LoadPicturesPointById({ id: pointId, imageType: 'PLANAR' })) // FIX EQUIREctangular not the time
         .toPromise()
         .then(() => {
           setTimeout(() => this.mapReady && this.mapReady.invalidateSize({ animate: true }), 500)
@@ -150,8 +158,9 @@ export class CampaignDetailComponent implements OnInit, OnDestroy {
     this.store.dispatch(new Actions.ChangeCameraPosition(position))
   }
 
-  onGoToNeighbours(direction: NeighboursDirectionType): void {
-    this.store.dispatch(new Actions.GoToNeighbour(direction))
+  onGoToNeighbours(evt: { dir: NeighboursDirectionType; imageType: ImageType }): void {
+    const { dir, imageType } = evt
+    this.store.dispatch(new Actions.GoToNeighbour({ dir, imageType }))
   }
 
   onFlyToTheFeature(featureId: string): void {

@@ -12,7 +12,7 @@
             <div>
               {{ item[1] }}
             </div>
-            <div *ngIf="item[2] === 'PLCO_ROAD_SECTION_STATE'">
+            <div *ngIf="item[2] === ORGANIZATION + '_ROAD_SECTION_STATE'">
               <button mat-icon-button (click)="onClick({ propName: item[0], propValue: item[1] })">
                 <mat-icon [svgIcon]="'feather:edit'" class="icon-size-16"></mat-icon>
               </button>

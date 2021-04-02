@@ -47,13 +47,11 @@ export class AuthStatusState {
   @Action(IsAuth)
   isAuth({ patchState }: StateContext<AuthStatusStateModel>, action: IsAuth) {
     const decryptedToken = AuthUtils.getOrganizationKeyName(action.payload.jwt)
-    const organizationKeyName = decryptedToken['org_key_name']
-    console.log(organizationKeyName)
     patchState({
       loggedIn: true,
       jwt: action.payload.jwt,
       email: action.payload.login,
-      organizationKeyName,
+      organizationKeyName: decryptedToken['org_key_name'],
     })
   }
 

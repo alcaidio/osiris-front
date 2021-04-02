@@ -4,6 +4,7 @@ export type ID = string | number
 export type LangType = 'fr' | 'en'
 export type GeomType = 'point' | 'linestring' | 'multilinestring' | 'multipolygon' | 'polygon'
 export type TypeModelPropType = 'number' | 'string' | 'date' | 'enum'
+export type ImageType = 'PLANAR' | 'EQUIRECTANGULAR'
 
 export interface Campaign {
   id: ID
@@ -165,7 +166,7 @@ export interface FiltersProp {
 
 // ________________VIEWER_______________________________________________________________
 export interface Picture {
-  type?: string
+  imageType: ImageType
   name: string
   path: string
   camera: CameraPositionType

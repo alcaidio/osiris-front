@@ -1,12 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core'
 import moment from 'moment'
-import {
-  CameraPositionType,
-  LangType,
-  NeighboursDirectionType,
-  Picture,
-  PicturePoint,
-} from '../../model/campaign.model'
+import { CameraPositionType, LangType, Picture, PicturePoint } from '../../model/campaign.model'
+import { ImageType, NeighboursDirectionType } from './../../model/campaign.model'
 
 @Component({
   selector: 'app-viewer',
@@ -23,14 +18,15 @@ export class ViewerComponent {
   @Output() closeViewer = new EventEmitter<void>()
   @Output() toggleFullscreen = new EventEmitter<void>()
   @Output() changeCamera = new EventEmitter<CameraPositionType>()
-  @Output() goToNeighbours = new EventEmitter<NeighboursDirectionType>()
+  @Output() goToNeighbours = new EventEmitter<{ dir: NeighboursDirectionType; imageType: ImageType }>()
 
   onChangeCameraPosition(position: CameraPositionType): void {
     this.changeCamera.emit(position)
   }
 
-  onChangeNeighboursDirection(direction: NeighboursDirectionType) {
-    this.goToNeighbours.emit(direction)
+  onChangeNeighboursDirection(evt: { dir: NeighboursDirectionType; imageType: ImageType }) {
+    const { dir, imageType } = evt
+    this.goToNeighbours.emit({ dir, imageType })
   }
 
   onCloseViewer(): void {

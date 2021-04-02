@@ -9,6 +9,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { Store } from '@ngxs/store'
+import { AuthStatusState } from 'app/modules/auth/store'
 import { Map } from 'leaflet'
 import { Overlay } from '../../model/campaign.model'
 import { AlertComponent } from '../alert/alert.component'
@@ -27,10 +29,13 @@ export class PopupContentComponent implements OnInit, OnDestroy {
   @Input() overlay: Overlay
   @Output() clearSelected = new EventEmitter<void>()
   properties: any[]
+  ORGANIZATION = null
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private store: Store) {}
 
   ngOnInit(): void {
+    this.ORGANIZATION = this.store.selectSnapshot(AuthStatusState.getOrganizationKeyName)
+
     this.properties = Object.entries(this.feature.properties)
       .filter((f) => f[0] !== 'diag_id' && f[0] !== 'gid')
       .map((prop) => transformKeyAndValue(prop[0], prop[1], this.overlay.featureTypeModel))

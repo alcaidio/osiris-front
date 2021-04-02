@@ -1,22 +1,36 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { Store } from '@ngxs/store'
 import { ID } from 'app/shared/models'
 import { environment } from 'environments/environment'
 import { LatLng } from 'leaflet'
 import { Observable, of } from 'rxjs'
 import { catchError, combineAll, map, switchMap } from 'rxjs/operators'
-import { BaseLayer, Calque, Campaign, GeoServerDTO, MapSmall, Overlay, PicturePoint } from '../model/campaign.model'
+import {
+  BaseLayer,
+  Calque,
+  Campaign,
+  GeoServerDTO,
+  ImageType,
+  MapSmall,
+  Overlay,
+  PicturePoint,
+} from '../model/campaign.model'
+import { AuthStatusState } from './../../auth/store'
 import { StyleSet } from './../model/campaign.model'
 
 @Injectable()
 export class ApiService {
   // Lunch json-server with "json-server --watch db.json --delay 2000"
   private api = environment.osiris.api
+  private ORGANIZATION = null
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store) {
+    this.ORGANIZATION = this.store.selectSnapshot(AuthStatusState.getOrganizationKeyName)
+  }
 
   getCampaignList(): Observable<Campaign[]> {
-    const headers = new HttpHeaders().set('organizationKeyName', 'PLCO') // TODO: get this param in the token
+    const headers = new HttpHeaders().set('organizationKeyName', this.ORGANIZATION)
     return this.http.get<Campaign[]>(`${this.api}/carto/mapabstracts`, { headers: headers })
   }
 
@@ -71,14 +85,16 @@ export class ApiService {
 
   getImageByLngLat(point: LatLng, distance?: string): Observable<PicturePoint> {
     return this.http.get<PicturePoint>(
-      `${this.api}/pictures/position/findNearestBySensorAndLngLat?lng=${point.lng}&lat=${
+      `${this.api}/pictures/positions?organizationKeyName=${this.ORGANIZATION}&lng=${point.lng}&lat=${
         point.lat
-      }&sensorTypeName=ImajBox&distance=${distance ? distance : '150'}`
+      }&distance=${distance ? distance : '150'}`
     )
   }
 
-  getImageById(id: ID): Observable<PicturePoint> {
-    return this.http.get<PicturePoint>(`${this.api}/pictures/position/${id}?sensorTypeName=ImajBox`)
+  getImageById(id: ID, imageType: ImageType): Observable<PicturePoint> {
+    return this.http.get<PicturePoint>(
+      `${this.api}/pictures/positions/${id}?organizationKeyName=${this.ORGANIZATION}&sensorImageTypeName=${imageType}`
+    )
   }
 
   updateFeature(body: {

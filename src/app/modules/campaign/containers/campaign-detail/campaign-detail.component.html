@@ -17,6 +17,7 @@
     </div>
     <div class="flex-initial bg-gray-200" [@slide]="isViewer$ | async">
       <app-viewer
+        *ngIf="(selectedPicture$ | async)?.imageType === 'PLANAR'"
         [picture]="selectedPicture$ | async"
         [point]="selectedPicturePoint$ | async"
         [isOpen]="isViewer$ | async"
@@ -26,6 +27,7 @@
         (changeCamera)="onChangeCamera($event)"
         (goToNeighbours)="onGoToNeighbours($event)"
       ></app-viewer>
+      <!-- TODO: 360, viewer is ok in components --- EQUIRECTANGULAR -->
     </div>
   </div>
   <div class="data flex-auto" [@slideHeight]="isData$ | async">

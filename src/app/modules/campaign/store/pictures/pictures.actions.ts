@@ -1,6 +1,7 @@
 import { ID } from 'app/shared/models'
 import { LatLng } from 'leaflet'
 import { CameraPositionType, NeighboursDirectionType, PicturePoint } from '../../model/campaign.model'
+import { ImageType } from './../../model/campaign.model'
 
 export class LoadPicturesPointByLngLat {
   static readonly type = '[Campaign - Pictures] Load picture point by lnglat'
@@ -9,7 +10,7 @@ export class LoadPicturesPointByLngLat {
 
 export class LoadPicturesPointById {
   static readonly type = '[Campaign - Pictures] Load picture point by id'
-  constructor(public payload: ID) {}
+  constructor(public payload: { id: ID; imageType: ImageType }) {}
 }
 
 export class LoadPicturesPointSuccess {
@@ -34,5 +35,5 @@ export class SwitchCameraPosition {
 
 export class GoToNeighbour {
   static readonly type = '[Campaign - Pictures] Go to neighbour'
-  constructor(public payload: NeighboursDirectionType) {}
+  constructor(public payload: { dir: NeighboursDirectionType; imageType: ImageType }) {}
 }

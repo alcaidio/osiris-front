@@ -105,13 +105,14 @@ export class PicturesState {
     patchState({
       loading: true,
     })
-    const id = +action.payload
+    const id = +action.payload.id
+    const imageType = action.payload.imageType
     const picturePoint = getState().entities[id]
 
     if (picturePoint) {
       return dispatch(new LoadPicturesPointSuccess(picturePoint))
     } else {
-      return this.api.getImageById(id).pipe(
+      return this.api.getImageById(id, imageType).pipe(
         map((p: PicturePoint) => dispatch(new LoadPicturesPointSuccess(p))),
         catchError((err) => {
           dispatch(new LoadPicturesPointFailure({ error: err, pointId: id }))
@@ -147,7 +148,7 @@ export class PicturesState {
       if (pointId) {
         this.notification.openSnackBar(`Le point "${pointId}" n'est pas disponible`, 'X', 1500)
       } else {
-        this.notification.openSnackBar('Aucun point disponible', 'X', 1500)
+        this.notification.openSnackBar(`Aucun point disponible pour id: ${pointId}`, 'X', 1500)
       }
     }
   }
@@ -192,8 +193,8 @@ export class PicturesState {
   @Action(GoToNeighbour)
   goToNeighbour({ dispatch, getState }: StateContext<PicturesStateModel>, action: GoToNeighbour) {
     const state = getState()
-    const pointId = state.entities[state.selectedPointId].neighbours[action.payload]
-    dispatch(new LoadPicturesPointById(pointId))
+    const pointId = state.entities[state.selectedPointId].neighbours[action.payload.dir]
+    dispatch(new LoadPicturesPointById({ id: pointId, imageType: action.payload.imageType }))
     this.store.dispatch(new Navigate([], { point: pointId }, { queryParamsHandling: 'merge', relativeTo: this.route }))
   }
 }
