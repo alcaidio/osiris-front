@@ -4,8 +4,8 @@ import { Pipe, PipeTransform } from '@angular/core'
   name: 'title',
 })
 export class TitlePipe implements PipeTransform {
-  transform(value: any): string {
-    const val = value.toString().toLowerCase()
+  transform(value: string): string {
+    const val = value.toLowerCase()
     return val.charAt(0).toUpperCase() + val.slice(1)
   }
 }

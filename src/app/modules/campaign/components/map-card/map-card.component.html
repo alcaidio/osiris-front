@@ -18,6 +18,10 @@
         </button>
 
         <mat-menu #menu="matMenu" [class]="'menu'">
+          <button mat-menu-item (click)="onClick('stats')">
+            <mat-icon>query_stats</mat-icon>
+            <span>Statistiques</span>
+          </button>
           <button mat-menu-item (click)="onClick('vue')" disabled>
             <mat-icon>preview</mat-icon>
             <span>Définir cette vue par défaut</span>
@@ -25,10 +29,6 @@
           <button mat-menu-item (click)="onClick('newCalque')" disabled>
             <mat-icon>layers</mat-icon>
             <span>Ajouter un calque</span>
-          </button>
-          <button mat-menu-item disabled>
-            <mat-icon>query_stats</mat-icon>
-            <span>Visualiser dans le dashboard</span>
           </button>
           <button mat-menu-item disabled>
             <mat-icon>copy_all</mat-icon>

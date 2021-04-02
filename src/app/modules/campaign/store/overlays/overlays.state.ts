@@ -28,6 +28,16 @@ export class OverlayState extends EntityState<Overlay> {
   }
 
   @Selector()
+  static getActiveOverlays(state: EntityStateModel<Overlay>): Overlay[] {
+    return Object.values(state.entities)
+  }
+
+  @Selector()
+  static getActiveOverlay(state: EntityStateModel<Overlay>): Overlay {
+    return state.entities[state.active]
+  }
+
+  @Selector()
   static getActiveOverlayFeatures(state: EntityStateModel<Overlay>) {
     return state.entities[state.active].features
   }

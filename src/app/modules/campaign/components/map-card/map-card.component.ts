@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core'
+import { Component, OnDestroy } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Select, Store } from '@ngxs/store'
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe'
 import { Observable } from 'rxjs'
@@ -6,7 +7,7 @@ import { BaseLayer, Calque, Campaign } from '../../model/campaign.model'
 import { BaselayerState, CalqueState, CampaignsState, ToggleMapCard, UIState } from '../../store'
 import { OsirisAnimations } from '../../utils/animation.utils'
 
-type actionType = 'vue' | 'newCalque'
+type actionType = 'vue' | 'newCalque' | 'stats'
 
 @AutoUnsubscribe()
 @Component({
@@ -23,16 +24,21 @@ export class MapCardComponent implements OnDestroy {
   @Select(BaselayerState.entities) baselayers$: Observable<BaseLayer[]>
   @Select(BaselayerState.activeId) activeBaselayerId$: Observable<string>
   @Select(UIState.getIsMapCard) isOpen$: Observable<boolean>
-  @Output() action = new EventEmitter<string>()
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
 
   onToggled(): void {
     this.store.dispatch(new ToggleMapCard())
   }
 
   onClick(type: actionType) {
-    this.action.emit(type)
+    switch (type) {
+      case 'stats':
+        this.router.navigate(['stats'], { relativeTo: this.route })
+        break
+      default:
+        console.warn('Action: no action available for this')
+    }
   }
 
   ngOnDestroy(): void {

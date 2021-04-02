@@ -1,0 +1,108 @@
+<div class="content-layout fullwidth-standard-inner-scroll">
+  <div class="header">
+    <div class="left">
+      <div class="breadcrumb">
+        <span class="path"><a class="hover:opacity-75 cursor-pointer" [routerLink]="['/maps']">Cartes</a></span>
+        <span class="separator">/</span>
+        <span class="path"
+          ><a class="hover:opacity-75 cursor-pointer" (click)="onBack()">{{ (map$ | async)?.title }}</a></span
+        >
+        <span class="separator">/</span>
+        <span class="path">Statistiques</span>
+      </div>
+
+      <h1>Statistiques</h1>
+    </div>
+
+    <div class="right">
+      <!-- TODO overlay switch  -->
+      <!-- <mat-form-field class="w-60" *ngIf="activeOverlay$ | async as active">
+        <mat-select name="categories" [(value)]="active.id" (selectionChange)="onChangeOverlay($event)">
+          <mat-option *ngFor="let overlay of overlays$ | async" [value]="overlay.id">
+            {{ overlay.displayName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+    </div>
+  </div>
+
+  <div class="main">
+    <mat-card class="h-auto w-full px-6 py-2 w-2/3">
+      <div class="flex justify-between items-center">
+        <div class="ml-4 -mt-2 antialiased">
+          <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+            {{ (seriesModel$ | async)?.displayName + ' par ' + (categoriesModel$ | async)?.displayName.toLowerCase() }}
+          </h2>
+          <div class="-mt-2 text-lg text-gray-500">
+            Graphique à barres {{ (barChart$ | async)?.params.stacked ? 'empilées' : '' }}
+          </div>
+        </div>
+        <div class="mt-8 mr-6 flex justify-between items-center">
+          <mat-form-field class="w-60 ml-2" *ngIf="seriesModel$ | async as active">
+            <mat-label>Series</mat-label>
+            <mat-select name="series" [(value)]="active.keyName" (selectionChange)="onChangeSeries($event)">
+              <mat-option
+                *ngFor="let model of models$ | async"
+                [value]="model.keyName"
+                [disabled]="(categoriesModel$ | async).keyName === model.keyName"
+              >
+                {{ model.displayName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-icon-button class="ml-2 mr-2 mt-2" (click)="switchModels()">
+            <mat-icon class="icon-size-18" svgIcon="heroicons_outline:switch-horizontal"></mat-icon>
+          </button>
+
+          <mat-form-field class="w-60" *ngIf="categoriesModel$ | async as active">
+            <mat-label>Categories</mat-label>
+            <mat-select name="categories" [(value)]="active.keyName" (selectionChange)="onChangeCategories($event)">
+              <mat-option
+                *ngFor="let model of models$ | async"
+                [value]="model.keyName"
+                [disabled]="(seriesModel$ | async).keyName === model.keyName"
+              >
+                {{ model.displayName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <app-bar-chart
+        *ngIf="barChart$ | async as chart"
+        [categories]="chart.data.categories"
+        [series]="chart.data.series"
+        [colors]="chart.data.colors"
+        [stacked]="chart.params.stacked"
+      ></app-bar-chart>
+      <div (click)="onToggleStacked()">stacked</div>
+    </mat-card>
+    <mat-card class="w-1/2 px-6 py-2 mt-6">
+      <div class="flex justify-between items-center">
+        <div class="antialiased">
+          <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">Répartition générale de l'état</h2>
+          <div class="-mt-2 text-lg text-gray-500">Diagramme circulaire</div>
+        </div>
+        <div>
+          <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu" [class]="'menu'">
+            <button mat-menu-item (click)="(true)" disabled>
+              <mat-icon>delete</mat-icon>
+              <span>Supprimer le widget</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+      <app-pie-chart
+        *ngIf="pieChart$ | async as chart"
+        [labels]="chart.data.labels"
+        [series]="chart.data.series"
+        [colors]="chart.data.colors"
+      ></app-pie-chart>
+    </mat-card>
+  </div>
+</div>

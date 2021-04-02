@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { CampaignDetailComponent } from './containers/campaign-detail/campaign-detail.component'
 import { CampaignListComponent } from './containers/campaign-list/campaign-list.component'
-import { CampaignResolver, MapSmallResolver } from './resolvers/campaign.resolvers'
+import { CampaignResolver, MapSmallResolver, StatsResolver } from './resolvers/campaign.resolvers'
 
 const routes: Routes = [
   {
@@ -13,6 +13,11 @@ const routes: Routes = [
     path: ':id',
     component: CampaignDetailComponent,
     resolve: { campaign: CampaignResolver, mapSmall: MapSmallResolver },
+  },
+  {
+    path: ':id/stats',
+    loadChildren: () => import('../stats/stats.module').then((m) => m.StatsModule),
+    resolve: { stats: StatsResolver },
   },
 ]
 

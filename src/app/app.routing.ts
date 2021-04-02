@@ -96,6 +96,7 @@ export const routes: Route[] = [
       {
         path: 'maps',
         loadChildren: () => import('./modules/campaign/campaign.module').then((m) => m.CampaignModule),
+        data: { title: 'Carte' },
       },
       {
         path: 'dashboard',
